@@ -1,6 +1,34 @@
-import '@/styles/globals.scss'
-import type { AppProps } from 'next/app'
+import { useContext, useEffect } from "react";
+import axios from "axios";
+import type { AppProps } from "next/app";
+import { GlobalContextProvider } from "@/context/globalContext";
+import { API, requestPagStart, requestPagLimit } from "@/constants";
+import { GlobalContext } from "@/context/globalContext";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  const { setVacancies } = useContext(GlobalContext);
+
+  const getVacancies = async () => {
+    await axios
+      .get(
+        `${API}/vacancies?locale=RU&${requestPagStart}=0&${requestPagLimit}=-1&populate=*`
+      )
+      .then((res) => {
+        setVacancies(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    getVacancies();
+  }, []);
+
+  return (
+    <GlobalContextProvider>
+      <Component {...pageProps} />;
+    </GlobalContextProvider>
+  );
 }

@@ -1,7 +1,15 @@
+import { useEffect, useContext, FC } from "react";
 import Layout from "@/components/Layout";
 import styles from "@/styles/_home/styles.module.scss";
+import { GlobalContext } from "@/context/globalContext";
 
-export default function Home() {
+const Home: FC = () => {
+  const { vacancies } = useContext(GlobalContext);
+
+  useEffect(() => {
+    console.log(vacancies);
+  }, []);
+
   return (
     <>
       <Layout>
@@ -9,4 +17,6 @@ export default function Home() {
       </Layout>
     </>
   );
-}
+};
+
+export default Home;
