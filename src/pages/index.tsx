@@ -1,13 +1,13 @@
-import { useEffect, useContext, FC } from "react";
-import Layout from "@/components/Layout";
-import styles from "@/styles/_home/styles.module.scss";
-import { GlobalContext } from "@/context/globalContext";
+import { useEffect, useContext, FC } from 'react';
+import Layout from '@/components/Layout';
+import styles from '@/styles/_home/styles.module.scss';
+import { GlobalContext } from '@/context/globalContext';
 
 const Home: FC = () => {
-  const { vacancies } = useContext(GlobalContext);
+  // const { vacancies } = useContext(GlobalContext);
 
   useEffect(() => {
-    console.log(vacancies);
+    // console.log(vacancies);
   }, []);
 
   return (
