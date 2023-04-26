@@ -1,49 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-// import { getVacancies } from './vacanciesOperations';
-// import axios from 'axios';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getVacancies } from './vacanciesOperations';
 
-interface VacanciesState {
+type InitialState = {
   vacanciesList: [];
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
-}
+  loading: boolean;
+  error: string;
+};
 
-const initialState: VacanciesState = {
+const initialState: InitialState = {
   vacanciesList: [],
-  loading: 'idle',
+  loading: false,
+  error: '',
 };
 
 export const vacanciesReducer = createSlice({
   name: 'vacancies',
   initialState,
-  reducers: {
-    // getVacancies: async (state, action: PayloadAction<string>) => {
-    //   try {
-    //     const res = await axios.get(
-    //       `${API}/vacancies?locale=RU&${requestPagStart}=0&${requestPagLimit}=-1&populate=*`
-    //     );
-    //     console.log(res.data.data);
-    //     return res.data.data;
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // },
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(getVacancies.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(getVacancies.rejected, (state, action) => {
+      state.loading = false;
+      // state.error = action.payload.error.message ?? 'Unknown error';
+    });
+    builder.addCase(getVacancies.fulfilled, (state, action: PayloadAction<[]>) => {
+      state.vacanciesList = action.payload;
+      state.loading = false;
+    });
   },
-
-  //   extraReducers: builder => {
-  //     builder.addCase(getVacancies.pending, state => {
-  //       state.loading = 'pending';
-  //     });
-  //     builder.addCase(getVacancies.rejected, state => {
-  //       state.loading = 'failed';
-  //     });
-  //     builder.addCase(getVacancies.fulfilled, (state, action) => {
-  //       state.vacanciesList = action.payload;
-  //       state.loading = 'succeeded';
-  //     });
-  //   },
 });
-
-// export const { getVacancies } = vacanciesReducer.actions;
 
 export default vacanciesReducer.reducer;
