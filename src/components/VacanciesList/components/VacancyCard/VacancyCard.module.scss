@@ -1,0 +1,33 @@
+.vacancy {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	border: 1px solid #616161;
+	border-radius: 20px;
+	padding: 40px 20px;
+	box-sizing: border-box;
+	color: #000;
+    // transition: all 0.3s ease;
+	&:hover {
+		outline: 3px solid #ff6501;
+		border-color: transparent;
+	}
+}
+.info {
+}
+.title {
+	font-weight: 600;
+	margin-bottom: 14px;
+}
+.fake_button {
+	padding: 20px 36px;
+	font-weight: 700;
+	background-color: #fbbf13;
+	box-shadow: 0px 0px 17px 5px rgba(255, 101, 1, 0.25);
+	border-radius: 15px;
+	transition: all 0.3s ease;
+	&:hover {
+		background-color: #ff6501;
+	}
+}
