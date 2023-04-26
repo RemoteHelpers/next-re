@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getVacancies } from './vacanciesOperations';
 
 type InitialState = {
@@ -13,6 +13,11 @@ const initialState: InitialState = {
   error: '',
 };
 
+const handleRejected = (state: InitialState, action: AnyAction) => {
+  state.loading = false;
+  state.error = action.error.message ?? 'Unknown error';
+};
+
 export const vacanciesReducer = createSlice({
   name: 'vacancies',
   initialState,
@@ -21,10 +26,7 @@ export const vacanciesReducer = createSlice({
     builder.addCase(getVacancies.pending, state => {
       state.loading = true;
     });
-    builder.addCase(getVacancies.rejected, (state, action) => {
-      state.loading = false;
-      // state.error = action.payload.error.message ?? 'Unknown error';
-    });
+    builder.addCase(getVacancies.rejected, handleRejected);
     builder.addCase(getVacancies.fulfilled, (state, action: PayloadAction<[]>) => {
       state.vacanciesList = action.payload;
       state.loading = false;
