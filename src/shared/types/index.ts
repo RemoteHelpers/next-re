@@ -1,4 +1,7 @@
-
+export interface IVacancy {
+    id: number,
+    attributes: IVacancyAttr    
+}
 export interface IVacancyAttr{
     title: string,
     subTitle: string,
@@ -23,10 +26,5 @@ export interface ICatAttr{
     createdAt: string,
     description: string,
     locale: string
-}
-
-export interface IVacancy {
-    id: number,
-    attributes: IVacancyAttr
 }
 

@@ -1,9 +1,10 @@
 import { ActionReducerMapBuilder, AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getVacanciesPage, getVacancyBySlug } from './vacanciesOperations';
+import { getVacancies, getVacancyBySlug } from './vacanciesOperations';
+import { IVacancy, IVacancyAttr } from '@/shared/types';
 
 type InitialState = {
   vacanciesList: [];
-  vacancyBySlug: [];
+  vacancyBySlug: IVacancy;
   loading: boolean;
   error: string;
 };
@@ -12,7 +13,20 @@ type CallbackRejected = (state: InitialState, action: AnyAction) => void;
 
 const initialState: InitialState = {
   vacanciesList: [],
-  vacancyBySlug: [],
+  vacancyBySlug: {
+    id: 0,
+    attributes: {
+      title: '',
+      subTitle: '',
+      cardDescription: '',
+      isHot: false,
+      vacancySlug: '',
+      videoLink: '',
+      categories: {
+        data: []
+      }
+    }
+  },
   loading: false,
   error: '',
 };
@@ -32,16 +46,16 @@ export const vacanciesReducer = createSlice({
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<InitialState>) => {
     builder
-      .addCase(getVacanciesPage.pending, handlePending)
-      .addCase(getVacanciesPage.rejected, handleRejected)
-      .addCase(getVacanciesPage.fulfilled, (state, action: PayloadAction<[]>) => {
+      .addCase(getVacancies.pending, handlePending)
+      .addCase(getVacancies.rejected, handleRejected)
+      .addCase(getVacancies.fulfilled, (state, action: PayloadAction<[]>) => {
         state.vacanciesList = action.payload;
         state.loading = false;
       });
     builder
       .addCase(getVacancyBySlug.pending, handlePending)
       .addCase(getVacancyBySlug.rejected, handleRejected)
-      .addCase(getVacancyBySlug.fulfilled, (state, action: PayloadAction<[]>) => {
+      .addCase(getVacancyBySlug.fulfilled, (state, action: PayloadAction<IVacancy>) => {
         state.vacancyBySlug = action.payload;
         state.loading = false;
       });

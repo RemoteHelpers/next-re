@@ -10,7 +10,6 @@ import logo from "./assets/logo.svg";
 import Link from "next/link";
 import { JsxChild } from "typescript";
 import { useRouter } from "next/router";
-
 interface INavItem {
 	title: string;
 	path: string;
@@ -35,6 +34,12 @@ const navItems: INavItem[] = [
 	},
 ];
 
+enum Languages {
+	"ru",
+	"uk",
+	"en"
+}
+
 type Props = {};
 export const Header: FC = ({}: Props) => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -53,7 +58,9 @@ export const Header: FC = ({}: Props) => {
 	};
 
 	useEffect(() => {
-		dispatch(getVacancies(lang.toLowerCase()));
+		dispatch(getVacancies({
+			lang: lang.toLowerCase(),
+		}));
 	}, [lang]);
 
 	return (
@@ -80,9 +87,9 @@ export const Header: FC = ({}: Props) => {
 						})}
 					</nav>
 					<select onChange={changeLanguage} value={lang} name="" id="">
-						<option value="RU">RU</option>
-						<option value="UK">UA</option>
-						<option value="EN">US</option>
+						<option value={Languages[0].toString()}>RU</option>
+						<option value={Languages[1].toString()}>UA</option>
+						<option value={Languages[2].toString()}>US</option>
 					</select>
 				</div>
 			</div>
