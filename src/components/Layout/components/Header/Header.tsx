@@ -89,3 +89,17 @@ export const Header: FC = ({}: Props) => {
 		</header>
 	);
 };
+
+// export async function getStaticProps() {
+//   console.log('entered getStaticProps');
+//   const lang = useSelector(selectLanguage);
+//   const dispatch = useDispatch<AppDispatch>();
+//   await dispatch(getVacancies(lang));
+//   const vacanciesList = useSelector(selectVacancies);
+//   return {
+//     props: {
+//       vacanciesList,
+//     },
+//     revalidate: 10,
+//   };
+// }

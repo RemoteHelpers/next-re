@@ -1,3 +1,5 @@
+'use client';
+
 import { configureStore } from '@reduxjs/toolkit';
 import languageReducer from './language/langSlice';
 import vacanciesReducer from './vacancies/vacanciesSlice';
