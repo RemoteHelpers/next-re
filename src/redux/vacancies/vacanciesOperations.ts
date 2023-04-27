@@ -9,7 +9,7 @@ export const getVacancies: AsyncThunk<any, string, any> = createAsyncThunk(
 			const res = await axios.get(
 				`https://strapi.rem-s.com/api/vacancies?populate=*&locale=${lang}`
 			);
-			console.log(res.data.data);
+			// console.log(res.data.data);
 			return res.data.data;
 		} catch (error) {
 			console.error(error);

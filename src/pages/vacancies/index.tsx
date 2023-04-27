@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Layout } from "@/components/Layout";
 import { VacanciesList } from "@/components/VacanciesList";
 
-const Vacancies: FC = () => {
+const VacanciesPage: FC = () => {
 	return (
 		<Layout>
 			<VacanciesList />
@@ -10,4 +10,4 @@ const Vacancies: FC = () => {
 	);
 };
 
-export default Vacancies;
+export default VacanciesPage;

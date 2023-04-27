@@ -1,5 +1,5 @@
 import { selectVacancies } from "@/redux/vacancies/vacanciesSelectors";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { VacancyCard } from "./components/VacancyCard";
 import { IVacancy } from "@/shared/types";
@@ -7,17 +7,21 @@ import s from "./VacanciesList.module.scss";
 import { getVacancies } from "@/redux/vacancies/vacanciesOperations";
 import { AppDispatch } from "@/redux/store";
 
-type Props = {
-	vacancies: IVacancy[];
-};
-
 export const VacanciesList = () => {
-	const vacancies = useSelector(selectVacancies);
+	const vacanciesData = useSelector(selectVacancies);
+	const [vacancies, setVacancies] = useState<IVacancy[]>([]);
+
+	useEffect(() => {
+		setVacancies(vacanciesData);
+	}, [vacanciesData]);
+
 	return (
-		<section className={s.vacancy_list}>
-			{vacancies.map((vacancy: IVacancy) => (
-				<VacancyCard key={vacancy.id} vacancy={vacancy} />
-			))}
+		<section className={s.vacancies_list}>
+			<div className={s.container}>
+				{vacancies.map((vacancy: IVacancy) => (
+					<VacancyCard key={vacancy.id} vacancy={vacancy} />
+				))}
+			</div>
 		</section>
 	);
 };

@@ -1,15 +1,23 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Layout } from "@/components/Layout";
 import { useRouter } from "next/router";
+import { Vacancy } from "@/components/Vacancy";
 
-const Vacancy: FC = () => {
+const VacancyPage: FC = () => {
 	const router = useRouter();
 	const { vacancy } = router.query;
+
+	// const [vacancyQuery, setVacancyQuery] = useState<string | string[] | undefined>([]);
+
+	// useEffect(() => {
+	// 	setVacancyQuery(prev => vacancy);
+	// }, [vacancy])
+
 	return (
-		<Layout>
-			<h1>{vacancy}</h1>
+		<Layout>	
+			<Vacancy vacancyQuery={vacancy} />
 		</Layout>
 	);
 };
 
-export default Vacancy;
+export default VacancyPage;

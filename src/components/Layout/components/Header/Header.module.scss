@@ -1,9 +1,9 @@
+@import '@/shared/styles/mixins';
 .header{
 
 }
 .container{
-    max-width: 1795px;
-    margin: 0 auto;
+    @include container(20px);
     padding: 48px 10px;
     display: flex;
     justify-content: space-between;
