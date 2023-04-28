@@ -69,15 +69,14 @@ export default VacancyPage;
 
 export const getServerSideProps = wrapper.getServerSideProps(
 	(store) => async (context) => {
-		const state = store.getState();
 		const params = context.params;
 		const slug = params?.vacancy?.slice(1)[0];
-		console.log(slug);
-		let vacancy = [];
+		let vacancy = {};		
+		const lang = context.locale === 'ua' ? 'uk' : context.locale;
 		if (slug) {
 			const res = await store.dispatch(
 				getVacancyBySlug({
-					lang: context.locale || 'ru',
+					lang: lang || 'ru',
 					slug: slug || "",
 				})
 			);

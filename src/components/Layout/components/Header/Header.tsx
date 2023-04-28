@@ -38,7 +38,7 @@ const navItems: INavItem[] = [
 
 export enum Languages {
 	"ru",
-	"uk",
+	"ua",
 	"en",
 }
 

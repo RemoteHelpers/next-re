@@ -22,12 +22,8 @@ export default VacanciesPage;
 
 export const getServerSideProps: GetServerSideProps =
 	wrapper.getServerSideProps((store) => async (context) => {
-		const state = store.getState();
-		console.log(context.locale);
-		const res = await store.dispatch(getVacancies({ lang: context.locale || "ru" }));
-		//   console.log(res.payload);
-		const vacancies = selectVacancies(state)
-		console.log(vacancies);
+		const lang = context.locale === 'ua' ? 'uk' : context.locale;
+		const res = await store.dispatch(getVacancies({ lang: lang || "ru" }));
 		return {
 			props: {
 				vacanciesData: res.payload,
