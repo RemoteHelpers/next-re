@@ -8,18 +8,18 @@ import { AppDispatch } from "@/redux/store";
 import { selectLanguage } from "@/redux/language/langSelectors";
 import { getVacancies } from "@/redux/vacancies/vacanciesOperations";
 
-export const VacanciesList = () => {
-	const vacanciesData = useSelector(selectVacancies);
+export const VacanciesList = ({vacanciesData}: any) => {
+	// const vacanciesData = useSelector(selectVacancies);
 	const dispatch = useDispatch<AppDispatch>();
 	const lang = useSelector(selectLanguage);	
 	
 	const [vacancies, setVacancies] = useState<IVacancy[]>([]);
 	
-	useEffect(() => {
-		dispatch(getVacancies({
-			lang: lang.toLowerCase(),
-		}));
-	}, [lang]);
+	// useEffect(() => {
+	// 	dispatch(getVacancies({
+	// 		lang: lang.toLowerCase(),
+	// 	}));
+	// }, [lang]);
 
 	useEffect(() => {
 		setVacancies(vacanciesData);
@@ -28,7 +28,7 @@ export const VacanciesList = () => {
 	return (
 		<section className={s.vacancies_list}>
 			<div className={s.container}>
-				{vacancies.length > 0 &&
+				{vacancies?.length > 0 &&
 					vacancies.map((vacancy: IVacancy) => (
 						<VacancyCard key={vacancy.id} vacancy={vacancy} />
 					))}
@@ -37,8 +37,4 @@ export const VacanciesList = () => {
 	);
 };
 
-export async function getServerSideProps() {
-	const dispatch = useDispatch<AppDispatch>();
-	const lang = useSelector(selectLanguage);
-	dispatch(getVacancies({lang}));	
-}
+

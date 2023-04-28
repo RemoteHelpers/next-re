@@ -15,10 +15,12 @@ interface INavItem {
 	path: string;
 }
 
+
 const navItems: INavItem[] = [
 	{
 		title: "Вакансії",
 		path: "/vacancies",
+		
 	},
 	{
 		title: "Про нас",
@@ -34,18 +36,18 @@ const navItems: INavItem[] = [
 	},
 ];
 
-enum Languages {
+export enum Languages {
 	"ru",
 	"uk",
-	"en"
+	"en",
 }
 
 type Props = {};
 export const Header: FC = ({}: Props) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const lang = useSelector(selectLanguage);
+	const router = useRouter();	
 
-	const router = useRouter();
 	const comparePath = useCallback(
 		(currentPath: string, path: string): boolean => {
 			return currentPath.split("/").at(-1) === path.split("/").at(-1);
@@ -55,13 +57,8 @@ export const Header: FC = ({}: Props) => {
 
 	const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>): void => {
 		dispatch(changeLang(e.target.value));
+		router.push(router.asPath, router.asPath, { locale: e.target.value });
 	};
-
-	useEffect(() => {
-		dispatch(getVacancies({
-			lang: lang.toLowerCase(),
-		}));
-	}, [lang]);
 
 	return (
 		<header className={s.header}>
@@ -75,7 +72,10 @@ export const Header: FC = ({}: Props) => {
 							return (
 								<Link
 									key={item.path}
-									href={item.path}
+									href={{
+										pathname: `${item.path}`,
+										
+									}}
 									className={
 										comparePath(router.pathname, item.path)
 											? `${s.nav_item} ${s.active}`
@@ -86,7 +86,7 @@ export const Header: FC = ({}: Props) => {
 							);
 						})}
 					</nav>
-					<select onChange={changeLanguage} value={lang} name="" id="">
+					<select onChange={changeLanguage} value={router.locale} name="" id="">
 						<option value={Languages[0].toString()}>RU</option>
 						<option value={Languages[1].toString()}>UA</option>
 						<option value={Languages[2].toString()}>US</option>
@@ -96,17 +96,3 @@ export const Header: FC = ({}: Props) => {
 		</header>
 	);
 };
-
-// export async function getStaticProps() {
-//   console.log('entered getStaticProps');
-//   const lang = useSelector(selectLanguage);
-//   const dispatch = useDispatch<AppDispatch>();
-//   await dispatch(getVacancies(lang));
-//   const vacanciesList = useSelector(selectVacancies);
-//   return {
-//     props: {
-//       vacanciesList,
-//     },
-//     revalidate: 10,
-//   };
-// }

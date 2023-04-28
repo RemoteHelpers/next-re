@@ -1,11 +1,14 @@
 import type { AppProps } from 'next/app';
 import '@/shared/styles/globals.scss';
 import StoreProvider from '@/redux/Provider';
+import { wrapper } from '@/redux/store';
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
-    <StoreProvider>
+    // <StoreProvider>
       <Component {...pageProps} />
-    </StoreProvider>
+    // </StoreProvider>
   );
 }
+
+export default wrapper.withRedux(App);
