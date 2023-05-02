@@ -12,40 +12,7 @@ interface VacancyProps {
 	vacancy: any;
 }
 
-export const Vacancy: FC<VacancyProps> = ({
-	vacancy: vacancyData,
-}: VacancyProps) => {
-	const router = useRouter();
-	const { vacancy: vacancyQuery } = router.query;
-
-	const [vacancyCatSlug, setVacancyCatSlug] = useState<string>("");
-	const [vacancySlug, setVacancySlug] = useState<string>("");
-	const [vacancy, setVacancy] = useState<IVacancy>();
-
-	const language = useSelector(selectLanguage);
-	const dispatch = useDispatch<AppDispatch>();
-	// const vacancyData = useSelector(selectVacancyBySlug);
-
-	// useEffect(() => {
-	// 	if (vacancyQuery?.length === 2) {
-	// 		setVacancyCatSlug(prev => vacancyQuery[0]);
-	// 		setVacancySlug(prev => vacancyQuery[1]);
-	// 	}
-	// }, [vacancyQuery]);
-
-	// useEffect(() => {
-	// 	dispatch(getVacancyBySlug({
-	// 		lang: language.toLowerCase(),
-	// 		slug: vacancySlug
-	// 	}));
-	// }, [language, vacancySlug]);
-
-	useEffect(() => {
-		if (vacancyData) {
-			setVacancy(vacancyData);
-		}
-	}, [vacancyData]);
-
+export const Vacancy: FC<VacancyProps> = ({ vacancy }: VacancyProps) => {
 	return (
 		<div className={s.container}>
 			<section className={s.vacancy}>

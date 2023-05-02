@@ -8,12 +8,12 @@ import { AppDispatch } from "@/redux/store";
 import { selectLanguage } from "@/redux/language/langSelectors";
 import { getVacancies } from "@/redux/vacancies/vacanciesOperations";
 
-export const VacanciesList = ({vacanciesData}: any) => {
+export const VacanciesList = ({ vacancies }: any) => {
 	// const vacanciesData = useSelector(selectVacancies);
 	const dispatch = useDispatch<AppDispatch>();
 	const lang = useSelector(selectLanguage);	
 	
-	const [vacancies, setVacancies] = useState<IVacancy[]>([]);
+	// const [vacancies, setVacancies] = useState<IVacancy[]>([]);
 	
 	// useEffect(() => {
 	// 	dispatch(getVacancies({
@@ -21,9 +21,9 @@ export const VacanciesList = ({vacanciesData}: any) => {
 	// 	}));
 	// }, [lang]);
 
-	useEffect(() => {
-		setVacancies(vacanciesData);
-	}, [vacanciesData]);
+	// useEffect(() => {
+	// 	setVacancies(vacanciesData);
+	// }, [vacanciesData]);
 
 	return (
 		<section className={s.vacancies_list}>

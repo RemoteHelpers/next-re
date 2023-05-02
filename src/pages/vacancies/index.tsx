@@ -10,10 +10,10 @@ import { IVacancy } from "@/shared/types";
 import { Languages } from "@/components/Layout/components/Header/Header";
 import { GetServerSideProps } from "next";
 
-const VacanciesPage: FC = ({ vacanciesData }: any) => {
+const VacanciesPage: FC = ({ vacancies }: any) => {
 	return (
 		<Layout>
-			<VacanciesList vacanciesData={vacanciesData} />
+			<VacanciesList vacancies={vacancies} />
 		</Layout>
 	);
 };
@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps =
 		const res = await store.dispatch(getVacancies({ lang: lang || "ru" }));
 		return {
 			props: {
-				vacanciesData: res.payload,
+				vacancies: res.payload,
 			},
 		};
 	});
