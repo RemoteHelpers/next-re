@@ -2,5 +2,9 @@ import React, { FC } from "react";
 import s from "./Footer.module.scss";
 
 export const Footer: FC = () => {
-	return <footer>Footer</footer>;
+	return (
+		<footer className={s.footer}>
+			<div className={s.container}>Footer</div>
+		</footer>
+	);
 };

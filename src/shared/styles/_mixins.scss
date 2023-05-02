@@ -1,0 +1,6 @@
+@import './variables';
+
+@mixin container ($ext: 0px, $mt: 0px, $mb: 0px){
+    max-width: $container + $ext;
+    margin: $mt auto $mb;
+}
