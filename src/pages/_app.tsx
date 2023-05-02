@@ -1,14 +1,13 @@
-import type { AppProps } from 'next/app';
-import '@/shared/styles/globals.scss';
-import StoreProvider from '@/redux/Provider';
-import { wrapper } from '@/redux/store';
+import type { AppProps } from "next/app";
+import "@/shared/styles/globals.scss";
+import { VacanciesProvider } from "@/context";
 
 function App({ Component, pageProps }: AppProps) {
-  return (
-    // <StoreProvider>
-      <Component {...pageProps} />
-    // </StoreProvider>
-  );
+	return (
+		<VacanciesProvider>
+			<Component {...pageProps} />
+		</VacanciesProvider>
+	);
 }
 
-export default wrapper.withRedux(App);
+export default App;

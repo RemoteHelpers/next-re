@@ -1,21 +1,13 @@
-import React, { FC, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { changeLang } from "@/redux/language/langSlice";
-import { selectLanguage } from "@/redux/language/langSelectors";
-import { getVacancies } from "@/redux/vacancies/vacanciesOperations";
-import { AppDispatch } from "@/redux/store";
+import React, { FC, useCallback } from "react";
 import s from "./Header.module.scss";
 import Image from "next/image";
 import logo from "./assets/logo.svg";
 import Link from "next/link";
-import { JsxChild } from "typescript";
 import { useRouter } from "next/router";
 interface INavItem {
 	title: string;
 	path: string;
 }
-
-
 const navItems: INavItem[] = [
 	{
 		title: "Вакансії",
@@ -44,8 +36,6 @@ export enum Languages {
 
 type Props = {};
 export const Header: FC = ({}: Props) => {
-	const dispatch = useDispatch<AppDispatch>();
-	const lang = useSelector(selectLanguage);
 	const router = useRouter();	
 
 	const comparePath = useCallback(
@@ -56,7 +46,6 @@ export const Header: FC = ({}: Props) => {
 	);
 
 	const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-		dispatch(changeLang(e.target.value));
 		router.push(router.asPath, router.asPath, { locale: e.target.value });
 	};
 
