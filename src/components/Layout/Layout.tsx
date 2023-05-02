@@ -8,11 +8,11 @@ import s from "./Layout.module.scss";
 export type LayoutProps = MainProps & {};
 
 export const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
-	return (
-		<div className={s.wrapper}>
-			<Header />
-			<Main>{children}</Main>
-			<Footer />
-		</div>
-	);
+  return (
+    <div className={s.wrapper}>
+      <Header />
+      <Main>{children}</Main>
+      <Footer />
+    </div>
+  );
 };

@@ -3,11 +3,11 @@ import "@/shared/styles/globals.scss";
 import { VacanciesProvider } from "@/context";
 
 function App({ Component, pageProps }: AppProps) {
-	return (
-		<VacanciesProvider>
-			<Component {...pageProps} />
-		</VacanciesProvider>
-	);
+  return (
+    <VacanciesProvider>
+      <Component {...pageProps} />
+    </VacanciesProvider>
+  );
 }
 
 export default App;

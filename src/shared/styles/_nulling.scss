@@ -10,11 +10,13 @@
 }
 :focus,
 :active {
-    outline: none;
+    outline: 0;
+    outline-offset: 0;
 }
 a:focus,
 a:active {
-    outline: none;
+    outline: 0;
+    outline-offset: 0;
 }
 
 nav,
@@ -26,11 +28,12 @@ aside {
 
 html,
 body {
-    min-height: 100%;
+    min-height: 100vh;
+    height: 100%;
     width: 100%;
-    font-size: 100%;
-    line-height: 1;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 1px;
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
