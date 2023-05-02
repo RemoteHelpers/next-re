@@ -1,0 +1,1 @@
+export { VacanciesService } from "./VacanciesService";
