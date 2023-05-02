@@ -80,7 +80,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
 					slug: slug || "",
 				})
 			);
-			vacancy = res.payload;
+			if (res.payload.length > 0) {				
+				vacancy = res.payload[0];
+			}
 		}
 		console.log(vacancy);
 		return {
