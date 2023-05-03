@@ -1,1 +1,1 @@
-export { getVacancies, getVacancy } from "./VacanciesService";
+export { getVacancies, getVacancy, getVacancyListData } from './VacanciesService';

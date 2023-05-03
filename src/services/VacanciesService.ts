@@ -1,15 +1,21 @@
-import axios from "axios";
-import { API, requestPagLimit, requestPagStart } from "@/constants";
+import axios from 'axios';
+import { API, requestPagLimit, requestPagStart } from '@/constants';
 
 const vacanciesInstance = axios.create({
   baseURL: API,
 });
 
-export const getVacancies = async (
-  lang: string,
-  pageStart = 0,
-  perPage = 25
-) => {
+export const getVacancyListData = async (lang: string, pageStart = 0, perPage = 25) => {
+  try {
+    const res = await vacanciesInstance.get(`/vacancy-list-data?populate=*&locale=${lang}`);
+    return res.data.data.attributes as Promise<{}>;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+};
+
+export const getVacancies = async (lang: string, pageStart = 0, perPage = 25) => {
   try {
     const res = await vacanciesInstance.get(
       `/vacancies?populate=*&locale=${lang}&${requestPagStart}=${pageStart}&${requestPagLimit}=${perPage}`
