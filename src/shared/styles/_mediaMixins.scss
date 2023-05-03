@@ -1,22 +1,22 @@
-@mixin onTablet {
+@mixin on768 {
     @media screen and (min-width: 768px) {
         @content;
     }
 }
 
-@mixin onDesktop {
+@mixin on992 {
     @media screen and (min-width: 992px) {
         @content;
     }
 }
 
-@mixin onDesktop {
+@mixin on1200 {
     @media screen and (min-width: 1200px) {
         @content;
     }
 }
 
-@mixin onDesktop {
+@mixin on1440 {
     @media screen and (min-width: 1440px) {
         @content;
     }
