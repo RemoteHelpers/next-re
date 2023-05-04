@@ -1,0 +1,121 @@
+@import '@/shared/styles/colors';
+@import '@/shared/styles/mixins';
+
+.dropdown {
+  width: clamp(220px, 13.95vw, 268px);
+  position: relative;
+}
+
+.dropdownBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  background-color: transparent;
+
+  cursor: pointer;
+
+  //   &:hover {
+  // box-shadow: 0 0 4px 2px black;
+  //   }
+
+  svg {
+    // margin-left: clamp(10px, 0.83vw, 16px);
+    width: 24px;
+    height: 24px;
+
+    stroke: $secondaryOrange;
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: clamp(16px, 1.04vw, 20px);
+  line-height: clamp(18px, 1.2vw, 23px);
+  text-align: start;
+
+  user-select: none;
+}
+
+.menu {
+  position: absolute;
+  top: calc(54px);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+
+  width: 300px;
+  height: 0px;
+  padding: 33px 30px;
+  border-radius: 30px;
+  border: 1px solid $rgbGray;
+
+  overflow: hidden;
+  background-color: $rgbWhite;
+
+  pointer-events: none;
+  opacity: 0;
+  //   transition: all 0.2s linear;
+}
+
+.menu_shown {
+  @extend .menu;
+
+  height: 474px;
+  opacity: 1;
+
+  pointer-events: all;
+
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 40px;
+
+  cursor: pointer;
+  &:hover .categoryName {
+    filter: drop-shadow(#2c4075);
+  }
+}
+
+.categoryName {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: calc(26px / 20px);
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //   padding: 10px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid $primaryBlue;
+  border-radius: 10px;
+
+  pointer-events: none;
+}
+.box_checked {
+  @extend .box;
+
+  .plug {
+    background-color: $rgbZodiac;
+  }
+}
+
+.plug {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
