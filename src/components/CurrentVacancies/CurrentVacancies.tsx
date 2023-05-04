@@ -8,7 +8,7 @@ export const CurrentVacancies = ({ vacanciesData, categories, vacancies }: any) 
   const [isHot, setIsHot] = useState(false);
   const [vacanciesList, setVacanciesList] = useState(vacancies.data);
 
-  // return (
+  return (
     <section className={s.section}>
       <CurrentVacanciesChoosing
         vacanciesData={vacanciesData}
