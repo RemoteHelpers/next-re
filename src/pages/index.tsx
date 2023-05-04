@@ -1,14 +1,15 @@
 import { FC } from "react";
+import { getHomeData } from "@/services";
 import { Layout } from "@/components/Layout";
 import { Questions } from "@/components/Questions";
-import { getHomeData } from "@/services";
+import Testimonials from "@/components/Testimonials/Testimonials";
 
 const Home: FC = ({ homeData }: any) => {
   return (
     <>
       <Layout>
-        <h1>Home Page</h1>
         <Questions questions={homeData} />
+        <Testimonials testimonials={homeData} />
       </Layout>
     </>
   );

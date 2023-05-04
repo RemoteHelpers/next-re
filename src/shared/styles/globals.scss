@@ -17,6 +17,7 @@ body {
   color: $rgbBlack;
 }
 
+// global styles ant design library for FAQ component
 .ant-collapse-item {
   border-color: #616161 !important;
   border-radius: 0 !important;
@@ -76,5 +77,44 @@ body {
 
   @include on768 {
     width: 90%;
+  }
+}
+
+
+// global swiper-slider styles for testimonials component
+.next-slider,
+.prev-slider {
+  cursor: pointer;
+  text-align: end;
+}
+
+.swiper-slide {
+  transition: all .4s ease-in-out !important;
+  transition-duration: 1s !important;
+  article {
+    header {
+      transition: all .5s ease-in-out !important;
+      margin: 2.5rem 0;
+    }
+    main {
+      div {
+        transition: all .5s ease-in-out !important;
+      }
+    }
+  }
+}
+
+.swiper-slide-active {
+  background-color: $primaryOrange;
+  border: 1px solid transparent !important;
+  article {
+    header {
+      color: $rgbWhite;
+    }
+    main {
+      div {
+        color: $rgbWhite;
+      }
+    }
   }
 }

@@ -1,9 +1,15 @@
 @import '../../shared/styles/colors';
 @import '../../shared/styles/fonts';
+@import "../../shared/styles/mixins";
+
+.container {
+    @include container();
+}
 
 .collapse {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 100%;
+    width: 100%;
     font-weight: 600;
     border: 0;
 }
@@ -28,6 +34,7 @@
         font-size: $fontSize4;
     }
 }
+
 .collapse_icon {
     display: flex;
     align-items: center;
