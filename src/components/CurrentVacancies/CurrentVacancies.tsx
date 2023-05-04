@@ -8,7 +8,7 @@ export const CurrentVacancies = ({ vacanciesData, categories, vacancies }: any) 
   const [isHot, setIsHot] = useState(false);
   const [vacanciesList, setVacanciesList] = useState(vacancies.data);
 
-  return (
+  // return (
     <section className={s.section}>
       <CurrentVacanciesChoosing
         vacanciesData={vacanciesData}
@@ -20,7 +20,7 @@ export const CurrentVacancies = ({ vacanciesData, categories, vacancies }: any) 
         vacancies={vacancies}
       />
 
-      <CurrentVacanciesList vacancies={vacanciesList} vacanciesData={vacanciesData} />
+      <CurrentVacanciesList vacancies={vacanciesList} vacanciesData={vacanciesData} isHot={isHot} />
     </section>
   );
 };

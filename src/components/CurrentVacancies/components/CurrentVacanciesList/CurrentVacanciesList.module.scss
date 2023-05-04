@@ -1,3 +1,83 @@
-.vacancyCard {
-  padding: 40px 54px;
+@import '@/shared/styles/colors';
+@import '@/shared/styles/mixins';
+
+.list {
+  margin-top: clamp(54px, 5.2vw, 100px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.card {
+  padding: 40px 25px;
+
+  border-radius: 20px;
+  border: 1px solid $rgbGray;
+
+  &:hover {
+    border: 2px solid $primaryOrange;
+  }
+}
+
+.titleWrap {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  justify-content: start;
+
+  // margin-bottom: clamp(10px, 1.92vw, 16px);
+  margin-bottom: clamp(10px, 1.87vw, 16px);
+}
+
+.hotLabel {
+  display: flex;
+  gap: 12px;
+
+  padding: 7px 13px;
+  border-radius: 15px;
+
+  background-color: $secondaryTomato;
+
+  svg {
+    fill: $rgbWhite;
+  }
+}
+
+.isHotValue {
+  color: $rgbWhite;
+}
+
+.title {
+  font-weight: 600; // 700
+  font-size: clamp(24px, 1.87vw, 36px);
+  line-height: clamp(32px, 2.08vw, 40px);
+}
+
+.salary {
+  margin-bottom: clamp(20px, 1.04vw, 13px);
+
+  font-weight: 500; // 600
+  font-size: clamp(14px, 1.04vw, 20px);
+  line-height: clamp(21px, 2.08vw, 30px);
+}
+
+.cardDescription {
+  margin-bottom: clamp(20px, 1.04vw, 13px);
+
+  font-size: clamp(14px, 1.04vw, 20px);
+  line-height: clamp(21px, 2.08vw, 30px);
+}
+
+.button {
+  padding: 19px 0;
+  border-radius: 15px;
+  width: 100%;
+  max-width: clamp(320px, 15.62vw, 300px);
+
+  background-color: $primaryYellow;
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(16px, 1.04vw, 20px);
+  line-height: clamp(18px, 1.2vw, 23px);
 }

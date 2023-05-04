@@ -2,6 +2,6 @@
 @import '@/shared/styles/mixins';
 
 .section {
+  // padding: 100px clamp(29px, 12vw, 230px) 0;
   padding: 100px 29px 0;
-  // box-sizing: border-box;
 }

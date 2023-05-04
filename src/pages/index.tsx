@@ -23,7 +23,7 @@ export const getServerSideProps = async (context: any) => {
   const lang = context.locale === 'ua' ? 'uk' : context.locale;
   const vacanciesData = await getVacancyListData(lang);
   const categories = await getCategories(lang);
-  const vacancies = await getCurrentVacancies({ lang, pageStart: 0, perPage: 6 });
+  const vacancies = await getCurrentVacancies({ lang, pageStart: 0, perPage: 111 });
 
   return {
     props: {
