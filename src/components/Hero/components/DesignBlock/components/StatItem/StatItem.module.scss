@@ -1,0 +1,87 @@
+@import "@/shared/styles/mixins";
+@import "@/shared/styles/mediaMixins";
+@import "@/shared/styles/colors";
+@import "@/shared/styles/fonts";
+
+$rotateReverse: rotate_anim 20s linear 0.8s infinite reverse;
+
+@keyframes rotate_anim {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.stat_item {
+	position: absolute;
+	display: flex;
+	gap: clamp(6px, 1.1vw, 16px);
+	padding: 8px 13px;
+	border-radius: 57px;
+	backdrop-filter: blur(1.9px);
+	color: $rgbBlack;
+	@include on992 {
+		padding: 15px 24px;
+	}
+	animation: $rotateReverse;
+	&[id="0"] {
+		background: linear-gradient(
+			253.58deg,
+			rgba(92, 233, 255, 0.44) 52.77%,
+			rgba(0, 0, 0, 0) 119.81%
+		);
+		bottom: 10%;
+		left: 5%;
+		max-width: 250px;
+	}
+	&[id="1"] {
+		background: linear-gradient(
+			259.58deg,
+			rgba(255, 255, 255, 0.73) 50.66%,
+			rgba(255, 255, 255, 0) 95.13%
+		);
+		top: 45%;
+		right: -7%;
+		max-width: 200px;
+	}
+}
+
+.fill_icon {
+	flex: 0 0 auto;
+	width: 15px;
+	height: 15px;
+	@include on992 {
+		width: 56px;
+		height: 56px;
+	}
+	border-radius: 50%;
+	background-color: $primaryOrange;
+	box-shadow: $shadow;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	img {
+		position: relative;
+		top: 0%;
+		left: 0%;
+		width: 50%;
+		height: 50%;
+		object-fit: contain;
+		object-position: center center;
+	}
+}
+.stats {
+	flex: 1 1 auto;
+}
+.value {
+	font-weight: 600;
+	font-size: $fontSize4;
+	line-height: 1.1;
+}
+.text {
+	font-weight: 500;
+	font-size: $fontSize7;
+	line-height: 1.1;
+}

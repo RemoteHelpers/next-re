@@ -5,6 +5,15 @@ const nextConfig = {
 		locales: ["en", "ua", "ru"],
 		defaultLocale: "ru",
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "strapi.rem-s.com",
+				pathname: "/**",
+			},
+		],
+	},
 };
 
 module.exports = nextConfig;

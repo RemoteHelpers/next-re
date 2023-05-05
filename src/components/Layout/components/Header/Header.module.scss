@@ -3,7 +3,7 @@
 @import "@/shared/styles/colors";
 @import "@/shared/styles/mediaMixins";
 .header {
-	position: absolute;
+	position: fixed;
 	z-index: 10;
 	height: $headerHeight1;
 	width: 100%;
