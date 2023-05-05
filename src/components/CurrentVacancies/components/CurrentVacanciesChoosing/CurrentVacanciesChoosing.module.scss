@@ -1,22 +1,31 @@
 @import '@/shared/styles/colors';
+@import '@/shared/styles/fonts';
 @import '@/shared/styles/mixins';
+@import '@/shared/styles/mediaMixins';
 
 .title {
-  margin-bottom: 50px;
+  margin-bottom: 3.1rem;
 
   color: $rgbZodiac;
-  font-size: clamp(28px, 2.5vw, 48px);
+  font-size: $fontSize2;
 
-  line-height: clamp(36px, 3.2vw, 62px);
+  line-height: 1.3;
   font-weight: 800;
 }
 
 .categoriesFilter {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 19px;
+  gap: 1.2rem;
+
+  @include on992 {
+    .searchWrap {
+      max-width: 38.6rem;
+    }
+    flex-direction: row;
+  }
 }
 
 .searchWrap {
@@ -24,16 +33,15 @@
   display: flex;
   align-items: center;
 
-  max-width: 618px;
   width: 100%;
 
   svg {
     position: absolute;
-    top: 11px;
-    right: 12px;
+    top: 0.68rem;
+    right: 0.75rem;
 
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
 
     fill: $secondaryOrange;
 
@@ -41,39 +49,39 @@
   }
 }
 
-.search {
-  padding: 12px;
+.searchInput {
+  padding: 0.75rem;
   width: 100%;
   border: 1px solid $rgbGray;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 
-  font-size: 16px;
-  line-height: calc(19px / 16px);
+  font-size: clamp(16px, 1.2vw, 20px);
+  line-height: 1.1;
 
-  &::placeholder {
-    color: $rgbGray;
+  color: $rgbGray;
+
+  @include on992 {
+    min-width: 36rem;
   }
 }
 
-.categoryTypeWrap {
+.filterTypeWrap {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: clamp(15px, 5.15vw, 99px);
+  gap: 1rem;
 
-  // max-width: 528px;
-  // width: 100%;
+  min-height: 2.9rem;
+  width: 100%;
 
   justify-content: space-between;
 
-  @media screen and (min-width: 1104px) {
+  @include on992 {
+    flex-wrap: nowrap;
+    max-width: 33rem;
+
     flex-direction: row-reverse;
   }
-}
-
-.categorySelector {
-  font-weight: 700;
-  font-size: 16px;
-  line-height: calc(18 / 16);
 }
 
 .checkbox {
@@ -91,13 +99,18 @@
   position: relative;
   cursor: pointer;
 
-  min-width: 132px;
-  height: 46px;
-  border-radius: 10px;
-  padding: 3px;
+  min-width: 8.2rem;
+  height: 2.9rem;
+  border-radius: 0.6rem;
+  padding: 0.2rem;
 
   background-color: $primaryYellow;
   transition: background-color 0.3s linear;
+
+  @include on992 {
+    height: 3.5rem;
+    width: 10rem;
+  }
 }
 
 .switcher_hot {
@@ -111,7 +124,11 @@
 
   .hotIcon {
     background-color: $primaryTomato;
-    transform: translateX(85px);
+    transform: translateX(5.3rem);
+
+    @include on992 {
+      transform: translateX(10rem - 3.1rem - 0.2rem * 2);
+    }
 
     svg {
       fill: $rgbWhite;
@@ -121,20 +138,24 @@
 
 .switcherTitle {
   position: absolute;
-  top: 15px;
-  left: 0px;
-  transform: translateX(43px);
+  top: 1rem;
+  left: 0;
+  transform: translateX(2.7rem);
 
-  width: calc(100% - 43px);
+  width: calc(100% - 2.7rem);
 
   text-align: center;
   color: $rgbWhite;
   font-weight: 600;
-  font-size: clamp(13px, 0.83vw, 16px);
-  line-height: calc(16 / 13);
+  font-size: clamp(13px, 1.1vw, 16px);
+  line-height: 1;
   user-select: none;
 
   transition: transform 0.3s linear;
+
+  @include on992 {
+    top: 1.2rem;
+  }
 }
 
 .hotIcon {
@@ -142,15 +163,20 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 8px;
-  width: 40px;
-  height: 40px;
+  border-radius: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
 
   background-color: $rgbWhite;
 
   transition-property: background-color transform;
   transition-duration: 0.3s;
   transition-timing-function: linear;
+
+  @include on992 {
+    width: 3.1rem;
+    height: 3.1rem;
+  }
 
   svg {
     fill: $primaryYellow;

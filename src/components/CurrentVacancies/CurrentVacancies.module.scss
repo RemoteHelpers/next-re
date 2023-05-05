@@ -1,7 +1,18 @@
 @import '@/shared/styles/colors';
 @import '@/shared/styles/mixins';
+@import '@/shared/styles/mediaMixins';
 
 .section {
-  // padding: 100px clamp(29px, 12vw, 230px) 0;
-  padding: 100px 29px 0;
+  margin-top: 100px;
+}
+
+.container {
+  @include container;
+  padding: 0 30px;
+
+  @include on992 {
+    @include container(20px);
+
+    padding: 0 10px;
+  }
 }

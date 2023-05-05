@@ -12,31 +12,39 @@ type Category = {
 type Props = {
   categoriesTitle: string;
   categories: Category[];
+  filtersState: any;
+  hotState: any;
 };
 
-export const DropDown: React.FC<Props> = ({ categories, categoriesTitle }) => {
+export const DropDown: React.FC<Props> = ({
+  categories,
+  categoriesTitle,
+  filtersState,
+  hotState: { isHot, setIsHot },
+}) => {
   const [isShown, setIsShown] = useState(false);
-  const [chosenCategorySlug, setChosenCategorySlug] = useState('');
-  const [chosenCategoryName, setChosenCategoryName] = useState(null);
+
+  const { chosenCategorySlug, setChosenCategorySlug, chosenCategoryName, setChosenCategoryName } =
+    filtersState;
 
   const handleSelection = (e: any) => {
-    e.stopPropagation();
+    if (!isHot) setIsHot(true);
 
     if (chosenCategorySlug === e.target.id) {
       setChosenCategorySlug('');
       setChosenCategoryName(null);
-      return;
+    } else {
+      setChosenCategorySlug(e.target.id);
+      setChosenCategoryName(e.target.firstChild.textContent);
     }
 
-    setChosenCategorySlug(e.target.id);
-    setChosenCategoryName(e.target.firstChild.textContent);
-    // setIsShown(false);
+    setIsShown(false);
   };
 
   return (
     <div className={s.dropdown}>
       <button type="button" className={s.dropdownBtn} onClick={() => setIsShown(!isShown)}>
-        <p className={s.title}>{chosenCategoryName ?? categoriesTitle}</p>
+        <span className={s.title}>{chosenCategoryName ?? categoriesTitle}</span>
 
         <CurrentVacanciesIcon name="dropdown-arrow" />
       </button>

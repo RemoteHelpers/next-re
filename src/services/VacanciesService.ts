@@ -24,7 +24,7 @@ export const getVacancyListData = async (lang: string) => {
   }
 };
 
-export const getCurrentVacancies = async ({ lang, pageStart = 0, perPage = 25 }: any) => {
+export const getCurrentVacancies = async ({ lang, pageStart, perPage }: any) => {
   try {
     const res = await vacanciesInstance.get(
       `/vacancies?populate=*&locale=${lang}&${requestPagStart}=${pageStart}&${requestPagLimit}=${perPage}`

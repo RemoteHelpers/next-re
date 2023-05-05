@@ -4,17 +4,21 @@ import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/Current
 import { DropDown } from './components/DropDown';
 
 export const CurrentVacanciesChoosing = ({
-  vacanciesData,
-  setIsHot,
-  isHot,
-  searchValue,
-  setSearchValue,
+  vacanciesInfo,
   categories,
-  vacancies,
+  hotState,
+  searchState,
+  filtersState,
 }: any) => {
-  console.log('file: CurrentVacanciesChoosing.tsx:15 ~ vacancies >>', vacancies);
+  const { searchValue, setSearchValue } = searchState;
+  const { isHot, setIsHot } = hotState;
   const checkboxRef = useRef<HTMLInputElement>(null);
-  const { title, placeholder, categoriesTitle, hotVacancies, allVacancies } = vacanciesData;
+  const { title, placeholder, categoriesTitle, hotVacancies, allVacancies } = vacanciesInfo;
+
+  const handleSearchChange = ({ target: { value } }: any) => {
+    setSearchValue(value);
+    if (!value || !isHot) setIsHot(true);
+  };
 
   return (
     <>
@@ -23,17 +27,22 @@ export const CurrentVacanciesChoosing = ({
       <div className={s.categoriesFilter}>
         <div className={s.searchWrap}>
           <input
-            className={s.search}
+            className={s.searchInput}
             placeholder={placeholder}
             value={searchValue}
-            onChange={({ target: { value } }) => setSearchValue(value)}
+            onChange={handleSearchChange}
           />
 
           <CurrentVacanciesIcon name="magnifying-glass" />
         </div>
 
-        <div className={s.categoryTypeWrap}>
-          <DropDown categories={categories} categoriesTitle={categoriesTitle} />
+        <div className={s.filterTypeWrap}>
+          <DropDown
+            filtersState={filtersState}
+            categories={categories}
+            categoriesTitle={categoriesTitle}
+            hotState={hotState}
+          />
 
           <input
             ref={checkboxRef}
@@ -45,13 +54,21 @@ export const CurrentVacanciesChoosing = ({
             className={s.checkbox}
           />
 
-          <div className={isHot ? s.switcher_hot : s.switcher} onClick={() => setIsHot(!isHot)}>
-            <div className={s.hotIcon}>
-              <CurrentVacanciesIcon name="fire" />
-            </div>
+          {filtersState.chosenCategoryName || searchValue ? (
+            <div></div>
+          ) : (
+            <button
+              type="button"
+              className={isHot ? s.switcher_hot : s.switcher}
+              onClick={() => setIsHot(!isHot)}
+            >
+              <span className={s.hotIcon}>
+                <CurrentVacanciesIcon name="fire" />
+              </span>
 
-            <p className={s.switcherTitle}>{isHot ? hotVacancies : allVacancies}</p>
-          </div>
+              <p className={s.switcherTitle}>{isHot ? hotVacancies : allVacancies}</p>
+            </button>
+          )}
         </div>
       </div>
     </>

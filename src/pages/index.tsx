@@ -3,12 +3,12 @@ import { Layout } from '@/components/Layout';
 import { CurrentVacancies } from '@/components/CurrentVacancies';
 import { getVacancyListData, getCategories, getCurrentVacancies } from '@/services';
 
-const Home: FC = ({ vacanciesData, categories, vacancies }: any) => {
+const Home: FC = ({ vacanciesInfo, categories, vacancies }: any) => {
   return (
     <>
       <Layout>
         <CurrentVacancies
-          vacanciesData={vacanciesData}
+          vacanciesInfo={vacanciesInfo}
           categories={categories}
           vacancies={vacancies}
         />
@@ -21,13 +21,22 @@ export default Home;
 
 export const getServerSideProps = async (context: any) => {
   const lang = context.locale === 'ua' ? 'uk' : context.locale;
-  const vacanciesData = await getVacancyListData(lang);
+  const vacanciesInfo = await getVacancyListData(lang);
   const categories = await getCategories(lang);
-  const vacancies = await getCurrentVacancies({ lang, pageStart: 0, perPage: 111 });
+
+  const perPage = 100;
+  const pageStart = 0;
+  const vacancies = (await getCurrentVacancies({ lang, pageStart, perPage })) as any;
+  // const { total } = vacanciesList.meta.pagination;
+  // const vacancies = [...vacanciesList];
+
+  // if (total > perPage) {
+  //   for (let i = 0; i < total; i += perPage) {}
+  // }
 
   return {
     props: {
-      vacanciesData,
+      vacanciesInfo,
       categories,
       vacancies,
     },
