@@ -1,9 +1,15 @@
 @import '../../shared/styles/colors';
 @import '../../shared/styles/fonts';
 @import "../../shared/styles/mixins";
+@import "../../shared/styles/mediaMixins";
 
 .container {
     @include container();
+    padding: 0 30px;
+
+    @include on1440 {
+        padding: 0;
+    }
 }
 
 .collapse {
@@ -31,7 +37,7 @@
     }
 
     h3 {
-        font-size: $fontSize4;
+        font-size: clamp(18px, 1.8vw, 26px);
     }
 }
 

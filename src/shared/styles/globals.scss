@@ -31,7 +31,7 @@ body {
 .ant-collapse-content-box {
   color: $rgbDeepDark;
   font-weight: 400;
-  font-size: $fontSize5;
+  font-size: $fontSize6;
   padding: 1rem 1rem 2rem 1rem !important;
 }
 
@@ -91,11 +91,13 @@ body {
 .swiper-slide {
   transition: all .4s ease-in-out !important;
   transition-duration: 1s !important;
+
   article {
     header {
       transition: all .5s ease-in-out !important;
       margin: 2.5rem 0;
     }
+
     main {
       div {
         transition: all .5s ease-in-out !important;
@@ -105,15 +107,42 @@ body {
 }
 
 .swiper-slide-active {
-  background-color: $primaryOrange;
-  border: 1px solid transparent !important;
+  background-color: transparent;
+  border: 1px solid $rgbGray !important;
+
+  @include on1440 {
+    background-color: $primaryOrange;
+    border: 1px solid transparent !important;
+
+    article {
+      div {
+        svg {
+          path {
+            fill: rgba(255, 255, 255) !important;
+          }
+        }
+      }
+
+      header {
+        color: $rgbWhite !important;
+      }
+
+      main {
+        div {
+          color: $rgbWhite !important;
+        }
+      }
+    }
+  }
+
   article {
     header {
-      color: $rgbWhite;
+      color: $rgbDark;
     }
+
     main {
       div {
-        color: $rgbWhite;
+        color: $rgbDark;
       }
     }
   }

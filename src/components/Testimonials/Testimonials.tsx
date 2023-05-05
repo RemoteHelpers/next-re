@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import { Navigation, Autoplay } from "swiper";
 import styles from "./Testimonials.module.scss";
 
 import "../../../node_modules/swiper/swiper.scss";
@@ -10,8 +10,10 @@ import { TestimonialsIcon } from "@/shared/components/IconComponents/Testimonial
 
 import { PhotoAPI } from "@/constants";
 import Image from "next/image";
+import { useState } from "react";
 
 const Feedbacks = ({ testimonials }: any) => {
+  const [showText, setShowText] = useState(false);
   console.log(testimonials);
 
   return (
@@ -19,21 +21,29 @@ const Feedbacks = ({ testimonials }: any) => {
       <h2>{testimonials.testimonialsTitle}</h2>
       <Swiper
         className={styles.swiper_wrapper}
-        modules={[Navigation]}
-        // Autoplay
-        centeredSlides
+        modules={[Navigation, Autoplay]}
+        centeredSlides={false}
         loop
         speed={1000}
         // autoplay={{
-        //   delay: 3000,
+        //   delay: 5000,
         //   disableOnInteraction: false,
         // }}
-        // pagination={{ clickable: true, type: "fraction" }}
-        slidesPerView={3}
+        slidesPerView={1}
         spaceBetween={20}
         navigation={{
           nextEl: ".next-slider",
           prevEl: ".prev-slider",
+        }}
+        breakpoints={{
+          768: {
+            slidesPerView: 2,
+            centeredSlides: false,
+          },
+          1440: {
+            slidesPerView: 3,
+            centeredSlides: true,
+          },
         }}
       >
         {testimonials.Testimonials &&
@@ -43,8 +53,13 @@ const Feedbacks = ({ testimonials }: any) => {
                 <div>
                   <TestimonialsIcon id="quotes" />
                 </div>
-                <header className={styles.slide_description}>
-                  {item.Description}
+                <header
+                  className={styles.slide_description}
+                  onClick={() => setShowText((prev: boolean) => !prev)}
+                >
+                  {showText
+                    ? item.Description
+                    : `${item.Description.slice(0, 250)}...`}
                 </header>
                 <main className={styles.slide_employee}>
                   <Image

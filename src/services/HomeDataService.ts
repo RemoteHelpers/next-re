@@ -9,7 +9,7 @@ const homeDataInstance = axios.create({
 export const getHomeData = async (lang: string) => {
   try {
     const res = await homeDataInstance.get(
-      `/home-page?locale=${lang}&populate=Testimonials.personImg,Faq_Question,partnersSlider`
+      `/home-page?locale=${lang}&populate=Testimonials.personImg,Faq_Question,partnersSlider,heroStats.heroStatIcon`
     );
 
     return res.data.data.attributes;
