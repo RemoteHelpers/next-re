@@ -52,7 +52,8 @@
 
   @include on992 {
     flex-direction: row-reverse;
-    justify-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
     gap: 60px;
 
     width: 100%;
@@ -76,6 +77,8 @@
   @include on992 {
     flex-direction: row-reverse;
     width: 8.6rem;
+
+    margin-left: auto;
   }
 
   svg {
@@ -149,7 +152,8 @@
   padding: 19px 0;
   border-radius: 15px;
   width: 100%;
-  max-width: clamp(320px, 15.62vw, 300px);
+  max-width: 20rem;
+  // max-width: clamp(320px, 15.62vw, 300px);
 
   background-color: $primaryYellow;
   color: $rgbWhite;
@@ -157,10 +161,12 @@
 
   text-align: center;
   font-weight: 700;
-  font-size: clamp(16px, 1.04vw, 20px);
-  line-height: clamp(18px, 1.2vw, 23px);
+  font-size: clamp(1rem, 1.37vw, 1.25rem);
+  line-height: 1.1;
 
   @include on992 {
     margin-left: 0;
+    max-width: 18.75rem;
+    line-height: 1.4;
   }
 }
