@@ -13,10 +13,17 @@
 	display: flex;
 	flex-direction: column;
 	padding: 0px 30px;
-	gap: clamp(46px, 10.27vw, 150px);
+	gap: 46px;
+	@include on768{
+		gap: 60px;
+	}
 	@include on992 {
 		padding: 0px 10px;
 		flex-direction: row-reverse;
+		gap: 90px;
+	}
+	@include on1200{
+		gap: 150px;
 	}
 }
 
