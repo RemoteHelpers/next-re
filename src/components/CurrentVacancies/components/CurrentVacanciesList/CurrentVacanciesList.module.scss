@@ -13,7 +13,7 @@
 
 .card {
   padding: 40px 25px;
-  // height: 23.12rem;
+  min-height: 23.12rem;
 
   border-radius: 20px;
   border: 1px solid $rgbGray;
@@ -31,7 +31,7 @@
     gap: 2rem;
 
     padding: 3.2rem;
-    // height: 17.5rem;
+    min-height: 17.5rem;
   }
 }
 
@@ -46,8 +46,7 @@
   flex-direction: column;
   gap: 32px;
 
-  // margin-bottom: clamp(10px, 1.92vw, 16px);
-  margin-bottom: clamp(10px, 1.87vw, 16px);
+  margin-bottom: 10px;
   max-width: 46rem;
 
   @include on992 {
@@ -57,8 +56,7 @@
     gap: 60px;
 
     width: 100%;
-    // height: 280px;
-    // padding: 50px 54px;
+    margin-bottom: 16px;
   }
 }
 
