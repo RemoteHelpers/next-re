@@ -1,5 +1,7 @@
 @import './nulling';
 @import './colors';
+@import './fonts';
+@import './mediaMixins';
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic");
 
 body {
@@ -13,4 +15,135 @@ body {
   font-weight: 400;
   line-height: 1.6;
   color: $rgbBlack;
+}
+
+// global styles ant design library for FAQ component
+.ant-collapse-item {
+  border-color: #616161 !important;
+  border-radius: 0 !important;
+  background-color: $rgbWhite;
+}
+
+.ant-collapse-content {
+  border: 0 !important;
+}
+
+.ant-collapse-content-box {
+  color: $rgbDeepDark;
+  font-weight: 400;
+  font-size: $fontSize6;
+  padding: 1rem 1rem 2rem 1rem !important;
+}
+
+.collapse_icon {
+  background-color: transparent;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: .3s ease-in;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  @include on768 {
+    width: 3.5rem;
+    height: 3.5rem;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+}
+
+.ant-collapse-item-active .collapse_icon {
+  background-color: $primaryOrange;
+
+  svg {
+    path {
+      transition: .3s ease-in;
+      fill: $rgbWhite;
+    }
+  }
+}
+
+.ant-collapse-content-box {
+  width: 100%;
+
+  @include on768 {
+    width: 90%;
+  }
+}
+
+
+// global swiper-slider styles for testimonials component
+.next-slider,
+.prev-slider {
+  cursor: pointer;
+  text-align: end;
+}
+
+.swiper-slide {
+  transition: all .4s ease-in-out !important;
+  transition-duration: 1s !important;
+
+  article {
+    header {
+      transition: all .5s ease-in-out !important;
+      margin: 2.5rem 0;
+    }
+
+    main {
+      div {
+        transition: all .5s ease-in-out !important;
+      }
+    }
+  }
+}
+
+.swiper-slide-active {
+  background-color: transparent;
+  border: 1px solid $rgbGray !important;
+
+  @include on1440 {
+    background-color: $primaryOrange;
+    border: 1px solid transparent !important;
+
+    article {
+      div {
+        svg {
+          path {
+            fill: rgba(255, 255, 255) !important;
+          }
+        }
+      }
+
+      header {
+        color: $rgbWhite !important;
+      }
+
+      main {
+        div {
+          color: $rgbWhite !important;
+        }
+      }
+    }
+  }
+
+  article {
+    header {
+      color: $rgbDark;
+    }
+
+    main {
+      div {
+        color: $rgbDark;
+      }
+    }
+  }
 }

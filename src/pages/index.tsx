@@ -1,8 +1,10 @@
+
 import { FC } from 'react';
 import { Layout } from '@/components/Layout';
 import { CurrentVacancies } from '@/components/CurrentVacancies';
 import { getVacancyListData, getCategories, getAllVacancies, getHomeData } from '@/services';
 import { Questions } from "@/components/Questions";
+import Testimonials from "@/components/Testimonials/Testimonials";
 import { Hero } from "@/components/Hero";
 
 const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData }: any) => {
@@ -16,6 +18,7 @@ const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData }: any) => {
           vacancies={vacancies}
         />
         <Questions questions={homeData} />
+        <Testimonials testimonials={homeData} />
       </Layout>
     </>
   );
