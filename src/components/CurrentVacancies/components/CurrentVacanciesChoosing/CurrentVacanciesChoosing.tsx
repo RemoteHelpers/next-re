@@ -9,25 +9,40 @@ export const CurrentVacanciesChoosing = ({
   hotState,
   searchState,
   filtersState,
+  setTitleRef,
+  resetCurrentPage,
 }: any) => {
   const { searchValue, setSearchValue } = searchState;
   const { isHot, setIsHot } = hotState;
   const checkboxRef = useRef<HTMLInputElement>(null);
   const { title, placeholder, categoriesTitle, hotVacancies, allVacancies } = vacanciesInfo;
 
+  const clearSearch = () => {
+    if (searchValue) setSearchValue('');
+  };
+
   const handleSearchChange = ({ target: { value } }: any) => {
     setSearchValue(value);
     if (!value || !isHot) setIsHot(true);
+    resetCurrentPage();
   };
 
-  const handleSearchClick = () => {
+  const handleSearchClick = (): void => {
     if (searchValue) setSearchValue('');
     if (!searchValue) return;
+    resetCurrentPage();
+  };
+
+  const switchIsHot = () => {
+    setIsHot(!isHot);
+    resetCurrentPage();
   };
 
   return (
     <>
-      <h2 className={s.title}>{title}</h2>
+      <h2 className={s.title} ref={setTitleRef}>
+        {title}
+      </h2>
 
       <div className={s.categoriesFilter}>
         <div className={s.searchWrap}>
@@ -53,6 +68,8 @@ export const CurrentVacanciesChoosing = ({
             categories={categories}
             categoriesTitle={categoriesTitle}
             hotState={hotState}
+            resetCurrentPage={resetCurrentPage}
+            clearSearch={clearSearch}
           />
 
           <input
@@ -71,7 +88,7 @@ export const CurrentVacanciesChoosing = ({
             <button
               type="button"
               className={isHot ? s.switcher_hot : s.switcher}
-              onClick={() => setIsHot(!isHot)}
+              onClick={switchIsHot}
             >
               <span className={s.hotIcon}>
                 <CurrentVacanciesIcon name="fire" />

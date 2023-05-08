@@ -1,18 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import s from './CurrentVacancies.module.scss';
 import { CurrentVacanciesChoosing } from './components/CurrentVacanciesChoosing';
 import { CurrentVacanciesList } from './components/CurrentVacanciesList';
 import { useRouter } from 'next/router';
 import { VacanciesPagination } from './components/VacanciesPagination';
 
-export const CurrentVacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
+export type PaginationInfo = {
+  totalVacans: number;
+  vacansPerPage: number;
+  totalPages: number;
+  setTotalPages: (pageNumber: number) => void;
+  currentPage: number;
+  setCurrentPage: (pageNumber: number) => void;
+};
+
+export const CurrentVacancies: React.FC = ({ vacanciesInfo, categories, vacancies }: any) => {
   const [searchValue, setSearchValue] = useState('');
   const [isHot, setIsHot] = useState(true);
   const [chosenCategorySlug, setChosenCategorySlug] = useState('');
   const [chosenCategoryName, setChosenCategoryName] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(Math.ceil(vacancies.length / 6));
+  const titleRef = useRef(null);
+
+  const paginationConfig: PaginationInfo = {
+    totalVacans: vacancies.length,
+    vacansPerPage: 6,
+    totalPages,
+    setTotalPages,
+    currentPage,
+    setCurrentPage,
+  };
 
   const { locale } = useRouter();
+
+  const resetCurrentPage = () => setCurrentPage(1);
 
   const resetFilters = () => {
     setSearchValue('');
@@ -39,10 +61,11 @@ export const CurrentVacancies = ({ vacanciesInfo, categories, vacancies }: any) 
             chosenCategoryName,
             setChosenCategoryName,
           }}
+          setTitleRef={titleRef}
+          resetCurrentPage={resetCurrentPage}
         />
 
         <CurrentVacanciesList
-          // vacancies={vacanciesList}
           vacancies={vacancies}
           vacanciesInfo={vacanciesInfo}
           isHot={isHot}
@@ -51,9 +74,10 @@ export const CurrentVacancies = ({ vacanciesInfo, categories, vacancies }: any) 
             chosenCategorySlug,
             chosenCategoryName,
           }}
+          paginationConfig={paginationConfig}
         />
 
-        <VacanciesPagination paginationConfig={{ currentPage, pagesCount: 3, setCurrentPage }} />
+        <VacanciesPagination paginationConfig={paginationConfig} titleRef={titleRef} />
       </div>
     </section>
   );

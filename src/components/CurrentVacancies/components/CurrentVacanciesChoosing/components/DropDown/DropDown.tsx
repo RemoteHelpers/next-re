@@ -9,11 +9,25 @@ type Category = {
   };
 };
 
+type HotState = {
+  isHot: boolean;
+  setIsHot: (boolean: boolean) => void;
+};
+
+type FiltersState = {
+  chosenCategorySlug: string;
+  setChosenCategorySlug: (x: string) => void;
+  chosenCategoryName: string | null;
+  setChosenCategoryName: (x: string | null) => void;
+};
+
 type Props = {
   categoriesTitle: string;
   categories: Category[];
-  filtersState: any;
-  hotState: any;
+  filtersState: FiltersState;
+  hotState: HotState;
+  resetCurrentPage: () => void;
+  clearSearch: () => void;
 };
 
 export const DropDown: React.FC<Props> = ({
@@ -21,6 +35,8 @@ export const DropDown: React.FC<Props> = ({
   categoriesTitle,
   filtersState,
   hotState: { isHot, setIsHot },
+  resetCurrentPage,
+  clearSearch,
 }) => {
   const [isShown, setIsShown] = useState(false);
 
@@ -39,6 +55,8 @@ export const DropDown: React.FC<Props> = ({
     }
 
     setIsShown(false);
+    resetCurrentPage();
+    clearSearch();
   };
 
   return (
