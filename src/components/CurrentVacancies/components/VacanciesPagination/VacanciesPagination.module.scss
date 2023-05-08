@@ -1,0 +1,33 @@
+@import '../../../../shared/styles/colors';
+
+.numBar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  margin-top: 3.125rem;
+}
+
+.numBtn {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+
+  width: 2.125rem;
+  height: 2.125rem;
+  border-radius: 50%;
+
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1em;
+  color: $hexGrey1;
+  background-color: transparent;
+}
+.numBtn_active {
+  @extend .numBtn;
+
+  background-color: $primaryOrange;
+  color: $rgbWhite;
+
+  cursor: not-allowed;
+}

@@ -1,0 +1,1 @@
+export { CurrentVacancies } from './CurrentVacancies';

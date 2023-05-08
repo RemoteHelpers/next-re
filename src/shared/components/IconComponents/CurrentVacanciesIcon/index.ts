@@ -1,0 +1,1 @@
+export { CurrentVacanciesIcon } from './CurrentVacanciesIcon';
