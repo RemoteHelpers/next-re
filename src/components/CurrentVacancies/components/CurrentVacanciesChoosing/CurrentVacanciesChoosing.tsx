@@ -20,6 +20,11 @@ export const CurrentVacanciesChoosing = ({
     if (!value || !isHot) setIsHot(true);
   };
 
+  const handleSearchClick = () => {
+    if (searchValue) setSearchValue('');
+    if (!searchValue) return;
+  };
+
   return (
     <>
       <h2 className={s.title}>{title}</h2>
@@ -33,7 +38,13 @@ export const CurrentVacanciesChoosing = ({
             onChange={handleSearchChange}
           />
 
-          <CurrentVacanciesIcon name="magnifying-glass" />
+          <button type="button" onClick={handleSearchClick} className={s.searchBtn}>
+            {searchValue ? (
+              <CurrentVacanciesIcon name="close-cross" />
+            ) : (
+              <CurrentVacanciesIcon name="magnifying-glass" />
+            )}
+          </button>
         </div>
 
         <div className={s.filterTypeWrap}>

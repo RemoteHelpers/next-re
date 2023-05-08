@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import s from './CurrentVacanciesList.module.scss';
 import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface Props {
   vacancies: any;
@@ -19,7 +20,8 @@ export const CurrentVacanciesList: React.FC<Props> = ({
   searchValue,
 }) => {
   const [vacanciesList, setVacanciesList] = useState(vacancies);
-  const { chosenCategorySlug, chosenCategoryName } = filtersState;
+  const { chosenCategoryName } = filtersState;
+  const { locale } = useRouter();
 
   const sortByHot = (a: any, b: any) => {
     if (a.attributes.isHot && !b.attributes.isHot) return -1;
@@ -58,7 +60,7 @@ export const CurrentVacanciesList: React.FC<Props> = ({
   useEffect(() => {
     if (!isHot) setAllByDate();
     else setVacanciesList(hotVacancies());
-  }, [isHot]);
+  }, [isHot, locale]);
 
   useEffect(() => {
     const filtered = vacancies.filter(filterByCategory).sort(sortByDate).sort(sortByHot);

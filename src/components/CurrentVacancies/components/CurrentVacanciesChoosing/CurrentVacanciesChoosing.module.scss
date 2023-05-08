@@ -34,24 +34,12 @@
   align-items: center;
 
   width: 100%;
-
-  svg {
-    position: absolute;
-    top: 0.68rem;
-    right: 0.75rem;
-
-    width: 1.5rem;
-    height: 1.5rem;
-
-    fill: $secondaryOrange;
-
-    pointer-events: none;
-  }
 }
 
 .searchInput {
-  padding: 0.75rem;
+  height: 2.625rem;
   width: 100%;
+  padding: 0.8rem;
   border: 1px solid $rgbGray;
   border-radius: 0.5rem;
 
@@ -62,6 +50,44 @@
 
   @include on992 {
     min-width: 36rem;
+    height: 3.5rem;
+    padding: 1rem;
+  }
+}
+
+.searchBtn {
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 2.6rem;
+  height: 2.6rem;
+  // top: 0.68rem;
+  // right: 0.75rem;
+
+  background-color: transparent;
+
+  @include on992 {
+    width: 3.5rem;
+    height: 3.5rem;
+    // top: 1rem;
+    // right: 1rem;
+  }
+
+  svg {
+    width: 1.125rem;
+    height: 1.125rem;
+
+    fill: $secondaryOrange;
+    stroke: $secondaryOrange;
+    // pointer-events: none;
+    @include on992 {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 }
 

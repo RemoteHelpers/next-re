@@ -2,17 +2,28 @@ import React, { useEffect, useState } from 'react';
 import s from './CurrentVacancies.module.scss';
 import { CurrentVacanciesChoosing } from './components/CurrentVacanciesChoosing';
 import { CurrentVacanciesList } from './components/CurrentVacanciesList';
+import { useRouter } from 'next/router';
+import { VacanciesPagination } from './components/VacanciesPagination';
 
 export const CurrentVacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
   const [searchValue, setSearchValue] = useState('');
   const [isHot, setIsHot] = useState(true);
   const [chosenCategorySlug, setChosenCategorySlug] = useState('');
   const [chosenCategoryName, setChosenCategoryName] = useState(null);
-  const [vacanciesList, setVacanciesList] = useState(vacancies.data);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { locale } = useRouter();
+
+  const resetFilters = () => {
+    setSearchValue('');
+    setIsHot(true);
+    setChosenCategorySlug('');
+    setChosenCategoryName(null);
+  };
 
   useEffect(() => {
-    setVacanciesList(vacancies.data);
-  }, [vacancies]);
+    resetFilters();
+  }, [locale]);
 
   return (
     <section className={s.section}>
@@ -31,7 +42,8 @@ export const CurrentVacancies = ({ vacanciesInfo, categories, vacancies }: any) 
         />
 
         <CurrentVacanciesList
-          vacancies={vacanciesList}
+          // vacancies={vacanciesList}
+          vacancies={vacancies}
           vacanciesInfo={vacanciesInfo}
           isHot={isHot}
           searchValue={searchValue}
@@ -40,6 +52,8 @@ export const CurrentVacancies = ({ vacanciesInfo, categories, vacancies }: any) 
             chosenCategoryName,
           }}
         />
+
+        <VacanciesPagination paginationConfig={{ currentPage, pagesCount: 3, setCurrentPage }} />
       </div>
     </section>
   );

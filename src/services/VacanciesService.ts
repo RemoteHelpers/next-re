@@ -24,25 +24,41 @@ export const getVacancyListData = async (lang: string) => {
   }
 };
 
-export const getCurrentVacancies = async ({ lang, pageStart, perPage }: any) => {
+export const getAllVacancies = async (lang: any) => {
+  const pageStart = 0;
+  const perPage = 100;
+
   try {
-    const res = await vacanciesInstance.get(
+    const vacanciesPage = await vacanciesInstance.get(
       `/vacancies?populate=*&locale=${lang}&${requestPagStart}=${pageStart}&${requestPagLimit}=${perPage}`
     );
+    const resultVacancies = [...vacanciesPage.data.data];
 
-    return res.data as Promise<[]>;
+    const { total } = vacanciesPage.data.meta.pagination;
+    if (total <= perPage) return resultVacancies;
+
+    for (let i = perPage; i < total; i += perPage) {
+      const nextPage = (await vacanciesInstance.get(
+        `/vacancies?populate=*&locale=${lang}&${requestPagStart}=${i}&${requestPagLimit}=${perPage}`
+      )) as any;
+
+      resultVacancies.push(...nextPage.data.data);
+    }
+    return resultVacancies;
   } catch (error) {
     console.error(error);
     return error;
   }
 };
+
 export const getVacancies = async (lang: string, pageStart = 0, perPage = 25) => {
   try {
     const res = await vacanciesInstance.get(
       `/vacancies?populate=*&locale=${lang}&${requestPagStart}=${pageStart}&${requestPagLimit}=${perPage}`
     );
 
-    return res.data.data as Promise<[]>;
+    return res.data as Promise<{}>;
+    // return res.data.data as Promise<[]>;
   } catch (error) {
     console.error(error);
     return error;

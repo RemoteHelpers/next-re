@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 type Props = {
-  name: 'fire' | 'magnifying-glass' | 'dropdown-arrow';
+  name: 'fire' | 'magnifying-glass' | 'dropdown-arrow' | 'close-cross';
 };
 
 export const CurrentVacanciesIcon: FC<Props> = ({ name }) => {
@@ -46,6 +46,25 @@ export const CurrentVacanciesIcon: FC<Props> = ({ name }) => {
             // stroke="#F24E1E"
             strokeWidth="2"
             strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+
+    case 'close-cross':
+      return (
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M22 22L2 2M22 2C14.1895 9.81049 9.81049 14.1895 2 22"
+            // stroke="black"
+            strokeWidth="2"
+            strokeLinecap="square"
             strokeLinejoin="round"
           />
         </svg>

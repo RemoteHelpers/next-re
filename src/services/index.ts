@@ -3,5 +3,5 @@ export {
   getVacancy,
   getVacancyListData,
   getCategories,
-  getCurrentVacancies,
+  getAllVacancies,
 } from './VacanciesService';
