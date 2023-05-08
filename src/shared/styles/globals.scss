@@ -29,7 +29,7 @@ body {
 }
 
 .ant-collapse-content-box {
-  color: $rgbDeepDark;
+  color: $secondaryBlack;
   font-weight: 400;
   font-size: $fontSize6;
   padding: 1rem 1rem 2rem 1rem !important;
@@ -137,12 +137,12 @@ body {
 
   article {
     header {
-      color: $rgbDark;
+      color: $secondaryBlack;
     }
 
     main {
       div {
-        color: $rgbDark;
+        color: $secondaryBlack;
       }
     }
   }

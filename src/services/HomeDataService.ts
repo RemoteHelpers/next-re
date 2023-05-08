@@ -17,4 +17,4 @@ export const getHomeData = async (lang: string) => {
     console.error("Error >>> ", error);
     return error;
   }
-});
+};
