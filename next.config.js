@@ -10,10 +10,10 @@ const nextConfig = {
 			{
 				protocol: "https",
 				hostname: "strapi.rem-s.com",
-				pathname: "/**"
-			}
-		]
-	}
+				pathname: "/**",
+			},
+		],
+	},
 };
 
 module.exports = nextConfig;

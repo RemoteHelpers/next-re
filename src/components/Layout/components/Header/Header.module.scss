@@ -1,40 +1,85 @@
-@import '@/shared/styles/mixins';
 
-.container{
-    @include container(20px);
-    padding: 48px 10px;
-    display: flex;
-    justify-content: space-between;
+@import "@/shared/styles/mixins";
+@import "@/shared/styles/variables";
+@import "@/shared/styles/colors";
+@import "@/shared/styles/mediaMixins";
+
+.header {
+	position: fixed;
+	z-index: 10;
+	height: $headerHeight1;
+	width: 100%;
+	@include on992 {
+		height: $headerHeight2;
+	}
 }
-.logo{
-    display: block;
-    max-width: 277px;
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        object-position: center;
-    }
+.container {
+	@include container(60px);
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px 30px;
+	@include on992 {
+		@include container(20px);
+		padding: 0px 10px;
+	}
 }
-.controls{
-    display: flex;
-    gap: 70px;
+.logo {
+	display: block;
+	flex: 0 0 180px;
+	@include on992 {
+		flex: 0 0 277px;
+	}
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: center;
+	}
 }
-.nav{
-    display: flex;
-    gap: 50px;
-    padding: 0px 10px 0px 10px;
+.controls {
+	display: flex;
+	gap: 25px;
+	@include on992 {
+		gap: 70px;
+	}
 }
-.nav_item{
-    display: block;
-    color: inherit;
-    font-weight: 500;
-    transition: all .2s ease;
-    &.active{
-        font-weight: 700;
-    }
-    &:hover{
-        transform: scale(1.1);
-        color: rgba(255, 101, 1, 1);
-    }
+.nav {
+	display: none;
+	@include on992 {
+		display: flex;
+		gap: 50px;
+		padding: 0px 10px 0px 10px;
+	}
+}
+.nav_item {
+	display: block;
+	color: inherit;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	&.active {
+		font-weight: 700;
+	}
+	&:hover {
+		transform: scale(1.1);
+		color: rgba(255, 101, 1, 1);
+	}
+}
+.burger_btn {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	&:hover {
+		cursor: pointer;
+	}
+	@include on992{
+		display: none;
+	}
+	div {
+		width: 24px;
+		height: 2px;
+		border-radius: 5px;
+		background-color: $rgbBlack;
+	}
 }

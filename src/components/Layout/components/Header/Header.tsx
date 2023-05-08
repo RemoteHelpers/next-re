@@ -80,6 +80,11 @@ export const Header: FC = ({}: Props) => {
             <option value={Languages[1].toString()}>UA</option>
             <option value={Languages[2].toString()}>US</option>
           </select>
+        <div className={s.burger_btn}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
         </div>
       </div>
     </header>
