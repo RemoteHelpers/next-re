@@ -10,8 +10,8 @@ import type { IVacancy } from "@/shared/types";
 import { getVacancies } from "@/services";
 import { useRouter } from "next/router";
 
-export interface ContextValue {
-  vacancies: IVacancy[];
+export type ContextValue = {
+  vacancies: any;
   setVacancies: ([]) => void;
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
@@ -21,7 +21,7 @@ export interface ProviderProps {
   children: ReactNode;
 }
 
-const defaultValue = {
+const defaultValue: ContextValue = {
   vacancies: [],
   setVacancies: () => {},
   isLoading: true,
@@ -33,7 +33,7 @@ export const VacanciesContext = createContext<ContextValue>(defaultValue);
 export const VacanciesProvider: FC<ProviderProps> = ({
   children,
 }: ProviderProps) => {
-  const [vacancies, setVacancies] = useState<IVacancy[]>([]);
+  const [vacancies, setVacancies] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
