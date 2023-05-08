@@ -17,7 +17,7 @@ const rotateOpts:
 	| number
 	| (KeyframeAnimationOptions & { pseudoElement?: string }) = {
 	delay: 800,
-	duration: 5000,
+	duration: 20000,
 	iterations: 1,
 	composite: "add",
 	easing: "linear",
@@ -38,9 +38,9 @@ export const StatItem: FC<StatItemProps> = ({
 }: StatItemProps) => {
 	const router = useRouter();
 	const circleAnim = useWebAnimations<HTMLDivElement>({
-    keyframes: rotateKeyframes,
-    animationOptions: rotateOpts,
-  });
+		keyframes: rotateKeyframes,
+		animationOptions: rotateOpts,
+	});
 	useEffect(() => {
 		if (circleAnim.playState === "finished") {
 			circleAnim.animate({
@@ -49,8 +49,8 @@ export const StatItem: FC<StatItemProps> = ({
 			});
 		}
 	}, [circleAnim, circleAnim.playState]);
-  useEffect(() => {
-    circleAnim.getAnimation()?.finish();
+	useEffect(() => {
+		circleAnim.getAnimation()?.finish();
 		circleAnim.getAnimation()?.play();
 	}, [router.locale]);
 
