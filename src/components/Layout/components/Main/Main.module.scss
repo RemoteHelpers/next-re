@@ -1,3 +1,9 @@
-.main{
-    flex: 1 1 auto;
+@import "@/shared/styles/variables";
+@import "@/shared/styles/mediaMixins";
+.main {
+	flex: 1 1 auto;
+    margin-top: $headerHeight1;
+	@include on992 {
+		margin-top: $headerHeight2;
+	}
 }
