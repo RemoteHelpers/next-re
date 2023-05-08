@@ -1,2 +1,8 @@
-export { getVacancies, getVacancy } from "./VacanciesService";
+export {
+  getVacancies,
+  getVacancy,
+  getVacancyListData,
+  getCategories,
+  getAllVacancies,
+} from './VacanciesService';
 export { getHomeData } from "./HomeDataService";

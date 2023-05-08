@@ -1,0 +1,211 @@
+@import '@/shared/styles/colors';
+@import '@/shared/styles/fonts';
+@import '@/shared/styles/mixins';
+@import '@/shared/styles/mediaMixins';
+
+.title {
+  margin-bottom: 3.1rem;
+
+  color: $rgbZodiac;
+  font-size: $fontSize2;
+
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+.categoriesFilter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.2rem;
+
+  @include on992 {
+    .searchWrap {
+      max-width: 38.6rem;
+    }
+    flex-direction: row;
+  }
+}
+
+.searchWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+}
+
+.searchInput {
+  height: 2.625rem;
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid $rgbGray;
+  border-radius: 0.5rem;
+
+  font-size: clamp(16px, 1.2vw, 20px);
+  line-height: 1.1;
+
+  color: $rgbGray;
+
+  @include on992 {
+    min-width: 36rem;
+    height: 3.5rem;
+    padding: 1rem;
+  }
+}
+
+.searchBtn {
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 2.6rem;
+  height: 2.6rem;
+  // top: 0.68rem;
+  // right: 0.75rem;
+
+  background-color: transparent;
+
+  @include on992 {
+    width: 3.5rem;
+    height: 3.5rem;
+    // top: 1rem;
+    // right: 1rem;
+  }
+
+  svg {
+    width: 1.125rem;
+    height: 1.125rem;
+
+    fill: $secondaryOrange;
+    stroke: $secondaryOrange;
+    // pointer-events: none;
+    @include on992 {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+}
+
+.filterTypeWrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+
+  min-height: 2.9rem;
+  width: 100%;
+
+  justify-content: space-between;
+
+  @include on992 {
+    flex-wrap: nowrap;
+    max-width: 33rem;
+
+    flex-direction: row-reverse;
+  }
+}
+
+.checkbox {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  pointer-events: none;
+}
+
+.switcher {
+  position: relative;
+  cursor: pointer;
+
+  min-width: 8.2rem;
+  height: 2.9rem;
+  border-radius: 0.6rem;
+  padding: 0.2rem;
+
+  background-color: $primaryYellow;
+  transition: background-color 0.3s linear;
+
+  @include on992 {
+    height: 3.5rem;
+    width: 10rem;
+  }
+}
+
+.switcher_hot {
+  @extend .switcher;
+
+  background-color: $secondaryTomato;
+
+  .switcherTitle {
+    transform: translateX(0);
+  }
+
+  .hotIcon {
+    background-color: $primaryTomato;
+    transform: translateX(5.3rem);
+
+    @include on992 {
+      transform: translateX(10rem - 3.1rem - 0.2rem * 2);
+    }
+
+    svg {
+      fill: $rgbWhite;
+    }
+  }
+}
+
+.switcherTitle {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  transform: translateX(2.7rem);
+
+  width: calc(100% - 2.7rem);
+
+  text-align: center;
+  color: $rgbWhite;
+  font-weight: 600;
+  font-size: clamp(13px, 1.1vw, 16px);
+  line-height: 1;
+  user-select: none;
+
+  transition: transform 0.3s linear;
+
+  @include on992 {
+    top: 1.2rem;
+  }
+}
+
+.hotIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  background-color: $rgbWhite;
+
+  transition-property: background-color transform;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+
+  @include on992 {
+    width: 3.1rem;
+    height: 3.1rem;
+  }
+
+  svg {
+    fill: $primaryYellow;
+    transition: fill 0.3s linear;
+  }
+}
