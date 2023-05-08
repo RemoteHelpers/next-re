@@ -10,10 +10,8 @@ import { TestimonialsIcon } from "@/shared/components/IconComponents/Testimonial
 
 import { PhotoAPI } from "@/constants";
 import Image from "next/image";
-import { useState } from "react";
 
 const Feedbacks = ({ testimonials }: any) => {
-  const [showText, setShowText] = useState(false);
   console.log(testimonials);
 
   return (
@@ -53,13 +51,8 @@ const Feedbacks = ({ testimonials }: any) => {
                 <div>
                   <TestimonialsIcon id="quotes" />
                 </div>
-                <header
-                  className={styles.slide_description}
-                  onClick={() => setShowText((prev: boolean) => !prev)}
-                >
-                  {showText
-                    ? item.Description
-                    : `${item.Description.slice(0, 250)}...`}
+                <header className={styles.slide_description}>
+                  {item.Description}
                 </header>
                 <main className={styles.slide_employee}>
                   <Image
