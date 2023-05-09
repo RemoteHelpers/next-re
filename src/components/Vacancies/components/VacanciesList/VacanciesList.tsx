@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import s from './CurrentVacanciesList.module.scss';
+import s from './VacanciesList.module.scss';
 import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import type { PaginationInfo } from '../../CurrentVacancies';
+import type { PaginationInfo } from '../../Vacancies';
 
 type Vacancy = {
   attributes: { isHot: boolean; updatedAt: Date };
@@ -21,7 +21,7 @@ type Props = {
   paginationConfig: PaginationInfo;
 };
 
-export const CurrentVacanciesList: React.FC<Props> = ({
+export const VacanciesList: React.FC<Props> = ({
   vacancies,
   vacanciesInfo,
   isHot,

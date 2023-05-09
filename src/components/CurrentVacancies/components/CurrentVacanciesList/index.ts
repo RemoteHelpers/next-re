@@ -1,1 +1,0 @@
-export { CurrentVacanciesList } from './CurrentVacanciesList';

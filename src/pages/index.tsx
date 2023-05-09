@@ -1,22 +1,17 @@
-
 import { FC } from 'react';
 import { Layout } from '@/components/Layout';
-import { CurrentVacancies } from '@/components/CurrentVacancies';
+import { Vacancies } from '@/components/Vacancies';
 import { getVacancyListData, getCategories, getAllVacancies, getHomeData } from '@/services';
-import { Questions } from "@/components/Questions";
-import Testimonials from "@/components/Testimonials/Testimonials";
-import { Hero } from "@/components/Hero";
+import { Questions } from '@/components/Questions';
+import Testimonials from '@/components/Testimonials/Testimonials';
+import { Hero } from '@/components/Hero';
 
 const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData }: any) => {
   return (
     <>
       <Layout>
-        <Hero data={homeData} />				
-        <CurrentVacancies
-          vacanciesInfo={vacanciesInfo}
-          categories={categories}
-          vacancies={vacancies}
-        />
+        <Hero data={homeData} />
+        <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} vacancies={vacancies} />
         <Questions questions={homeData} />
         <Testimonials testimonials={homeData} />
       </Layout>

@@ -14,14 +14,14 @@ export const VacanciesPagination = ({
 
     const lastIndex = buttons.length - 1;
     const activeIndex = buttons.indexOf(currentPage);
-    const backstepMainIndex = lastIndex - currentPage - 1;
+    const skipCount = lastIndex - currentPage - 1;
 
     if (currentPage === 1) buttons.splice(activeIndex + 3, lastIndex - 3, 'nextDots');
-    else if (currentPage <= 3) buttons.splice(activeIndex + 2, backstepMainIndex, 'nextDots');
+    else if (currentPage <= 3) buttons.splice(activeIndex + 2, skipCount, 'nextDots');
     else if (currentPage === buttons.length) buttons.splice(1, buttons.length - 4, 'prevDots');
     else {
       buttons.splice(1, currentPage - 3, 'prevDots');
-      if (backstepMainIndex > 0) buttons.splice(5, backstepMainIndex, 'nextDots');
+      if (skipCount > 0) buttons.splice(5, skipCount, 'nextDots');
     }
 
     return buttons;

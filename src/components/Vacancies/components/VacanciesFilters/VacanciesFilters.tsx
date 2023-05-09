@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import s from './CurrentVacanciesChoosing.module.scss';
+import s from './VacanciesFilters.module.scss';
 import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
 import { DropDown } from './components/DropDown';
 
-export const CurrentVacanciesChoosing = ({
+export const VacanciesFilters = ({
   vacanciesInfo,
   categories,
   hotState,
@@ -17,9 +17,7 @@ export const CurrentVacanciesChoosing = ({
   const checkboxRef = useRef<HTMLInputElement>(null);
   const { title, placeholder, categoriesTitle, hotVacancies, allVacancies } = vacanciesInfo;
 
-  const clearSearch = () => {
-    if (searchValue) setSearchValue('');
-  };
+  const { chosenCategoryName, setChosenCategoryName } = filtersState;
 
   const handleSearchChange = ({ target: { value } }: any) => {
     setSearchValue(value);
@@ -27,9 +25,9 @@ export const CurrentVacanciesChoosing = ({
     resetCurrentPage();
   };
 
-  const handleSearchClick = (): void => {
-    if (searchValue) setSearchValue('');
+  const clearSearch = (): void => {
     if (!searchValue) return;
+    setSearchValue('');
     resetCurrentPage();
   };
 
@@ -39,7 +37,7 @@ export const CurrentVacanciesChoosing = ({
   };
 
   useEffect(() => {
-    if (filtersState.chosenCategoryName) filtersState.setChosenCategoryName(null);
+    if (chosenCategoryName) setChosenCategoryName(null);
   }, [searchValue]);
 
   return (
@@ -57,7 +55,7 @@ export const CurrentVacanciesChoosing = ({
             onChange={handleSearchChange}
           />
 
-          <button type="button" onClick={handleSearchClick} className={s.searchBtn}>
+          <button type="button" onClick={clearSearch} className={s.searchBtn}>
             {searchValue ? (
               <CurrentVacanciesIcon name="close-cross" />
             ) : (
@@ -86,9 +84,7 @@ export const CurrentVacanciesChoosing = ({
             className={s.checkbox}
           />
 
-          {filtersState.chosenCategoryName || searchValue ? (
-            <div></div>
-          ) : (
+          {!chosenCategoryName && !searchValue && (
             <button
               type="button"
               className={isHot ? s.switcher_hot : s.switcher}
