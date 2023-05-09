@@ -5,6 +5,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { PaginationInfo } from '../../CurrentVacancies';
 
+type Vacancy = {
+  attributes: { isHot: boolean; updatedAt: Date };
+  id: number;
+};
+
+type hotSortFoo = {};
+
 type Props = {
   vacancies: any;
   vacanciesInfo: any;
@@ -27,44 +34,57 @@ export const CurrentVacanciesList: React.FC<Props> = ({
   const { vacansPerPage, currentPage, setTotalPages } = paginationConfig;
   const { locale } = useRouter();
 
-  const changeTotalPages = (): void => setTotalPages(Math.ceil(vacanciesList.length / 6));
-  changeTotalPages();
+  const changeTotalPages = (): void =>
+    setTotalPages(Math.ceil(vacanciesList.length / vacansPerPage));
 
-  const slicePerPage = (vacansArr: any[]) => {
+  const slicePerPage = (vacansArr: any[]): any[] => {
     const skipIndex = currentPage > 1 ? vacansPerPage * (currentPage - 1) : 0;
     const limitIndex = skipIndex + vacansPerPage;
     const sliced = vacansArr.slice(skipIndex, limitIndex);
     return sliced;
   };
 
-  const sortByHot = (a: any, b: any) => {
+  const sortByHot = (a: Vacancy, b: Vacancy): -1 | 1 | 0 => {
     if (a.attributes.isHot && !b.attributes.isHot) return -1;
     if (!a.attributes.isHot && b.attributes.isHot) return 1;
     return 0;
   };
 
-  const sortByDate = (a: any, b: any): number => {
+  const sortByDate = (a: Vacancy, b: Vacancy): number => {
     return new Date(b.attributes.updatedAt).getTime() - new Date(a.attributes.updatedAt).getTime();
   };
 
   const setAllByDate = () => setVacanciesList(vacancies.sort(sortByDate));
 
-  const hotVacancies = () => vacancies.filter((el: any) => el.attributes.isHot);
+  const hotVacancies = () => vacancies.filter((el: Vacancy) => el.attributes.isHot);
 
   const searchedVacancies = () => {
-    return vacanciesList.filter(({ attributes }: any) => {
-      return (
-        attributes.title.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-        attributes.vacancySlug.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-        attributes.keyword_tags.data.some((keyword: any) =>
-          keyword.attributes.keyPhrase.toLowerCase().includes(searchValue.toLowerCase())
-        )
-      );
-    });
+    return vacanciesList
+      .filter(
+        ({ attributes }: any) =>
+          attributes.title.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+          attributes.vacancySlug.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+          attributes.keyword_tags.data.some((keyword: any) =>
+            keyword.attributes.keyPhrase.toLowerCase().includes(searchValue.toLowerCase())
+          )
+      )
+      .sort(sortByDate)
+      .sort(sortByHot);
   };
 
-  const filterByCategory = (el: any) =>
-    el.attributes.categories.data[0].attributes.categoryTitle === chosenCategoryName;
+  const filteredVacancies = (): any[] => {
+    return vacancies
+      .filter(
+        (el: any) =>
+          el.attributes.categories.data[0].attributes.categoryTitle === chosenCategoryName
+      )
+      .sort(sortByDate)
+      .sort(sortByHot);
+  };
+
+  useEffect(() => {
+    changeTotalPages();
+  });
 
   useEffect(() => {
     if (!isHot) setAllByDate();
@@ -74,12 +94,12 @@ export const CurrentVacanciesList: React.FC<Props> = ({
 
   useEffect(() => {
     if (!searchValue) setVacanciesList(hotVacancies());
-    else setVacanciesList(searchedVacancies().sort(sortByDate).sort(sortByHot));
+    else setVacanciesList(searchedVacancies());
     changeTotalPages();
   }, [searchValue]);
 
   useEffect(() => {
-    const filtered = vacancies.filter(filterByCategory).sort(sortByDate).sort(sortByHot);
+    const filtered = filteredVacancies();
     if (!filtered.length) setVacanciesList(hotVacancies());
     else setVacanciesList(filtered);
     changeTotalPages();

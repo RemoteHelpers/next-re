@@ -13,7 +13,7 @@
 
 .card {
   padding: 40px 25px;
-  min-height: 23.12rem;
+  // min-height: 23.12rem;
 
   border-radius: 20px;
   border: 1px solid $rgbGray;
@@ -107,7 +107,7 @@
 
   color: $secondaryBlack;
   font-weight: 500;
-  font-size: $fontSize4;
+  font-size: $fontSize5;
   line-height: 1.3;
 
   @include on992 {
@@ -143,7 +143,7 @@
   display: flex;
   justify-content: center;
 
-  margin-left: auto;
+  margin: 0 auto;
   padding: 19px 0;
   border-radius: 15px;
   width: 100%;

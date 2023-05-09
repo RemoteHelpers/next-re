@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { VacanciesPagination } from './components/VacanciesPagination';
 
 export type PaginationInfo = {
-  totalVacans: number;
   vacansPerPage: number;
   totalPages: number;
   setTotalPages: (pageNumber: number) => void;
@@ -20,12 +19,12 @@ export const CurrentVacancies: React.FC = ({ vacanciesInfo, categories, vacancie
   const [chosenCategorySlug, setChosenCategorySlug] = useState('');
   const [chosenCategoryName, setChosenCategoryName] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(Math.ceil(vacancies.length / 6));
+  const vacansPerPage = 9;
+  const [totalPages, setTotalPages] = useState(Math.ceil(vacancies.length / vacansPerPage));
   const titleRef = useRef(null);
 
   const paginationConfig: PaginationInfo = {
-    totalVacans: vacancies.length,
-    vacansPerPage: 6,
+    vacansPerPage,
     totalPages,
     setTotalPages,
     currentPage,

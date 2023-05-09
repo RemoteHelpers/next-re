@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import s from './CurrentVacanciesChoosing.module.scss';
 import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
 import { DropDown } from './components/DropDown';
@@ -37,6 +37,10 @@ export const CurrentVacanciesChoosing = ({
     setIsHot(!isHot);
     resetCurrentPage();
   };
+
+  useEffect(() => {
+    if (filtersState.chosenCategoryName) filtersState.setChosenCategoryName(null);
+  }, [searchValue]);
 
   return (
     <>
