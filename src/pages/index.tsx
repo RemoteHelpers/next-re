@@ -8,6 +8,7 @@ import Testimonials from "@/components/Testimonials/Testimonials";
 import { Hero } from "@/components/Hero";
 
 const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData }: any) => {
+  console.log(categories);
   return (
     <>
       <Layout>
@@ -28,17 +29,17 @@ export default Home;
 
 export const getServerSideProps = async (context: any) => {
   const lang = context.locale === 'ua' ? 'uk' : context.locale;
+  const homeData = await getHomeData(lang);
   const vacanciesInfo = await getVacancyListData(lang);
   const categories = await getCategories(lang);
   const vacancies = await getAllVacancies(lang);
-  const homeData = await getHomeData(lang);
 
   return {
     props: {
+      homeData,
       vacanciesInfo,
       categories,
       vacancies,
-      homeData,
     },
   };
 };

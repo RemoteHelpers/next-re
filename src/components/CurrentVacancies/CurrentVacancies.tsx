@@ -4,8 +4,15 @@ import { CurrentVacanciesChoosing } from './components/CurrentVacanciesChoosing'
 import { CurrentVacanciesList } from './components/CurrentVacanciesList';
 import { useRouter } from 'next/router';
 import { VacanciesPagination } from './components/VacanciesPagination';
+import { IVacancy } from '@/shared/types';
 
-export const CurrentVacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
+type CurrentVacanciesProps = {
+  vacanciesInfo: [],
+  categories: [],
+  vacancies: IVacancy[]
+}
+
+export const CurrentVacancies = ({ vacanciesInfo, categories, vacancies }: CurrentVacanciesProps) => {
   const [searchValue, setSearchValue] = useState('');
   const [isHot, setIsHot] = useState(true);
   const [chosenCategorySlug, setChosenCategorySlug] = useState('');

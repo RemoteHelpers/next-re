@@ -78,7 +78,7 @@ export const Header: FC = ({}: Props) => {
           <select onChange={changeLanguage} value={router.locale} name="" id="">
             <option value={Languages[0].toString()}>RU</option>
             <option value={Languages[1].toString()}>UA</option>
-            <option value={Languages[2].toString()}>US</option>
+            <option value={Languages[2].toString()}>EN</option>
           </select>
         <div className={s.burger_btn}>
           <div></div>
