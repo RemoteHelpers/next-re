@@ -8,7 +8,7 @@ interface INavItem {
   title: string;
   path: string;
 }
-const navItems: INavItem[] = [
+export const navItems: INavItem[] = [
   {
     title: "Вакансії",
     path: "/vacancies",
