@@ -11,7 +11,6 @@ import {
   getHomeData,
   getFooterData,
 } from '@/services';
-
 import { Spheres } from '@/components/Spheres';
 import { Partners } from '@/components/Partners';
 
