@@ -7,3 +7,4 @@ export {
 } from './VacanciesService';
 
 export { getHomeData } from "./HomeDataService";
+export { getFooterData } from "./FooterDataService";
