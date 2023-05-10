@@ -1,37 +1,26 @@
-import { FC } from "react";
-import { Layout } from "@/components/Layout";
-import { CurrentVacancies } from "@/components/CurrentVacancies";
+import { FC } from 'react';
+import { Layout } from '@/components/Layout';
+import { Vacancies } from '@/components/Vacancies';
+import { Questions } from '@/components/Questions';
+import Testimonials from '@/components/Testimonials/Testimonials';
+import { Hero } from '@/components/Hero';
 import {
-
   getVacancyListData,
   getCategories,
   getAllVacancies,
   getHomeData,
   getFooterData,
-} from "@/services";
-import { Questions } from "@/components/Questions";
-import Testimonials from "@/components/Testimonials/Testimonials";
-import { Hero } from "@/components/Hero";
-import { Spheres } from "@/components/Spheres";
-import { Partners } from "@/components/Partners";
+} from '@/services';
+import { Hero } from '@/components/Hero';
+import { Spheres } from '@/components/Spheres';
+import { Partners } from '@/components/Partners';
 
-
-const Home: FC = ({
-  vacanciesInfo,
-  categories,
-  vacancies,
-  homeData,
-  footerData,
-}: any) => {
+const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData, footerData }: any) => {
   return (
     <>
       <Layout footerData={footerData}>
         <Hero data={homeData} />
-        <CurrentVacancies
-          vacanciesInfo={vacanciesInfo}
-          categories={categories}
-          vacancies={vacancies}
-        />
+        <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} vacancies={vacancies} />
         <Questions questions={homeData} />
         <Testimonials testimonials={homeData} />
       </Layout>
@@ -42,7 +31,7 @@ const Home: FC = ({
 export default Home;
 
 export const getServerSideProps = async (context: any) => {
-  const lang = context.locale === "ua" ? "uk" : context.locale;
+  const lang = context.locale === 'ua' ? 'uk' : context.locale;
   const vacanciesInfo = await getVacancyListData(lang);
   const categories = await getCategories(lang);
   const vacancies = await getAllVacancies(lang);

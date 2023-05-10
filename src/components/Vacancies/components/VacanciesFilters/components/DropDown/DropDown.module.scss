@@ -2,8 +2,19 @@
 @import '@/shared/styles/mixins';
 @import '@/shared/styles/mediaMixins';
 
+// .customSelect {
+//   position: relative;
+
+//   ::placeholder {
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//   }
+// }
+
 .dropdown {
   // min-width: 13.5rem;
+
   // width: 100%;
   // max-width: 15rem;
 
@@ -19,9 +30,6 @@
   width: 100%;
   background-color: transparent;
   cursor: pointer;
-
-  @include on992 {
-  }
 
   svg {
     width: 24px;
@@ -40,9 +48,19 @@
   user-select: none;
 }
 
+// .menuWrapper {
+//   transition: all 0.3s linear;
+//   height: 0;
+// }
+// .menuWrapper_shown {
+//   @extend .menuWrapper;
+//   height: auto;
+// }
+
 .menu {
   position: absolute;
   top: 3.3rem;
+  z-index: 1;
 
   // left: 0;
   display: flex;
@@ -90,6 +108,7 @@
   cursor: pointer;
   &:hover .categoryName {
     filter: drop-shadow(#2c4075);
+    transform: scale(1.1);
   }
 }
 
@@ -114,16 +133,10 @@
 
   pointer-events: none;
 }
-.box_checked {
-  @extend .box;
-
-  .plug {
-    background-color: $rgbZodiac;
-  }
-}
 
 .plug {
   border-radius: 50%;
   width: 20px;
   height: 20px;
+  background-color: $rgbZodiac;
 }

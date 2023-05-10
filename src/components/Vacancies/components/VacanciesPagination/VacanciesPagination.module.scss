@@ -2,6 +2,7 @@
 
 .numBar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
 
@@ -9,9 +10,9 @@
 }
 
 .numBtn {
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   width: 2.125rem;
   height: 2.125rem;
@@ -19,7 +20,7 @@
 
   font-weight: 700;
   font-size: 1.25rem;
-  line-height: 1em;
+  // line-height: 1em;
   color: $primaryBlack;
   background-color: transparent;
 }
@@ -31,3 +32,8 @@
 
   cursor: not-allowed;
 }
+
+// .prevDots {
+// }
+// .nextDots {
+// }
