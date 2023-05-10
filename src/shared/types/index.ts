@@ -37,6 +37,10 @@ export interface ICatAttr {
 	locale: string;
 	publishedAt: string;
 	updatedAt: string;
+	vacancies?: IVacanciesData;
+}
+export interface IVacanciesData{
+	data: IVacancy[];
 }
 export interface IKeywordData {
 	data: [];

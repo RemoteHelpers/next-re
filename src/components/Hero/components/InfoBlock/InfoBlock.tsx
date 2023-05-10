@@ -15,7 +15,7 @@ export const InfoBlock: FC<InfoBlockProps> = ({data}: InfoBlockProps) => {
         <ReactMarkdown className={s.description}>
             {data.mainScreenParagraph}
         </ReactMarkdown>
-        <a className={s.btn}>
+            <a className={s.btn}>
             {data.mainScreenButton}
             <span className={s.btn_icon}>
                 <Image src={bag} alt="bag" />
