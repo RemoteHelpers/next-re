@@ -14,10 +14,11 @@ export type PaginationInfo = {
 };
 
 export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
-  const [searchValue, setSearchValue] = useState('');
-  const [isHot, setIsHot] = useState(true);
-  const [chosenCategorySlug, setChosenCategorySlug] = useState('');
-  const [chosenCategoryName, setChosenCategoryName] = useState(null);
+  const initialHotState = useRouter().asPath === '/' ? true : false;
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isHot, setIsHot] = useState(initialHotState);
+  const [isDropdownShown, setIsDropdownShown] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const vacansPerPage = 9;
   const [totalPages, setTotalPages] = useState(Math.ceil(vacancies.length / vacansPerPage));
@@ -33,17 +34,24 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
 
   const { locale } = useRouter();
 
-  const resetCurrentPage = (): void => setCurrentPage(1);
+  const resetCurrentPage = (): void => {
+    if (currentPage !== 1) setCurrentPage(1);
+  };
 
   const resetFilters = (): void => {
-    setSearchValue('');
-    setIsHot(true);
-    setChosenCategorySlug('');
-    setChosenCategoryName(null);
+    if (searchQuery) setSearchQuery('');
+    if (!isHot) setIsHot(initialHotState);
+    if (currentCategory) setCurrentCategory('');
+    if (isDropdownShown) setIsDropdownShown(false);
   };
 
   useEffect(() => {
+    console.log('currentCategory', currentCategory);
+  }, []);
+
+  useEffect(() => {
     resetFilters();
+    resetCurrentPage();
   }, [locale]);
 
   return (
@@ -52,28 +60,21 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
         <VacanciesFilters
           vacanciesInfo={vacanciesInfo}
           categories={categories}
-          searchState={{ searchValue, setSearchValue }}
-          hotState={{ isHot, setIsHot }}
-          filtersState={{
-            chosenCategorySlug,
-            setChosenCategorySlug,
-            chosenCategoryName,
-            setChosenCategoryName,
-          }}
+          searchState={{ searchQuery, setSearchQuery }}
+          hotState={{ isHot, setIsHot, initialHotState }}
+          categoriesState={{ currentCategory, setCurrentCategory }}
           setTitleRef={titleRef}
           resetCurrentPage={resetCurrentPage}
+          dropdownState={{ isDropdownShown, setIsDropdownShown }}
         />
 
         <VacanciesList
           vacancies={vacancies}
           vacanciesInfo={vacanciesInfo}
           isHot={isHot}
-          searchValue={searchValue}
-          filtersState={{
-            chosenCategorySlug,
-            chosenCategoryName,
-          }}
+          searchQuery={searchQuery}
           paginationConfig={paginationConfig}
+          currentCategory={currentCategory}
         />
 
         {totalPages > 1 && (

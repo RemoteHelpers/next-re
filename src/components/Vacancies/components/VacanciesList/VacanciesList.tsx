@@ -6,14 +6,14 @@ import { useRouter } from 'next/router';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
 import type { Vacancy } from '@/shared/types';
 
-type hotSortFoo = {};
+// type hotSortFoo = {};
 
 type Props = {
   vacancies: any;
   vacanciesInfo: any;
   isHot: boolean;
-  filtersState: any;
-  searchValue: string;
+  currentCategory: string;
+  searchQuery: string;
   paginationConfig: PaginationInfo;
 };
 
@@ -21,12 +21,11 @@ export const VacanciesList: React.FC<Props> = ({
   vacancies,
   vacanciesInfo,
   isHot,
-  filtersState,
-  searchValue,
+  currentCategory,
+  searchQuery,
   paginationConfig,
 }) => {
   const [vacanciesList, setVacanciesList] = useState(vacancies);
-  const { chosenCategoryName } = filtersState;
   const { vacansPerPage, currentPage, setTotalPages } = paginationConfig;
   const { locale } = useRouter();
 
@@ -58,10 +57,10 @@ export const VacanciesList: React.FC<Props> = ({
     return vacanciesList
       .filter(
         ({ attributes }: any) =>
-          attributes.title.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-          attributes.vacancySlug.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+          attributes.title.toLowerCase().includes(searchQuery.toLocaleLowerCase()) ||
+          attributes.vacancySlug.toLowerCase().includes(searchQuery.toLocaleLowerCase()) ||
           attributes.keyword_tags.data.some((keyword: any) =>
-            keyword.attributes.keyPhrase.toLowerCase().includes(searchValue.toLowerCase())
+            keyword.attributes.keyPhrase.toLowerCase().includes(searchQuery.toLowerCase())
           )
       )
       .sort(sortByDate)
@@ -69,10 +68,11 @@ export const VacanciesList: React.FC<Props> = ({
   };
 
   const filteredVacancies = (): any[] => {
+    console.log('currentCategory', currentCategory);
+
     return vacancies
       .filter(
-        (el: any) =>
-          el.attributes.categories.data[0].attributes.categoryTitle === chosenCategoryName
+        (el: any) => el.attributes.categories.data[0].attributes.categoryTitle === currentCategory
       )
       .sort(sortByDate)
       .sort(sortByHot);
@@ -89,17 +89,17 @@ export const VacanciesList: React.FC<Props> = ({
   }, [isHot, locale]);
 
   useEffect(() => {
-    if (!searchValue) setVacanciesList(hotVacancies());
+    if (!searchQuery) setVacanciesList(hotVacancies());
     else setVacanciesList(searchedVacancies());
     changeTotalPages();
-  }, [searchValue]);
+  }, [searchQuery]);
 
   useEffect(() => {
     const filtered = filteredVacancies();
     if (!filtered.length) setVacanciesList(hotVacancies());
     else setVacanciesList(filtered);
     changeTotalPages();
-  }, [chosenCategoryName]);
+  }, [currentCategory]);
 
   return (
     <ul className={s.list}>

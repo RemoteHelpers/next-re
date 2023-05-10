@@ -2,32 +2,32 @@ import React, { useEffect, useRef } from 'react';
 import s from './VacanciesFilters.module.scss';
 import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
 import { DropDown } from './components/DropDown';
+import { Test } from './components/DropDown/Test';
 
 export const VacanciesFilters = ({
   vacanciesInfo,
   categories,
   hotState,
   searchState,
-  filtersState,
   setTitleRef,
   resetCurrentPage,
+  categoriesState,
+  dropdownState,
 }: any) => {
-  const { searchValue, setSearchValue } = searchState;
-  const { isHot, setIsHot } = hotState;
+  const { searchQuery, setSearchQuery } = searchState;
+  const { isHot, setIsHot, initialHotState } = hotState;
   const checkboxRef = useRef<HTMLInputElement>(null);
   const { title, placeholder, categoriesTitle, hotVacancies, allVacancies } = vacanciesInfo;
-
-  const { chosenCategoryName, setChosenCategoryName } = filtersState;
+  const { currentCategory, setCurrentCategory } = categoriesState;
 
   const handleSearchChange = ({ target: { value } }: any) => {
-    setSearchValue(value);
-    if (!value || !isHot) setIsHot(true);
+    setSearchQuery(value);
     resetCurrentPage();
   };
 
-  const clearSearch = (): void => {
-    if (!searchValue) return;
-    setSearchValue('');
+  const handleClear = (): void => {
+    if (!searchQuery) return;
+    setSearchQuery('');
     resetCurrentPage();
   };
 
@@ -37,8 +37,9 @@ export const VacanciesFilters = ({
   };
 
   useEffect(() => {
-    if (chosenCategoryName) setChosenCategoryName(null);
-  }, [searchValue]);
+    if (!searchQuery || !isHot) setIsHot(initialHotState);
+    if (searchQuery && currentCategory) setCurrentCategory('');
+  }, [searchQuery]);
 
   return (
     <>
@@ -51,12 +52,14 @@ export const VacanciesFilters = ({
           <input
             className={s.searchInput}
             placeholder={placeholder}
-            value={searchValue}
+            id="search-vacancy-input"
+            name="search-vacancy-input"
+            value={searchQuery}
             onChange={handleSearchChange}
           />
 
-          <button type="button" onClick={clearSearch} className={s.searchBtn}>
-            {searchValue ? (
+          <button type="button" onClick={handleClear} className={s.searchBtn}>
+            {searchQuery ? (
               <CurrentVacanciesIcon name="close-cross" />
             ) : (
               <CurrentVacanciesIcon name="magnifying-glass" />
@@ -66,13 +69,15 @@ export const VacanciesFilters = ({
 
         <div className={s.filterTypeWrap}>
           <DropDown
-            filtersState={filtersState}
             categories={categories}
             categoriesTitle={categoriesTitle}
             hotState={hotState}
             resetCurrentPage={resetCurrentPage}
-            clearSearch={clearSearch}
+            clearSearch={() => setSearchQuery('')}
+            categoriesState={categoriesState}
+            dropdownState={dropdownState}
           />
+          {/* <Test /> */}
 
           <input
             ref={checkboxRef}
@@ -84,7 +89,7 @@ export const VacanciesFilters = ({
             className={s.checkbox}
           />
 
-          {!chosenCategoryName && !searchValue && (
+          {!currentCategory && !searchQuery && (
             <button
               type="button"
               className={isHot ? s.switcher_hot : s.switcher}
