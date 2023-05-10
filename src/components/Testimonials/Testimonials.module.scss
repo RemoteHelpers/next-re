@@ -10,6 +10,16 @@
     @include on1440 {
         padding: 0;
     }
+    margin-top: 100px;
+	@include on768 {
+		margin-top: 120px;
+	}
+	@include on992 {
+		margin-top: 150px;
+	}
+	@include on1200 {
+		margin-top: 200px;
+	}
 }
 
 .swiper_slide {
@@ -48,7 +58,8 @@
 }
 
 .employee_img {
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     border-radius: 50%;
 }
 

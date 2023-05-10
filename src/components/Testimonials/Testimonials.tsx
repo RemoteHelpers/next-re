@@ -12,7 +12,10 @@ import { PhotoAPI } from '@/constants';
 import Image from 'next/image';
 
 const Feedbacks = ({ testimonials }: any) => {
+<<<<<<< HEAD
   // console.log(testimonials);
+=======
+>>>>>>> dev
 
   return (
     <section className={styles.container}>
@@ -76,7 +79,7 @@ const Feedbacks = ({ testimonials }: any) => {
             <TestimonialsIcon id="next" />
           </span>
         </div>
-      </Swiper>
+      </Swiper>      
     </section>
   );
 };

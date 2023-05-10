@@ -1,15 +1,24 @@
 import { FC } from 'react';
 import { Layout } from '@/components/Layout';
 import { Vacancies } from '@/components/Vacancies';
-import { getVacancyListData, getCategories, getAllVacancies, getHomeData } from '@/services';
 import { Questions } from '@/components/Questions';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import { Hero } from '@/components/Hero';
+import {
+  getVacancyListData,
+  getCategories,
+  getAllVacancies,
+  getHomeData,
+  getFooterData,
+} from '@/services';
+import { Hero } from '@/components/Hero';
+import { Spheres } from '@/components/Spheres';
+import { Partners } from '@/components/Partners';
 
-const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData }: any) => {
+const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData, footerData }: any) => {
   return (
     <>
-      <Layout>
+      <Layout footerData={footerData}>
         <Hero data={homeData} />
         <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} vacancies={vacancies} />
         <Questions questions={homeData} />
@@ -27,6 +36,7 @@ export const getServerSideProps = async (context: any) => {
   const categories = await getCategories(lang);
   const vacancies = await getAllVacancies(lang);
   const homeData = await getHomeData(lang);
+  const footerData = await getFooterData(lang);
 
   return {
     props: {
@@ -34,6 +44,7 @@ export const getServerSideProps = async (context: any) => {
       categories,
       vacancies,
       homeData,
+      footerData,
     },
   };
 };
