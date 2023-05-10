@@ -11,7 +11,7 @@ import {
   getHomeData,
   getFooterData,
 } from '@/services';
-import { Hero } from '@/components/Hero';
+
 import { Spheres } from '@/components/Spheres';
 import { Partners } from '@/components/Partners';
 
@@ -20,8 +20,10 @@ const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData, footerData }
     <>
       <Layout footerData={footerData}>
         <Hero data={homeData} />
+        <Spheres title={homeData.spheresTitle} categories={categories} />
         <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} vacancies={vacancies} />
         <Questions questions={homeData} />
+        <Partners title={homeData.partnersTitle} slides={homeData.partnersSlider.data} />
         <Testimonials testimonials={homeData} />
       </Layout>
     </>
