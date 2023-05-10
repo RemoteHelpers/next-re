@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Layout } from "@/components/Layout";
 import { CurrentVacancies } from "@/components/CurrentVacancies";
 import {
+
   getVacancyListData,
   getCategories,
   getAllVacancies,
@@ -11,6 +12,9 @@ import {
 import { Questions } from "@/components/Questions";
 import Testimonials from "@/components/Testimonials/Testimonials";
 import { Hero } from "@/components/Hero";
+import { Spheres } from "@/components/Spheres";
+import { Partners } from "@/components/Partners";
+
 
 const Home: FC = ({
   vacanciesInfo,

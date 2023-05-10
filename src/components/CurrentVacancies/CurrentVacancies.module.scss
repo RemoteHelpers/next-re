@@ -4,6 +4,15 @@
 
 .section {
   margin-top: 100px;
+  @include on768{
+    margin-top: 120px;
+  }
+  @include on992{
+    margin-top: 150px;
+  }
+  @include on1200{
+    margin-top: 200px;
+  }
 }
 
 .container {

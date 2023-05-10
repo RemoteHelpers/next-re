@@ -11,7 +11,7 @@ import { getVacancies } from "@/services";
 import { useRouter } from "next/router";
 
 export type ContextValue = {
-  vacancies: any;
+  vacancies: IVacancy[];
   setVacancies: ([]) => void;
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
