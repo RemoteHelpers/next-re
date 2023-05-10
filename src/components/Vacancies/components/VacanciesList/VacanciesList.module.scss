@@ -1,82 +1,100 @@
 @import '@/shared/styles/colors';
 @import '@/shared/styles/mixins';
+@import '@/shared/styles/variables';
 @import '@/shared/styles/fonts';
 @import '@/shared/styles/mediaMixins';
 
 .list {
-  margin-top: clamp(54px, 5.2vw, 100px);
-
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  row-gap: 3.125rem;
+
+  margin-top: 2.5rem;
+
+  @include on992 {
+    margin-top: 6.25rem;
+    row-gap: 2.8rem;
+  }
 }
 
 .card {
-  padding: 40px 25px;
-  // min-height: 23.12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
-  border-radius: 20px;
+  gap: 2rem;
+
+  height: auto;
+  // height: 27.5rem;
+
+  padding: 2.5rem 1.56rem;
   border: 1px solid $rgbGray;
+  border-radius: 1.25rem;
+  outline: 2px solid transparent;
+
+  transition-property: outline-color border-color;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
 
   &:hover {
     border-color: transparent;
-    outline: 2px solid $primaryOrange;
+    outline-color: $primaryOrange;
   }
 
   @include on992 {
-    display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    gap: 2rem;
 
     padding: 3.2rem;
-    min-height: 17.5rem;
+    // height: 17.5rem;
   }
 }
 
 .mainWrap {
+  height: auto;
+  max-height: 100%;
+
   @include on992 {
-    width: 54.25rem;
+    max-width: 52.5rem;
   }
 }
 
 .titleWrap {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 2rem;
 
-  margin-bottom: 10px;
-  max-width: 46rem;
+  margin-bottom: 0.625rem;
+  width: 100%;
 
   @include on992 {
     flex-direction: row-reverse;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 60px;
+    justify-content: space-between;
+    // justify-content: flex-end;
+    align-items: start;
+    gap: 0;
 
     width: 100%;
-    margin-bottom: 16px;
+    max-width: 46rem;
+    margin-bottom: 1rem;
   }
 }
 
 .hotLabel {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
 
   width: 7.9rem;
-
-  padding: 7px 13px;
-  border-radius: 15px;
+  padding: 0.44rem 0.81rem;
+  border-radius: 0.94rem;
 
   background-color: $secondaryTomato;
 
   @include on992 {
-    flex-direction: row-reverse;
+    // flex-direction: row-reverse;
     width: 8.6rem;
-
-    margin-left: auto;
   }
 
   svg {
@@ -103,7 +121,7 @@
 }
 
 .salary {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 
   color: $secondaryBlack;
   font-weight: 500;
@@ -111,56 +129,49 @@
   line-height: 1.3;
 
   @include on992 {
+    margin-bottom: 0.81rem;
+
     font-weight: 600;
-    margin-bottom: 13px;
     line-height: 1.9;
   }
 }
 
 .cardDescription {
-  margin-bottom: 20px;
-  // height: 5.25rem;
-
-  font-size: clamp(14px, 1.04vw, 20px);
+  font-size: $fontSize5;
   line-height: 1.3;
   color: $rgbGray;
-
-  display: -webkit-box; // трансформуємо контейнер
-  -webkit-line-clamp: 2; // строка на якій буде "..."
-  -webkit-box-orient: vertical; // додає "..."
-  overflow: hidden; // ховаємо зайве
-
+  // display: -webkit-box; // трансформуємо контейнер
+  // -webkit-line-clamp: 6; // строка на якій буде "..."
+  // -webkit-box-orient: vertical; // додає "..."
+  // overflow: hidden; // ховаємо зайве
+  // text-overflow: ellipsis; // магія
   @include on992 {
-    // height: 4.6rem;
-
-    font-weight: 600;
-    margin-bottom: 13px;
     line-height: 1.9;
   }
 }
 
 .link {
-  display: flex;
-  justify-content: center;
-
-  margin: 0 auto;
-  padding: 19px 0;
-  border-radius: 15px;
+  padding: 1.19rem 0;
+  border-radius: 0.94rem;
   width: 100%;
   max-width: 20rem;
-  // max-width: clamp(320px, 15.62vw, 300px);
 
-  background-color: $primaryYellow;
   color: $rgbWhite;
-  box-shadow: 0px 0px 17px 5px rgba(255, 101, 1, 0.25);
-
   text-align: center;
   font-weight: 700;
-  font-size: clamp(1rem, 1.37vw, 1.25rem);
+  font-size: $fontSize8;
   line-height: 1.1;
+  box-shadow: $mainOrangeShadow;
+  background-color: $primaryYellow;
+
+  transition: background-color 0.2s linear;
+
+  &:hover,
+  &:focus {
+    background-color: $primaryOrange;
+  }
 
   @include on992 {
-    margin-left: 0;
     max-width: 18.75rem;
     line-height: 1.4;
   }

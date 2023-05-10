@@ -3,12 +3,8 @@ import s from './VacanciesList.module.scss';
 import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import type { PaginationInfo } from '../../Vacancies';
-
-type Vacancy = {
-  attributes: { isHot: boolean; updatedAt: Date };
-  id: number;
-};
+import type { PaginationInfo } from '../../../Vacancies/Vacancies';
+import type { Vacancy } from '@/shared/types';
 
 type hotSortFoo = {};
 
@@ -37,7 +33,7 @@ export const VacanciesList: React.FC<Props> = ({
   const changeTotalPages = (): void =>
     setTotalPages(Math.ceil(vacanciesList.length / vacansPerPage));
 
-  const slicePerPage = (vacansArr: any[]): any[] => {
+  const slicePerPage = (vacansArr: Vacancy[]): any[] => {
     const skipIndex = currentPage > 1 ? vacansPerPage * (currentPage - 1) : 0;
     const limitIndex = skipIndex + vacansPerPage;
     const sliced = vacansArr.slice(skipIndex, limitIndex);

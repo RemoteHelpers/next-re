@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import s from './DropDown.module.scss';
 import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
-
-type Category = {
-  attributes: {
-    categorySlug: string;
-    categoryTitle: string;
-  };
-};
+import type { Category } from '@/shared/types';
+import Select from 'react-select';
 
 type HotState = {
   isHot: boolean;
@@ -59,8 +54,34 @@ export const DropDown: React.FC<Props> = ({
     clearSearch();
   };
 
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ];
+
+  const customStyles = {
+    control: () => ({
+      border: '0 !important',
+      boxShadow: '0 !important',
+      '&:hover': {
+        border: '0 !important',
+      },
+    }),
+  };
+
   return (
     <div className={s.dropdown}>
+      {/* <Select
+        styles={customStyles}
+        classNamePrefix="custom-select"
+        options={selectCategories}
+        value={getCategory()}
+        onChange={handleCategorySelect}
+        placeholder={vacancyListData?.categoriesTitle}
+        isSearchable={false}
+        components={{ DropdownIndicator }}
+      /> */}
       <button type="button" className={s.dropdownBtn} onClick={() => setIsShown(!isShown)}>
         <span className={s.title}>{chosenCategoryName ?? categoriesTitle}</span>
 
