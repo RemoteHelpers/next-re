@@ -78,11 +78,13 @@ export const DropDown: React.FC<Props> = ({
           return (
             // <div className={isDropdownShown ? s.menuWrapper_shown : s.menuWrapper}>
             <li className={s.item} key={categoryTitle} id={categoryTitle} onClick={handleSelection}>
-              <p className={s.optionName}>{categoryTitle}</p>
+              <p className={currentCategory === categoryTitle ? s.optionCurrentName : s.optionName}>
+                {categoryTitle}
+              </p>
 
-              <div className={s.optionBox}>
+              {/* <div className={s.optionBox}>
                 {categoryTitle === currentCategory && <div className={s.optionCheck}></div>}
-              </div>
+              </div> */}
             </li>
             // </div>
           );

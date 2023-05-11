@@ -96,19 +96,6 @@ export const VacanciesList: React.FC<Props> = ({
     <ul className={s.list}>
       {vacanciesList.length ? (
         slicePerPage(
-          vacanciesList.map(({ attributes }: any) => {
-            const {
-              isHot,
-              createdAt,
-              cardDescription,
-              title,
-              categories: { data: categoriesInfo },
-              vacancySlug,
-            } = attributes;
-  return (
-    <ul className={s.list}>
-      {vacanciesList.length ? (
-        slicePerPage(
           vacanciesList.map(({ attributes }: IVacancy) => {
             const {
               isHot,

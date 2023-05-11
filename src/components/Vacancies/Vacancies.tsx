@@ -75,10 +75,6 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
           }}
         />
 
-        <p>{`isHot: ${isHot}`}</p>
-        <p>{`searchQuery: ${searchQuery}`}</p>
-        <p>currentCategory: {currentCategory}</p>
-
         <VacanciesList
           vacancies={vacancies}
           vacanciesInfo={vacanciesInfo}
