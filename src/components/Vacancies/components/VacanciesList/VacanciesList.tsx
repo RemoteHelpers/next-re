@@ -6,24 +6,24 @@ import { useRouter } from 'next/router';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
 import type { Vacancy } from '@/shared/types';
 
-// type hotSortFoo = {};
-
 type Props = {
   vacancies: any;
   vacanciesInfo: any;
-  isHot: boolean;
+  // isHot: boolean;
   currentCategory: string;
   searchQuery: string;
   paginationConfig: PaginationInfo;
+  hotState: any;
 };
 
 export const VacanciesList: React.FC<Props> = ({
   vacancies,
   vacanciesInfo,
-  isHot,
+  // isHot,
   currentCategory,
   searchQuery,
   paginationConfig,
+  hotState: { isHot, initialHotState },
 }) => {
   const [vacanciesList, setVacanciesList] = useState(vacancies);
   const { vacansPerPage, currentPage, setTotalPages } = paginationConfig;
@@ -49,12 +49,15 @@ export const VacanciesList: React.FC<Props> = ({
     return new Date(b.attributes.updatedAt).getTime() - new Date(a.attributes.updatedAt).getTime();
   };
 
-  const setAllByDate = () => setVacanciesList(vacancies.sort(sortByDate));
+  const setAllByDate = () => {
+    setVacanciesList(vacancies);
+    setVacanciesList(vacanciesList.sort(sortByDate));
+  };
 
   const hotVacancies = () => vacancies.filter((el: Vacancy) => el.attributes.isHot);
 
-  const searchedVacancies = () => {
-    return vacanciesList
+  const vacanciesBySearch = () => {
+    return vacancies
       .filter(
         ({ attributes }: any) =>
           attributes.title.toLowerCase().includes(searchQuery.toLocaleLowerCase()) ||
@@ -67,9 +70,7 @@ export const VacanciesList: React.FC<Props> = ({
       .sort(sortByHot);
   };
 
-  const filteredVacancies = (): any[] => {
-    console.log('currentCategory', currentCategory);
-
+  const vacanciesByCategory = (): any[] => {
     return vacancies
       .filter(
         (el: any) => el.attributes.categories.data[0].attributes.categoryTitle === currentCategory
@@ -82,24 +83,36 @@ export const VacanciesList: React.FC<Props> = ({
     changeTotalPages();
   });
 
-  useEffect(() => {
-    if (!isHot) setAllByDate();
-    else setVacanciesList(hotVacancies());
-    changeTotalPages();
-  }, [isHot, locale]);
+  // useEffect(() => {
+  //   if (!isHot) setAllByDate();
+  //   else setVacanciesList(hotVacancies());
+  //   changeTotalPages();
+  // }, [isHot]);
+
+  // useEffect(() => {
+  //   if (!searchQuery) setVacanciesList(hotVacancies());
+  //   else setVacanciesList(vacanciesBySearch());
+  //   changeTotalPages();
+  // }, [searchQuery]);
+
+  // useEffect(() => {
+  //   const filtered = vacanciesByCategory();
+  //   if (!filtered.length) setVacanciesList(hotVacancies());
+  //   else setVacanciesList(filtered);
+  //   changeTotalPages();
+  // }, [currentCategory]);
 
   useEffect(() => {
-    if (!searchQuery) setVacanciesList(hotVacancies());
-    else setVacanciesList(searchedVacancies());
-    changeTotalPages();
-  }, [searchQuery]);
-
-  useEffect(() => {
-    const filtered = filteredVacancies();
-    if (!filtered.length) setVacanciesList(hotVacancies());
-    else setVacanciesList(filtered);
-    changeTotalPages();
-  }, [currentCategory]);
+    if (searchQuery) setVacanciesList(vacanciesBySearch());
+    else if (currentCategory) {
+      const filtered = vacanciesByCategory();
+      setVacanciesList(filtered);
+    } else if (isHot) setVacanciesList(hotVacancies());
+    else if (!isHot) {
+      const allVacans = vacancies;
+      setVacanciesList(allVacans.sort(sortByDate));
+    }
+  }, [isHot, currentCategory, searchQuery]);
 
   return (
     <ul className={s.list}>

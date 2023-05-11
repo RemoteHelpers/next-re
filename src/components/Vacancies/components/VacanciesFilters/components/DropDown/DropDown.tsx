@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import s from './DropDown.module.scss';
 import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
 import type { Category } from '@/shared/types';
-import Select, { components } from 'react-select';
 
 type HotState = {
   isHot: boolean;
@@ -26,18 +25,23 @@ type Props = {
   dropdownState: DropdownState;
   hotState: HotState;
   resetCurrentPage: () => void;
-  clearSearch: () => void;
+  clearSearch: (string: string) => void;
   categoriesState: CategoriesState;
+  resetFiltersState: any;
 };
 
 export const DropDown: React.FC<Props> = ({
   categories,
   categoriesTitle,
   categoriesState: { currentCategory, setCurrentCategory },
-  hotState: { isHot, setIsHot, initialHotState },
   resetCurrentPage,
-  clearSearch,
   dropdownState: { isDropdownShown, setIsDropdownShown },
+  resetFiltersState: {
+    needResetCategory,
+    setNeedResetCategory,
+    setNeedResetHot,
+    setNeedResetSearch,
+  },
 }) => {
   const handleSelection = (e: any) => {
     if (currentCategory === e.target.id) setCurrentCategory('');
@@ -45,35 +49,39 @@ export const DropDown: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (!isHot) setIsHot(initialHotState);
-    clearSearch();
-    resetCurrentPage();
     setIsDropdownShown(false);
-  }, [currentCategory]);
+    if (needResetCategory) setNeedResetCategory(false);
+    if (needResetCategory && currentCategory) setCurrentCategory('');
+    if (!needResetCategory && currentCategory) {
+      resetCurrentPage();
+      setNeedResetHot(true);
+      setNeedResetSearch(true);
+    }
+  }, [needResetCategory, currentCategory]);
 
   return (
-    <div className={s.dropdown}>
+    <div className={s.wrapper}>
       <button
         type="button"
-        className={s.dropdownBtn}
+        className={isDropdownShown ? s.button_clicked : s.button}
         onClick={() => setIsDropdownShown(!isDropdownShown)}
       >
-        <span className={s.title}>{currentCategory ? currentCategory : categoriesTitle}</span>
+        <span className={s.btnText}>{currentCategory ? currentCategory : categoriesTitle}</span>
 
         <CurrentVacanciesIcon name="dropdown-arrow" />
       </button>
 
-      <ul className={isDropdownShown ? s.menu_shown : s.menu}>
+      <ul className={isDropdownShown ? s.list_shown : s.list}>
         {categories.map(category => {
           const { categoryTitle } = category.attributes;
 
           return (
             // <div className={isDropdownShown ? s.menuWrapper_shown : s.menuWrapper}>
             <li className={s.item} key={categoryTitle} id={categoryTitle} onClick={handleSelection}>
-              <p className={s.categoryName}>{categoryTitle}</p>
+              <p className={s.optionName}>{categoryTitle}</p>
 
-              <div className={s.box}>
-                {categoryTitle === currentCategory && <div className={s.plug}></div>}
+              <div className={s.optionBox}>
+                {categoryTitle === currentCategory && <div className={s.optionCheck}></div>}
               </div>
             </li>
             // </div>
