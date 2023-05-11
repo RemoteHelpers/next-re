@@ -15,17 +15,9 @@ export const VacanciesFilters = ({
   resetState,
 }: any) => {
   const checkboxRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    console.log('currentCategory', currentCategory);
-    console.log('isHot', isHot);
-    console.log('searchQuery', searchQuery);
-  }, []);
-  // const { searchQuery, setSearchQuery } = searchState;
-  // const { title, placeholder, categoriesTitle, hotVacancies, allVacancies } = vacanciesInfo;
   const { isHot, setIsHot, initialHotState } = hotState;
-  const { currentCategory, setCurrentCategory } = categoriesState;
+  const { currentCategory } = categoriesState;
   const {
-    needResetCategory,
     setNeedResetCategory,
     needResetHot,
     setNeedResetHot,

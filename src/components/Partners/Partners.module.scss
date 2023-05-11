@@ -3,42 +3,42 @@
 @import "@/shared/styles/colors";
 @import "@/shared/styles/fonts";
 .partners {
-	margin-top: 100px;
+	margin-top: 6.25rem;
 	@include on768 {
-		margin-top: 150px;
+		margin-top: 9.375rem;
 	}
 	@include on992 {
-		margin-top: 200px;
+		margin-top: 12.5rem;
 	}
 	@include on1200 {
-		margin-top: 270px;
+		margin-top: 16.875rem;
 	}
 }
 .container {
 	@include container(60px);
-	padding: 0px 30px;
+	padding: 0px 1.875rem;
 	@include on768 {
 		@include container(20px);
-		padding: 0px 10px;
+		padding: 0px 0.625rem;
 	}
 }
 .title {
 	font-size: $fontSize2;
 	color: $rgbZodiac;
-	margin-bottom: 50px;
+	margin-bottom: 3.125rem;
 	font-weight: 800;
 	@include on768 {
-		margin-bottom: 65px;
+		margin-bottom: 4rem;
 	}
 	@include on992 {
-		margin-bottom: 80px;
+		margin-bottom: 5rem;
 	}
 	@include on1200 {
-		margin-bottom: 100px;
+		margin-bottom: 6.25rem;
 	}
 }
 .swiper {
-	height: 90px;
+	height: 5.625rem;
 }
 // temporary class and selector
 .active_slide{
