@@ -113,6 +113,7 @@
   font-size: $fontSize3;
   line-height: 2rem;
   color: $primaryBlack;
+  margin-right: auto;
 
   @include on992 {
     font-weight: 700;

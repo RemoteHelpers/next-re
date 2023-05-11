@@ -20,6 +20,11 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
   const [isDropdownShown, setIsDropdownShown] = useState(false);
   const [currentCategory, setCurrentCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [needResetCategory, setNeedResetCategory] = useState(false);
+  const [needResetHot, setNeedResetHot] = useState(false);
+  const [needResetSearch, setNeedResetSearch] = useState(false);
+
   const vacansPerPage = 9;
   const [totalPages, setTotalPages] = useState(Math.ceil(vacancies.length / vacansPerPage));
   const titleRef = useRef(null);
@@ -46,10 +51,6 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
   };
 
   useEffect(() => {
-    console.log('currentCategory', currentCategory);
-  }, []);
-
-  useEffect(() => {
     resetFilters();
     resetCurrentPage();
   }, [locale]);
@@ -66,12 +67,24 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
           setTitleRef={titleRef}
           resetCurrentPage={resetCurrentPage}
           dropdownState={{ isDropdownShown, setIsDropdownShown }}
+          resetState={{
+            needResetCategory,
+            setNeedResetCategory,
+            needResetHot,
+            setNeedResetHot,
+            needResetSearch,
+            setNeedResetSearch,
+          }}
         />
+
+        <p>{`isHot: ${isHot}`}</p>
+        <p>{`searchQuery: ${searchQuery}`}</p>
+        <p>currentCategory: {currentCategory}</p>
 
         <VacanciesList
           vacancies={vacancies}
           vacanciesInfo={vacanciesInfo}
-          isHot={isHot}
+          hotState={{ isHot, setIsHot, initialHotState }}
           searchQuery={searchQuery}
           paginationConfig={paginationConfig}
           currentCategory={currentCategory}
