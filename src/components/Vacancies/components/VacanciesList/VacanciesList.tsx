@@ -4,6 +4,7 @@ import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/Current
 import Link from 'next/link';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
 import type { IVacancy } from '@/shared/types';
+import { useRouter } from 'next/router';
 
 type Props = {
   vacancies: any;
@@ -24,6 +25,7 @@ export const VacanciesList: React.FC<Props> = ({
 }) => {
   const [vacanciesList, setVacanciesList] = useState(vacancies);
   const { vacansPerPage, currentPage, setTotalPages } = paginationConfig;
+  const { locale } = useRouter();
 
   const changeTotalPages = (): void =>
     setTotalPages(Math.ceil(vacanciesList.length / vacansPerPage));
@@ -45,17 +47,12 @@ export const VacanciesList: React.FC<Props> = ({
     return new Date(b.attributes.updatedAt).getTime() - new Date(a.attributes.updatedAt).getTime();
   };
 
-  const setAllByDate = () => {
-    setVacanciesList(vacancies);
-    setVacanciesList(vacanciesList.sort(sortByDate));
-  };
-
   const hotVacancies = () => vacancies.filter((el: IVacancy) => el.attributes.isHot);
 
   const vacanciesBySearch = () => {
     return vacancies
       .filter(
-        ({ attributes }: any) =>
+        ({ attributes }: IVacancy) =>
           attributes.title.toLowerCase().includes(searchQuery.toLocaleLowerCase()) ||
           attributes.vacancySlug.toLowerCase().includes(searchQuery.toLocaleLowerCase()) ||
           attributes.keyword_tags.data.some((keyword: any) =>
@@ -66,10 +63,11 @@ export const VacanciesList: React.FC<Props> = ({
       .sort(sortByHot);
   };
 
-  const vacanciesByCategory = (): any[] => {
+  const vacanciesByCategory = (): IVacancy[] => {
     return vacancies
       .filter(
-        (el: any) => el.attributes.categories.data[0].attributes.categoryTitle === currentCategory
+        (el: IVacancy) =>
+          el.attributes.categories.data[0].attributes.categoryTitle === currentCategory
       )
       .sort(sortByDate)
       .sort(sortByHot);
@@ -78,24 +76,40 @@ export const VacanciesList: React.FC<Props> = ({
   useEffect(() => {
     changeTotalPages();
   });
+  const vacanicesByDate = () => {
+    const allVacans = vacancies;
+    return allVacans.sort(sortByDate);
+  };
+
+  useEffect(() => {
+    changeTotalPages();
+  });
 
   useEffect(() => {
     if (searchQuery) setVacanciesList(vacanciesBySearch());
-    else if (currentCategory) {
-      const filtered = vacanciesByCategory();
-      setVacanciesList(filtered);
-    } else if (isHot) setVacanciesList(hotVacancies());
-    else if (!isHot) {
-      const allVacans = vacancies;
-      setVacanciesList(allVacans.sort(sortByDate));
-    }
-  }, [isHot, currentCategory, searchQuery]);
+    else if (currentCategory) setVacanciesList(vacanciesByCategory());
+    else if (isHot) setVacanciesList(hotVacancies());
+    else if (!isHot) setVacanciesList(vacanicesByDate());
+  }, [isHot, currentCategory, searchQuery, locale]);
 
   return (
     <ul className={s.list}>
       {vacanciesList.length ? (
         slicePerPage(
           vacanciesList.map(({ attributes }: any) => {
+            const {
+              isHot,
+              createdAt,
+              cardDescription,
+              title,
+              categories: { data: categoriesInfo },
+              vacancySlug,
+            } = attributes;
+  return (
+    <ul className={s.list}>
+      {vacanciesList.length ? (
+        slicePerPage(
+          vacanciesList.map(({ attributes }: IVacancy) => {
             const {
               isHot,
               createdAt,
