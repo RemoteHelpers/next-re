@@ -4,6 +4,7 @@ import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/Current
 import Link from 'next/link';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
 import type { IVacancy } from '@/shared/types';
+import { useRouter } from 'next/router';
 
 type Props = {
   vacancies: any;
@@ -24,6 +25,7 @@ export const VacanciesList: React.FC<Props> = ({
 }) => {
   const [vacanciesList, setVacanciesList] = useState(vacancies);
   const { vacansPerPage, currentPage, setTotalPages } = paginationConfig;
+  const { locale } = useRouter();
 
   const changeTotalPages = (): void =>
     setTotalPages(Math.ceil(vacanciesList.length / vacansPerPage));
@@ -50,7 +52,7 @@ export const VacanciesList: React.FC<Props> = ({
   const vacanciesBySearch = () => {
     return vacancies
       .filter(
-        ({ attributes }: any) =>
+        ({ attributes }: IVacancy) =>
           attributes.title.toLowerCase().includes(searchQuery.toLocaleLowerCase()) ||
           attributes.vacancySlug.toLowerCase().includes(searchQuery.toLocaleLowerCase()) ||
           attributes.keyword_tags.data.some((keyword: any) =>
@@ -61,10 +63,11 @@ export const VacanciesList: React.FC<Props> = ({
       .sort(sortByHot);
   };
 
-  const vacanciesByCategory = (): any[] => {
+  const vacanciesByCategory = (): IVacancy[] => {
     return vacancies
       .filter(
-        (el: any) => el.attributes.categories.data[0].attributes.categoryTitle === currentCategory
+        (el: IVacancy) =>
+          el.attributes.categories.data[0].attributes.categoryTitle === currentCategory
       )
       .sort(sortByDate)
       .sort(sortByHot);
@@ -84,7 +87,7 @@ export const VacanciesList: React.FC<Props> = ({
     else if (currentCategory) setVacanciesList(vacanciesByCategory());
     else if (isHot) setVacanciesList(hotVacancies());
     else if (!isHot) setVacanciesList(vacanicesByDate());
-  }, [isHot, currentCategory, searchQuery]);
+  }, [isHot, currentCategory, searchQuery, locale]);
 
   return (
     <ul className={s.list}>
