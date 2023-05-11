@@ -10,7 +10,7 @@
 	align-items: center;
 	justify-content: center;
 	@include on768 {
-		padding: 0px 30px 0px 0px;
+		padding: 0px 1.875rem 0px 0px;
 	}
 	@include on992 {
 		flex: 1 1 50%;
@@ -21,12 +21,12 @@
 	z-index: 7;
 	outline: 1px solid $rgbZodiac;
 	border-radius: 50%;
-	padding: 25px;
+	padding: 1.5625rem;
 	width: 80vw;
 	height: 80vw;
 	@include on480 {
-		width: clamp(350px, 43.15vw, 630px);
-		height: clamp(350px, 43.15vw, 630px);
+		width: clamp(21.875rem, 43.15vw, 39.375rem);
+		height: clamp(21.875rem, 43.15vw, 39.375rem);
 	}
 	opacity: 0;
 	transform: scale(0);
@@ -37,8 +37,8 @@
 
 .icon {
 	position: absolute;
-	width: clamp(25px, 3.08vw, 45px);
-	height: clamp(25px, 3.08vw, 45px);
+	width: clamp(1.5625rem, 3.08vw, 2.8125rem);
+	height: clamp(1.5625rem, 3.08vw, 2.8125rem);
 	background-color: $rgbWhite;
 	display: flex;
 	align-items: center;
@@ -67,8 +67,8 @@
 #globe {
 	right: 10%;
 	bottom: 10%;
-	width: clamp(30px, 3.84vw, 56px);
-	height: clamp(30px, 3.84vw, 56px);
+	width: clamp(1.875rem, 3.84vw, 3.5rem);
+	height: clamp(1.875rem, 3.84vw, 3.5rem);
 	background-color: #ffa265;
 	box-shadow: $shadow;
 	img {
@@ -87,8 +87,8 @@
 	width: 70vw;
 	height: 70vw;
 	@include on480 {
-		width: clamp(300px, 37vw, 540px);
-		height: clamp(300px, 37vw, 540px);
+		width: clamp(18.75rem, 37vw, 33.75rem);
+		height: clamp(18.75rem, 37vw, 33.75rem);
 	}
 	img {
 		width: 100%;
@@ -105,14 +105,14 @@
 	overflow: hidden;
 	bottom: 0;
 	left: 50%;
-	width: 250px;
-	height: 250px;
+	width: 15.625rem;
+	height: 15.625rem;
 	transform: translate(100%, 0%);
 	width: 60vw;
 	height: 60vw;
 	@include on480 {
-		width: clamp(250px, 31.5vw, 460px);
-		height: clamp(250px, 31.5vw, 460px);
+		width: clamp(15.625rem, 31.5vw, 28.75rem);
+		height: clamp(15.625rem, 31.5vw, 28.75rem);
 	}
 	img {
 		width: 100%;
