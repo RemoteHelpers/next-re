@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import s from './VacanciesFilters.module.scss';
 import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
 import { DropDown } from './components/DropDown';
-import { Test } from './components/DropDown/Test';
 
 export const VacanciesFilters = ({
   vacanciesInfo,
