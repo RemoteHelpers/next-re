@@ -45,11 +45,6 @@ export const VacanciesList: React.FC<Props> = ({
     return new Date(b.attributes.updatedAt).getTime() - new Date(a.attributes.updatedAt).getTime();
   };
 
-  const setAllByDate = () => {
-    setVacanciesList(vacancies);
-    setVacanciesList(vacanciesList.sort(sortByDate));
-  };
-
   const hotVacancies = () => vacancies.filter((el: IVacancy) => el.attributes.isHot);
 
   const vacanciesBySearch = () => {
@@ -75,27 +70,27 @@ export const VacanciesList: React.FC<Props> = ({
       .sort(sortByHot);
   };
 
+  const vacanicesByDate = () => {
+    const allVacans = vacancies;
+    return allVacans.sort(sortByDate);
+  };
+
   useEffect(() => {
     changeTotalPages();
   });
 
   useEffect(() => {
     if (searchQuery) setVacanciesList(vacanciesBySearch());
-    else if (currentCategory) {
-      const filtered = vacanciesByCategory();
-      setVacanciesList(filtered);
-    } else if (isHot) setVacanciesList(hotVacancies());
-    else if (!isHot) {
-      const allVacans = vacancies;
-      setVacanciesList(allVacans.sort(sortByDate));
-    }
+    else if (currentCategory) setVacanciesList(vacanciesByCategory());
+    else if (isHot) setVacanciesList(hotVacancies());
+    else if (!isHot) setVacanciesList(vacanicesByDate());
   }, [isHot, currentCategory, searchQuery]);
 
   return (
     <ul className={s.list}>
       {vacanciesList.length ? (
         slicePerPage(
-          vacanciesList.map(({ attributes }: any) => {
+          vacanciesList.map(({ attributes }: IVacancy) => {
             const {
               isHot,
               createdAt,

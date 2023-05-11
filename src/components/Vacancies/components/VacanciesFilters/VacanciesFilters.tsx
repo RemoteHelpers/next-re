@@ -92,7 +92,6 @@ export const VacanciesFilters = ({
             dropdownState={dropdownState}
             resetFiltersState={resetState}
           />
-          {/* <Test /> */}
 
           <input
             ref={checkboxRef}

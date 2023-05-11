@@ -14,17 +14,15 @@ export type PaginationInfo = {
 };
 
 export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
-  const initialHotState = useRouter().asPath === '/' ? true : false;
   const [searchQuery, setSearchQuery] = useState('');
+  const initialHotState = useRouter().asPath === '/' ? true : false;
   const [isHot, setIsHot] = useState(initialHotState);
   const [isDropdownShown, setIsDropdownShown] = useState(false);
   const [currentCategory, setCurrentCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-
   const [needResetCategory, setNeedResetCategory] = useState(false);
   const [needResetHot, setNeedResetHot] = useState(false);
   const [needResetSearch, setNeedResetSearch] = useState(false);
-
   const vacansPerPage = 9;
   const [totalPages, setTotalPages] = useState(Math.ceil(vacancies.length / vacansPerPage));
   const titleRef = useRef(null);
@@ -76,10 +74,6 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
             setNeedResetSearch,
           }}
         />
-
-        <p>{`isHot: ${isHot}`}</p>
-        <p>{`searchQuery: ${searchQuery}`}</p>
-        <p>currentCategory: {currentCategory}</p>
 
         <VacanciesList
           vacancies={vacancies}
