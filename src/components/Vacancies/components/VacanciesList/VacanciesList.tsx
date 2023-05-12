@@ -5,6 +5,7 @@ import Link from 'next/link';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
 import type { IVacancy } from '@/shared/types';
 import { useRouter } from 'next/router';
+import { Oops } from './components/Oops/Oops';
 
 type Props = {
   vacancies: any;
@@ -73,6 +74,9 @@ export const VacanciesList: React.FC<Props> = ({
       .sort(sortByHot);
   };
 
+  useEffect(() => {
+    changeTotalPages();
+  });
   const vacanicesByDate = () => {
     const allVacans = vacancies;
     return allVacans.sort(sortByDate);
@@ -133,7 +137,7 @@ export const VacanciesList: React.FC<Props> = ({
           })
         )
       ) : (
-        <p>Sorry we didn't found anything</p>
+        <Oops vacanciesInfo={vacanciesInfo} />
       )}
     </ul>
   );
