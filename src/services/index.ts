@@ -6,5 +6,5 @@ export {
   getAllVacancies,
 } from './VacanciesService';
 
-export { getHomeData } from "./HomeDataService";
-export { getFooterData } from "./FooterDataService";
+export { getHomeData } from './HomeDataService';
+export { getFooterData } from './FooterDataService';

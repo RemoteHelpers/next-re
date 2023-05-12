@@ -2,13 +2,15 @@
 @import '@/shared/styles/colors';
 
 .container {
-  height: 27.5rem;
-  background-image: url('./assets/sad-cat.svg'), url('./assets/ground.svg');
-  background-repeat: no-repeat;
-  background-position: center bottom, center bottom;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  //   background-size: 45%, contain;
-  background-size: calc(100% - 60%) auto, contain;
+  height: 27.5rem;
+  background-image: url('./assets/ground.svg');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: contain;
   border-radius: 1.25rem;
   border: 1px solid $primaryOrange;
 
@@ -20,7 +22,7 @@
 }
 
 .title {
-  margin-top: 5.625rem;
+  margin-top: 5rem;
   margin-bottom: 0.625rem;
 
   text-align: center;
@@ -50,4 +52,10 @@
     font-size: 1.25rem;
     line-height: 1.43rem;
   }
+}
+
+.catsImage {
+  margin-top: auto;
+  height: auto;
+  width: clamp(200px, 17.12vw, 250px);
 }
