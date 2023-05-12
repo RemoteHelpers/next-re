@@ -46,7 +46,7 @@ export const Header: FC = ({}: Props) => {
   );
 
   const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    router.push(router.asPath, router.asPath, { locale: e.target.value });
+    router.replace(router.asPath, router.asPath, { locale: e.target.value });
   };
 
   return (

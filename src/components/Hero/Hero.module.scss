@@ -3,8 +3,6 @@
 @import "@/shared/styles/colors";
 @import "@/shared/styles/fonts";
 
-
-
 .hero {
 	margin-top: clamp(22px, 7.8vw, 114px);
 }
@@ -14,7 +12,7 @@
 	flex-direction: column;
 	padding: 0px 30px;
 	gap: 46px;
-	@include on768{
+	@include on768 {
 		gap: 60px;
 	}
 	@include on992 {
@@ -22,9 +20,7 @@
 		flex-direction: row-reverse;
 		gap: 90px;
 	}
-	@include on1200{
+	@include on1200 {
 		gap: 150px;
 	}
 }
-
-
