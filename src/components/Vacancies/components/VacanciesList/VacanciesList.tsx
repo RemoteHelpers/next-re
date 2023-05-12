@@ -5,6 +5,7 @@ import Link from 'next/link';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
 import type { IVacancy } from '@/shared/types';
 import { useRouter } from 'next/router';
+import { BadRequest } from './components/BadRequest/BadRequest';
 
 type Props = {
   vacancies: any;
@@ -136,7 +137,7 @@ export const VacanciesList: React.FC<Props> = ({
           })
         )
       ) : (
-        <p>Sorry we didn't found anything</p>
+        <BadRequest />
       )}
     </ul>
   );

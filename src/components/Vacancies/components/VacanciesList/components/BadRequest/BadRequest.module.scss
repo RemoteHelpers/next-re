@@ -1,0 +1,53 @@
+@import '@/shared/styles/mediaMixins';
+@import '@/shared/styles/colors';
+
+.container {
+  height: 27.5rem;
+  background-image: url('./assets/sad-cat.svg'), url('./assets/ground.svg');
+  background-repeat: no-repeat;
+  background-position: center bottom, center bottom;
+
+  //   background-size: 45%, contain;
+  background-size: calc(100% - 60%) auto, contain;
+  border-radius: 1.25rem;
+  border: 1px solid $primaryOrange;
+
+  @include on992 {
+    border-width: 3px;
+    height: 30rem;
+    background-size: auto, auto;
+  }
+}
+
+.title {
+  margin-top: 5.625rem;
+  margin-bottom: 0.625rem;
+
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 2rem;
+
+  @include on992 {
+    margin-top: 3.375rem;
+    margin-bottom: 1.375rem;
+
+    font-weight: 700;
+    font-size: 2.25rem;
+    line-height: 2.6rem;
+  }
+}
+
+.description {
+  padding: 0 1.25rem;
+
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.31rem;
+
+  @include on992 {
+    font-size: 1.25rem;
+    line-height: 1.43rem;
+  }
+}
