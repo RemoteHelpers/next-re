@@ -4,7 +4,8 @@ import Image from 'next/image';
 import logo from './assets/logo.svg';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-interface INavItem {
+import { BurgerMenu } from './components/BurgerMenu';
+export interface INavItem {
   title: string;
   path: string;
 }
@@ -33,8 +34,10 @@ export enum Languages {
   'en',
 }
 
-type Props = {};
-export const Header: FC = ({}: Props) => {
+type Props = {
+  headerData: any;
+};
+export const Header: FC<Props> = ({ headerData }) => {
   const [isBurgerMenu, setIsBurgerMenu] = useState(false);
   const router = useRouter();
 
@@ -72,7 +75,13 @@ export const Header: FC = ({}: Props) => {
               );
             })}
           </nav>
-          <select onChange={changeLanguage} value={router.locale} name="" id="">
+          <select
+            className={s.select}
+            onChange={changeLanguage}
+            value={router.locale}
+            name=""
+            id=""
+          >
             <option value={Languages[0].toString()}>RU</option>
             <option value={Languages[1].toString()}>UA</option>
             <option value={Languages[2].toString()}>EN</option>
@@ -89,6 +98,12 @@ export const Header: FC = ({}: Props) => {
           </button>
         </div>
       </div>
+
+      <BurgerMenu
+        navList={navItems}
+        menuState={{ isBurgerMenu, setIsBurgerMenu }}
+        headerData={headerData}
+      />
     </header>
   );
 };

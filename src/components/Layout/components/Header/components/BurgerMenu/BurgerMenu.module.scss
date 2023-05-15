@@ -1,0 +1,118 @@
+@import '@/shared/styles/mixins';
+@import '@/shared/styles/variables';
+@import '@/shared/styles/colors';
+@import '@/shared/styles/mediaMixins';
+
+.menuWrap {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: $primaryMint;
+
+  transform: translateX(101%);
+  transition: 0.3s linear;
+
+  @include on992 {
+    display: none;
+  }
+}
+
+.menuWrap_shown {
+  @extend .menuWrap;
+
+  transform: translateX(0);
+}
+
+.menuTitle {
+  padding: 1.375rem;
+
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.44rem;
+  text-align: center;
+}
+
+.navigation {
+  position: relative;
+
+  height: 100%;
+  //   padding: 48px 0;
+  padding-top: 48px;
+  padding-bottom: 10vh;
+
+  background-color: $rgbWhite;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  //   border-radius: 50%;
+  //   box-shadow: $mainOrangeShadow;
+
+  overflow-y: auto;
+}
+
+.navTab {
+  position: absolute;
+  top: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  width: 100vw;
+  padding: 60px 30px;
+
+  transition: 0.25s linear;
+
+  li {
+    display: flex;
+    width: 100%;
+    padding: 35px;
+    border-radius: 1rem;
+    border: 1px solid black;
+  }
+
+  button {
+    background-color: transparent;
+  }
+}
+
+.firstTab {
+  @extend .navTab;
+
+  left: -100%;
+}
+
+.firstTab_shown {
+  @extend .firstTab;
+  left: 0;
+}
+
+.secondTab {
+  @extend .navTab;
+  left: 100%;
+}
+
+.secondTab_shown {
+  @extend .secondTab;
+  left: 0;
+}
+
+.thirdTab {
+  @extend .navTab;
+  left: -100%;
+  transition: 0.25s linear;
+}
+
+.thirdTab_shown {
+  @extend .thirdTab;
+  left: 0;
+}
+
+.navLink {
+}
+.navBtn {
+}

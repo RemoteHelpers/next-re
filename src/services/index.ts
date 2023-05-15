@@ -4,7 +4,8 @@ export {
   getVacancyListData,
   getCategories,
   getAllVacancies,
-} from './VacanciesService';
+} from './vacanciesServices';
 
 export { getHomeData } from './HomeDataService';
 export { getFooterData } from './FooterDataService';
+export { getHeaderData } from './headerServices';
