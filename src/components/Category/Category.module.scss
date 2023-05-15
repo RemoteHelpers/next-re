@@ -1,0 +1,14 @@
+@import "@/shared/styles/colors";
+@import "@/shared/styles/mixins";
+@import "@/shared/styles/mediaMixins";
+.category {
+}
+.container {
+    @include container(20px);
+    padding: 0 10px;
+    border: 2px solid $rgbGray;
+}
+.title {
+}
+.description {
+}
