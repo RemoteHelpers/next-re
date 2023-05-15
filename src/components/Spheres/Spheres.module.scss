@@ -32,6 +32,21 @@
 		margin-bottom: 6.25rem;
 	}
 }
+.title {
+	font-size: $fontSize2;
+	color: $rgbZodiac;
+	margin-bottom: 3.125rem;
+	font-weight: 800;
+	@include on768 {
+		margin-bottom: 4rem;
+	}
+	@include on992 {
+		margin-bottom: 5rem;
+	}
+	@include on1200 {
+		margin-bottom: 6.25rem;
+	}
+}
 .spheres_cards {
 	display: flex;
 	flex-direction: row;

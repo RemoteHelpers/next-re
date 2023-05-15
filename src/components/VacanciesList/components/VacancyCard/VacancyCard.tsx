@@ -5,11 +5,16 @@ import Link from "next/link";
 
 type VacancyCardProps = {
 	vacancy: IVacancy;
+	category?: string;
 };
 
-export const VacancyCard = ({ vacancy }: VacancyCardProps) => {
-	const getPathToVacancy = useCallback(():string => {
-		return `/${vacancy.attributes.categories.data[0].attributes.categorySlug}/${vacancy.attributes.vacancySlug}`;
+export const VacancyCard = ({ vacancy, category }: VacancyCardProps) => {
+	const getPathToVacancy = useCallback((): string => {
+		if (category) {
+			return `/${category}/${vacancy.attributes.vacancySlug}`;
+		} else {
+			return `/${vacancy.attributes.categories.data[0].attributes.categorySlug}/${vacancy.attributes.vacancySlug}`;
+		}
 	}, []);
 
 	return (

@@ -17,6 +17,7 @@
 	border: 1px solid $rgbGray;
 	border-radius: 1.25rem;
 	padding: 1.5rem;
+	margin-bottom: 7rem;
 	@include on1200 {
 		border: 2px solid $rgbGray;
 		padding: 3.125rem 3.75rem;
@@ -27,6 +28,7 @@
 	font-size: clamp(32px, 3.3vw, 64px);
 	margin-top: 2rem;
 }
+
 .description {
 	p {
 		margin: 1.5rem 0;
@@ -37,7 +39,7 @@
 		color: $rgbZodiac;
 		font-style: normal;
 		font-weight: 800;
-		font-size: $fontSize2;
+		font-size: $fontSize23;		
 	}
 	ul {
 		list-style-type: none;
@@ -72,4 +74,10 @@
 		padding: 1.25rem 4.5rem;
 		box-shadow: $shadow;
 	}
+}
+.vacancies_list{
+	margin: 4rem 0rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
 }
