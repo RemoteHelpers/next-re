@@ -1,0 +1,32 @@
+@import '@/shared/styles/colors';
+@import '@/shared/styles/mixins';
+@import '@/shared/styles/mediaMixins';
+
+.section {
+  margin-top: 6.25rem;
+  margin-bottom: 6.25rem;
+
+  @include on768 {
+    margin-top: 7.5rem;
+    margin-bottom: 7.5rem;
+  }
+  @include on992 {
+    margin-top: 9.375rem;
+    margin-bottom: 9.375rem;
+  }
+  @include on1200 {
+    margin-top: 12.5rem;
+    margin-bottom: 12.5rem;
+  }
+}
+
+.container {
+  @include container;
+  padding: 0 1.875rem;
+
+  @include on992 {
+    @include container(20px);
+
+    padding: 0 0.625rem;
+  }
+}

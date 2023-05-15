@@ -1,0 +1,171 @@
+@import '@/shared/styles/fonts';
+@import '@/shared/styles/colors';
+@import '@/shared/styles/mixins';
+@import '@/shared/styles/mediaMixins';
+
+.wrapper {
+  position: relative;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 1rem;
+
+  height: 2.9rem;
+  width: 100%;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover .btnText {
+    // box-shadow: $mainOrangeShadow;
+    transform: scale(1.1);
+  }
+
+  @include on992 {
+    height: 3.5rem;
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke: $secondaryOrange;
+    transition: transform 0.2s linear;
+  }
+}
+
+.button_clicked {
+  @extend .button;
+
+  svg {
+    transform: rotateZ(180deg);
+  }
+}
+
+.btnText {
+  font-weight: 700;
+  font-size: $fontSize8;
+  line-height: 1.1;
+  text-align: start;
+  user-select: none;
+  transition: transform 0.2s linear;
+}
+
+.list {
+  position: absolute;
+  top: 3rem;
+  // left: 0;
+  right: 0;
+
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  height: 0;
+  // width: 15rem;
+  padding: 0 1rem;
+  border-radius: 1.25rem;
+  border: 1px solid $rgbGray;
+
+  overflow: hidden;
+  background-color: $rgbWhite;
+
+  pointer-events: none;
+  opacity: 0;
+
+  transition-property: height opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+
+  @include on992 {
+    // right: 0;
+    top: 3.5rem;
+    gap: 1rem;
+    // width: 18.75rem;
+    padding: 0 1rem;
+  }
+}
+
+.list_shown {
+  @extend .list;
+  padding: 1rem;
+  height: auto;
+  opacity: 1;
+  pointer-events: all;
+
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+  @include on992 {
+    padding: 1rem 2rem;
+  }
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover .optionName {
+    // filter: revert;
+    color: $primaryOrange;
+    outline: 1px solid $primaryOrange;
+    // filter: brightness(100);
+    // filter: drop-shadow(#2c4075);
+    // transform: scale(1.1);
+  }
+  &:hover .optionCurrentName {
+    color: $rgbWhite;
+  }
+}
+
+.optionName {
+  font-weight: 600;
+  font-size: $fontSize9;
+  line-height: 1.25;
+  // text-align: center;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+
+  background-color: $rgbWhite;
+  user-select: none;
+  pointer-events: none;
+  transition: transform 0.1s linear;
+}
+.optionCurrentName {
+  @extend .optionName;
+
+  background-color: $primaryOrange;
+  color: $rgbWhite;
+}
+
+.optionBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid $primaryBlue;
+  border-radius: 0.625rem;
+
+  @include on992 {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  pointer-events: none;
+}
+
+.optionCheck {
+  border-radius: 50%;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: $rgbZodiac;
+  @include on992 {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}

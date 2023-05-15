@@ -4,23 +4,23 @@
 @import "@/shared/styles/fonts";
 
 .hero {
-	margin-top: clamp(22px, 7.8vw, 114px);
+	margin-top: clamp(1.375rem, 7.8vw, 7.125rem);
 }
 .container {
 	@include container(20px);
 	display: flex;
 	flex-direction: column;
-	padding: 0px 30px;
-	gap: 46px;
-	@include on768 {
-		gap: 60px;
+	padding: 0px 1.875rem;
+	gap: 2.875rem;
+	@include on768{
+		gap: 3.75rem;
 	}
 	@include on992 {
-		padding: 0px 10px;
+		padding: 0px .625rem;
 		flex-direction: row-reverse;
-		gap: 90px;
+		gap: 5.625rem;
 	}
-	@include on1200 {
-		gap: 150px;
+	@include on1200{
+		gap: 9.375rem;
 	}
 }

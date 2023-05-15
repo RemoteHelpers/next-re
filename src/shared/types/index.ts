@@ -1,3 +1,40 @@
+export type Category = {
+  id: number;
+  attributes: {
+    categorySlug: string;
+    categoryTitle: string;
+    createdAt: Date;
+    description: string;
+    locale: string;
+    publishedAt: Date;
+    updatedAt: Date;
+  };
+};
+
+export type Vacancy = {
+  attributes: {
+    cardDescription: string;
+    categories: {
+      data: Category[];
+    };
+    createdAt: Date;
+    description: string;
+    formTitle: string;
+    isHot: boolean;
+    keyword_tags: { data: any[] };
+    locale: string;
+    localizations: { data: any[] };
+    publishedAt: Date;
+    subTitle: string;
+    title: string;
+    titleH1: string;
+    updatedAt: Date;
+    vacancySlug: string;
+    videoLink: string;
+    videoPreview: { data: null };
+  };
+  id: number;
+};
 // Interface for a vacancy
 export interface IVacancy {
 	id: number;
@@ -52,3 +89,4 @@ export interface IVideoPreviewData {
 	data: {};
 }
 /* End of additional interfaces for a vacancy interface*/ 
+
