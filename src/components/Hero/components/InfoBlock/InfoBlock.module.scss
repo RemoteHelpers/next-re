@@ -39,19 +39,19 @@
 	font-weight: 700;
 	font-size: $fontSize5;
 	line-height: 1.15;
-	border-radius: 15px;
+	border-radius: 1rem;
 	background-color: $primaryOrange;
 	transition: all 0.2s ease-in-out;
 	&:hover {
 		cursor: pointer;
 		background-color: $primaryYellow;
 	}
-	padding: 20px 30px;
-	gap: 16px;
+	padding: 1.25rem 1.875rem;
+	gap: 1rem;
 	@include on992 {
-		margin-top: 50px;
-		gap: 16px;
-		padding: 20px 36px;
+		margin-top: 3.125rem;
+		gap: 1rem;
+		padding: 1.25rem 2.25rem;
 		box-shadow: $shadow;
 	}
 }

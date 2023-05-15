@@ -17,7 +17,7 @@ export const getCategories = async (lang: string) => {
 	}
 };
 
-export const getCategoryBySlug = async (slug: string, lang: string) => {
+export const getCategoryBySlug = async (slug: string, lang: string) => {    
 	try {
 		const res = await categoriesInstance.get(
 			`/categories?populate=*&locale=${lang}`
