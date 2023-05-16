@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import s from './VacanciesFilters.module.scss';
-import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
+import { VacansiesIcon } from '@/shared/components/IconComponents/Vacancies';
 import { DropDown } from './components/DropDown';
 
 export const VacanciesFilters = ({
@@ -74,9 +74,9 @@ export const VacanciesFilters = ({
 
           <button type="button" onClick={handleClearSearch} className={s.searchBtn}>
             {searchQuery ? (
-              <CurrentVacanciesIcon name="close-cross" />
+              <VacansiesIcon name="close-cross" />
             ) : (
-              <CurrentVacanciesIcon name="magnifying-glass" />
+              <VacansiesIcon name="magnifying-glass" />
             )}
           </button>
         </div>
@@ -110,7 +110,7 @@ export const VacanciesFilters = ({
               onClick={switchIsHot}
             >
               <span className={s.hotIcon}>
-                <CurrentVacanciesIcon name="fire" />
+                <VacansiesIcon name="fire" />
               </span>
 
               <p className={s.switcherTitle}>{isHot ? hotVacancies : allVacancies}</p>
