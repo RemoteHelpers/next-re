@@ -8,3 +8,4 @@ export {
 
 export { getHomeData } from "./HomeDataService";
 export { getFooterData } from "./FooterDataService";
+export { getFormData } from "./FormDataService";

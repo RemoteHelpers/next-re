@@ -4,9 +4,10 @@
 @import './mediaMixins';
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic");
 
-html{
+html {
   scroll-behavior: smooth;
 }
+
 body {
   min-height: 100vh;
   width: 100%;
@@ -148,5 +149,30 @@ body {
         color: $secondaryBlack;
       }
     }
+  }
+}
+
+.css-13cymwt-control,
+.css-t3ipsp-control {
+  border: 2px solid $primaryBlue;
+  background-color: $primaryCyan;
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid $primaryBlue;
+    background-color: $primaryCyan;
+  }
+}
+
+.css-1u9des2-indicatorSeparator {
+  display: none;
+}
+
+.css-1xc3v61-indicatorContainer svg {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  path {
+    fill: $rgbZodiac;
   }
 }

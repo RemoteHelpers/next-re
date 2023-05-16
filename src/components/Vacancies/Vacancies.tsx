@@ -45,9 +45,9 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
     if (isDropdownShown) setIsDropdownShown(false);
   };
 
-  useEffect(() => {
-    console.log('currentCategory', currentCategory);
-  }, []);
+  // useEffect(() => {
+  //   console.log('currentCategory', currentCategory);
+  // }, []);
 
   useEffect(() => {
     resetFilters();

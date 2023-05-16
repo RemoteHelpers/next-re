@@ -78,7 +78,7 @@ export const VacanciesList: React.FC<Props> = ({
 	};
 
 	const filteredVacancies = (): any[] => {
-		console.log("currentCategory", currentCategory);
+		// console.log("currentCategory", currentCategory);
 
 		return vacancies
 			.filter(

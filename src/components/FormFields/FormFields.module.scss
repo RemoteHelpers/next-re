@@ -1,0 +1,36 @@
+@import "../../shared/styles/mixins.scss";
+@import "../../shared/styles/mediaMixins.scss";
+@import "../../shared/styles/colors.scss";
+
+.container {
+    @include container(60px);
+    padding: 0 30px;
+}
+
+.form {
+    input {
+        border: 2px solid $primaryBlue;
+        background-color: $primaryCyan;
+    }
+}
+
+.first_row,
+.second_row,
+.work_cv {
+    display: flex;
+    flex-direction: column;
+
+    @include on992 {
+        flex-direction: row;
+    }
+}
+
+.number {
+    border: 2px solid $primaryBlue;
+    background-color: $primaryCyan;
+
+    input {
+        background-color: transparent;
+        border: transparent;
+    }
+}
