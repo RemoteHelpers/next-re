@@ -3,14 +3,19 @@ import { IVacancy } from "@/shared/types";
 import s from "./VacancyCard.module.scss";
 import Link from "next/link";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { CurrentVacanciesIcon } from "@/shared/components/IconComponents/CurrentVacanciesIcon";
+import { VacanciesIcon } from "@/shared/components/IconComponents/VacanciesIcon";
 
 type VacancyCardProps = {
 	vacancy: IVacancy;
 	category?: string;
+	header?: any;
 };
 
-export const VacancyCard = ({ vacancy, category }: VacancyCardProps) => {
+export const VacancyCard = ({
+	vacancy,
+	category,
+	header,
+}: VacancyCardProps) => {
 	const getPathToVacancy = useCallback((): string => {
 		if (category) {
 			return `/${category}/${vacancy.attributes.vacancySlug}`;
@@ -18,14 +23,16 @@ export const VacancyCard = ({ vacancy, category }: VacancyCardProps) => {
 			return `/${vacancy.attributes.categories.data[0].attributes.categorySlug}/${vacancy.attributes.vacancySlug}`;
 		}
 	}, []);
-	console.log(vacancy);
 
 	return (
 		<Link href={getPathToVacancy()} className={s.vacancy}>
 			<div className={s.info}>
-				{vacancy.attributes.isHot && <div className={s.hot_mark}>
-				<CurrentVacanciesIcon name="fire" />
-                        <span className={s.labelText}>Гаряча</span></div>}
+				{vacancy.attributes.isHot && (
+					<div className={s.hot_mark}>
+						<VacanciesIcon name="fire" />
+						<span className={s.labelText}>{header.isHotValue}</span>
+					</div>
+				)}
 				<h3 className={s.title}>{vacancy.attributes.title}</h3>
 				<h4 className={s.subtitle}>{vacancy.attributes.subTitle}</h4>
 				<p className={s.desc}>{vacancy.attributes.cardDescription}</p>

@@ -86,14 +86,14 @@
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	margin-bottom: 1.5rem;
-	@include on992 {
+	@include on1200 {
 		margin-bottom: 0rem;
 	}
 }
 .fake_button {
 	flex: 0 0 auto;
 	text-align: center;
-	padding: 1.25rem 2.25rem;
+	padding: 0.75rem 1.25rem;
 	font-weight: 700;
 	background-color: #fbbf13;
 	box-shadow: $mainOrangeShadow;
@@ -102,7 +102,11 @@
 	&:hover {
 		background-color: #ff6501;
 	}
+	@include on768{
+		padding: 1rem 1.875rem;
+	}
 	@include on1200 {
 		align-self: center;
+		padding: 1.25rem 2.25rem;
 	}
 }
