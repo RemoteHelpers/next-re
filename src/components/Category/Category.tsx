@@ -9,8 +9,8 @@ type CategoryProps = {
 };
 
 export const Category = ({ category, header }: CategoryProps) => {
-	const { categoryTitle, categorySlug, description, vacancies } = category.attributes;
-	console.log(vacancies);
+	const { categoryTitle, categorySlug, description, vacancies } =
+		category.attributes;
 	return (
 		<section className={s.category}>
 			<div className={s.container}>
@@ -19,9 +19,26 @@ export const Category = ({ category, header }: CategoryProps) => {
 					<ReactMarkdown className={s.description}>{description}</ReactMarkdown>
 					<button className={s.btn}>{header?.categoryButton}</button>
 					<div className={s.vacancies_list}>
-						{vacancies.data.map((vacancy: any) => (
-							<VacancyCard vacancy={vacancy} category={categorySlug} />
-						))}
+						{vacancies.data.map(
+							(vacancy: any) =>
+								vacancy.attributes.isHot && (
+									<VacancyCard
+										vacancy={vacancy}
+										category={categorySlug}
+										key={vacancy.id}
+									/>
+								)
+						)}
+						{vacancies.data.map(
+							(vacancy: any) =>
+								!vacancy.attributes.isHot && (
+									<VacancyCard
+										vacancy={vacancy}
+										category={categorySlug}
+										key={vacancy.id}
+									/>
+								)
+						)}
 					</div>
 				</div>
 			</div>
