@@ -39,6 +39,7 @@ type Props = {
 };
 export const Header: FC<Props> = ({ headerData }) => {
   const [isBurgerMenu, setIsBurgerMenu] = useState(false);
+  const { menu } = headerData.navData.attributes;
   const router = useRouter();
 
   const comparePath = useCallback((currentPath: string, path: string): boolean => {
@@ -57,20 +58,21 @@ export const Header: FC<Props> = ({ headerData }) => {
         </Link>
         <div className={s.controls}>
           <nav className={s.nav}>
-            {navItems.map((item: INavItem) => {
+            {menu.map(({ title, path_id }: any) => {
+              if (!path_id.trim()) return;
               return (
                 <Link
-                  key={item.path}
+                  key={path_id}
                   href={{
-                    pathname: `${item.path}`,
+                    pathname: `${path_id}`,
                   }}
                   className={
-                    comparePath(router.pathname, item.path)
+                    comparePath(router.pathname, path_id)
                       ? `${s.nav_item} ${s.active}`
                       : `${s.nav_item}`
                   }
                 >
-                  {item.title}
+                  {title}
                 </Link>
               );
             })}
