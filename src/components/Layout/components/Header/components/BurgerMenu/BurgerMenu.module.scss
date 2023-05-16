@@ -27,9 +27,11 @@
 .menuTitle {
   padding: 1.375rem;
 
+  color: $rgbZodiac;
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1.44rem;
+  // line-height: 1.2rem;
   text-align: center;
 }
 
@@ -41,7 +43,7 @@
   background-color: $rgbWhite;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  box-shadow: 0px 0px 17px rgba(255, 101, 1, 0.25);
+  box-shadow: $orangeShadow;
 
   overflow: hidden;
 }
@@ -53,17 +55,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 1.25rem;
 
   width: 100vw;
   height: 100%;
-  padding: 60px 30px;
+  padding: 3.75rem 1.875rem;
 
   overflow-y: auto;
   transition: 0.25s linear;
 
   li {
     width: 100%;
+    // &:not(:first-child) {
+    //   margin-bottom: 1.25rem;
+    // }
   }
 
   a {
@@ -72,17 +77,18 @@
     align-items: center;
 
     width: 100%;
-    padding: 2rem;
+    padding: 2rem 0;
     border-radius: 1rem;
 
     border: 1px solid $rgbGray;
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     line-height: 2rem;
     color: $rgbGray;
     &:hover,
     &:focus {
       color: inherit;
+      border-color: $primaryOrange;
     }
   }
 
@@ -92,10 +98,31 @@
   }
 
   .backBtn {
-    padding: 0;
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
     justify-content: start;
+
+    padding: 0;
+    width: calc(100% - 4rem);
+
+    font-size: 1rem;
     border-color: transparent;
+
+    &:hover,
+    &:focus {
+      border-color: transparent;
+    }
+
+    svg {
+      stroke: $primaryOrange;
+      margin-right: 0.625rem;
+    }
   }
+}
+
+.navBtn img {
+  margin-right: 0.625rem;
 }
 
 .firstTab {

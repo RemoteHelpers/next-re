@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import s from './VacanciesList.module.scss';
-import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
+import { VacansiesIcon } from '@/shared/components/IconComponents/Vacancies';
 import Link from 'next/link';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
 import type { IVacancy } from '@/shared/types';
@@ -113,7 +113,7 @@ export const VacanciesList: React.FC<Props> = ({
                   <div className={s.titleWrap}>
                     {isHot && (
                       <div className={s.hotLabel}>
-                        <CurrentVacanciesIcon name="fire" />
+                        <VacansiesIcon name="fire" />
                         <p className={s.labelText}>{vacanciesInfo.isHotValue}</p>
                       </div>
                     )}

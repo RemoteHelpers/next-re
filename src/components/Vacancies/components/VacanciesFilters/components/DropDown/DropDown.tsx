@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import s from './DropDown.module.scss';
-import { CurrentVacanciesIcon } from '@/shared/components/IconComponents/CurrentVacanciesIcon';
+import { VacansiesIcon } from '@/shared/components/IconComponents/Vacancies';
 import type { Category } from '@/shared/types';
 
 type HotState = {
@@ -68,7 +68,7 @@ export const DropDown: React.FC<Props> = ({
       >
         <span className={s.btnText}>{currentCategory ? currentCategory : categoriesTitle}</span>
 
-        <CurrentVacanciesIcon name="dropdown-arrow" />
+        <VacansiesIcon name="dropdown-arrow" />
       </button>
 
       <ul className={isDropdownShown ? s.list_shown : s.list}>
