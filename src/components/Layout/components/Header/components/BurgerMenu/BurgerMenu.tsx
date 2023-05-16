@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import s from './BurgerMenu.module.scss';
-import { INavItem } from '../../Header';
+// import { INavItem } from '../../Header';
 import Link from 'next/link';
 import { VacanciesContext } from '@/context';
 import type { Category, IVacancy } from '@/shared/types';
@@ -11,19 +11,24 @@ type MenuState = {
 };
 
 type Props = {
-  navList: INavItem[];
+  // navList: INavItem[];
   menuState: MenuState;
   headerData: any;
 };
 
-export const BurgerMenu: React.FC<Props> = ({ navList, menuState, headerData }) => {
-  const { categories, vacancies } = useContext(VacanciesContext);
+export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
+  // const { categories, vacancies } = useContext(VacanciesContext);
   const [currentTab, setCurrentTab] = useState(1);
   const [currentCategory, setCurrentCategory] = useState('');
-  const { menu } = headerData.navData.attributes;
-  console.log('menu', menu);
+  const { menu, menuValue, backValue } = headerData.navData.attributes;
+  const { categories, vacancies } = headerData;
+  // console.log('headerData', headerData);
 
   const { isBurgerMenu } = menuState;
+
+  const navToFirst = () => {};
+
+  const navToSecond = () => {};
 
   const navToThird = (value: string) => {
     setCurrentCategory(value);
@@ -57,9 +62,7 @@ export const BurgerMenu: React.FC<Props> = ({ navList, menuState, headerData }) 
 
   return (
     <div className={isBurgerMenu ? s.menuWrap_shown : s.menuWrap}>
-      <p className={s.menuTitle} onClick={() => setCurrentTab(1)}>
-        Меню
-      </p>
+      <p className={s.menuTitle}>{menuValue}</p>
 
       <nav className={s.navigation}>
         <ul className={currentTab === 1 ? s.firstTab_shown : s.firstTab}>
@@ -77,6 +80,12 @@ export const BurgerMenu: React.FC<Props> = ({ navList, menuState, headerData }) 
         </ul>
 
         <ul className={currentTab === 2 ? s.secondTab_shown : s.secondTab}>
+          <li>
+            <button className={s.backBtn} type="button" onClick={() => setCurrentTab(1)}>
+              {`< ${backValue}`}
+            </button>
+          </li>
+
           {categories.length &&
             categories.map(({ attributes: { categoryTitle, createdAt } }: Category) => (
               <li key={createdAt.toString()}>
@@ -92,6 +101,12 @@ export const BurgerMenu: React.FC<Props> = ({ navList, menuState, headerData }) 
         </ul>
 
         <ul className={currentTab === 3 ? s.thirdTab_shown : s.thirdTab}>
+          <li>
+            <button className={s.backBtn} type="button" onClick={() => setCurrentTab(2)}>
+              {`< ${currentCategory}`}
+            </button>
+          </li>
+
           {filteredVacancies().map(({ attributes }: IVacancy) => {
             const {
               createdAt,

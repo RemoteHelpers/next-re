@@ -100,7 +100,7 @@ export const Header: FC<Props> = ({ headerData }) => {
       </div>
 
       <BurgerMenu
-        navList={navItems}
+        // navList={navItems}
         menuState={{ isBurgerMenu, setIsBurgerMenu }}
         headerData={headerData}
       />

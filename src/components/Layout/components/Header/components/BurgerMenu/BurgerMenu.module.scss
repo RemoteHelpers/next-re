@@ -6,14 +6,11 @@
 .menuWrap {
   position: fixed;
   top: 0;
-  right: 0;
-
+  right: -100%;
   width: 100vw;
   height: 100vh;
-
   background-color: $primaryMint;
-
-  transform: translateX(101%);
+  // transform: translateX(100%);
   transition: 0.3s linear;
 
   @include on992 {
@@ -23,8 +20,8 @@
 
 .menuWrap_shown {
   @extend .menuWrap;
-
-  transform: translateX(0);
+  // transform: translateX(0);
+  right: 0;
 }
 
 .menuTitle {
@@ -39,18 +36,14 @@
 .navigation {
   position: relative;
 
-  height: 100%;
-  //   padding: 48px 0;
-  padding-top: 48px;
-  padding-bottom: 10vh;
+  height: calc(100% - 4.19rem);
 
   background-color: $rgbWhite;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  //   border-radius: 50%;
-  //   box-shadow: $mainOrangeShadow;
+  box-shadow: 0px 0px 17px rgba(255, 101, 1, 0.25);
 
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .navTab {
@@ -63,29 +56,52 @@
   gap: 20px;
 
   width: 100vw;
+  height: 100%;
   padding: 60px 30px;
 
+  overflow-y: auto;
   transition: 0.25s linear;
 
   li {
-    display: flex;
     width: 100%;
-    padding: 35px;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    padding: 2rem;
     border-radius: 1rem;
-    border: 1px solid black;
+
+    border: 1px solid $rgbGray;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: $rgbGray;
+    &:hover,
+    &:focus {
+      color: inherit;
+    }
   }
 
   button {
+    @extend a;
     background-color: transparent;
+  }
+
+  .backBtn {
+    padding: 0;
+    justify-content: start;
+    border-color: transparent;
   }
 }
 
 .firstTab {
   @extend .navTab;
-
   left: -100%;
 }
-
 .firstTab_shown {
   @extend .firstTab;
   left: 0;
@@ -95,7 +111,6 @@
   @extend .navTab;
   left: 100%;
 }
-
 .secondTab_shown {
   @extend .secondTab;
   left: 0;
@@ -104,15 +119,8 @@
 .thirdTab {
   @extend .navTab;
   left: -100%;
-  transition: 0.25s linear;
 }
-
 .thirdTab_shown {
   @extend .thirdTab;
   left: 0;
-}
-
-.navLink {
-}
-.navBtn {
 }
