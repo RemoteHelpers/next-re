@@ -16,10 +16,6 @@
 	&:hover {
 		outline: 3px solid #ff6501;
 		border-color: transparent;
-		cursor: wait;
-		cursor: vertical-text;
-		cursor: not-allowed;
-		user-select: none;
 	}
 	@include on1200 {
 		flex-direction: row;
