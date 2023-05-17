@@ -5,6 +5,8 @@
 
 .langSelector {
   position: relative;
+  display: flex;
+  align-items: center;
 
   margin-right: 3.125rem;
   @include on992 {

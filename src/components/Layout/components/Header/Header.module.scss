@@ -6,63 +6,116 @@
 .header {
   position: fixed;
   z-index: 10;
-  height: $headerHeight1;
+
   width: 100%;
-  //   padding-top: 20px;
+  padding: 1.25rem 30px;
+  // height: $headerHeight1;
 
   backdrop-filter: blur(15px);
   background: rgb(251 251 251 / 80%);
   box-shadow: 0 20px 20px 0px rgb(251 251 251 / 80%);
 
   @include on992 {
-    height: $headerHeight2;
+    padding: 2.5rem 10px;
+    // height: $headerHeight2;
   }
 }
 .container {
-  //   position: relative;
-  @include container(60px);
-  height: 100%;
+  // @include container;
+
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 30px;
+  // gap: 1rem;
+
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1460px;
+
   @include on992 {
-    @include container(20px);
-    padding: 0px 10px;
+    // padding: 0px 10px;
   }
 }
+
 .logo {
-  display: block;
-  flex: 0 0 180px;
-  @include on992 {
-    flex: 0 0 277px;
-  }
+  display: flex;
+  align-items: center;
+  min-width: 11.5rem;
   img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
+    // width: clamp(1.5rem, 2.375rem, 3.25rem);
+    width: 1.5rem;
+    margin-right: 0.25rem;
+
+    // height: 1.5rem;
+    // object-fit: contain;
+    // object-position: center;
+  }
+
+  @include on992 {
+    // min-width: 21rem;
+    min-width: 22rem;
+
+    img {
+      width: 3.25rem;
+      margin-right: 0.625rem;
+    }
   }
 }
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+
+  color: #333333;
+}
+
+.logoName {
+  font-weight: 700;
+  font-size: clamp(14px, 2.32vw, 33px);
+  // font-size: 14.7978px;
+  // font-size: 0.875rem;
+  line-height: 1.125rem;
+  @include on992 {
+    // font-size: 2.0625rem;
+
+    line-height: 2.5625rem;
+  }
+}
+.logoDescr {
+  font-size: clamp(9px, 2.32vw, 20px);
+  // font-size: 8.93828px;
+  // font-size: 0.5625rem;
+  line-height: 0.6875rem;
+  @include on992 {
+    // font-size: 1.25rem;
+    line-height: 1.5625rem;
+  }
+}
+
 .controls {
   display: flex;
-  gap: 25px;
+  justify-content: space-between;
+  // gap: 25px;
   @include on992 {
-    gap: 70px;
+    max-width: 43.75rem;
+    width: 100%;
+    // gap: 70px;
   }
 }
 .nav {
   display: none;
   @include on992 {
     display: flex;
-    gap: 50px;
-    padding: 0px 10px 0px 10px;
+    gap: 2rem;
+    // padding: 0px 10px 0px 10px;
   }
 }
 .nav_item {
   display: block;
   color: inherit;
   font-weight: 500;
+  font-size: 1.25rem;
   transition: all 0.2s ease;
   &.active {
     font-weight: 700;
@@ -83,11 +136,12 @@
 .burgerBtn {
   position: absolute;
   //   top: 0;
-  //   right: 0;
+  right: 0;
   // top: 1.55rem;
   // right: 2rem;
-  top: 1.15rem;
-  right: 1.5rem;
+  // top: 1.15rem;
+  // right: 1.5rem;
+  transform: translate(0.5rem, -0.2rem);
   z-index: 1;
 
   display: flex;

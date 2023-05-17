@@ -2,6 +2,7 @@ import React, { FC, useCallback, useState } from 'react';
 import s from './Header.module.scss';
 import Image from 'next/image';
 import logo from './assets/logo.svg';
+import re_logo from './assets/re_logo.svg';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { BurgerMenu } from './components/BurgerMenu';
@@ -50,8 +51,13 @@ export const Header: FC<Props> = ({ headerData }) => {
     <header className={s.header}>
       <div className={s.container}>
         <Link href="/" className={s.logo}>
-          <Image src={logo} alt="RemotEmployees Logo" />
+          <Image src={re_logo} alt="RemotEmployees Logo" />
+          <p className={s.logoText}>
+            <span className={s.logoName}>Remote Employees</span>
+            <span className={s.logoDescr}>The outstaffing company</span>
+          </p>
         </Link>
+
         <div className={s.controls}>
           <nav className={s.nav}>
             {menu.map(({ title, path_id }: any) => {
