@@ -5,6 +5,7 @@ import logo from './assets/logo.svg';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { BurgerMenu } from './components/BurgerMenu';
+import { SelectLang } from './components/SelectLang';
 export interface INavItem {
   title: string;
   path: string;
@@ -27,28 +28,23 @@ export const navItems: INavItem[] = [
     path: '/videointerview',
   },
 ];
-
-export enum Languages {
-  'ru',
-  'ua',
-  'en',
-}
+// export enum Languages {
+//   'ru',
+//   'ua',
+//   'en',
+// }
 
 type Props = {
   headerData: any;
 };
 export const Header: FC<Props> = ({ headerData }) => {
   const [isBurgerMenu, setIsBurgerMenu] = useState(false);
-  const { menu } = headerData.navData.attributes;
+  const { menu, chooseLangValue } = headerData.navData.attributes;
   const router = useRouter();
 
   const comparePath = useCallback((currentPath: string, path: string): boolean => {
     return currentPath.split('/').at(-1) === path.split('/').at(-1);
   }, []);
-
-  const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    router.push(router.asPath, router.asPath, { locale: e.target.value });
-  };
 
   return (
     <header className={s.header}>
@@ -77,17 +73,8 @@ export const Header: FC<Props> = ({ headerData }) => {
               );
             })}
           </nav>
-          <select
-            className={s.select}
-            onChange={changeLanguage}
-            value={router.locale}
-            name=""
-            id=""
-          >
-            <option value={Languages[0].toString()}>RU</option>
-            <option value={Languages[1].toString()}>UA</option>
-            <option value={Languages[2].toString()}>EN</option>
-          </select>
+
+          <SelectLang chooseLangValue={chooseLangValue} isBurgerMenu={isBurgerMenu} />
 
           <button
             type="button"
@@ -105,3 +92,18 @@ export const Header: FC<Props> = ({ headerData }) => {
     </header>
   );
 };
+
+// const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+//   router.push(router.asPath, router.asPath, { locale: e.target.value });
+// };
+/* <select
+            className={s.select}
+            onChange={changeLanguage}
+            value={router.locale}
+            name=""
+            id=""
+          >
+            <option value={Languages[0].toString()}>RU</option>
+            <option value={Languages[1].toString()}>UA</option>
+            <option value={Languages[2].toString()}>EN</option>
+          </select> */

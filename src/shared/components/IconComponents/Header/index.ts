@@ -1,1 +1,1 @@
-export { HeaderIcon } from './HeaderIcons';
+export { BurgerMenuIcon, LangSelectorIcon } from './HeaderIcons';

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import s from './DropDown.module.scss';
 import { VacansiesIcon } from '@/shared/components/IconComponents/Vacancies';
 import type { Category } from '@/shared/types';
@@ -76,17 +76,11 @@ export const DropDown: React.FC<Props> = ({
           const { categoryTitle } = category.attributes;
 
           return (
-            // <div className={isDropdownShown ? s.menuWrapper_shown : s.menuWrapper}>
             <li className={s.item} key={categoryTitle} id={categoryTitle} onClick={handleSelection}>
               <p className={currentCategory === categoryTitle ? s.optionCurrentName : s.optionName}>
                 {categoryTitle}
               </p>
-
-              {/* <div className={s.optionBox}>
-                {categoryTitle === currentCategory && <div className={s.optionCheck}></div>}
-              </div> */}
             </li>
-            // </div>
           );
         })}
       </ul>

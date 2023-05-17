@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import s from './BurgerMenu.module.scss';
 import Link from 'next/link';
 import type { Category, IVacancy } from '@/shared/types';
-import { HeaderIcon } from '@/shared/components/IconComponents/Header';
+import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
 
 type MenuState = {
   isBurgerMenu: boolean;
@@ -85,7 +85,7 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
         <ul className={currentTab === 2 ? s.secondTab_shown : s.secondTab}>
           <li>
             <button className={s.backBtn} type="button" onClick={navToFirst}>
-              <HeaderIcon name="left-arrow" />
+              <BurgerMenuIcon name="left-arrow" />
               {backValue}
             </button>
           </li>
@@ -106,7 +106,7 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
                     type="button"
                     onClick={() => navToThird(categoryTitle)}
                   >
-                    <HeaderIcon name={categorySlug} />
+                    <BurgerMenuIcon name={categorySlug} />
                     {categoryTitle}
                   </button>
                 </li>
@@ -117,7 +117,7 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
         <ul className={currentTab === 3 ? s.thirdTab_shown : s.thirdTab}>
           <li>
             <button className={s.backBtn} type="button" onClick={navToSecond}>
-              <HeaderIcon name="left-arrow" />
+              <BurgerMenuIcon name="left-arrow" />
               {currentCategory}
             </button>
           </li>
