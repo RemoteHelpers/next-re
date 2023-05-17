@@ -28,11 +28,57 @@
 	font-size: clamp(32px, 3.3vw, 64px);
 	margin-top: 2rem;
 }
-.breadcrumbs{
-	display: flex;
-}
-.breadcrumb_root{
-	
+.breadcrumbs {
+	font: inherit;
+	ol {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem 1rem;
+		@include on992 {
+			gap: 1.5rem;
+		}
+		li {
+			margin: 0 !important;
+			display: flex;
+			align-items: center;
+			&[class*="separator"] {
+				svg {
+					height: 0.9rem;
+					width: auto;
+					@include on992 {
+						height: 1.125rem;
+					}
+				}
+			}
+			&:hover {
+				cursor: default;
+			}
+			span {
+				font-size: $fontSize5;
+				font-weight: 500;
+				font-style: normal;
+				line-height: 1.15;
+				color: $primaryOrange;
+				&:hover {
+					cursor: default;
+				}
+				a {
+					color: $rgbGray;
+					opacity: 0.5;
+					font-size: inherit;
+					line-height: inherit;
+					margin: 0 !important;
+					padding: 0 !important;
+					border-radius: 0;
+					height: auto;
+					&:hover {
+						opacity: 1;
+						background-color: transparent;
+					}
+				}
+			}
+		}
+	}
 }
 .description {
 	p {
@@ -53,7 +99,7 @@
 		flex-direction: column;
 		gap: 1rem 0;
 		font-size: $fontSize5;
-		
+
 		li {
 			line-height: 1.4;
 		}

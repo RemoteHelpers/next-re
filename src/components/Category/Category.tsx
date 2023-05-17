@@ -4,8 +4,8 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { VacancyCard } from "../VacanciesList/components/VacancyCard";
 import { Breadcrumb } from "antd";
 import Link from "next/link";
-import { VacanciesIcon } from "@/shared/components/IconComponents/VacanciesIcon";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
+import { BreadcrumbsIcon } from "@/shared/components/IconComponents/BreadcrumbsIcon";
 
 type CategoryProps = {
 	category: any;
@@ -25,7 +25,7 @@ export const Category = ({ category, header }: CategoryProps) => {
 				title: categoryTitle,
 			},
 		],
-		[]
+		[header]
 	);
 	return (
 		<section className={s.category}>
@@ -33,12 +33,8 @@ export const Category = ({ category, header }: CategoryProps) => {
 				<div className={s.content}>
 					<Breadcrumb
 						items={breadcrumbsItems}
-						separator={">"}
-						className={s.breadcrumbs}
-						rootClassName={s.breadcrumb_root}
-						params={{
-							colorBgTextHover: "rgba(255, 255, 0, 1)",
-						}}
+						separator={<BreadcrumbsIcon id="separator" />}
+						className={s.breadcrumbs}					
 					/>
 					<h1 className={s.title}>{categoryTitle}</h1>
 					<ReactMarkdown className={s.description}>{description}</ReactMarkdown>

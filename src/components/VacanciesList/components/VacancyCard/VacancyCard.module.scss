@@ -16,6 +16,10 @@
 	&:hover {
 		outline: 3px solid #ff6501;
 		border-color: transparent;
+		cursor: wait;
+		cursor: vertical-text;
+		cursor: not-allowed;
+		user-select: none;
 	}
 	@include on1200 {
 		flex-direction: row;
@@ -90,7 +94,7 @@
 		margin-bottom: 0rem;
 	}
 }
-.fake_button {
+.link {
 	flex: 0 0 auto;
 	text-align: center;
 	padding: 0.75rem 1.25rem;

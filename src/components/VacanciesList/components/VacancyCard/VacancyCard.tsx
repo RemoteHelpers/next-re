@@ -25,7 +25,7 @@ export const VacancyCard = ({
 	}, []);
 
 	return (
-		<Link href={getPathToVacancy()} className={s.vacancy}>
+		<article className={s.vacancy}>
 			<div className={s.info}>
 				{vacancy.attributes.isHot && (
 					<div className={s.hot_mark}>
@@ -35,9 +35,9 @@ export const VacancyCard = ({
 				)}
 				<h3 className={s.title}>{vacancy.attributes.title}</h3>
 				<h4 className={s.subtitle}>{vacancy.attributes.subTitle}</h4>
-				<p className={s.desc}>{vacancy.attributes.cardDescription}</p>
+				<ReactMarkdown className={s.desc}>{vacancy.attributes.cardDescription}</ReactMarkdown>
 			</div>
-			<div className={s.fake_button}>Побачити більше</div>
-		</Link>
+			<Link href={getPathToVacancy()} className={s.link}>Побачити більше</Link>
+		</article>
 	);
 };
