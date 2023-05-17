@@ -1,7 +1,6 @@
 import React, { FC, useCallback, useState } from 'react';
 import s from './Header.module.scss';
 import Image from 'next/image';
-import logo from './assets/logo.svg';
 import re_logo from './assets/re_logo.svg';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -29,11 +28,6 @@ export const navItems: INavItem[] = [
     path: '/videointerview',
   },
 ];
-// export enum Languages {
-//   'ru',
-//   'ua',
-//   'en',
-// }
 
 type Props = {
   headerData: any;
@@ -98,18 +92,3 @@ export const Header: FC<Props> = ({ headerData }) => {
     </header>
   );
 };
-
-// const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-//   router.push(router.asPath, router.asPath, { locale: e.target.value });
-// };
-/* <select
-            className={s.select}
-            onChange={changeLanguage}
-            value={router.locale}
-            name=""
-            id=""
-          >
-            <option value={Languages[0].toString()}>RU</option>
-            <option value={Languages[1].toString()}>UA</option>
-            <option value={Languages[2].toString()}>EN</option>
-          </select> */

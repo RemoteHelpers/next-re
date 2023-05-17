@@ -9,7 +9,6 @@
 
   width: 100%;
   padding: 1.25rem 30px;
-  // height: $headerHeight1;
 
   backdrop-filter: blur(15px);
   background: rgb(251 251 251 / 80%);
@@ -17,25 +16,17 @@
 
   @include on992 {
     padding: 2.5rem 10px;
-    // height: $headerHeight2;
   }
 }
 .container {
-  // @include container;
-
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // gap: 1rem;
 
   margin: 0 auto;
   width: 100%;
   max-width: 1460px;
-
-  @include on992 {
-    // padding: 0px 10px;
-  }
 }
 
 .logo {
@@ -43,21 +34,16 @@
   align-items: center;
   min-width: 11.5rem;
   img {
-    // width: clamp(1.5rem, 2.375rem, 3.25rem);
     width: 1.5rem;
+    height: 1.5rem;
     margin-right: 0.25rem;
-
-    // height: 1.5rem;
-    // object-fit: contain;
-    // object-position: center;
   }
 
   @include on992 {
-    // min-width: 21rem;
     min-width: 22rem;
-
     img {
       width: 3.25rem;
+      height: 3.25rem;
       margin-right: 0.625rem;
     }
   }
@@ -66,29 +52,24 @@
 .logoText {
   display: flex;
   flex-direction: column;
-
   color: #333333;
 }
 
 .logoName {
   font-weight: 700;
   font-size: clamp(14px, 2.32vw, 33px);
-  // font-size: 14.7978px;
-  // font-size: 0.875rem;
   line-height: 1.125rem;
+  color: $primaryBlack;
   @include on992 {
-    // font-size: 2.0625rem;
-
     line-height: 2.5625rem;
   }
 }
 .logoDescr {
   font-size: clamp(9px, 2.32vw, 20px);
-  // font-size: 8.93828px;
-  // font-size: 0.5625rem;
   line-height: 0.6875rem;
+  color: $secondaryBlack;
+
   @include on992 {
-    // font-size: 1.25rem;
     line-height: 1.5625rem;
   }
 }
@@ -96,11 +77,10 @@
 .controls {
   display: flex;
   justify-content: space-between;
-  // gap: 25px;
+
   @include on992 {
     max-width: 43.75rem;
     width: 100%;
-    // gap: 70px;
   }
 }
 .nav {
@@ -108,7 +88,6 @@
   @include on992 {
     display: flex;
     gap: 2rem;
-    // padding: 0px 10px 0px 10px;
   }
 }
 .nav_item {
@@ -127,7 +106,7 @@
 }
 
 .select {
-  margin-right: calc(25px * 2);
+  margin-right: 3.125rem;
   @include on992 {
     margin-right: 0;
   }
@@ -135,12 +114,7 @@
 
 .burgerBtn {
   position: absolute;
-  //   top: 0;
   right: 0;
-  // top: 1.55rem;
-  // right: 2rem;
-  // top: 1.15rem;
-  // right: 1.5rem;
   transform: translate(0.5rem, -0.2rem);
   z-index: 1;
 
