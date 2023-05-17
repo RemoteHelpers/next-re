@@ -22,8 +22,6 @@ const Api = {
       },
     });
 
-    console.log("Res data >>> ", res.data);
-
     if (res?.data?.length !== 0) {
       return res.data;
     }

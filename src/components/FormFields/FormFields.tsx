@@ -6,6 +6,9 @@ import Select from "react-select";
 import PhoneInput from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
 import styles from "./FormFields.module.scss";
+import { FormIcon } from "@/shared/components/IconComponents/FormIcon";
+import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
+import Image from "next/image";
 
 const FormFields = ({ formData }: any) => {
   const { register, handleSubmit, reset, setValue, control } =
@@ -14,16 +17,6 @@ const FormFields = ({ formData }: any) => {
   const [loadFile, setLoadFile] = useState<any>();
 
   console.log("Form data >>> ", formData);
-
-  const EnglishLevel = [
-    { value: "beginner", label: "Beginner" },
-    { value: "elementary ", label: "Elementary" },
-    { value: "pre-intermediate", label: "Pre-Intermediate" },
-    { value: "intermediate", label: "Intermediate" },
-    { value: "upper-intermediate", label: "Upper-Intermediate" },
-    { value: "advanced", label: "Advanced" },
-    { value: "Proficiency", label: "Proficiency" },
-  ];
 
   const handleFileChange = async () => {
     if (fileInputRef.current.files.length > 0) {
@@ -49,6 +42,7 @@ const FormFields = ({ formData }: any) => {
       });
 
       reset();
+      loadFile[0].name = formData?.cv;
     } catch (err) {
       console.error("Form error >>> ", err);
     }
@@ -59,8 +53,7 @@ const FormFields = ({ formData }: any) => {
   };
 
   return (
-    <section className={styles.container}>
-      <h1>{formData?.title}</h1>
+    <>
       <form onSubmit={submitForm} className={styles.form}>
         <div className={styles.first_row}>
           <input
@@ -84,6 +77,7 @@ const FormFields = ({ formData }: any) => {
             type="email"
             {...register("eMail", { required: true })}
             placeholder={formData?.email}
+            className={styles.email}
           />
           <input
             type="text"
@@ -91,14 +85,17 @@ const FormFields = ({ formData }: any) => {
             maxLength={2}
             {...register("age", { pattern: /\d+/, required: true })}
             placeholder={formData?.age}
+            className={styles.age}
           />
         </div>
-        <h2>{formData?.englishLabel}</h2>
-        <Select
-          placeholder={formData?.englishLevel}
-          onChange={changeEnglishLevel}
-          options={EnglishLevel}
-        />
+        <div>
+          <p className={styles.english_title}>{formData?.englishLabel}</p>
+          <Select
+            placeholder={formData?.englishLevel}
+            onChange={changeEnglishLevel}
+            options={formData?.enlishLevels}
+          />
+        </div>
         <div className={styles.work_cv}>
           <input
             type="text"
@@ -117,13 +114,15 @@ const FormFields = ({ formData }: any) => {
               style={{ display: "none" }}
             />
             <span>{loadFile ? loadFile[0]?.name : formData?.cv}</span>
+            <FormIcon id="pin" />
           </label>
         </div>
+        <Image className={styles.mobile_cat} src={mainCat} alt={"main cat"} />
         <button className={styles.submit} type="submit">
           {formData?.submit}
         </button>
       </form>
-    </section>
+    </>
   );
 };
 

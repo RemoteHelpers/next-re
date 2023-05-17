@@ -14,7 +14,7 @@ import {
 } from "@/services";
 import { Spheres } from "@/components/Spheres";
 import { Partners } from "@/components/Partners";
-import FormFields from "@/components/FormFields";
+import MainForm from "@/components/MainForm/MainForm";
 
 const Home: FC = ({
   vacanciesInfo,
@@ -40,7 +40,7 @@ const Home: FC = ({
           slides={homeData.partnersSlider.data}
         />
         <Testimonials testimonials={homeData} />
-        <FormFields formData={formData} />
+        <MainForm formData={formData} />
       </Layout>
     </>
   );

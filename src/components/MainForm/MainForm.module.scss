@@ -1,0 +1,45 @@
+@import "@/shared/styles/mixins.scss";
+@import "@/shared/styles/mediaMixins.scss";
+@import "@/shared/styles/colors.scss";
+@import "@/shared/styles/fonts.scss";
+
+.container {
+    @include container(60px);
+    padding: 0 30px;
+}
+
+.main {
+    &_title {
+        margin-bottom: 4rem;
+        font-size: $fontSize2;
+        color: $rgbZodiac;
+        font-weight: 700;
+    }
+
+    &_wrapper {
+        width: 100%;
+        border: 2px solid $primaryOrange;
+        border-radius: 1.875rem;
+        padding: 2.5rem 1.625rem;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 0 7rem;
+
+        @include on992 {
+            flex-direction: row;
+            padding: 3rem 2.5rem;
+        }
+    }
+
+    &_cat {
+        transform: scale(1.05);
+        display: none;
+
+        @include on1200 {
+            display: block;
+        }
+    }
+}
