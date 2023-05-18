@@ -18,7 +18,7 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
   const [currentTab, setCurrentTab] = useState(1);
   const [currentCategory, setCurrentCategory] = useState('');
   const { isBurgerMenu, setIsBurgerMenu } = menuState;
-  const { menu, menuValue, backValue, allVacanciesValue } = headerData.navData.attributes;
+  const { menu, menuValue, backValue, allVacanciesValue } = headerData.header;
   const { categories, vacancies } = headerData;
 
   const handleLinkNav = () => setIsBurgerMenu(false);

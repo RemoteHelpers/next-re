@@ -9,9 +9,9 @@ import {
 } from '@/services';
 import { Category } from '@/components/Category';
 
-const VacancyPage: FC<any> = ({ category, categories, vacancies, footerData, navData, header }) => {
+const VacancyPage: FC<any> = ({ category, categories, vacancies, footerData, header }) => {
   return (
-    <Layout footerData={footerData} headerData={{ navData, categories, vacancies }}>
+    <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
       <Category category={category} header={header} />
     </Layout>
   );
@@ -26,7 +26,6 @@ export const getServerSideProps = async (context: any) => {
   const categories = await getCategories(lang);
   const vacancies = await getAllVacancies(lang);
   const footerData = await getFooterData(lang);
-  const navData = await getHeaderData(lang);
   const category = await getCategoryBySlug(categorySlug, lang);
   const header = await getHeaderData(lang);
   return {
@@ -35,7 +34,6 @@ export const getServerSideProps = async (context: any) => {
       categories,
       vacancies,
       footerData,
-      navData,
       header,
     },
   };

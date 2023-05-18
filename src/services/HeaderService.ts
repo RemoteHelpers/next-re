@@ -1,16 +1,19 @@
-import axios from "axios";
-import { API } from "@/constants";
+import axios from 'axios';
+import { API } from '@/constants';
 
-const axiosInstance = axios.create({
-	baseURL: API,
+const instance = axios.create({
+  baseURL: API,
+  params: {
+    populate: '*',
+  },
 });
 
 export const getHeaderData = async (lang: string) => {
-	try {
-		const res = await axiosInstance.get(`/header?locale=${lang}&populate=*`);
-		return res.data.data.attributes as Promise<[]>;
-	} catch (error) {
-		console.error(error);
-		return error;
-	}
+  try {
+    const res = await instance.get(`/header?locale=${lang}`);
+    return res.data.data.attributes as Promise<{}>;
+  } catch (error) {
+    console.error(error);
+    return { error };
+  }
 };

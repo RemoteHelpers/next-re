@@ -1,1 +1,1 @@
-export { VacansiesIcon } from './Vacancies';
+export { VacanciesIcon } from './Vacancies';

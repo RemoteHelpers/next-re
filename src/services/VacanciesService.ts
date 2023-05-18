@@ -8,16 +8,6 @@ const instance = axios.create({
   },
 });
 
-export const getCategories = async (lang: string) => {
-  try {
-    const res = await instance.get(`/categories?locale=${lang}`);
-    return res.data.data as Promise<[]>;
-  } catch (error) {
-    console.error(error);
-    return error;
-  }
-};
-
 export const getVacancyListData = async (lang: string) => {
   try {
     const res = await instance.get(`/vacancy-list-data?locale=${lang}`);

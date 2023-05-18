@@ -4,9 +4,9 @@ import { Vacancy } from '@/components/Vacancy';
 import { getVacancy } from '@/services';
 import { getAllVacancies, getCategories, getFooterData, getHeaderData } from '@/services';
 
-const VacancyPage: FC<any> = ({ vacancy, categories, vacancies, footerData, navData }) => {
+const VacancyPage: FC<any> = ({ vacancy, categories, vacancies, footerData, header }) => {
   return (
-    <Layout footerData={footerData} headerData={{ navData, categories, vacancies }}>
+    <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
       <Vacancy vacancy={vacancy} />
     </Layout>
   );
@@ -22,14 +22,14 @@ export const getServerSideProps = async (context: any) => {
   const categories = await getCategories(lang);
   const vacancies = await getAllVacancies(lang);
   const footerData = await getFooterData(lang);
-  const navData = await getHeaderData(lang);
+  const header = await getHeaderData(lang);
   return {
     props: {
       vacancy,
       categories,
       vacancies,
       footerData,
-      navData,
+      header,
     },
   };
 };

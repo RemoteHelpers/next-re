@@ -17,10 +17,10 @@ const VacanciesPage: FC<any> = ({
   vacancies,
   homeData,
   footerData,
-  navData,
+  header,
 }) => {
   return (
-    <Layout footerData={footerData} headerData={{ navData, categories, vacancies }}>
+    <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
       <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} vacancies={vacancies} />
     </Layout>
   );
@@ -35,7 +35,7 @@ export const getServerSideProps = async (context: any) => {
   const vacancies = await getAllVacancies(lang);
   const homeData = await getHomeData(lang);
   const footerData = await getFooterData(lang);
-  const navData = await getHeaderData(lang);
+  const header = await getHeaderData(lang);
   return {
     props: {
       vacanciesInfo,
@@ -43,7 +43,7 @@ export const getServerSideProps = async (context: any) => {
       vacancies,
       homeData,
       footerData,
-      navData,
+      header,
     },
   };
 };

@@ -1,123 +1,123 @@
-@import "@/shared/styles/colors";
-@import "@/shared/styles/fonts";
-@import "@/shared/styles/mixins";
-@import "@/shared/styles/mediaMixins";
+@import '@/shared/styles/colors';
+@import '@/shared/styles/fonts';
+@import '@/shared/styles/mixins';
+@import '@/shared/styles/mediaMixins';
 .vacancy {
-	width: 100%;
-	display: flex;
-	position: relative;
-	justify-content: stretch;
-	flex-direction: column;
-	border: 1px solid #616161;
-	border-radius: 1.25rem;
-	padding: 1.25rem 1rem;
-	box-sizing: border-box;
-	color: #000;
-	&:hover {
-		outline: 3px solid #ff6501;
-		border-color: transparent;
-	}
-	@include on768 {
-		padding: 2rem 1rem;
-	}
-	@include on992 {
-		padding: 2.5rem 1.25rem;
-	}
-	@include on1200 {
-		flex-direction: row;
-		gap: 10rem;
-	}
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: stretch;
+  flex-direction: column;
+  border: 1px solid #616161;
+  border-radius: 1.25rem;
+  padding: 1.25rem 1rem;
+  box-sizing: border-box;
+  color: #000;
+  &:hover {
+    outline: 3px solid #ff6501;
+    border-color: transparent;
+  }
+  @include on768 {
+    padding: 2rem 1rem;
+  }
+  @include on992 {
+    padding: 2.5rem 1.25rem;
+  }
+  @include on1200 {
+    flex-direction: row;
+    gap: 10rem;
+  }
 }
 .info {
-	flex: 1 1 auto;
-	display: flex;
-	flex-direction: column;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 .hot_mark {
-	align-self: flex-start;
-	display: flex;
-	align-items: center;
-	gap: 0.75rem;
-	padding: 0.6rem 1.2rem;
-	border-radius: 1rem;
-	font-size: $fontSize5;
-	background-color: $secondaryTomato;
-	color: $rgbWhite;
-	margin-bottom: .75rem;
-	@include on768 {
-		position: absolute;
-		top: 2.5rem;
-		right: 2rem;
-		margin-bottom: 0;
-	}
-	@include on992 {
-		padding: 0.6rem 1.7rem;
-		border-radius: 1.7rem;
-		gap: 1.2rem;
-	}
-	@include on1200 {
-		position: absolute;
-		top: 2.5rem;
-		right: 50%;
-		transform: translate(50%, 0%);
-	}
-	svg {
-		fill: $rgbWhite;
-	}
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 1rem;
+  font-size: $fontSize5;
+  background-color: $secondaryTomato;
+  color: $rgbWhite;
+  margin-bottom: 0.75rem;
+  @include on768 {
+    position: absolute;
+    top: 2.5rem;
+    right: 2rem;
+    margin-bottom: 0;
+  }
+  @include on992 {
+    padding: 0.6rem 1.7rem;
+    border-radius: 1.7rem;
+    gap: 1.2rem;
+  }
+  @include on1200 {
+    position: absolute;
+    top: 2.5rem;
+    right: 50%;
+    transform: translate(50%, 0%);
+  }
+  svg {
+    fill: $rgbWhite;
+  }
 }
 .title {
-	font-weight: 700;
-	margin-bottom: 1rem;
-	font-size: $fontSize3;
-	line-height: 1;
-	@include on768 {
-		max-width: 75%;
-		line-height: 1.4;
-	}
-	@include on1200 {
-		max-width: 65%;
-		line-height: 1.6;
-	}
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: $fontSize3;
+  line-height: 1;
+  @include on768 {
+    max-width: 75%;
+    line-height: 1.4;
+  }
+  @include on1200 {
+    max-width: 65%;
+    line-height: 1.6;
+  }
 }
 .subtitle {
-	font-weight: 600;
-	font-size: $fontSize5;
-	line-height: 1.5;
-	margin-bottom: 0.8rem;
+  font-weight: 600;
+  font-size: $fontSize5;
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
 }
 .desc {
-	font-weight: 400;
-	font-size: $fontSize5;
-	line-height: 1.5;
-	color: $rgbGray;
-	display: -webkit-box;
-	-webkit-line-clamp: 2; // количество строк
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	margin-bottom: 1.5rem;
-	@include on1200 {
-		margin-bottom: 0rem;
-	}
+  font-weight: 400;
+  font-size: $fontSize5;
+  line-height: 1.5;
+  color: $rgbGray;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; // количество строк
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  @include on1200 {
+    margin-bottom: 0rem;
+  }
 }
 .link {
-	flex: 0 0 auto;
-	color: $primaryBlack;
-	text-align: center;
-	padding: 0.75rem 1.25rem;
-	font-weight: 700;
-	font-size: $fontSize54;
-	background-color: #fbbf13;
-	box-shadow: $mainOrangeShadow;
-	border-radius: 1rem;
-	transition: all 0.3s ease;
-	&:hover {
-		background-color: #ff6501;
-	}
-	@include on768 {
-		padding: 1rem 1.875rem;
-	}
-	@include on1200 {
-		align-self: center;
-		padding: 1.25rem 2.25rem;
-	}
+  flex: 0 0 auto;
+  color: $primaryBlack;
+  text-align: center;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  font-size: $fontSize54;
+  background-color: #fbbf13;
+  box-shadow: $orangeShadow;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: #ff6501;
+  }
+  @include on768 {
+    padding: 1rem 1.875rem;
+  }
+  @include on1200 {
+    align-self: center;
+    padding: 1.25rem 2.25rem;
+  }
 }

@@ -15,10 +15,10 @@ import {
 import { Spheres } from '@/components/Spheres';
 import { Partners } from '@/components/Partners';
 
-const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData, footerData, navData }: any) => {
+const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData, footerData, header }: any) => {
   return (
     <>
-      <Layout footerData={footerData} headerData={{ navData, categories, vacancies }}>
+      <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
         <Hero data={homeData} />
         <Spheres title={homeData.spheresTitle} categories={categories} />
         <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} vacancies={vacancies} />
@@ -39,7 +39,7 @@ export const getServerSideProps = async (context: any) => {
   const vacancies = await getAllVacancies(lang);
   const homeData = await getHomeData(lang);
   const footerData = await getFooterData(lang);
-  const navData = await getHeaderData(lang);
+  const header = await getHeaderData(lang);
 
   return {
     props: {
@@ -48,7 +48,7 @@ export const getServerSideProps = async (context: any) => {
       vacancies,
       homeData,
       footerData,
-      navData,
+      header,
     },
   };
 };
