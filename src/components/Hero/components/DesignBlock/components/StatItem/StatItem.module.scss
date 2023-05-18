@@ -25,15 +25,15 @@ $rotateReverse: rotate_anim 20s linear 0.8s infinite reverse;
 	@include on992 {
 		padding: 15px 24px;
 	}
-	// animation: $rotateReverse;
 	&[id="0"] {
 		background: linear-gradient(
 			253.58deg,
 			rgba(92, 233, 255, 0.44) 52.77%,
 			rgba(0, 0, 0, 0) 119.81%
 		);
-		bottom: 10%;
-		left: 5%;
+		bottom: 0%;
+		left: 50%;
+		transform: translate(-50%, 50%);
 		max-width: clamp(135px, 16vw, 250px);
 		@include on992 {
 			max-width: clamp(130px, 18vw, 250px);
@@ -45,8 +45,9 @@ $rotateReverse: rotate_anim 20s linear 0.8s infinite reverse;
 			rgba(255, 255, 255, 0.73) 50.66%,
 			rgba(255, 255, 255, 0) 95.13%
 		);
-		top: 45%;
-		right: -7%;
+		top: 50%;
+		right: 0%;
+		transform: translate(50%, 0%);
 		max-width: clamp(115px, 14vw, 210px);
 		@include on992 {
 			max-width: clamp(125px, 16vw, 210px);

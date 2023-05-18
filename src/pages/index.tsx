@@ -39,7 +39,7 @@ export const getServerSideProps = async (context: any) => {
   const vacancies = await getAllVacancies(lang);
   const homeData = await getHomeData(lang);
   const footerData = await getFooterData(lang);
-  const navData = await getHeaderData(lang);
+  const header = await getHeaderData(lang);
 
   return {
     props: {
@@ -48,7 +48,7 @@ export const getServerSideProps = async (context: any) => {
       vacancies,
       homeData,
       footerData,
-      navData,
+      header,
     },
   };
 };

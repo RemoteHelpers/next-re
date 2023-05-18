@@ -1,11 +1,11 @@
 export {
-  getVacancies,
-  getVacancy,
-  getVacancyListData,
+	getVacancies,
+	getVacancy,
+	getVacancyListData,
+	getAllVacancies,
   getCategories,
-  getAllVacancies,
-} from './vacanciesServices';
-
-export { getHomeData } from './HomeDataService';
-export { getFooterData } from './FooterDataService';
-export { getHeaderData } from './headerServices';
+} from "./VacanciesService";
+export { getCategories, getCategoryBySlug } from "./CategoryService";
+export { getHomeData } from "./HomeDataService";
+export { getFooterData } from "./FooterDataService";
+export { getHeaderData } from "./HeaderService";
