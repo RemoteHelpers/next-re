@@ -30,6 +30,7 @@
     width: 1.3125rem;
     height: 1.3125rem;
     fill: currentColor;
+    pointer-events: none;
   }
 
   @include on992 {
@@ -54,16 +55,15 @@
   position: absolute;
   top: 3rem;
   right: 0;
-
   z-index: 1;
 
+  min-width: max-content;
   height: 0;
+
   border-radius: 1.25rem;
   border: 1px solid $rgbGray;
-
-  overflow: hidden;
   background-color: $rgbWhite;
-
+  overflow: hidden;
   pointer-events: none;
   opacity: 0;
 

@@ -45,7 +45,7 @@ export const Header: FC<Props> = ({ headerData }) => {
     <header className={s.header}>
       <div className={s.container}>
         <Link href="/" className={s.logo}>
-          <Image src={re_logo} alt="RemotEmployees Logo" />
+          <Image src={re_logo} alt="RemotEmployees Logo" className={s.logoImg} />
           <p className={s.logoText}>
             <span className={s.logoName}>Remote Employees</span>
             <span className={s.logoDescr}>The outstaffing company</span>

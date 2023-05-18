@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import s from './SelectLang.module.scss';
 import { useRouter } from 'next/router';
 import { LangSelectorIcon } from '@/shared/components/IconComponents/Header';
@@ -15,10 +15,6 @@ type Languages = {
 
 const languages: Languages = [
   {
-    lang: 'русский',
-    locale: 'ru',
-  },
-  {
     lang: 'Українська',
     locale: 'ua',
   },
@@ -34,37 +30,64 @@ const languages: Languages = [
     lang: 'Slovenský',
     locale: 'sk',
   },
+  {
+    lang: 'русский',
+    locale: 'ru',
+  },
 ];
 
 export const SelectLang: React.FC<Props> = ({ chooseLangValue, isBurgerMenu }) => {
   const router = useRouter();
   const [currentLang, setCurrentLang] = useState<string>(router.locale?.toUpperCase()!);
   const [isSelectorShown, setIsSelectorShown] = useState<boolean>(false);
+  const [needAddListeners, setNeedAddListeners] = useState<boolean>(false);
+  const [needRemoveListeners, setNeedRemoveListeners] = useState<boolean>(false);
+  const langBtnRef = useRef(null);
 
-  const hideLanguages = (): void => {
-    if (isSelectorShown) setIsSelectorShown(false);
+  const handleSelectBtn = () => {
+    if (!isSelectorShown) {
+      setIsSelectorShown(true);
+      if (!needAddListeners) setNeedAddListeners(true);
+    } else setIsSelectorShown(false);
   };
+
+  const listenerHandler = (e: any): void => {
+    if (e.target === langBtnRef.current) return;
+    setNeedAddListeners(false);
+    setNeedRemoveListeners(true);
+    if (isSelectorShown) setIsSelectorShown(false);
+    console.log('needAddListeners', needAddListeners);
+    console.log('needRemoveListeners', needRemoveListeners);
+  };
+
   const handleSelection = (locale: string): void => {
     if (currentLang.toLowerCase() === locale) return;
     setCurrentLang(locale.toUpperCase());
     router.push(router.asPath, router.asPath, { locale });
-    hideLanguages();
+    setIsSelectorShown(false);
   };
 
   useEffect(() => {
-    if (isBurgerMenu) hideLanguages();
-    else if (document) {
-      if (isSelectorShown) document.addEventListener('scroll', hideLanguages);
-      else document.removeEventListener('scroll', hideLanguages);
+    if (!document) return;
+    if (needAddListeners && isSelectorShown) {
+      document.addEventListener('click', listenerHandler);
+      document.addEventListener('scroll', listenerHandler, { once: true });
+      setNeedAddListeners(false);
     }
-  }, [isSelectorShown, isBurgerMenu]);
+    if (!isSelectorShown && needRemoveListeners) {
+      document.removeEventListener('click', listenerHandler);
+      document.removeEventListener('scroll', listenerHandler);
+      setNeedRemoveListeners(false);
+    }
+  }, [isSelectorShown, needRemoveListeners, needAddListeners]);
 
   return (
     <div className={s.langSelector}>
       <button
+        ref={langBtnRef}
         type="button"
         className={isSelectorShown ? s.mainBtn_clicked : s.mainBtn}
-        onClick={() => setIsSelectorShown(!isSelectorShown)}
+        onClick={handleSelectBtn}
       >
         {currentLang}
         <LangSelectorIcon name="internationalization" />
