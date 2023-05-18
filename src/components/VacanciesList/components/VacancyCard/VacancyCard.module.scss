@@ -10,12 +10,18 @@
 	flex-direction: column;
 	border: 1px solid #616161;
 	border-radius: 1.25rem;
-	padding: 2.5rem 1.25rem;
+	padding: 1.25rem 1rem;
 	box-sizing: border-box;
 	color: #000;
 	&:hover {
 		outline: 3px solid #ff6501;
 		border-color: transparent;
+	}
+	@include on768 {
+		padding: 2rem 1rem;
+	}
+	@include on992 {
+		padding: 2.5rem 1.25rem;
 	}
 	@include on1200 {
 		flex-direction: row;
@@ -37,7 +43,7 @@
 	font-size: $fontSize5;
 	background-color: $secondaryTomato;
 	color: $rgbWhite;
-	margin-bottom: 1.875rem;
+	margin-bottom: .75rem;
 	@include on768 {
 		position: absolute;
 		top: 2.5rem;
@@ -62,23 +68,26 @@
 .title {
 	font-weight: 700;
 	margin-bottom: 1rem;
-	font-size: 2.25rem;
+	font-size: $fontSize3;
+	line-height: 1;
 	@include on768 {
 		max-width: 75%;
+		line-height: 1.4;
 	}
 	@include on1200 {
 		max-width: 65%;
+		line-height: 1.6;
 	}
 }
 .subtitle {
 	font-weight: 600;
-	font-size: 1.25rem;
+	font-size: $fontSize5;
 	line-height: 1.5;
 	margin-bottom: 0.8rem;
 }
 .desc {
 	font-weight: 400;
-	font-size: 1.25rem;
+	font-size: $fontSize5;
 	line-height: 1.5;
 	color: $rgbGray;
 	display: -webkit-box;
@@ -96,6 +105,7 @@
 	text-align: center;
 	padding: 0.75rem 1.25rem;
 	font-weight: 700;
+	font-size: $fontSize54;
 	background-color: #fbbf13;
 	box-shadow: $mainOrangeShadow;
 	border-radius: 1rem;
@@ -103,7 +113,7 @@
 	&:hover {
 		background-color: #ff6501;
 	}
-	@include on768{
+	@include on768 {
 		padding: 1rem 1.875rem;
 	}
 	@include on1200 {
