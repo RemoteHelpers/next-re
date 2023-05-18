@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './VacancyItem.module.scss';
 import { IVacancy, IVacancyAttr } from '@/shared/types';
-import { VacansiesIcon } from '@/shared/components/IconComponents/Vacancies';
+import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
 import Link from 'next/link';
 
 type Props = {
@@ -24,7 +24,7 @@ export const VacancyItem: React.FC<Props> = ({ attributes, vacanciesInfo }) => {
         <div className={s.titleWrap}>
           {isHot && (
             <div className={s.hotLabel}>
-              <VacansiesIcon name="fire" />
+              <VacanciesIcon name="fire" />
               <p className={s.labelText}>{vacanciesInfo.isHotValue}</p>
             </div>
           )}
