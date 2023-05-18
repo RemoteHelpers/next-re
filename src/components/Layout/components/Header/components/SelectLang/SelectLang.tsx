@@ -56,8 +56,6 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue, isBurgerMenu }) =
     setNeedAddListeners(false);
     setNeedRemoveListeners(true);
     if (isSelectorShown) setIsSelectorShown(false);
-    console.log('needAddListeners', needAddListeners);
-    console.log('needRemoveListeners', needRemoveListeners);
   };
 
   const handleSelection = (locale: string): void => {
@@ -68,16 +66,21 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue, isBurgerMenu }) =
   };
 
   useEffect(() => {
-    if (!document) return;
-    if (needAddListeners && isSelectorShown) {
-      document.addEventListener('click', listenerHandler);
-      document.addEventListener('scroll', listenerHandler, { once: true });
-      setNeedAddListeners(false);
-    }
-    if (!isSelectorShown && needRemoveListeners) {
-      document.removeEventListener('click', listenerHandler);
-      document.removeEventListener('scroll', listenerHandler);
-      setNeedRemoveListeners(false);
+    if (document) {
+      if (needAddListeners && isSelectorShown) {
+        document.addEventListener('mousedown', listenerHandler, { once: true });
+        document.addEventListener('scroll', listenerHandler, { once: true });
+        setNeedAddListeners(false);
+      }
+      if (!isSelectorShown && needRemoveListeners) {
+        document.removeEventListener('mousedown', listenerHandler);
+        document.removeEventListener('scroll', listenerHandler);
+        setNeedRemoveListeners(false);
+      }
+      return (
+        document.removeEventListener('mousedown', listenerHandler),
+        document.removeEventListener('scroll', listenerHandler)
+      );
     }
   }, [isSelectorShown, needRemoveListeners, needAddListeners]);
 
