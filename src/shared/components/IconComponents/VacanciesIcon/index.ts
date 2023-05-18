@@ -1,1 +1,0 @@
-export { VacanciesIcon } from "./VacanciesIcon";

@@ -18,18 +18,9 @@
 .container {
 	@include container(60px);
 	padding: 0px 1.875rem;
-	margin-bottom: 3.125rem;
-	font-weight: 800;
 	@include on768 {
 		@include container(20px);
 		padding: 0px 0.625rem;
-		margin-bottom: 4rem;
-	}
-	@include on992 {
-		margin-bottom: 5rem;
-	}
-	@include on1200 {
-		margin-bottom: 6.25rem;
 	}
 }
 .title {
