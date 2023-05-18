@@ -52,6 +52,7 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue, isBurgerMenu }) =
   };
 
   const listenerHandler = (e: any): void => {
+    console.log('ПОДІЯ');
     if (e.target === langBtnRef.current) return;
     setNeedAddListeners(false);
     setNeedRemoveListeners(true);
@@ -67,21 +68,29 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue, isBurgerMenu }) =
 
   useEffect(() => {
     if (document) {
-      if (needAddListeners && isSelectorShown) {
+      if (isSelectorShown) {
         document.addEventListener('mousedown', listenerHandler, { once: true });
         document.addEventListener('scroll', listenerHandler, { once: true });
-        setNeedAddListeners(false);
       }
-      if (!isSelectorShown && needRemoveListeners) {
-        document.removeEventListener('mousedown', listenerHandler);
-        document.removeEventListener('scroll', listenerHandler);
-        setNeedRemoveListeners(false);
-      }
-      return (
-        document.removeEventListener('mousedown', listenerHandler),
-        document.removeEventListener('scroll', listenerHandler)
-      );
+      // if (needAddListeners && isSelectorShown) {
+      //   console.log('ДОДАЮ ЛІСЕНЕРИ');
+      //   document.addEventListener('mousedown', listenerHandler, { once: true });
+      //   document.addEventListener('scroll', listenerHandler, { once: true });
+      //   setNeedAddListeners(false);
+      //   console.log('ДОДАВ');
+      // }
+      // if (!isSelectorShown && needRemoveListeners) {
+      //   console.log('ЗАБИРАЮ ЛІСЕНЕРИ');
+      //   document.removeEventListener('mousedown', listenerHandler);
+      //   document.removeEventListener('scroll', listenerHandler);
+      //   setNeedRemoveListeners(false);
+      //   console.log('ЗАБРАВ');
+      // }
     }
+    // return (
+    //   document.removeEventListener('mousedown', listenerHandler),
+    //   document.removeEventListener('scroll', listenerHandler)
+    // );
   }, [isSelectorShown, needRemoveListeners, needAddListeners]);
 
   return (
