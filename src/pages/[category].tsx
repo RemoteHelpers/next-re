@@ -1,11 +1,18 @@
 import { FC } from 'react';
 import { Layout } from '@/components/Layout';
-import { getAllVacancies, getCategories, getFooterData, getHeaderData } from '@/services';
+import {
+  getAllVacancies,
+  getCategories,
+  getFooterData,
+  getHeaderData,
+  getCategoryBySlug,
+} from '@/services';
+import { Category } from '@/components/Category';
 
-const VacancyPage: FC<any> = ({ category, categories, vacancies, footerData, navData }) => {
+const VacancyPage: FC<any> = ({ category, categories, vacancies, footerData, navData, header }) => {
   return (
     <Layout footerData={footerData} headerData={{ navData, categories, vacancies }}>
-      <h1>{category}</h1>
+      <Category category={category} header={header} />
     </Layout>
   );
 };
@@ -20,13 +27,16 @@ export const getServerSideProps = async (context: any) => {
   const vacancies = await getAllVacancies(lang);
   const footerData = await getFooterData(lang);
   const navData = await getHeaderData(lang);
+  const category = await getCategoryBySlug(categorySlug, lang);
+  const header = await getHeaderData(lang);
   return {
     props: {
-      category: categorySlug,
+      category,
       categories,
       vacancies,
       footerData,
       navData,
+      header,
     },
   };
 };

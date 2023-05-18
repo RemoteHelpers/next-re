@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import s from './VacanciesList.module.scss';
-import { VacansiesIcon } from '@/shared/components/IconComponents/Vacancies';
-import Link from 'next/link';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
 import type { IVacancy } from '@/shared/types';
 import { useRouter } from 'next/router';
