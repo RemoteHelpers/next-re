@@ -1,27 +1,12 @@
-import { FC } from 'react';
-import { Layout } from '@/components/Layout';
-import { VacanciesList } from '@/components/VacanciesList';
-import {
-  getAllVacancies,
-  getCategories,
-  getFooterData,
-  getHeaderData,
-  getHomeData,
-  getVacancyListData,
-} from '@/services';
-import { Vacancies } from '@/components/Vacancies';
+import { FC } from "react";
+import { Layout } from "@/components/Layout";
+import { VacanciesList } from "@/components/VacanciesList";
+import { getVacancies } from "@/services";
 
-const VacanciesPage: FC<any> = ({
-  vacanciesInfo,
-  categories,
-  vacancies,
-  homeData,
-  footerData,
-  navData,
-}) => {
+const VacanciesPage: FC = ({ vacancies }: any) => {
   return (
-    <Layout footerData={footerData} headerData={{ navData, categories, vacancies }}>
-      <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} vacancies={vacancies} />
+    <Layout>
+      <VacanciesList vacancies={vacancies} />
     </Layout>
   );
 };
@@ -29,21 +14,11 @@ const VacanciesPage: FC<any> = ({
 export default VacanciesPage;
 
 export const getServerSideProps = async (context: any) => {
-  const lang = context.locale === 'ua' ? 'uk' : context.locale;
-  const vacanciesInfo = await getVacancyListData(lang);
-  const categories = await getCategories(lang);
-  const vacancies = await getAllVacancies(lang);
-  const homeData = await getHomeData(lang);
-  const footerData = await getFooterData(lang);
-  const navData = await getHeaderData(lang);
+  const lang = context.locale === "ua" ? "uk" : context.locale;
+  const vacancies = await getVacancies(lang);
   return {
     props: {
-      vacanciesInfo,
-      categories,
       vacancies,
-      homeData,
-      footerData,
-      navData,
     },
   };
 };
