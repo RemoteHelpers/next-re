@@ -33,7 +33,6 @@ type Props = {
   headerData: any;
 };
 export const Header: FC<Props> = ({ headerData }) => {
-  console.log('headerData', headerData);
   const [isBurgerMenu, setIsBurgerMenu] = useState(false);
   const { menu, chooseLangValue } = headerData.header;
   const router = useRouter();

@@ -8,11 +8,12 @@ import s from './Layout.module.scss';
 // export type LayoutProps = MainProps & {};
 
 export const Layout = ({ children, footerData, headerData }: any) => {
+  const { header } = headerData;
   return (
     <div className={s.wrapper}>
       <Header headerData={headerData} />
       <Main>{children}</Main>
-      <Footer footerData={footerData} />
+      <Footer footerData={footerData} header={header} />
     </div>
   );
 };
