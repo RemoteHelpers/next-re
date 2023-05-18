@@ -3,6 +3,7 @@ export {
 	getVacancy,
 	getVacancyListData,
 	getAllVacancies,
+  getCategories,
 } from "./VacanciesService";
 export { getCategories, getCategoryBySlug } from "./CategoryService";
 export { getHomeData } from "./HomeDataService";

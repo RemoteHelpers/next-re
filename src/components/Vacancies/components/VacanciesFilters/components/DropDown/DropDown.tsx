@@ -68,7 +68,6 @@ export const DropDown: React.FC<Props> = ({
 				<span className={s.btnText}>
 					{currentCategory ? currentCategory : categoriesTitle}
 				</span>
-
 				<VacanciesIcon name="dropdown-arrow" />
 			</button>
 

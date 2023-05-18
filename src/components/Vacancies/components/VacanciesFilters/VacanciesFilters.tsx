@@ -89,7 +89,6 @@ export const VacanciesFilters = ({
 						)}
 					</button>
 				</div>
-
 				<div className={s.filterTypeWrap}>
 					<DropDown
 						categories={categories}
@@ -111,7 +110,6 @@ export const VacanciesFilters = ({
 						onChange={() => {}}
 						className={s.checkbox}
 					/>
-
 					{!currentCategory && !searchQuery && (
 						<button
 							type="button"

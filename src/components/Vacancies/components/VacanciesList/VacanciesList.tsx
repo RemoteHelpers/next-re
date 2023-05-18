@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import s from "./VacanciesList.module.scss";
 import { VacanciesIcon } from "@/shared/components/IconComponents/VacanciesIcon";
@@ -6,7 +7,6 @@ import type { PaginationInfo } from "../../../Vacancies/Vacancies";
 import type { IVacancy } from "@/shared/types";
 import { useRouter } from "next/router";
 import { Oops } from "./components/Oops/Oops";
-
 type Props = {
 	vacancies: any;
 	vacanciesInfo: any;
