@@ -4,6 +4,8 @@
 @import "@/shared/styles/fonts";
 
 .info {
+	position: relative;
+	z-index: 2;
 	flex: 1 1 50%;
 	display: flex;
 	flex-direction: column;
@@ -45,7 +47,7 @@
 		background-color: $primaryYellow;
 	}
 	padding: 1.25rem 1.875rem;
-	gap: 16px;
+	gap: 1rem;
 	@include on992 {
 		margin-top: 3.125rem;
 		gap: 1rem;

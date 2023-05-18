@@ -1,0 +1,178 @@
+@import '@/shared/styles/fonts';
+@import '@/shared/styles/colors';
+@import '@/shared/styles/mixins';
+@import '@/shared/styles/mediaMixins';
+
+.langSelector {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  margin-right: 3.125rem;
+  @include on992 {
+    margin-right: 0;
+  }
+}
+
+.mainBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+
+  color: inherit;
+  font-weight: 600;
+  font-size: $fontSize54;
+  line-height: 1.5rem;
+  background-color: transparent;
+  cursor: pointer;
+
+  svg {
+    width: 1.3125rem;
+    height: 1.3125rem;
+    fill: currentColor;
+    pointer-events: none;
+  }
+
+  @include on992 {
+    font-weight: 500;
+    gap: 1rem;
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+}
+
+.mainBtn_clicked {
+  @extend .mainBtn;
+  color: $primaryOrange;
+  svg {
+    fill: currentColor;
+  }
+}
+
+.menu {
+  position: absolute;
+  top: 3rem;
+  right: 0;
+  z-index: 1;
+
+  min-width: max-content;
+  height: 0;
+
+  border-radius: 1.25rem;
+  border: 1px solid $rgbGray;
+  background-color: $rgbWhite;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+
+  transition-property: height opacity;
+  transition-duration: 0.1s;
+  transition-timing-function: linear;
+
+  @include on992 {
+    width: 25rem;
+    top: 3.5rem;
+    gap: 1rem;
+  }
+}
+
+.menu_shown {
+  @extend .menu;
+  padding: 1.5rem 1rem;
+  height: auto;
+  opacity: 1;
+  pointer-events: all;
+
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+  @include on992 {
+    padding: 3.5rem 3.25rem;
+  }
+}
+
+.langsTitle {
+  margin-bottom: 1.5rem;
+
+  letter-spacing: 0;
+  color: $rgbZodiac;
+  font-weight: 900;
+  font-size: $fontSize10;
+  line-height: 2rem;
+
+  @include on992 {
+    margin-bottom: 2.25rem;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include on992 {
+    gap: 1.75rem;
+  }
+}
+
+.item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  cursor: pointer;
+
+  img {
+    height: auto;
+  }
+  .plugBox {
+    margin-left: auto;
+  }
+
+  @include on992 {
+    img {
+      margin-right: 1.5rem;
+      width: 2.5rem;
+    }
+  }
+}
+
+.language {
+  font-weight: 600;
+  font-size: $fontSize9;
+  line-height: 1.25;
+
+  // background-color: $rgbWhite;
+  user-select: none;
+  pointer-events: none;
+  transition: transform 0.1s linear;
+}
+
+.plugBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid $primaryBlue;
+  border-radius: 0.625rem;
+
+  @include on992 {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  pointer-events: none;
+}
+
+.plug {
+  border-radius: 50%;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: $primaryOrange;
+  @include on992 {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}

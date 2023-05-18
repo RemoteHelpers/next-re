@@ -74,7 +74,7 @@ const Feedbacks = ({ testimonials }: any) => {
             <TestimonialsIcon id="next" />
           </span>
         </div>
-      </Swiper>
+      </Swiper>      
     </section>
   );
 };

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import s from './VacanciesList.module.scss';
-import { VacansiesIcon } from '@/shared/components/IconComponents/Vacancies';
-import Link from 'next/link';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
 import type { IVacancy } from '@/shared/types';
 import { useRouter } from 'next/router';
 import { Oops } from './components/Oops/Oops';
+import { VacancyItem } from './components/VacancyItem';
 
 type Props = {
   vacancies: any;
@@ -98,41 +97,9 @@ export const VacanciesList: React.FC<Props> = ({
       {vacanciesList.length ? (
         slicePerPage(
           vacanciesList.map(({ attributes }: IVacancy) => {
-            const {
-              isHot,
-              createdAt,
-              cardDescription,
-              title,
-              categories: { data: categoriesInfo },
-              vacancySlug,
-            } = attributes;
-
+            const { createdAt } = attributes;
             return (
-              <li key={createdAt} className={s.card}>
-                <div className={s.mainWrap}>
-                  <div className={s.titleWrap}>
-                    {isHot && (
-                      <div className={s.hotLabel}>
-                        <VacansiesIcon name="fire" />
-                        <p className={s.labelText}>{vacanciesInfo.isHotValue}</p>
-                      </div>
-                    )}
-
-                    <h3 className={s.title}>{title}</h3>
-                  </div>
-
-                  <p className={s.salary}>{vacanciesInfo.salary}</p>
-
-                  <p className={s.cardDescription}>{`${cardDescription.slice(0, 107)}...`}</p>
-                </div>
-
-                <Link
-                  href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
-                  className={s.link}
-                >
-                  {vacanciesInfo.button}
-                </Link>
-              </li>
+              <VacancyItem key={createdAt} attributes={attributes} vacanciesInfo={vacanciesInfo} />
             );
           })
         )

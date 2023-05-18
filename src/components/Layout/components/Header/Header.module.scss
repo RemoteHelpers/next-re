@@ -6,9 +6,9 @@
 .header {
   position: fixed;
   z-index: 10;
-  height: $headerHeight1;
+
   width: 100%;
-  //   padding-top: 20px;
+  padding: 1.25rem 1.875rem;
 
   backdrop-filter: blur(15px);
   background: rgb(251 251 251 / 80%);
@@ -17,20 +17,21 @@
   @include on992 {
     height: $headerHeight2;
   }
+  @include on992 {
+    padding: 2.5rem 0.625rem;
+  }
 }
 .container {
-  //   position: relative;
-  @include container(60px);
-  height: 100%;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 30px;
-  @include on992 {
-    @include container(20px);
-    padding: 0px 10px;
-  }
+
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1460px;
 }
+
 .logo {
   display: block;
   flex: 0 0 180px;
@@ -43,12 +44,72 @@
     object-fit: contain;
     object-position: center;
   }
+  display: flex;
+  align-items: center;
+  min-width: 11.5rem;
+
+  @include on992 {
+    min-width: 22rem;
+  }
 }
+
+.logoImg {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  margin-right: 0.25rem;
+
+  @include on992 {
+    width: 2.2rem;
+    height: 2.2rem;
+
+    margin-right: 0.625rem;
+  }
+
+  @include on1440 {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  color: $primaryBlack;
+}
+
+.logoName {
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  color: $primaryBlack;
+  @include on992 {
+    font-size: clamp(1.375rem, 2vw, 2.0625rem);
+    line-height: 1em;
+  }
+}
+.logoDescr {
+  line-height: 0.6875rem;
+  color: $secondaryBlack;
+  font-size: 0.5625rem;
+  @include on992 {
+    line-height: 1em;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+  }
+}
+
 .controls {
   display: flex;
   gap: 25px;
   @include on992 {
     gap: 70px;
+  }
+  display: flex;
+  justify-content: space-between;
+
+  @include on992 {
+    max-width: 43.75rem;
+    width: 100%;
   }
 }
 .nav {
@@ -57,6 +118,11 @@
     display: flex;
     gap: 50px;
     padding: 0px 10px 0px 10px;
+  }
+  display: none;
+  @include on992 {
+    display: flex;
+    gap: 2rem;
   }
 }
 .nav_item {
@@ -71,10 +137,24 @@
     transform: scale(1.1);
     color: rgba(255, 101, 1, 1);
   }
+  display: block;
+  color: inherit;
+  font-weight: 500;
+  font-size: clamp(1rem, 1.37vw, 1.25rem);
+  min-width: max-content;
+  // font-size: 1.25rem;
+  transition: all 0.2s ease;
+  &.active {
+    font-weight: 700;
+  }
+  &:hover {
+    transform: scale(1.1);
+    color: $primaryOrange;
+  }
 }
 
 .select {
-  margin-right: calc(25px * 2);
+  margin-right: 3.125rem;
   @include on992 {
     margin-right: 0;
   }
@@ -82,19 +162,15 @@
 
 .burgerBtn {
   position: absolute;
-  //   top: 0;
-  //   right: 0;
-  // top: 1.55rem;
-  // right: 2rem;
-  top: 1.15rem;
-  right: 1.5rem;
+  right: 0;
+  transform: translate(0.5rem, -0.2rem);
   z-index: 1;
 
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
 
-  padding: 0.5rem;
+  padding: 0.4rem 0.5rem;
   width: 2.5rem;
   height: 2rem;
 
@@ -131,10 +207,10 @@
 
   span {
     &:nth-child(1) {
-      -webkit-transform: rotate(135deg) translate(0.375rem, -0.3125rem);
-      -moz-transform: rotate(135deg) translate(0.375rem, -0.3125rem);
-      -o-transform: rotate(135deg) translate(0.375rem, -0.3125rem);
-      transform: rotate(135deg) translate(0.375rem, -0.3125rem);
+      -webkit-transform: rotate(135deg) translate(0.4rem, -0.4rem);
+      -moz-transform: rotate(135deg) translate(0.4rem, -0.4rem);
+      -o-transform: rotate(135deg) translate(0.4rem, -0.4rem);
+      transform: rotate(135deg) translate(0.4rem, -0.4rem);
     }
 
     &:nth-child(2) {
@@ -146,10 +222,10 @@
     }
 
     &:nth-child(3) {
-      -webkit-transform: rotate(-135deg) translate(0.3125rem, 0.25rem);
-      -moz-transform: rotate(-135deg) translate(0.3125rem, 0.25rem);
-      -o-transform: rotate(-135deg) translate(0.3125rem, 0.25rem);
-      transform: rotate(-135deg) translate(0.3125rem, 0.25rem);
+      -webkit-transform: rotate(-135deg) translate(0.25rem, 0.3rem);
+      -moz-transform: rotate(-135deg) translate(0.25rem, 0.3rem);
+      -o-transform: rotate(-135deg) translate(0.25rem, 0.3rem);
+      transform: rotate(-135deg) translate(0.25rem, 0.3rem);
     }
   }
 }

@@ -1,0 +1,140 @@
+@import "@/shared/styles/colors";
+@import "@/shared/styles/fonts";
+@import "@/shared/styles/mixins";
+@import "@/shared/styles/mediaMixins";
+.category {
+	margin-top: 5rem;
+}
+.container {
+	@include container(60px);
+	padding: 0px 30px;
+	@include on768 {
+		@include container(20px);
+		padding: 0px 10px;
+	}
+}
+.content {
+	border: 1px solid $rgbGray;
+	border-radius: 1.25rem;
+	padding: 1.5rem;
+	margin-bottom: 7rem;
+	@include on1200 {
+		border: 2px solid $rgbGray;
+		padding: 3.125rem 3.75rem;
+	}
+}
+.title {
+	font-weight: 900;
+	font-size: clamp(32px, 3.3vw, 64px);
+	margin-top: 2rem;
+}
+.breadcrumbs {
+	font: inherit;
+	ol {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem 1rem;
+		@include on992 {
+			gap: 1.5rem;
+		}
+		li {
+			margin: 0 !important;
+			display: flex;
+			align-items: center;
+			&[class*="separator"] {
+				svg {
+					height: 0.9rem;
+					width: auto;
+					@include on992 {
+						height: 1.125rem;
+					}
+				}
+			}
+			&:hover {
+				cursor: default;
+			}
+			span {
+				font-size: $fontSize5;
+				font-weight: 500;
+				font-style: normal;
+				line-height: 1.15;
+				color: $primaryOrange;
+				&:hover {
+					cursor: default;
+				}
+				a {
+					color: $rgbGray;
+					opacity: 0.5;
+					font-size: inherit;
+					line-height: inherit;
+					margin: 0 !important;
+					padding: 0 !important;
+					border-radius: 0;
+					height: auto;
+					&:hover {
+						opacity: 1;
+						background-color: transparent;
+					}
+				}
+			}
+		}
+	}
+}
+.description {
+	p {
+		margin: 1.5rem 0;
+		line-height: 1.4;
+	}
+	h2 {
+		margin: 2rem 0;
+		color: $rgbZodiac;
+		font-style: normal;
+		font-weight: 800;
+		font-size: $fontSize23;
+	}
+	ul {
+		list-style-type: none;
+		margin-bottom: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem 0;
+		font-size: $fontSize5;
+
+		li {
+			line-height: 1.4;
+		}
+	}
+}
+.btn {
+	display: flex;
+	color: $rgbWhite;
+	font-weight: 700;
+	font-size: $fontSize5;
+	line-height: 1.15;
+	border-radius: 1rem;
+	background-color: $primaryOrange;
+	transition: all 0.2s ease-in-out;
+	&:hover {
+		cursor: pointer;
+		background-color: $primaryYellow;
+	}
+	padding: 1.25rem 1.875rem;
+	gap: 1rem;
+	margin-top: 1.25rem;
+	@include on992 {
+		margin-top: 3.125rem;
+		gap: 1rem;
+		padding: 1.25rem 4.5rem;
+		box-shadow: $shadow;
+	}
+}
+.vacancies_list {
+	display: flex;
+	flex-direction: column;
+	margin: 2rem 0rem;
+	gap: 1rem;
+	@include on992 {
+		margin: 4rem 0rem;
+		gap: 2rem;
+	}
+}

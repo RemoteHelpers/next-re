@@ -4,7 +4,7 @@ type Props = {
   name: 'fire' | 'magnifying-glass' | 'dropdown-arrow' | 'close-cross';
 };
 
-export const VacansiesIcon: FC<Props> = ({ name }) => {
+export const VacanciesIcon: FC<Props> = ({ name }) => {
   switch (name) {
     case 'fire':
       return (
