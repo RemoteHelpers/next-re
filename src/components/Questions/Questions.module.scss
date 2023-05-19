@@ -12,6 +12,17 @@
     }
 }
 
+.faq_title {
+    font-size: $fontSize2;
+    font-weight: 700;
+    color: $rgbZodiac;
+    margin-bottom: 2rem;
+
+    @include on992 {
+        margin-bottom: 4rem;
+    }
+}
+
 .collapse {
     margin: 0 auto;
     max-width: 100%;
@@ -34,14 +45,14 @@
     strong {
         font-size: $fontSize3;
         margin-right: 1.25rem;
+        align-self: flex-start;
+
+        @include on992 {
+            align-self: center;
+        }
     }
 
     h3 {
         font-size: clamp(18px, 1.8vw, 26px);
     }
-}
-
-.collapse_icon {
-    display: flex;
-    align-items: center;
 }

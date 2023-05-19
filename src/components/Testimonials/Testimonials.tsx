@@ -1,35 +1,40 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay } from 'swiper';
-import styles from './Testimonials.module.scss';
+import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper";
+import styles from "./Testimonials.module.scss";
 
-import '../../../node_modules/swiper/swiper.scss';
-import '../../../node_modules/swiper/modules/pagination/pagination.scss';
-import '../../../node_modules/swiper/modules/navigation/navigation.scss';
+import "../../../node_modules/swiper/swiper.scss";
+import "../../../node_modules/swiper/modules/pagination/pagination.scss";
+import "../../../node_modules/swiper/modules/navigation/navigation.scss";
 
-import { TestimonialsIcon } from '@/shared/components/IconComponents/Testimonials';
+import { TestimonialsIcon } from "@/shared/components/IconComponents/Testimonials";
 
-import { PhotoAPI } from '@/constants';
-import Image from 'next/image';
+import { PhotoAPI } from "@/constants";
+import Image from "next/image";
 
 const Feedbacks = ({ testimonials }: any) => {
+  const [currentId, setCurrentId] = useState<any>();
+
+  const handleSlideClick = (event: any) => {
+    setCurrentId(event.target.id);
+  };
+
   return (
     <section className={styles.container}>
-      <h2>{testimonials.testimonialsTitle}</h2>
+      <h2 className={styles.testimonials_title}>
+        {testimonials.testimonialsTitle}
+      </h2>
       <Swiper
         className={styles.swiper_wrapper}
         modules={[Navigation, Autoplay]}
         centeredSlides={false}
         loop
         speed={1000}
-        // autoplay={{
-        //   delay: 5000,
-        //   disableOnInteraction: false,
-        // }}
         slidesPerView={1}
         spaceBetween={20}
         navigation={{
-          nextEl: '.next-slider',
-          prevEl: '.prev-slider',
+          nextEl: ".next-slider",
+          prevEl: ".prev-slider",
         }}
         breakpoints={{
           768: {
@@ -44,12 +49,28 @@ const Feedbacks = ({ testimonials }: any) => {
       >
         {testimonials.Testimonials &&
           testimonials.Testimonials.map((item: any) => (
-            <SwiperSlide key={item.id} className={styles.swiper_slide}>
+            <SwiperSlide
+              key={item.id}
+              className={styles.swiper_slide}
+              onClick={handleSlideClick}
+              id={item.id}
+            >
               <article>
                 <div>
                   <TestimonialsIcon id="quotes" />
                 </div>
-                <header className={styles.slide_description}>{item.Description}</header>
+                <header className={styles.slide_description}>
+                  {item.id == currentId ? (
+                    <span
+                      style={{ pointerEvents: "all", height: "100%" }}
+                      onClick={() => setCurrentId(!currentId)}
+                    >
+                      {item.Description}
+                    </span>
+                  ) : (
+                    `${item.Description.slice(0, 150)}...`
+                  )}
+                </header>
                 <main className={styles.slide_employee}>
                   <Image
                     src={PhotoAPI + item.personImg.data.attributes.url}
@@ -74,7 +95,7 @@ const Feedbacks = ({ testimonials }: any) => {
             <TestimonialsIcon id="next" />
           </span>
         </div>
-      </Swiper>      
+      </Swiper>
     </section>
   );
 };
