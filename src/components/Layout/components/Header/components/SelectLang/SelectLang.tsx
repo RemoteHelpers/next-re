@@ -36,13 +36,14 @@ const languages: Languages = [
   },
 ];
 
-export const SelectLang: React.FC<Props> = ({ chooseLangValue, isBurgerMenu }) => {
+export const SelectLang: React.FC<Props> = ({ chooseLangValue }) => {
   const router = useRouter();
   const [currentLang, setCurrentLang] = useState<string>(router.locale?.toUpperCase()!);
   const [isSelectorShown, setIsSelectorShown] = useState<boolean>(false);
   const [needAddListeners, setNeedAddListeners] = useState<boolean>(false);
   const [needRemoveListeners, setNeedRemoveListeners] = useState<boolean>(false);
   const langBtnRef = useRef(null);
+  const langItemRef = useRef(null);
 
   const handleSelectBtn = () => {
     if (!isSelectorShown) {
@@ -51,9 +52,8 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue, isBurgerMenu }) =
     } else setIsSelectorShown(false);
   };
 
-  const listenerHandler = (e: any): void => {
-    console.log('ПОДІЯ');
-    if (e.target === langBtnRef.current) return;
+  const listenerHandler = ({ target }: any): void => {
+    if (target === langBtnRef.current || target === langItemRef.current) return;
     setNeedAddListeners(false);
     setNeedRemoveListeners(true);
     if (isSelectorShown) setIsSelectorShown(false);
@@ -62,35 +62,16 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue, isBurgerMenu }) =
   const handleSelection = (locale: string): void => {
     if (currentLang.toLowerCase() === locale) return;
     setCurrentLang(locale.toUpperCase());
-    router.push(router.asPath, router.asPath, { locale });
+    router.replace(router.asPath, router.asPath, { locale });
     setIsSelectorShown(false);
   };
 
   useEffect(() => {
-    if (document) {
-      if (isSelectorShown) {
-        document.addEventListener('mousedown', listenerHandler, { once: true });
-        document.addEventListener('scroll', listenerHandler, { once: true });
-      }
-      // if (needAddListeners && isSelectorShown) {
-      //   console.log('ДОДАЮ ЛІСЕНЕРИ');
-      //   document.addEventListener('mousedown', listenerHandler, { once: true });
-      //   document.addEventListener('scroll', listenerHandler, { once: true });
-      //   setNeedAddListeners(false);
-      //   console.log('ДОДАВ');
-      // }
-      // if (!isSelectorShown && needRemoveListeners) {
-      //   console.log('ЗАБИРАЮ ЛІСЕНЕРИ');
-      //   document.removeEventListener('mousedown', listenerHandler);
-      //   document.removeEventListener('scroll', listenerHandler);
-      //   setNeedRemoveListeners(false);
-      //   console.log('ЗАБРАВ');
-      // }
+    if (!document) return;
+    if (isSelectorShown) {
+      document.addEventListener('mouseup', listenerHandler, { once: true });
+      document.addEventListener('scroll', listenerHandler, { once: true });
     }
-    // return (
-    //   document.removeEventListener('mousedown', listenerHandler),
-    //   document.removeEventListener('scroll', listenerHandler)
-    // );
   }, [isSelectorShown, needRemoveListeners, needAddListeners]);
 
   return (
@@ -111,7 +92,13 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue, isBurgerMenu }) =
         <ul className={s.list}>
           {languages.map(({ lang, locale }) => {
             return (
-              <li className={s.item} key={lang} id={lang} onClick={() => handleSelection(locale)}>
+              <li
+                className={s.item}
+                key={lang}
+                id={lang}
+                onClick={() => handleSelection(locale)}
+                ref={langItemRef}
+              >
                 <LangSelectorIcon name={locale} />
 
                 <p className={s.language}>{lang}</p>

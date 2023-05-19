@@ -1,0 +1,142 @@
+@import '@/shared/styles/colors';
+@import '@/shared/styles/variables';
+@import '@/shared/styles/mixins';
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 8;
+
+  width: 100%;
+  height: 100%;
+  padding: $headerHeight2 10px 0;
+
+  background: rgba(10, 69, 79, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s linear;
+
+  .navMenu {
+    transition: 0.2s ease-in-out;
+    transform: translateY(-100%);
+  }
+}
+.backdrop_shown {
+  @extend .backdrop;
+  opacity: 1;
+  pointer-events: all;
+  .navMenu {
+    transform: translateY(0);
+  }
+}
+
+.navMenu {
+  background: $rgbWhite;
+  display: flex;
+  flex-direction: column;
+
+  padding: 2rem 1.5rem;
+  margin: 0 auto;
+  max-width: 1460px;
+
+  backdrop-filter: blur(15px);
+  background: $rgbWhite;
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+}
+
+.categoriesList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 1.5rem;
+  width: 100%;
+
+  li {
+    width: 32%;
+  }
+}
+
+.categoryBtn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  height: 100%;
+  width: 100%;
+  padding: 1rem 0;
+
+  color: $rgbGray;
+  background-color: transparent;
+  border: 1px solid $rgbGray;
+  border-radius: 1rem;
+  transition: 0.1s linear;
+  cursor: pointer;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+  }
+
+  &:hover,
+  &:focus {
+    box-shadow: $orangeShadow;
+  }
+}
+
+.categoryBtn_active {
+  @extend .categoryBtn;
+
+  color: clamp(2rem, 3.1vw, 4rem);
+  border: 1px solid $primaryOrange;
+  box-shadow: $orangeShadow;
+  border-radius: 1rem;
+}
+
+.categoryName {
+  font-weight: 600;
+  line-height: 100%;
+  text-align: center;
+  font-size: clamp(1.375rem, 1.3vw, 2rem);
+}
+
+.vacanciesList {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem 2%;
+  margin-top: 2rem;
+
+  li {
+    width: 32%;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: $rgbBlack;
+    transition: 0.1s linear;
+
+    &:hover {
+      background-color: $primaryOrange;
+      color: $rgbWhite;
+    }
+  }
+
+  a {
+    display: block;
+    width: 100%;
+    padding: 0.4em;
+
+    color: inherit;
+    text-align: left;
+    text-decoration: none;
+    font-weight: 600;
+    line-height: 115%;
+    font-size: clamp(0.94rem, 1.04vw, 1.25rem);
+    transition: 0.1s linear;
+  }
+}

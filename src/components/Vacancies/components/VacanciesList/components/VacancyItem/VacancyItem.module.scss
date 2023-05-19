@@ -20,9 +20,9 @@
   border-radius: 1.25rem;
   outline: 2px solid transparent;
 
-  transition-property: outline-color border-color;
-  transition-duration: 0.2s;
-  transition-timing-function: linear;
+  // transition-property: outline-color border-color;
+  // transition-duration: 0.2s;
+  // transition-timing-function: linear;
 
   &:hover {
     border-color: transparent;
@@ -149,7 +149,7 @@
   font-weight: 700;
   font-size: $fontSize8;
   line-height: 1.1;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: $darkShadow;
 
   background-color: $primaryYellow;
 

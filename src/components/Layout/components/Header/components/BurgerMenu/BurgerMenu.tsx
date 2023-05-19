@@ -21,7 +21,7 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
   const { menu, menuValue, backValue, allVacanciesValue } = headerData.header;
   const { categories, vacancies } = headerData;
 
-  const handleLinkNav = () => setIsBurgerMenu(false);
+  const navToLink = () => setIsBurgerMenu(false);
   const navToFirst = () => setCurrentTab(1);
   const navToSecond = () => setCurrentTab(2);
   const navToThird = (value: string) => {
@@ -69,7 +69,7 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
             return (
               <li key={path_id}>
                 {path_id !== 'vacancies' ? (
-                  <Link href={`/${path_id}`} onClick={handleLinkNav}>
+                  <Link href={`/${path_id}`} onClick={navToLink}>
                     {title}
                   </Link>
                 ) : (
@@ -91,27 +91,27 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
           </li>
 
           <li>
-            <Link href={`/vacancies`} onClick={handleLinkNav}>
+            <Link href={`/vacancies`} onClick={navToLink}>
               {allVacanciesValue}
             </Link>
           </li>
 
-          {categories.length &&
-            categories.map(({ attributes }: Category) => {
-              const { categoryTitle, createdAt, categorySlug } = attributes;
-              return (
-                <li key={createdAt.toString()}>
-                  <button
-                    className={s.navBtn}
-                    type="button"
-                    onClick={() => navToThird(categoryTitle)}
-                  >
-                    <BurgerMenuIcon name={categorySlug} />
-                    {categoryTitle}
-                  </button>
-                </li>
-              );
-            })}
+          {categories.map(({ attributes }: Category) => {
+            const { categoryTitle, createdAt, categorySlug } = attributes;
+            if (categorySlug === 'other') return;
+            return (
+              <li key={createdAt.toString()}>
+                <button
+                  className={s.navBtn}
+                  type="button"
+                  onClick={() => navToThird(categoryTitle)}
+                >
+                  <BurgerMenuIcon name={categorySlug} />
+                  {categoryTitle}
+                </button>
+              </li>
+            );
+          })}
         </ul>
 
         <ul className={currentTab === 3 ? s.thirdTab_shown : s.thirdTab}>
@@ -134,7 +134,7 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
               <li key={createdAt.toString()}>
                 <Link
                   href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
-                  onClick={handleLinkNav}
+                  onClick={navToLink}
                 >
                   {title}
                 </Link>
