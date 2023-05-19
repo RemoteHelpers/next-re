@@ -22,16 +22,29 @@
 	}
 }
 
+
+.testimonials_title {
+    font-size: $fontSize2;
+    font-weight: 700;
+    color: $rgbZodiac;
+    margin-bottom: 2rem;
+
+    @include on992 {
+        margin-bottom: 4rem;
+    }
+}
+
 .swiper_slide {
     padding: 3.125rem 1.75rem;
     border: 1px solid $rgbGray;
     border-radius: 1.875rem;
-    height: auto !important;
+    cursor: pointer;
 
     article {
         display: flex;
         flex-direction: column;
         height: 100%;
+        pointer-events: none;
     }
 }
 

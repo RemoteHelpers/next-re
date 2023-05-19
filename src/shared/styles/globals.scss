@@ -7,6 +7,7 @@
 html {
   scroll-behavior: smooth;
 }
+
 body {
   min-height: 100vh;
   width: 100%;
@@ -28,22 +29,35 @@ body {
 .ant-collapse-item {
   border-color: #616161 !important;
   border-radius: 0 !important;
-  background-color: $rgbWhite;
+  background-color: transparent;
+}
+.ant-collapse {
+  background-color: transparent;
+}
+
+.ant-collapse-header {
+  padding: 1rem 0 !important;
 }
 
 .ant-collapse-content {
   border: 0 !important;
+  background-color: transparent !important;
 }
 
 .ant-collapse-content-box {
   color: $secondaryBlack;
   font-weight: 400;
   font-size: $fontSize6;
-  padding: 1rem 1rem 2rem 1rem !important;
+  padding: 1rem 1rem 2rem 3rem !important;
+  
+  @include on992 {
+    padding: 1rem 1rem 2rem 4rem !important;
+  }
 }
 
 .collapse_icon {
   background-color: transparent;
+  aspect-ratio: 1;
   width: 2.5rem;
   height: 2.5rem;
   display: flex;
@@ -152,4 +166,43 @@ body {
       }
     }
   }
+}
+
+// global styles for react select library in form fields component
+.css-13cymwt-control,
+.css-t3ipsp-control {
+  border: 2px solid $primaryBlue;
+  background-color: $primaryCyan;
+  cursor: pointer;
+  border-radius: .5rem;
+  padding: .4rem;
+  font-size: $fontSize5;
+  color: $rgbGray;
+  font-weight: 500;
+
+  &:hover {
+    border: 2px solid $primaryBlue;
+    background-color: $primaryCyan;
+  }
+}
+
+.css-1u9des2-indicatorSeparator {
+  display: none;
+}
+
+.css-1xc3v61-indicatorContainer svg {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  path {
+    fill: $rgbZodiac;
+  }
+}
+
+// global styles for react-input-select-language library in form fields component
+.PhoneInputCountrySelectArrow {
+  display: none !important;
+}
+.PhoneInputCountry {
+  margin: 0 !important;
 }

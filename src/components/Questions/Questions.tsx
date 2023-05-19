@@ -20,7 +20,7 @@ export const Questions = ({ questions }: any) => {
 
   return (
     <section className={styles.container}>
-      <h1>{questions?.faqTitle}</h1>
+      <h1 className={styles.faq_title}>{questions?.faqTitle}</h1>
       {questions.Faq_Question &&
         questions.Faq_Question.map((item: any, index: number) => (
           <Collapse key={item.id} className={styles.collapse}>
