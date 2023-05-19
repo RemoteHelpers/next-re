@@ -2,7 +2,7 @@
 @import './colors';
 @import './fonts';
 @import './mediaMixins';
-@import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic");
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic');
 
 html {
   scroll-behavior: smooth;
@@ -19,6 +19,10 @@ body {
   font-weight: 400;
   line-height: 1.6;
   color: $rgbBlack;
+  background-color: $primaryBackground;
+  &.no-scroll {
+    overflow: hidden;
+  }
 }
 
 // global styles ant design library for FAQ component
@@ -47,7 +51,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: .3s ease-in;
+  transition: 0.3s ease-in;
 
   svg {
     width: 1rem;
@@ -70,7 +74,7 @@ body {
 
   svg {
     path {
-      transition: .3s ease-in;
+      transition: 0.3s ease-in;
       fill: $rgbWhite;
     }
   }
@@ -84,7 +88,6 @@ body {
   }
 }
 
-
 // global swiper-slider styles for testimonials component
 .next-slider,
 .prev-slider {
@@ -93,18 +96,18 @@ body {
 }
 
 .swiper-slide {
-  transition: all .4s ease-in-out !important;
+  transition: all 0.4s ease-in-out !important;
   transition-duration: 1s !important;
 
   article {
     header {
-      transition: all .5s ease-in-out !important;
+      transition: all 0.5s ease-in-out !important;
       margin: 2.5rem 0;
     }
 
     main {
       div {
-        transition: all .5s ease-in-out !important;
+        transition: all 0.5s ease-in-out !important;
       }
     }
   }

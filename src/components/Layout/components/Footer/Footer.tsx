@@ -1,12 +1,12 @@
-import React from "react";
-import s from "./Footer.module.scss";
-import Image from "next/image";
-import footerLogo from "./assets/footerLogo.svg";
-import { navItems } from "../Header/Header";
-import Link from "next/link";
-import { FooterIcon } from "@/shared/components/IconComponents/Footer";
+import React from 'react';
+import s from './Footer.module.scss';
+import Image from 'next/image';
+import footerLogo from './assets/footerLogo.svg';
+import { navItems } from '../Header/Header';
+import Link from 'next/link';
+import { FooterIcon } from '@/shared/components/IconComponents/Footer';
 
-export const Footer = ({ footerData }: any) => {
+export const Footer = ({ footerData, header: { menu } }: any) => {
   // console.log(footerData);
 
   return (
@@ -16,7 +16,7 @@ export const Footer = ({ footerData }: any) => {
           <Link href="/">
             <Image
               src={footerLogo}
-              alt={"Remote Employees"}
+              alt={'Remote Employees'}
               width={400}
               height={60}
               className={s.footer_logo}
@@ -24,17 +24,20 @@ export const Footer = ({ footerData }: any) => {
           </Link>
           <span className={s.line}></span>
           <div className={s.footer_links}>
-            {navItems.map((link: any) => (
-              <Link
-                key={link.path}
-                href={{
-                  pathname: `${link.path}`,
-                }}
-                className={s.footer_link}
-              >
-                {link.title}
-              </Link>
-            ))}
+            {menu.map((link: any) => {
+              if (!link.path_id.trim()) return;
+              return (
+                <Link
+                  key={link.path_id}
+                  href={{
+                    pathname: `${link.path_id}`,
+                  }}
+                  className={s.footer_link}
+                >
+                  {link.title}
+                </Link>
+              );
+            })}
           </div>
           <div className={s.footer_contacts}>
             <p>{footerData?.footerAdress}</p>

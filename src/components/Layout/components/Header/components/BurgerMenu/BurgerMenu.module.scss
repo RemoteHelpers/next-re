@@ -1,0 +1,148 @@
+@import '@/shared/styles/colors';
+@import '@/shared/styles/mediaMixins';
+
+.menuWrap {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100vw;
+  height: 100vh;
+  background-color: $primaryMint;
+  // transform: translateX(100%);
+  transition: 0.3s linear;
+
+  @include on992 {
+    display: none;
+  }
+}
+
+.menuWrap_shown {
+  @extend .menuWrap;
+  // transform: translateX(0);
+  right: 0;
+}
+
+.menuTitle {
+  padding: 1.375rem;
+
+  color: $rgbZodiac;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.44rem;
+  // line-height: 1.2rem;
+  text-align: center;
+}
+
+.navigation {
+  position: relative;
+
+  height: calc(100% - 4.19rem);
+
+  background-color: $rgbWhite;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  box-shadow: $orangeShadow;
+
+  overflow: hidden;
+}
+
+.navTab {
+  position: absolute;
+  top: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+
+  width: 100vw;
+  height: 100%;
+  padding: 3.75rem 1.875rem;
+
+  overflow-y: auto;
+  transition: 0.25s linear;
+
+  li {
+    width: 100%;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    padding: 2rem 0;
+    border-radius: 1rem;
+
+    border: 1px solid $rgbGray;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    color: $rgbGray;
+    &:hover,
+    &:focus {
+      color: inherit;
+      border-color: $primaryOrange;
+    }
+  }
+
+  button {
+    @extend a;
+    background-color: transparent;
+  }
+
+  .backBtn {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    justify-content: start;
+
+    padding: 0;
+    width: calc(100% - 4rem);
+
+    font-size: 1rem;
+    border-color: transparent;
+
+    &:hover,
+    &:focus {
+      border-color: transparent;
+    }
+
+    svg {
+      stroke: $primaryOrange;
+      margin-right: 0.625rem;
+    }
+  }
+}
+
+.navBtn img {
+  margin-right: 0.625rem;
+}
+
+.firstTab {
+  @extend .navTab;
+  left: -100%;
+}
+.firstTab_shown {
+  @extend .firstTab;
+  left: 0;
+}
+
+.secondTab {
+  @extend .navTab;
+  left: 100%;
+}
+.secondTab_shown {
+  @extend .secondTab;
+  left: 0;
+}
+
+.thirdTab {
+  @extend .navTab;
+  left: -100%;
+}
+.thirdTab_shown {
+  @extend .thirdTab;
+  left: 0;
+}

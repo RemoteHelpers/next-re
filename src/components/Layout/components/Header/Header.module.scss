@@ -1,90 +1,220 @@
-
-@import "@/shared/styles/mixins";
-@import "@/shared/styles/variables";
-@import "@/shared/styles/colors";
-@import "@/shared/styles/mediaMixins";
+@import '@/shared/styles/mixins';
+@import '@/shared/styles/variables';
+@import '@/shared/styles/colors';
+@import '@/shared/styles/mediaMixins';
 
 .header {
-	position: fixed;
-	z-index: 10;
-	height: $headerHeight1;
-	width: 100%;
+  position: fixed;
+  z-index: 10;
 
-	backdrop-filter: blur(15px);
-    background: rgb(251 251 251 / 80%);
-    box-shadow: 0 20px 20px 0px rgb(251 251 251 / 80%);
+  width: 100%;
+  padding: 1.25rem 1.875rem;
 
-	@include on992 {
-		height: $headerHeight2;
-	}
+  backdrop-filter: blur(15px);
+  background: rgb(251 251 251 / 80%);
+  box-shadow: 0 20px 20px 0px rgb(251 251 251 / 80%);
+
+  @include on992 {
+    height: $headerHeight2;
+  }
+  @include on992 {
+    padding: 2.5rem 0.625rem;
+  }
 }
 .container {
-	@include container(60px);
-	height: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0px 30px;
-	@include on992 {
-		@include container(20px);
-		padding: 0px 10px;
-	}
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1460px;
 }
+
 .logo {
-	display: block;
-	flex: 0 0 180px;
-	@include on992 {
-		flex: 0 0 277px;
-	}
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
-		object-position: center;
-	}
+  display: flex;
+  align-items: center;
+  min-width: 11.5rem;
+
+  @include on992 {
+    min-width: 22rem;
+  }
 }
+
+.logoImg {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  margin-right: 0.25rem;
+
+  @include on992 {
+    width: 2.2rem;
+    height: 2.2rem;
+
+    margin-right: 0.625rem;
+  }
+
+  @include on1440 {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  color: $primaryBlack;
+}
+
+.logoName {
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  color: $primaryBlack;
+  @include on992 {
+    font-size: clamp(1.375rem, 2vw, 2.0625rem);
+    line-height: 1em;
+  }
+}
+.logoDescr {
+  line-height: 0.6875rem;
+  color: $secondaryBlack;
+  font-size: 0.5625rem;
+  @include on992 {
+    line-height: 1em;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+  }
+}
+
 .controls {
-	display: flex;
-	gap: 25px;
-	@include on992 {
-		gap: 70px;
-	}
+  display: flex;
+  gap: 25px;
+  @include on992 {
+    gap: 70px;
+  }
+  display: flex;
+  justify-content: space-between;
+
+  @include on992 {
+    max-width: 43.75rem;
+    width: 100%;
+  }
 }
 .nav {
-	display: none;
-	@include on992 {
-		display: flex;
-		gap: 50px;
-		padding: 0px 10px 0px 10px;
-	}
+  display: none;
+  @include on992 {
+    display: flex;
+    gap: 50px;
+    padding: 0px 10px 0px 10px;
+  }
+  display: none;
+  @include on992 {
+    display: flex;
+    gap: 2rem;
+  }
 }
 .nav_item {
-	display: block;
-	color: inherit;
-	font-weight: 500;
-	transition: all 0.2s ease;
-	&.active {
-		font-weight: 700;
-	}
-	&:hover {
-		transform: scale(1.1);
-		color: rgba(255, 101, 1, 1);
-	}
+  display: block;
+  color: inherit;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  &.active {
+    font-weight: 700;
+  }
+  &:hover {
+    transform: scale(1.1);
+    color: rgba(255, 101, 1, 1);
+  }
+  display: block;
+  color: inherit;
+  font-weight: 500;
+  font-size: clamp(1rem, 1.37vw, 1.25rem);
+  min-width: max-content;
+  // font-size: 1.25rem;
+  transition: all 0.2s ease;
+  &.active {
+    font-weight: 700;
+  }
+  &:hover {
+    transform: scale(1.1);
+    color: $primaryOrange;
+  }
 }
-.burger_btn {
-	display: flex;
-	flex-direction: column;
-	gap: 6px;
-	&:hover {
-		cursor: pointer;
-	}
-	@include on992{
-		display: none;
-	}
-	div {
-		width: 24px;
-		height: 2px;
-		border-radius: 5px;
-		background-color: $rgbBlack;
-	}
+
+.select {
+  margin-right: 3.125rem;
+  @include on992 {
+    margin-right: 0;
+  }
+}
+
+.burgerBtn {
+  position: absolute;
+  right: 0;
+  transform: translate(0.5rem, -0.2rem);
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+
+  padding: 0.4rem 0.5rem;
+  width: 2.5rem;
+  height: 2rem;
+
+  background-color: transparent;
+  cursor: pointer;
+
+  @include on992 {
+    display: none;
+  }
+
+  span {
+    display: block;
+
+    height: 0.125rem;
+    width: 100%;
+
+    background-color: $rgbBlack;
+    border-radius: 1rem;
+    opacity: 1;
+
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+  }
+}
+
+.burgerBtn_clicked {
+  @extend .burgerBtn;
+
+  span {
+    &:nth-child(1) {
+      -webkit-transform: rotate(135deg) translate(0.4rem, -0.4rem);
+      -moz-transform: rotate(135deg) translate(0.4rem, -0.4rem);
+      -o-transform: rotate(135deg) translate(0.4rem, -0.4rem);
+      transform: rotate(135deg) translate(0.4rem, -0.4rem);
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+      -webkit-transform: translateX(-200%);
+      -moz-transform: translateX(-200%);
+      -o-transform: translateX(-200%);
+      transform: translateX(-200%);
+    }
+
+    &:nth-child(3) {
+      -webkit-transform: rotate(-135deg) translate(0.25rem, 0.3rem);
+      -moz-transform: rotate(-135deg) translate(0.25rem, 0.3rem);
+      -o-transform: rotate(-135deg) translate(0.25rem, 0.3rem);
+      transform: rotate(-135deg) translate(0.25rem, 0.3rem);
+    }
+  }
 }

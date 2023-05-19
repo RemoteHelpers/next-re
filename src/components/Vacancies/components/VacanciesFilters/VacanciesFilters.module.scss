@@ -94,8 +94,10 @@
 .filterTypeWrap {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row-reverse;
+
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 
   min-height: 2.9rem;
   width: 100%;

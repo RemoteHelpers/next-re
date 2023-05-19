@@ -1,0 +1,1 @@
+export { VacancyItem } from './VacancyItem';

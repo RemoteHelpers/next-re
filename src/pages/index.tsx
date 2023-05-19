@@ -11,22 +11,16 @@ import {
   getHomeData,
   getFooterData,
   getFormData,
-} from "@/services";
-import { Spheres } from "@/components/Spheres";
-import { Partners } from "@/components/Partners";
+  getHeaderData,
+} from '@/services';
+import { Spheres } from '@/components/Spheres';
+import { Partners } from '@/components/Partners';
 import MainForm from "@/components/MainForm/MainForm";
 
-const Home: FC = ({
-  vacanciesInfo,
-  categories,
-  vacancies,
-  homeData,
-  footerData,
-  formData,
-}: any) => {
+const Home: FC = ({ vacanciesInfo, categories, vacancies, homeData, footerData, header, formData }: any) => {
   return (
     <>
-      <Layout footerData={footerData}>
+      <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
         <Hero data={homeData} />
         <Spheres title={homeData.spheresTitle} categories={categories} />
         <Vacancies
@@ -56,6 +50,7 @@ export const getServerSideProps = async (context: any) => {
   const homeData = await getHomeData(lang);
   const footerData = await getFooterData(lang);
   const formData = await getFormData(lang);
+  const header = await getHeaderData(lang);
 
   return {
     props: {
@@ -65,6 +60,7 @@ export const getServerSideProps = async (context: any) => {
       homeData,
       footerData,
       formData,
+      header,
     },
   };
 };
