@@ -2,7 +2,6 @@ import React from 'react';
 import s from './Footer.module.scss';
 import Image from 'next/image';
 import footerLogo from './assets/footerLogo.svg';
-import { navItems } from '../Header/Header';
 import Link from 'next/link';
 import { FooterIcon } from '@/shared/components/IconComponents/Footer';
 
