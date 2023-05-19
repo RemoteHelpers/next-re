@@ -1,0 +1,159 @@
+@import "../../shared/styles/mixins.scss";
+@import "../../shared/styles/mediaMixins.scss";
+@import "../../shared/styles/colors.scss";
+@import "../../shared/styles/fonts.scss";
+
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem 0;
+
+    input {
+        border: 2px solid $primaryBlue;
+        background-color: $primaryCyan;
+        width: 100%;
+        padding: 1rem;
+        border-radius: .5rem;
+        font-size: $fontSize5;
+        font-weight: 500;
+        color: $rgbGray;
+    }
+}
+
+.first_row,
+.second_row,
+.work_cv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem 0;
+
+    @include on992 {
+        flex-direction: row;
+        gap: 0 2rem;
+    }
+}
+
+.english_title {
+    font-size: $fontSize5;
+    font-weight: 600;
+    color: $primaryBlack;
+    margin-bottom: 1rem;
+}
+
+.work_cv {
+    position: relative;
+    width: 100%;
+}
+
+.attach_cv {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    background-color: $rgbWhite;
+    padding: .5rem 1.25rem;
+    border-radius: .5rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    transition: .2s ease-in-out;
+
+    &:hover {
+        box-shadow: $orangeShadow;
+    }
+
+    span {
+        display: none;
+    }
+
+    @include on1200 {
+        span {
+            display: inline-block;
+        }
+    }
+}
+
+.name {
+    width: 100%;
+
+    @include on992 {
+        width: 60% !important;
+    }
+}
+
+.number {
+    border: 2px solid $primaryBlue;
+    background-color: $primaryCyan;
+    border-radius: .5rem;
+    padding: 0 1.25rem;
+    width: 100%;
+
+    @include on992 {
+        width: 40% !important;
+    }
+
+    input {
+        background-color: transparent;
+        border: transparent;
+    }
+}
+
+.email {
+    width: 100%;
+
+    @include on992 {
+        width: 80% !important;
+    }
+}
+
+.age {
+    width: 100%;
+    @include on992 {
+        width: 20% !important;
+    }
+}
+
+.mobile_cat {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+
+    @include on1200 {
+        display: none;
+    }
+}
+
+.submit {
+    width: 100%;
+    align-self: center;
+    background-color: $primaryOrange;
+    border-radius: 1rem;
+    padding: 1rem 5rem;
+    color: $rgbWhite;
+    font-size: $fontSize5;
+    font-weight: 600;
+    box-shadow: $shadow;
+    margin-top: 1.5rem;
+
+    transition: .2s ease-in-out;
+
+    &:hover {
+        background-color: $primaryYellow;
+    }
+
+    @include on768 {
+        width: 50%;
+    }
+
+    @include on1200 {
+        align-self: flex-start;
+        margin-top: 0;
+        width: auto;
+    }
+}

@@ -7,6 +7,7 @@
 html {
   scroll-behavior: smooth;
 }
+
 body {
   min-height: 100vh;
   width: 100%;
@@ -152,4 +153,43 @@ body {
       }
     }
   }
+}
+
+// global styles for react select library in form fields component
+.css-13cymwt-control,
+.css-t3ipsp-control {
+  border: 2px solid $primaryBlue;
+  background-color: $primaryCyan;
+  cursor: pointer;
+  border-radius: .5rem;
+  padding: .4rem;
+  font-size: $fontSize5;
+  color: $rgbGray;
+  font-weight: 500;
+
+  &:hover {
+    border: 2px solid $primaryBlue;
+    background-color: $primaryCyan;
+  }
+}
+
+.css-1u9des2-indicatorSeparator {
+  display: none;
+}
+
+.css-1xc3v61-indicatorContainer svg {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  path {
+    fill: $rgbZodiac;
+  }
+}
+
+// global styles for react-input-select-language library in form fields component
+.PhoneInputCountrySelectArrow {
+  display: none !important;
+}
+.PhoneInputCountry {
+  margin: 0 !important;
 }
