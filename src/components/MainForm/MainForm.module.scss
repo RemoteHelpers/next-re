@@ -6,14 +6,28 @@
 .container {
     @include container(60px);
     padding: 0 30px;
+
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+	@include on992 {
+		margin-top: 150px;
+	}
+	@include on1200 {
+		margin-top: 200px;
+	}
 }
 
 .main {
     &_title {
-        margin-bottom: 4rem;
         font-size: $fontSize2;
         color: $rgbZodiac;
         font-weight: 700;
+        margin-bottom: 2rem;
+
+        @include on992 {
+            margin-bottom: 4rem;
+        }
     }
 
     &_wrapper {

@@ -29,22 +29,35 @@ body {
 .ant-collapse-item {
   border-color: #616161 !important;
   border-radius: 0 !important;
-  background-color: $rgbWhite;
+  background-color: transparent;
+}
+.ant-collapse {
+  background-color: transparent;
+}
+
+.ant-collapse-header {
+  padding: 1rem 0 !important;
 }
 
 .ant-collapse-content {
   border: 0 !important;
+  background-color: transparent !important;
 }
 
 .ant-collapse-content-box {
   color: $secondaryBlack;
   font-weight: 400;
   font-size: $fontSize6;
-  padding: 1rem 1rem 2rem 1rem !important;
+  padding: 1rem 1rem 2rem 3rem !important;
+  
+  @include on992 {
+    padding: 1rem 1rem 2rem 4rem !important;
+  }
 }
 
 .collapse_icon {
   background-color: transparent;
+  aspect-ratio: 1;
   width: 2.5rem;
   height: 2.5rem;
   display: flex;
