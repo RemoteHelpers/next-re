@@ -10,9 +10,9 @@
   width: 100%;
   padding: 1.25rem 1.875rem;
 
-  backdrop-filter: blur(15px);
-  background: rgb(251 251 251 / 80%);
-  box-shadow: 0 20px 20px 0px rgb(251 251 251 / 80%);
+  backdrop-filter: blur(1rem);
+  background: $headerBackground;
+  box-shadow: 0 1.25rem 1.25rem 0px $headerBackground;
 
   @include on992 {
     height: $headerHeight2;
@@ -20,6 +20,11 @@
   @include on992 {
     padding: 2.5rem 0.625rem;
   }
+}
+.headerWithMenu {
+  @extend .header;
+  background: $rgbWhite;
+  box-shadow: none;
 }
 .container {
   position: relative;
@@ -89,24 +94,21 @@
 
 .controls {
   display: flex;
-  gap: 25px;
-  @include on992 {
-    gap: 70px;
-  }
+  gap: 1.5rem;
   display: flex;
   justify-content: space-between;
 
   @include on992 {
-    max-width: 43.75rem;
+    max-width: 45rem;
     width: 100%;
   }
 }
 .nav {
   display: none;
+
   @include on992 {
     display: flex;
-    gap: 50px;
-    padding: 0px 10px 0px 10px;
+    gap: 3.125rem;
   }
   display: none;
   @include on992 {
@@ -114,38 +116,21 @@
     gap: 2rem;
   }
 }
+
 .nav_item {
-  display: block;
-  color: inherit;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  &.active {
-    font-weight: 700;
-  }
-  &:hover {
-    transform: scale(1.1);
-    color: rgba(255, 101, 1, 1);
-  }
   display: block;
   color: inherit;
   font-weight: 500;
   font-size: clamp(1rem, 1.37vw, 1.25rem);
   min-width: max-content;
-  // font-size: 1.25rem;
   transition: all 0.2s ease;
+
   &.active {
     font-weight: 700;
   }
   &:hover {
     transform: scale(1.1);
     color: $primaryOrange;
-  }
-}
-
-.select {
-  margin-right: 3.125rem;
-  @include on992 {
-    margin-right: 0;
   }
 }
 

@@ -101,6 +101,9 @@
   font-size: $fontSize10;
   line-height: 2rem;
 
+  user-select: none;
+  pointer-events: none;
+
   @include on992 {
     margin-bottom: 2.25rem;
   }
