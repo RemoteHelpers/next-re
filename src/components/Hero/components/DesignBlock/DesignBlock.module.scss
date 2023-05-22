@@ -8,12 +8,10 @@
 	align-self: center;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	@include on768 {
-		padding: 0px 5rem 0px 0px;
-	}
+	justify-content: center;	
 	@include on992 {
 		flex: 1 1 50%;
+		padding: 0px 5rem 0px 0px;
 	}	
 	@include on1920{
 		padding-right: 2rem;
@@ -28,8 +26,8 @@
 	width: 70vw;
 	height: 70vw;
 	@include on480 {
-		width: clamp(21.875rem, 43.15vw, 39.375rem);
-		height: clamp(21.875rem, 43.15vw, 39.375rem);
+		width: clamp(21.875rem, 38.3vw, 35rem);
+		height: clamp(21.875rem, 38.3vw, 35rem);
 	}
 	opacity: 0;
 	transform: scale(0);
@@ -58,12 +56,12 @@
 	}
 }
 #like {
-	right: 14%;
+	left: 14%;
 	top: 7%;
 }
 #smile {
-	right: -7%;
-	top: 30%;
+	right: 15%;
+	top: 0%;
 	width: clamp(25px, 2.53vw, 37px);
 	height: auto;
 }
@@ -90,8 +88,8 @@
 	width: 60vw;
 	height: 60vw;
 	@include on480 {
-		width: clamp(18.75rem, 37vw, 33.75rem);
-		height: clamp(18.75rem, 37vw, 33.75rem);
+		width: clamp(18.75rem, 32.9vw, 30rem);
+		height: clamp(18.75rem, 32.9vw, 30rem);
 	}
 	img {
 		width: 100%;
@@ -114,8 +112,8 @@
 	width: 50vw;
 	height: 50vw;
 	@include on480 {
-		width: clamp(15.625rem, 31.5vw, 28.75rem);
-		height: clamp(15.625rem, 31.5vw, 28.75rem);
+		width: clamp(15.625rem, 27.4vw, 25rem);
+		height: clamp(15.625rem, 27.4vw, 25rem);
 	}
 	img {
 		width: 100%;
