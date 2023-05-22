@@ -138,3 +138,21 @@
 		gap: 2rem;
 	}
 }
+.form_wrapper{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 0 7rem;
+	@include on992 {
+		flex-direction: row;
+	}
+}
+.main_cat{
+	display: none;
+	@include on1200 {
+		display: block;
+		height: 100%;
+	}
+}

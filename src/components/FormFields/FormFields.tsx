@@ -16,7 +16,6 @@ const FormFields = ({ formData }: any) => {
   const fileInputRef = useRef<any>(null);
   const [loadFile, setLoadFile] = useState<any>();
 
-  console.log("Form data >>> ", formData);
 
   const handleFileChange = async () => {
     if (fileInputRef.current.files.length > 0) {

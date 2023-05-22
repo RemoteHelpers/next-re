@@ -62,7 +62,6 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue, isDesktopMenuShow
 
   const handleSelection = (locale: string): void => {
     if (currentLang.toLowerCase() === locale) return;
-
     setCurrentLang(locale === 'uk' ? 'UA' : locale.toUpperCase());
     router.replace(router.asPath, router.asPath, { locale });
     setIsSelectorShown(false);
