@@ -1,11 +1,11 @@
-import type { AppProps } from "next/app";
-import "@/shared/styles/globals.scss";
-import { VacanciesProvider } from "@/context";
-import Head from "next/head";
+import type { AppProps } from 'next/app';
+import '@/shared/styles/globals.scss';
+import { GlobalProvider } from '@/context';
+import Head from 'next/head';
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <VacanciesProvider>
+    <GlobalProvider>
       <Head>
         <title>Remote Helpers</title>
         <meta name="description" content="The outstaffing company" />
@@ -13,7 +13,7 @@ function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />
-    </VacanciesProvider>
+    </GlobalProvider>
   );
 }
 
