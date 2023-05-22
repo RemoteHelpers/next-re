@@ -40,7 +40,8 @@
 .logo {
   display: flex;
   align-items: center;
-  min-width: 11.5rem;
+  min-width: max-content;
+  user-select: none;
 
   @include on992 {
     min-width: 22rem;
@@ -74,7 +75,8 @@
 
 .logoName {
   font-weight: 700;
-  font-size: 0.875rem;
+  font-size: clamp(0.5rem, 3.5vw, 0.9rem);
+  // font-size: 0.875rem;
   line-height: 1.125rem;
   color: $primaryBlack;
   @include on992 {
@@ -83,9 +85,10 @@
   }
 }
 .logoDescr {
+  font-size: clamp(0.4rem, 2.5vw, 0.56rem);
+  // font-size: 0.5625rem;
   line-height: 0.6875rem;
   color: $secondaryBlack;
-  font-size: 0.5625rem;
   @include on992 {
     line-height: 1em;
     font-size: clamp(1rem, 1.5vw, 1.25rem);
@@ -123,6 +126,7 @@
   font-weight: 500;
   font-size: clamp(1rem, 1.37vw, 1.25rem);
   min-width: max-content;
+  user-select: none;
   transition: all 0.2s ease;
 
   &.active {
@@ -196,10 +200,10 @@
     }
 
     &:nth-child(3) {
-      -webkit-transform: rotate(-135deg) translate(0.25rem, 0.3rem);
-      -moz-transform: rotate(-135deg) translate(0.25rem, 0.3rem);
-      -o-transform: rotate(-135deg) translate(0.25rem, 0.3rem);
-      transform: rotate(-135deg) translate(0.25rem, 0.3rem);
+      -webkit-transform: rotate(-135deg) translate(0.27rem, 0.32rem);
+      -moz-transform: rotate(-135deg) translate(0.27rem, 0.32rem);
+      -o-transform: rotate(-135deg) translate(0.27rem, 0.32rem);
+      transform: rotate(-135deg) translate(0.27rem, 0.32rem);
     }
   }
 }

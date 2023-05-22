@@ -29,7 +29,7 @@ const VacanciesPage: FC<any> = ({
 export default VacanciesPage;
 
 export const getServerSideProps = async (context: any) => {
-  const lang = context.locale === 'ua' ? 'uk' : context.locale;
+  const lang = context.locale;
   const vacanciesInfo = await getVacancyListData(lang);
   const categories = await getCategories(lang);
   const vacancies = await getAllVacancies(lang);

@@ -24,7 +24,7 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
   const filteredVacancies = (): IVacancy[] => {
     return vacancies
       .filter((el: IVacancy) => {
-        return el.attributes.categories.data[0].attributes.categoryTitle === currentCategory;
+        return el.attributes.categories.data[0]?.attributes.categoryTitle === currentCategory;
       })
       .sort((a: IVacancy, b: IVacancy): number => {
         return (
@@ -46,9 +46,15 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
     if (isDesktopMenuShown) setIsDesktopMenuShown(false);
   };
 
+  // useEffect(() => {
+  //   if (!document) return;
+  //   if (isDesktopMenuShown) document.addEventListener('scroll', closeMenu, { once: true });
+  // }, [isDesktopMenuShown]);
+
   useEffect(() => {
-    if (!document) return;
-    if (isDesktopMenuShown) document.addEventListener('scroll', closeMenu, { once: true });
+    const body = document?.querySelector('body')!;
+    if (isDesktopMenuShown) body.classList.add('no-scroll');
+    else if (!isDesktopMenuShown) body.classList.remove('no-scroll');
   }, [isDesktopMenuShown]);
 
   useEffect(() => {
@@ -85,25 +91,26 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
         </ul>
 
         <ul className={s.vacanciesList}>
-          {filteredVacancies().map(({ attributes }: IVacancy) => {
-            const {
-              createdAt,
-              title,
-              categories: { data: categoriesInfo },
-              vacancySlug,
-            } = attributes;
+          {isDesktopMenuShown &&
+            filteredVacancies().map(({ attributes }: IVacancy) => {
+              const {
+                createdAt,
+                title,
+                categories: { data: categoriesInfo },
+                vacancySlug,
+              } = attributes;
 
-            return (
-              <li key={createdAt.toString()}>
-                <Link
-                  href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
-                  onClick={closeMenu}
-                >
-                  {title}
-                </Link>
-              </li>
-            );
-          })}
+              return (
+                <li key={createdAt.toString()}>
+                  <Link
+                    href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
+                    onClick={closeMenu}
+                  >
+                    {title}
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </nav>
     </div>

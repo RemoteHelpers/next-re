@@ -13,16 +13,11 @@
   gap: 2rem;
 
   height: auto;
-  // height: 27.5rem;
 
   padding: 2.5rem 1.56rem;
   border: 1px solid $rgbGray;
   border-radius: 1.25rem;
   outline: 2px solid transparent;
-
-  // transition-property: outline-color border-color;
-  // transition-duration: 0.2s;
-  // transition-timing-function: linear;
 
   &:hover {
     border-color: transparent;
@@ -34,13 +29,13 @@
     align-items: center;
 
     padding: 3.2rem;
-    // height: 17.5rem;
   }
 }
 
 .mainWrap {
   height: auto;
   max-height: 100%;
+  width: 100%;
 
   @include on992 {
     max-width: 52.5rem;
@@ -58,7 +53,6 @@
   @include on992 {
     flex-direction: row-reverse;
     justify-content: space-between;
-    // justify-content: flex-end;
     align-items: start;
     gap: 0;
 

@@ -24,7 +24,12 @@
   font-size: $fontSize54;
   line-height: 1.5rem;
   background-color: transparent;
+  transition: 0.2s;
   cursor: pointer;
+
+  &:hover {
+    color: $primaryOrange;
+  }
 
   svg {
     width: 1.3125rem;

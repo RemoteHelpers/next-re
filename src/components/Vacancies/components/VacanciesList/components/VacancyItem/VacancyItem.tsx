@@ -38,7 +38,7 @@ export const VacancyItem: React.FC<Props> = ({ attributes, vacanciesInfo }) => {
       </div>
 
       <Link
-        href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
+        href={`/${categoriesInfo[0]?.attributes.categorySlug}/${vacancySlug}`}
         className={s.link}
       >
         {vacanciesInfo.button}
