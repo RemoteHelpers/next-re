@@ -46,10 +46,6 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
     if (isDesktopMenuShown) setIsDesktopMenuShown(false);
   };
 
-  useEffect(() => {
-    console.log(window.pageYOffset);
-  });
-
   // useEffect(() => {
   //   if (!document) return;
   //   if (isDesktopMenuShown) document.addEventListener('scroll', closeMenu, { once: true });
