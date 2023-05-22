@@ -56,7 +56,6 @@ export const Header: FC<Props> = ({ headerData }) => {
                         : `${s.nav_item}`
                     }
                     onMouseOver={() => openMenu(path_id)}
-                    onTouchMove={() => openMenu(path_id)}
                     onTouchStart={() => openMenu(path_id)}
                   >
                     {title}

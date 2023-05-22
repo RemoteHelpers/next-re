@@ -19,6 +19,8 @@
   pointer-events: none;
   transition: 0.2s linear;
 
+  overflow-y: auto;
+
   @include on992 {
     display: block;
   }

@@ -46,16 +46,20 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
     if (isDesktopMenuShown) setIsDesktopMenuShown(false);
   };
 
+  useEffect(() => {
+    console.log(window.pageYOffset);
+  });
+
   // useEffect(() => {
   //   if (!document) return;
   //   if (isDesktopMenuShown) document.addEventListener('scroll', closeMenu, { once: true });
   // }, [isDesktopMenuShown]);
 
-  useEffect(() => {
-    const body = document?.querySelector('body')!;
-    if (isDesktopMenuShown) body.classList.add('no-scroll');
-    else if (!isDesktopMenuShown) body.classList.remove('no-scroll');
-  }, [isDesktopMenuShown]);
+  // useEffect(() => {
+  //   const body = document?.querySelector('body')!;
+  //   if (isDesktopMenuShown) body.classList.add('no-scroll');
+  //   else if (!isDesktopMenuShown) body.classList.remove('no-scroll');
+  // }, [isDesktopMenuShown]);
 
   useEffect(() => {
     setCurrentCategory(initialCategoryState);
@@ -65,6 +69,7 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
     <div
       className={isDesktopMenuShown ? s.backdrop_shown : s.backdrop}
       onMouseOver={backdropHandler}
+      onClick={backdropHandler}
     >
       <nav className={s.navMenu}>
         <ul className={s.categoriesList}>

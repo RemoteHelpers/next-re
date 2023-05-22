@@ -21,10 +21,14 @@
     padding: 2.5rem 0.625rem;
   }
 }
+
 .headerWithMenu {
   @extend .header;
   background: $rgbWhite;
   box-shadow: none;
+  @include on992 {
+    // padding-right: calc(0.625rem + 15px);
+  }
 }
 .container {
   position: relative;
