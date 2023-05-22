@@ -4,7 +4,10 @@
 @import "@/shared/styles/fonts";
 
 .hero {
-	margin-top: 10vh;
+	margin-top: 5vh;
+	@include on992 {
+		margin-top: 10vh;
+	}
 }
 .container {
 	@include container(20px);
@@ -12,18 +15,18 @@
 	flex-direction: column;
 	padding: 0px 1.875rem;
 	gap: 2.875rem;
-	@include on768{
+	@include on768 {
 		gap: 3.75rem;
 	}
 	@include on992 {
-		padding: 0px .625rem;
+		padding: 0px 0.625rem;
 		flex-direction: row-reverse;
 		gap: 5.625rem;
 	}
-	@include on1200{
+	@include on1200 {
 		gap: 8rem;
 	}
-	@include on1440{
+	@include on1440 {
 		gap: 9.375rem;
 	}
 }

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import s from "./Category.module.scss";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { VacancyCard } from "../VacanciesList/components/VacancyCard";
@@ -38,6 +38,7 @@ export const Category = ({
 		],
 		[header]
 	);
+	const formRef = useRef<any>(null);
 	return (
 		<section className={s.category}>
 			<div className={s.container}>
@@ -49,7 +50,16 @@ export const Category = ({
 					/>
 					<h1 className={s.title}>{categoryTitle}</h1>
 					<ReactMarkdown className={s.description}>{description}</ReactMarkdown>
-					<button className={s.btn}>{categoryButton}</button>
+					<button
+						className={s.btn}
+						onClick={() => {
+							formRef?.current?.scrollIntoView({
+								block: "center",
+								behavior: "smooth",
+							});
+						}}>
+						{categoryButton}
+					</button>
 					<div className={s.vacancies_list}>
 						{vacancies.data.map(
 							(vacancy: any) =>
@@ -74,7 +84,7 @@ export const Category = ({
 								)
 						)}
 					</div>
-					<div className={s.form_wrapper}>
+					<div className={s.form_wrapper} ref={formRef}>
 						<FormFields formData={formData} />
 						<Image className={s.main_cat} src={mainCat} alt={"main cat"} />
 					</div>

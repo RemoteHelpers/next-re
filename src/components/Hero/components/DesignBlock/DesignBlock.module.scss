@@ -8,12 +8,12 @@
 	align-self: center;
 	display: flex;
 	align-items: center;
-	justify-content: center;	
+	justify-content: center;
 	@include on992 {
 		flex: 1 1 50%;
 		padding: 0px 5rem 0px 0px;
-	}	
-	@include on1920{
+	}
+	@include on1920 {
 		padding-right: 2rem;
 	}
 }
@@ -21,6 +21,8 @@
 	position: relative;
 	z-index: 7;
 	outline: 1px solid $rgbZodiac;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
 	border-radius: 50%;
 	padding: 1.5625rem;
 	width: 70vw;
