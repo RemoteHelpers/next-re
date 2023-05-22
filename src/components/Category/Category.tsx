@@ -7,17 +7,22 @@ import Link from "next/link";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 import { BreadcrumbsIcon } from "@/shared/components/IconComponents/BreadcrumbsIcon";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
+import FormFields from "../FormFields/FormFields";
+import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
+import Image from "next/image";
 
 type CategoryProps = {
 	category: any;
 	header: any;
 	vacanciesInfo: any;
+	formData: any;
 };
 
 export const Category = ({
 	category,
 	header,
 	vacanciesInfo,
+	formData,
 }: CategoryProps) => {
 	const { categoryTitle, categorySlug, description, vacancies } =
 		category.attributes;
@@ -33,7 +38,6 @@ export const Category = ({
 		],
 		[header]
 	);
-	console.log(vacancies);
 	return (
 		<section className={s.category}>
 			<div className={s.container}>
@@ -51,6 +55,7 @@ export const Category = ({
 							(vacancy: any) =>
 								vacancy.attributes.isHot && (
 									<VacancyItem
+										key={vacancy.id}
 										attributes={vacancy.attributes}
 										vacanciesInfo={vacanciesInfo}
 										category={categorySlug}
@@ -61,12 +66,17 @@ export const Category = ({
 							(vacancy: any) =>
 								!vacancy.attributes.isHot && (
 									<VacancyItem
+										key={vacancy.id}
 										attributes={vacancy.attributes}
 										vacanciesInfo={vacanciesInfo}
 										category={categorySlug}
 									/>
 								)
 						)}
+					</div>
+					<div className={s.form_wrapper}>
+						<FormFields formData={formData} />
+						<Image className={s.main_cat} src={mainCat} alt={"main cat"} />
 					</div>
 				</div>
 			</div>
