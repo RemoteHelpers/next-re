@@ -26,7 +26,7 @@ export const VacanciesList: React.FC<Props> = ({
   const [vacanciesList, setVacanciesList] = useState(vacancies);
   const { vacansPerPage, currentPage, setTotalPages } = paginationConfig;
   const { locale } = useRouter();
-
+  console.log(vacancies);
   const changeTotalPages = (): void =>
     setTotalPages(Math.ceil(vacanciesList.length / vacansPerPage));
 

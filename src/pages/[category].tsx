@@ -6,13 +6,14 @@ import {
   getFooterData,
   getHeaderData,
   getCategoryBySlug,
+  getVacancyListData,
 } from '@/services';
 import { Category } from '@/components/Category';
 
-const VacancyPage: FC<any> = ({ category, categories, vacancies, footerData, header }) => {
+const VacancyPage: FC<any> = ({ category, categories, vacancies, footerData, header, vacanciesInfo }) => {
   return (
     <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
-      <Category category={category} header={header} />
+      <Category category={category} header={header} vacanciesInfo={vacanciesInfo} />
     </Layout>
   );
 };
@@ -25,6 +26,7 @@ export const getServerSideProps = async (context: any) => {
   const lang = context.locale === 'ua' ? 'uk' : context.locale;
   const categories = await getCategories(lang);
   const vacancies = await getAllVacancies(lang);
+  const vacanciesInfo = await getVacancyListData(lang);
   const footerData = await getFooterData(lang);
   const category = await getCategoryBySlug(categorySlug, lang);
   const header = await getHeaderData(lang);
@@ -35,6 +37,7 @@ export const getServerSideProps = async (context: any) => {
       vacancies,
       footerData,
       header,
+      vacanciesInfo
     },
   };
 };
