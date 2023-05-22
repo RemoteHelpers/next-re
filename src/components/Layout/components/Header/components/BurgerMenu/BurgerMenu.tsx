@@ -96,22 +96,23 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
             </Link>
           </li>
 
-          {categories.map(({ attributes }: Category) => {
-            const { categoryTitle, createdAt, categorySlug } = attributes;
-            if (categorySlug === 'other') return;
-            return (
-              <li key={createdAt.toString()}>
-                <button
-                  className={s.navBtn}
-                  type="button"
-                  onClick={() => navToThird(categoryTitle)}
-                >
-                  <BurgerMenuIcon name={categorySlug} />
-                  {categoryTitle}
-                </button>
-              </li>
-            );
-          })}
+          {currentTab === 2 &&
+            categories.map(({ attributes }: Category) => {
+              const { categoryTitle, createdAt, categorySlug } = attributes;
+              if (categorySlug === 'other') return;
+              return (
+                <li key={createdAt.toString()}>
+                  <button
+                    className={s.navBtn}
+                    type="button"
+                    onClick={() => navToThird(categoryTitle)}
+                  >
+                    <BurgerMenuIcon name={categorySlug} />
+                    {categoryTitle}
+                  </button>
+                </li>
+              );
+            })}
         </ul>
 
         <ul className={currentTab === 3 ? s.thirdTab_shown : s.thirdTab}>
@@ -122,25 +123,26 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
             </button>
           </li>
 
-          {filteredVacancies().map(({ attributes }: IVacancy) => {
-            const {
-              createdAt,
-              title,
-              categories: { data: categoriesInfo },
-              vacancySlug,
-            } = attributes;
+          {currentTab === 3 &&
+            filteredVacancies().map(({ attributes }: IVacancy) => {
+              const {
+                createdAt,
+                title,
+                categories: { data: categoriesInfo },
+                vacancySlug,
+              } = attributes;
 
-            return (
-              <li key={createdAt.toString()}>
-                <Link
-                  href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
-                  onClick={navToLink}
-                >
-                  {title}
-                </Link>
-              </li>
-            );
-          })}
+              return (
+                <li key={createdAt.toString()}>
+                  <Link
+                    href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
+                    onClick={navToLink}
+                  >
+                    {title}
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </nav>
     </div>

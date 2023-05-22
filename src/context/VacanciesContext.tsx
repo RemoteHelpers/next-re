@@ -32,7 +32,7 @@ export const VacanciesProvider: FC<ProviderProps> = ({ children }: ProviderProps
   const [categories, setCategories] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { locale } = useRouter();
-  const lang = (locale === 'ua' ? 'uk' : locale) || 'ru';
+  const lang = locale || 'ru';
 
   const fetchVacancies = async () => {
     try {

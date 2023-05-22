@@ -56,6 +56,7 @@ export const Header: FC<Props> = ({ headerData }) => {
                         : `${s.nav_item}`
                     }
                     onMouseOver={() => openMenu(path_id)}
+                    onTouchStart={() => openMenu(path_id)}
                   >
                     {title}
                   </Link>
@@ -63,7 +64,7 @@ export const Header: FC<Props> = ({ headerData }) => {
               })}
             </nav>
 
-            <SelectLang chooseLangValue={chooseLangValue} isBurgerMenu={isBurgerMenu} />
+            <SelectLang chooseLangValue={chooseLangValue} isDesktopMenuShown={isDesktopMenuShown} />
 
             <button
               type="button"

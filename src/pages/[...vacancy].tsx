@@ -17,7 +17,7 @@ export default VacancyPage;
 export const getServerSideProps = async (context: any) => {
   const params = context.params;
   const slug = params?.vacancy?.slice(1)[0];
-  const lang = context.locale === 'ua' ? 'uk' : context.locale;
+  const lang = context.locale;
   const vacancy = await getVacancy(lang, slug);
   const categories = await getCategories(lang);
   const vacancies = await getAllVacancies(lang);
