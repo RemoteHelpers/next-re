@@ -6,21 +6,32 @@ import Image from "next/image";
 
 interface InfoBlockProps {
 	data: any;
+	formRef: any;
 }
 
-export const InfoBlock: FC<InfoBlockProps> = ({ data }: InfoBlockProps) => {
+export const InfoBlock: FC<InfoBlockProps> = ({
+	data,
+	formRef,
+}: InfoBlockProps) => {
 	return (
 		<div className={s.info}>
 			<h1 className={s.title}>{data.mainScreenTitle}</h1>
 			<ReactMarkdown className={s.description}>
 				{data.mainScreenParagraph}
 			</ReactMarkdown>
-			<a className={s.btn}>
+			<button
+				className={s.btn}
+				onClick={() => {
+					formRef?.current?.scrollIntoView({
+						block: "center",
+						behavior: "smooth",
+					});
+				}}>
 				{data.mainScreenButton}
 				<span className={s.btn_icon}>
 					<Image src={bag} alt="bag" />
 				</span>
-			</a>
+			</button>
 		</div>
 	);
 };
