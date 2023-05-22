@@ -21,6 +21,9 @@
 		gap: 5.625rem;
 	}
 	@include on1200{
+		gap: 8rem;
+	}
+	@include on1440{
 		gap: 9.375rem;
 	}
 }

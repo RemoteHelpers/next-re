@@ -10,10 +10,13 @@
 	align-items: center;
 	justify-content: center;
 	@include on768 {
-		padding: 0px 1.875rem 0px 0px;
+		padding: 0px 5rem 0px 0px;
 	}
 	@include on992 {
 		flex: 1 1 50%;
+	}	
+	@include on1920{
+		padding-right: 2rem;
 	}
 }
 .circle {
@@ -22,8 +25,8 @@
 	outline: 1px solid $rgbZodiac;
 	border-radius: 50%;
 	padding: 1.5625rem;
-	width: 80vw;
-	height: 80vw;
+	width: 70vw;
+	height: 70vw;
 	@include on480 {
 		width: clamp(21.875rem, 43.15vw, 39.375rem);
 		height: clamp(21.875rem, 43.15vw, 39.375rem);
@@ -84,8 +87,8 @@
 	z-index: 3;
 	transform: scale(0);
 	opacity: 0;
-	width: 70vw;
-	height: 70vw;
+	width: 60vw;
+	height: 60vw;
 	@include on480 {
 		width: clamp(18.75rem, 37vw, 33.75rem);
 		height: clamp(18.75rem, 37vw, 33.75rem);
@@ -108,8 +111,8 @@
 	width: 15.625rem;
 	height: 15.625rem;
 	transform: translate(100%, 0%);
-	width: 60vw;
-	height: 60vw;
+	width: 50vw;
+	height: 50vw;
 	@include on480 {
 		width: clamp(15.625rem, 31.5vw, 28.75rem);
 		height: clamp(15.625rem, 31.5vw, 28.75rem);
