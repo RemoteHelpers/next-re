@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import s from './SelectLang.module.scss';
 import { useRouter } from 'next/router';
 import { LangSelectorIcon } from '@/shared/components/IconComponents/Header';
+import { GlobalContext } from '@/context';
 
 type Props = {
   chooseLangValue: string;
@@ -37,12 +38,11 @@ const languages: Languages = [
 ];
 
 export const SelectLang: React.FC<Props> = ({ chooseLangValue, isDesktopMenuShown }) => {
-  const router = useRouter();
-  const initialLang = router.locale === 'uk' ? 'UA' : router.locale?.toUpperCase()!;
-  const [currentLang, setCurrentLang] = useState<string>(initialLang);
   const [isSelectorShown, setIsSelectorShown] = useState<boolean>(false);
   const [needAddListeners, setNeedAddListeners] = useState<boolean>(false);
   const [needRemoveListeners, setNeedRemoveListeners] = useState<boolean>(false);
+  const { setIsLoading, currentLang, setCurrentLang } = useContext(GlobalContext);
+  const router = useRouter();
   const langBtnRef = useRef(null);
   const langItemRef = useRef(null);
 
@@ -65,6 +65,7 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue, isDesktopMenuShow
     setCurrentLang(locale === 'uk' ? 'UA' : locale.toUpperCase());
     router.replace(router.asPath, router.asPath, { locale });
     setIsSelectorShown(false);
+    setIsLoading(true);
   };
 
   useEffect(() => {

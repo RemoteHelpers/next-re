@@ -1,2 +1,2 @@
-export { VacanciesContext, VacanciesProvider } from "./VacanciesContext";
-export type { ContextValue, ProviderProps } from "./VacanciesContext";
+export { GlobalContext, GlobalProvider } from './GlobalContext';
+export type { ContextValue, ProviderProps } from './GlobalContext';
