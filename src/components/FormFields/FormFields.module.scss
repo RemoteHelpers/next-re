@@ -8,7 +8,11 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 2rem 0;
+    gap: 1rem 0;
+
+    @include on992 {
+        gap: 1.5rem 0;
+    }
 
     input {
         border: 2px solid $primaryBlue;
@@ -28,7 +32,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 2rem 0;
+    gap: 1rem 0;
 
     @include on992 {
         flex-direction: row;
@@ -55,7 +59,7 @@
     transform: translate(0, -50%);
     cursor: pointer;
     background-color: $rgbWhite;
-    padding: .5rem 1.25rem;
+    padding: .5rem .75rem;
     border-radius: .5rem;
 
     display: flex;
@@ -72,7 +76,8 @@
         display: none;
     }
 
-    @include on1200 {
+    @include on992 {
+        padding: .5rem 1.25rem;
         span {
             display: inline-block;
         }
@@ -122,7 +127,8 @@
 .mobile_cat {
     display: block;
     max-width: 100%;
-    margin: 0 auto;
+    height: auto;
+    margin: 1.5rem auto 0;
 
     @include on1200 {
         display: none;
@@ -134,7 +140,8 @@
     align-self: center;
     background-color: $primaryOrange;
     border-radius: 1rem;
-    padding: 1rem 5rem;
+    padding: 1rem 0;
+    text-align: center;
     color: $rgbWhite;
     font-size: $fontSize5;
     font-weight: 600;
@@ -155,5 +162,6 @@
         align-self: flex-start;
         margin-top: 0;
         width: auto;
+        padding: 1rem 5rem;
     }
 }
