@@ -1,12 +1,14 @@
 @import '@/shared/styles/colors';
 @import '@/shared/styles/variables';
 @import '@/shared/styles/mixins';
+@import '@/shared/styles/mediaMixins';
 
 .backdrop {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 8;
+  display: none;
 
   width: 100%;
   height: 100%;
@@ -16,6 +18,12 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.2s linear;
+
+  overflow-y: auto;
+
+  @include on992 {
+    display: block;
+  }
 
   .navMenu {
     transition: 0.2s ease-in-out;
@@ -36,10 +44,12 @@
   display: flex;
   flex-direction: column;
 
-  padding: 2rem 1.5rem;
+  padding: 1rem 1.5rem 2rem;
   margin: 0 auto;
   max-width: 1460px;
+  max-height: calc(100vh - $headerHeight2);
 
+  overflow: hidden;
   backdrop-filter: blur(15px);
   background: $rgbWhite;
   border-bottom-left-radius: 1.25rem;
@@ -85,7 +95,8 @@
 
   &:hover,
   &:focus {
-    box-shadow: $orangeShadow;
+    box-shadow: $darkShadow;
+    color: $rgbBlack;
   }
 }
 
@@ -94,8 +105,13 @@
 
   color: clamp(2rem, 3.1vw, 4rem);
   border: 1px solid $primaryOrange;
-  box-shadow: $orangeShadow;
+  box-shadow: $darkShadow;
   border-radius: 1rem;
+
+  &:is(:hover, :focus) {
+    color: $rgbGray;
+    cursor: default;
+  }
 }
 
 .categoryName {
@@ -112,6 +128,7 @@
   flex-wrap: wrap;
   gap: 1rem 2%;
   margin-top: 2rem;
+  overflow-y: auto;
 
   li {
     width: 32%;

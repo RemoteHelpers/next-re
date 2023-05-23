@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import s from './DesktopMenu.module.scss';
 import { Category, IVacancy } from '@/shared/types';
 import Link from 'next/link';
 import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
 import { useRouter } from 'next/router';
+import { GlobalContext } from '@/context';
 
 type Props = {
   desktopMenuState: {
@@ -20,11 +21,17 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
     attributes: { categoryTitle: initialCategoryState },
   } = categories.find((el: any) => el.attributes.categorySlug !== 'other');
   const [currentCategory, setCurrentCategory] = useState<string>(initialCategoryState);
+  const { setNavURL } = useContext(GlobalContext);
+
+  const navToLink = (path: string): void => {
+    setIsDesktopMenuShown(false);
+    setNavURL(path);
+  };
 
   const filteredVacancies = (): IVacancy[] => {
     return vacancies
       .filter((el: IVacancy) => {
-        return el.attributes.categories.data[0].attributes.categoryTitle === currentCategory;
+        return el.attributes.categories.data[0]?.attributes.categoryTitle === currentCategory;
       })
       .sort((a: IVacancy, b: IVacancy): number => {
         return (
@@ -42,14 +49,16 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
     if (target === currentTarget) setIsDesktopMenuShown(false);
   };
 
-  const closeMenu = () => {
-    if (isDesktopMenuShown) setIsDesktopMenuShown(false);
-  };
+  // useEffect(() => {
+  //   if (!document) return;
+  //   if (isDesktopMenuShown) document.addEventListener('scroll', closeMenu, { once: true });
+  // }, [isDesktopMenuShown]);
 
-  useEffect(() => {
-    if (!document) return;
-    if (isDesktopMenuShown) document.addEventListener('scroll', closeMenu, { once: true });
-  }, [isDesktopMenuShown]);
+  // useEffect(() => {
+  //   const body = document?.querySelector('body')!;
+  //   if (isDesktopMenuShown) body.classList.add('no-scroll');
+  //   else if (!isDesktopMenuShown) body.classList.remove('no-scroll');
+  // }, [isDesktopMenuShown]);
 
   useEffect(() => {
     setCurrentCategory(initialCategoryState);
@@ -59,6 +68,7 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
     <div
       className={isDesktopMenuShown ? s.backdrop_shown : s.backdrop}
       onMouseOver={backdropHandler}
+      onClick={backdropHandler}
     >
       <nav className={s.navMenu}>
         <ul className={s.categoriesList}>
@@ -85,25 +95,25 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
         </ul>
 
         <ul className={s.vacanciesList}>
-          {filteredVacancies().map(({ attributes }: IVacancy) => {
-            const {
-              createdAt,
-              title,
-              categories: { data: categoriesInfo },
-              vacancySlug,
-            } = attributes;
+          {isDesktopMenuShown &&
+            filteredVacancies().map(({ attributes }: IVacancy) => {
+              const {
+                createdAt,
+                title,
+                categories: { data: categoriesInfo },
+                vacancySlug,
+              } = attributes;
 
-            return (
-              <li key={createdAt.toString()}>
-                <Link
-                  href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
-                  onClick={closeMenu}
-                >
-                  {title}
-                </Link>
-              </li>
-            );
-          })}
+              const path = `/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`;
+
+              return (
+                <li key={createdAt.toString()}>
+                  <Link href={path} onClick={() => navToLink(path)}>
+                    {title}
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </nav>
     </div>

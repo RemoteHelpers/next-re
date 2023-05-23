@@ -23,6 +23,21 @@ body {
   &.no-scroll {
     overflow: hidden;
   }
+
+  body::-webkit-scrollbar {
+    width: 12px; /* ширина скролбару */
+    overflow: visible;
+  }
+
+  body::-webkit-scrollbar-track {
+    background: transparent; /* фон треку скролбару */
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: #888; /* колір самого скролбару */
+    border-radius: 6px; /* радіус кутів скролбару */
+    border: 3px solid #fff; /* обрамлення скролбару */
+  }
 }
 
 // global styles ant design library for FAQ component
@@ -49,7 +64,7 @@ body {
   font-weight: 400;
   font-size: $fontSize6;
   padding: 1rem 1rem 2rem 3rem !important;
-  
+
   @include on992 {
     padding: 1rem 1rem 2rem 4rem !important;
   }
@@ -174,8 +189,8 @@ body {
   border: 2px solid $primaryBlue;
   background-color: $primaryCyan;
   cursor: pointer;
-  border-radius: .5rem;
-  padding: .4rem;
+  border-radius: 0.5rem;
+  padding: 0.4rem;
   font-size: $fontSize5;
   color: $rgbGray;
   font-weight: 500;

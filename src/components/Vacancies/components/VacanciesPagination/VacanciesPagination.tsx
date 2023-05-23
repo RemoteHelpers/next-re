@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import s from './VacanciesPagination.module.scss';
 
 type paginationItem = number | 'prevDots' | 'nextDots';
@@ -32,10 +32,16 @@ export const VacanciesPagination = ({
     else return false;
   };
 
-  const navToPage = (pageNumber: paginationItem): void => {
-    setCurrentPage(pageNumber);
-    titleRef.current.scrollIntoView();
-  };
+  const navToPage = useCallback(
+    (pageNumber: paginationItem): void => {
+      setCurrentPage(pageNumber);
+      titleRef?.current?.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth',
+      });
+    },
+    [titleRef]
+  );
 
   return (
     <ul className={s.numBar}>

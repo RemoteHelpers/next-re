@@ -4,11 +4,12 @@
 .menuWrap {
   position: fixed;
   top: 0;
-  right: -100%;
+  right: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   background-color: $primaryMint;
-  // transform: translateX(100%);
+  transform: translateX(110%);
   transition: 0.3s linear;
 
   @include on992 {
@@ -18,8 +19,7 @@
 
 .menuWrap_shown {
   @extend .menuWrap;
-  // transform: translateX(0);
-  right: 0;
+  transform: translateX(0);
 }
 
 .menuTitle {
@@ -28,8 +28,8 @@
   color: $rgbZodiac;
   font-weight: 500;
   font-size: 1rem;
-  line-height: 1.44rem;
-  // line-height: 1.2rem;
+  line-height: 1.8rem;
+  // line-height: 1.44rem;
   text-align: center;
 }
 
@@ -41,7 +41,7 @@
   background-color: $rgbWhite;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  box-shadow: $orangeShadow;
+  box-shadow: $darkShadow;
 
   overflow: hidden;
 }
@@ -78,6 +78,7 @@
     border: 1px solid $rgbGray;
     font-weight: 600;
     font-size: 1.2rem;
+    text-align: center;
     line-height: 2rem;
     color: $rgbGray;
     &:hover,
@@ -90,6 +91,7 @@
   button {
     @extend a;
     background-color: transparent;
+    font-size: 1.2rem;
   }
 
   .backBtn {
@@ -122,27 +124,37 @@
 
 .firstTab {
   @extend .navTab;
+
   left: -100%;
 }
 .firstTab_shown {
   @extend .firstTab;
+
   left: 0;
 }
 
 .secondTab {
   @extend .navTab;
+
   left: 100%;
 }
 .secondTab_shown {
   @extend .secondTab;
+
   left: 0;
 }
 
 .thirdTab {
   @extend .navTab;
+
   left: -100%;
+
+  // a {
+  //   font-size: clamp(0.8rem, 2.06vw, 1.2rem);
+  // }
 }
 .thirdTab_shown {
   @extend .thirdTab;
+
   left: 0;
 }

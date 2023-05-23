@@ -31,8 +31,8 @@ $rotateReverse: rotate_anim 20s linear 0.8s infinite reverse;
 			rgba(92, 233, 255, 0.44) 52.77%,
 			rgba(0, 0, 0, 0) 119.81%
 		);
-		bottom: 0%;
-		left: 50%;
+		bottom: 20%;
+		left: 10%;
 		transform: translate(-50%, 50%);
 		max-width: clamp(135px, 16vw, 250px);
 		@include on992 {
@@ -45,8 +45,8 @@ $rotateReverse: rotate_anim 20s linear 0.8s infinite reverse;
 			rgba(255, 255, 255, 0.73) 50.66%,
 			rgba(255, 255, 255, 0) 95.13%
 		);
-		top: 50%;
-		right: 0%;
+		top: 30%;
+		right: 2%;
 		transform: translate(50%, 0%);
 		max-width: clamp(115px, 14vw, 210px);
 		@include on992 {

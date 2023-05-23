@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import s from './SelectLang.module.scss';
 import { useRouter } from 'next/router';
 import { LangSelectorIcon } from '@/shared/components/IconComponents/Header';
+import { GlobalContext } from '@/context';
 
 type Props = {
   chooseLangValue: string;
-  isBurgerMenu: boolean;
+  isDesktopMenuShown: boolean;
 };
 
 type Languages = {
@@ -16,7 +17,7 @@ type Languages = {
 const languages: Languages = [
   {
     lang: 'Українська',
-    locale: 'ua',
+    locale: 'uk',
   },
   {
     lang: 'Polski',
@@ -36,12 +37,12 @@ const languages: Languages = [
   },
 ];
 
-export const SelectLang: React.FC<Props> = ({ chooseLangValue }) => {
-  const router = useRouter();
-  const [currentLang, setCurrentLang] = useState<string>(router.locale?.toUpperCase()!);
+export const SelectLang: React.FC<Props> = ({ chooseLangValue, isDesktopMenuShown }) => {
   const [isSelectorShown, setIsSelectorShown] = useState<boolean>(false);
   const [needAddListeners, setNeedAddListeners] = useState<boolean>(false);
   const [needRemoveListeners, setNeedRemoveListeners] = useState<boolean>(false);
+  const { setIsLoading, currentLang, setCurrentLang } = useContext(GlobalContext);
+  const router = useRouter();
   const langBtnRef = useRef(null);
   const langItemRef = useRef(null);
 
@@ -61,9 +62,10 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue }) => {
 
   const handleSelection = (locale: string): void => {
     if (currentLang.toLowerCase() === locale) return;
-    setCurrentLang(locale.toUpperCase());
+    setCurrentLang(locale === 'uk' ? 'UA' : locale.toUpperCase());
     router.replace(router.asPath, router.asPath, { locale });
     setIsSelectorShown(false);
+    setIsLoading(true);
   };
 
   useEffect(() => {
@@ -73,6 +75,10 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue }) => {
       document.addEventListener('scroll', listenerHandler, { once: true });
     }
   }, [isSelectorShown, needRemoveListeners, needAddListeners]);
+
+  useEffect(() => {
+    if (isDesktopMenuShown) setIsSelectorShown(false);
+  }, [isDesktopMenuShown]);
 
   return (
     <div className={s.langSelector}>
@@ -91,6 +97,10 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue }) => {
 
         <ul className={s.list}>
           {languages.map(({ lang, locale }) => {
+            const uk = currentLang === 'UA' && 'uk';
+            const isCurrentLocale =
+              locale === uk ? true : locale === currentLang.toLowerCase() ? true : false;
+
             return (
               <li
                 className={s.item}
@@ -103,9 +113,7 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue }) => {
 
                 <p className={s.language}>{lang}</p>
 
-                <div className={s.plugBox}>
-                  {locale === currentLang.toLowerCase() && <div className={s.plug}></div>}
-                </div>
+                <div className={s.plugBox}>{isCurrentLocale && <div className={s.plug}></div>}</div>
               </li>
             );
           })}

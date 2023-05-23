@@ -1,22 +1,29 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import s from './VacancyItem.module.scss';
-import { IVacancy, IVacancyAttr } from '@/shared/types';
+import { IVacancyAttr } from '@/shared/types';
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
 import Link from 'next/link';
+import { GlobalContext } from '@/context';
 
 type Props = {
   attributes: IVacancyAttr;
   vacanciesInfo: any;
+  category?: string;
 };
 
-export const VacancyItem: React.FC<Props> = ({ attributes, vacanciesInfo }) => {
-  const {
-    isHot,
-    cardDescription,
-    title,
-    categories: { data: categoriesInfo },
-    vacancySlug,
-  } = attributes;
+export const VacancyItem: React.FC<Props> = ({ attributes, vacanciesInfo, category }) => {
+  const { isHot, cardDescription, title, categories, vacancySlug } = attributes;
+  const { setNavURL } = useContext(GlobalContext);
+
+  const getPathToVacancy = useCallback((): string => {
+    if (category) {
+      return `/${category}/${vacancySlug}`;
+    }
+    if (categories) {
+      return `/${categories?.data[0]?.attributes.categorySlug}/${vacancySlug}`;
+    }
+    return '';
+  }, [category, vacancySlug]);
 
   return (
     <li className={s.card}>
@@ -38,8 +45,9 @@ export const VacancyItem: React.FC<Props> = ({ attributes, vacanciesInfo }) => {
       </div>
 
       <Link
-        href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
+        href={getPathToVacancy()}
         className={s.link}
+        onClick={() => setNavURL(getPathToVacancy())}
       >
         {vacanciesInfo.button}
       </Link>

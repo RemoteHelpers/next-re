@@ -13,7 +13,7 @@ const About: FC<any> = ({ categories, vacancies, footerData, header }) => {
 export default About;
 
 export const getServerSideProps = async (context: any) => {
-  const lang = context.locale === 'ua' ? 'uk' : context.locale;
+  const lang = context.locale;
   const categories = await getCategories(lang);
   const vacancies = await getAllVacancies(lang);
   const footerData = await getFooterData(lang);

@@ -24,7 +24,12 @@
   font-size: $fontSize54;
   line-height: 1.5rem;
   background-color: transparent;
+  transition: 0.2s;
   cursor: pointer;
+
+  &:hover {
+    color: $primaryOrange;
+  }
 
   svg {
     width: 1.3125rem;
@@ -125,9 +130,14 @@
   align-items: center;
   cursor: pointer;
 
+  &:has(.plug) {
+    pointer-events: none;
+  }
+
   img {
     height: auto;
   }
+
   .plugBox {
     margin-left: auto;
   }
