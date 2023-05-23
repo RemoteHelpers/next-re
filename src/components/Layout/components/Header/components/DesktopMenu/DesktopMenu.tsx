@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import s from './DesktopMenu.module.scss';
-import { Category, IVacancy } from '@/shared/types';
 import Link from 'next/link';
-import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
 import { useRouter } from 'next/router';
+import s from './DesktopMenu.module.scss';
+import type { IHeaderData } from '@/shared/types/HeaderTypes';
+import type { ICategory } from '@/shared/types/CategoriesTypes';
+import type { IVacancy } from '@/shared/types/VacanciesTypes';
+import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
 import { GlobalContext } from '@/context';
 
 type Props = {
@@ -11,7 +13,7 @@ type Props = {
     isDesktopMenuShown: boolean;
     setIsDesktopMenuShown: (boolean: boolean) => void;
   };
-  headerData: any;
+  headerData: IHeaderData;
 };
 
 export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) => {
@@ -19,7 +21,7 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
   const { categories, vacancies } = headerData;
   const {
     attributes: { categoryTitle: initialCategoryState },
-  } = categories.find((el: any) => el.attributes.categorySlug !== 'other');
+  } = categories.find((el: ICategory) => el.attributes.categorySlug !== 'other') as ICategory;
   const [currentCategory, setCurrentCategory] = useState<string>(initialCategoryState);
   const { setNavURL } = useContext(GlobalContext);
 
@@ -45,7 +47,7 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
       });
   };
 
-  const backdropHandler = ({ target, currentTarget }: any) => {
+  const backdropHandler = ({ target, currentTarget }: React.MouseEvent) => {
     if (target === currentTarget) setIsDesktopMenuShown(false);
   };
 
@@ -72,7 +74,7 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
     >
       <nav className={s.navMenu}>
         <ul className={s.categoriesList}>
-          {categories.map(({ attributes }: Category) => {
+          {categories.map(({ attributes }: ICategory) => {
             const { categoryTitle, createdAt, categorySlug } = attributes;
 
             if (!currentCategory && categorySlug !== 'other') setCurrentCategory(categoryTitle);
