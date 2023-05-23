@@ -4,8 +4,7 @@
 @import "@/shared/styles/fonts.scss";
 
 .container {
-    @include container(60px);
-    padding: 0 30px;
+    @include container();
 
     margin-top: 100px;
     margin-bottom: 100px;
