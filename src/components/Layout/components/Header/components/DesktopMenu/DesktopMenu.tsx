@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import s from './DesktopMenu.module.scss';
 import { Category, IVacancy } from '@/shared/types';
 import Link from 'next/link';
 import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
 import { useRouter } from 'next/router';
+import { GlobalContext } from '@/context';
 
 type Props = {
   desktopMenuState: {
@@ -20,6 +21,12 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
     attributes: { categoryTitle: initialCategoryState },
   } = categories.find((el: any) => el.attributes.categorySlug !== 'other');
   const [currentCategory, setCurrentCategory] = useState<string>(initialCategoryState);
+  const { setNavURL } = useContext(GlobalContext);
+
+  const navToLink = (path: string): void => {
+    setIsDesktopMenuShown(false);
+    setNavURL(path);
+  };
 
   const filteredVacancies = (): IVacancy[] => {
     return vacancies
@@ -40,10 +47,6 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
 
   const backdropHandler = ({ target, currentTarget }: any) => {
     if (target === currentTarget) setIsDesktopMenuShown(false);
-  };
-
-  const closeMenu = () => {
-    if (isDesktopMenuShown) setIsDesktopMenuShown(false);
   };
 
   // useEffect(() => {
@@ -101,12 +104,11 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
                 vacancySlug,
               } = attributes;
 
+              const path = `/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`;
+
               return (
                 <li key={createdAt.toString()}>
-                  <Link
-                    href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
-                    onClick={closeMenu}
-                  >
+                  <Link href={path} onClick={() => navToLink(path)}>
                     {title}
                   </Link>
                 </li>

@@ -1,53 +1,56 @@
-import React, { FC, ReactNode, createContext, useEffect, useMemo, useState } from 'react';
-import type { IVacancy, Category } from '@/shared/types';
-import { getCategories, getAllVacancies } from '@/services';
+import React, { ReactNode, createContext, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export type ContextValue = {
-  vacancies: IVacancy[];
-  setVacancies: ([]) => void;
+  navURL: string;
+  setNavURL: (string: string) => void;
   isLoading: boolean;
-  setIsLoading: (value: boolean) => void;
-  categories: Category[];
-  setCategories: (array: Category[]) => void;
+  setIsLoading: (boolean: boolean) => void;
+  currentLang: string;
+  setCurrentLang: (string: string) => void;
 };
-
 export interface ProviderProps {
   children: ReactNode;
 }
 
 const defaultValue: ContextValue = {
-  vacancies: [],
-  setVacancies: () => {},
+  navURL: '',
+  setNavURL: () => {},
   isLoading: true,
   setIsLoading: () => {},
-  categories: [],
-  setCategories: () => {},
+  currentLang: '',
+  setCurrentLang: () => {},
 };
-
 export const GlobalContext = createContext<ContextValue>(defaultValue);
 
-export const GlobalProvider: FC<ProviderProps> = ({ children }: ProviderProps) => {
-  const [vacancies, setVacancies] = useState<any>([]);
-  const [categories, setCategories] = useState<any>([]);
+export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
+  const [navURL, setNavURL] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  // const { locale } = useRouter();
-  // const lang = locale || 'ru';
+  const { locale, asPath } = useRouter();
+  const initialLang = locale === 'uk' ? 'UA' : locale?.toUpperCase()!;
+  const [currentLang, setCurrentLang] = useState<string>(initialLang);
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  // }, [locale]);
+  useEffect(() => {
+    if (!navURL) return;
+    if (asPath === navURL || asPath === `/${navURL}`) setNavURL('');
+    else setIsLoading(true);
+  }, [navURL]);
+
+  useEffect(() => {
+    setIsLoading(false);
+    setNavURL('');
+  }, [locale, asPath]);
 
   const contextValue = useMemo(
     () => ({
-      vacancies,
-      setVacancies,
       isLoading,
       setIsLoading,
-      categories,
-      setCategories,
+      navURL,
+      setNavURL,
+      currentLang,
+      setCurrentLang,
     }),
-    [vacancies, isLoading, categories]
+    [isLoading, navURL, currentLang]
   );
 
   return <GlobalContext.Provider value={contextValue}>{children}</GlobalContext.Provider>;

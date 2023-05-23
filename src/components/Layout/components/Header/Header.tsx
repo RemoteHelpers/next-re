@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useState, useContext } from 'react';
 import s from './Header.module.scss';
 import Image from 'next/image';
 import re_logo from './assets/re_logo.svg';
@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { BurgerMenu } from './components/BurgerMenu';
 import { SelectLang } from './components/SelectLang';
 import { DesktopMenu } from './components/DesktopMenu';
+import { GlobalContext } from '@/context';
 
 type Props = {
   headerData: any;
@@ -16,6 +17,7 @@ export const Header: FC<Props> = ({ headerData }) => {
   const [isDesktopMenuShown, setIsDesktopMenuShown] = useState(false);
   const { menu, chooseLangValue } = headerData.header;
   const router = useRouter();
+  const { setNavURL } = useContext(GlobalContext);
 
   const openMenu = (path: string) => {
     if (path === 'vacancies' && !isDesktopMenuShown) setIsDesktopMenuShown(true);
@@ -32,7 +34,7 @@ export const Header: FC<Props> = ({ headerData }) => {
         onClick={() => setIsDesktopMenuShown(false)}
       >
         <div className={s.container}>
-          <Link href="/" className={s.logo}>
+          <Link href="/" className={s.logo} onClick={() => setNavURL('/')}>
             <Image src={re_logo} alt="RemotEmployees Logo" className={s.logoImg} />
             <p className={s.logoText}>
               <span className={s.logoName}>Remote Employees</span>
@@ -55,6 +57,7 @@ export const Header: FC<Props> = ({ headerData }) => {
                         ? `${s.nav_item} ${s.active}`
                         : `${s.nav_item}`
                     }
+                    onClick={() => setNavURL(path_id)}
                     onMouseOver={() => openMenu(path_id)}
                     onTouchStart={() => openMenu(path_id)}
                   >

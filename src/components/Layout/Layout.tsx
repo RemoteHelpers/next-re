@@ -1,17 +1,15 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import { Header } from './components/Header';
 import { Main } from './components/Main';
 import { Footer } from './components/Footer';
-// import type { MainProps } from "./components/Main";
 import s from './Layout.module.scss';
 import { Loader } from '../Loader';
 import { GlobalContext } from '@/context';
 
-// export type LayoutProps = MainProps & {};
-
 export const Layout = ({ children, footerData, headerData }: any) => {
-  const { isLoading } = useContext(GlobalContext);
   const { header } = headerData;
+  const { isLoading } = useContext(GlobalContext);
+
   return (
     <>
       <div className={s.wrapper}>

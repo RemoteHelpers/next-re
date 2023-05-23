@@ -1,4 +1,4 @@
-import { FC, useRef, useContext, useEffect } from 'react';
+import { FC, useRef } from 'react';
 import { Layout } from '@/components/Layout';
 import { Vacancies } from '@/components/Vacancies';
 import { Questions } from '@/components/Questions';
@@ -16,8 +16,6 @@ import {
 import { Spheres } from '@/components/Spheres';
 import { Partners } from '@/components/Partners';
 import MainForm from '@/components/MainForm/MainForm';
-import { GlobalContext } from '@/context';
-import { useRouter } from 'next/router';
 
 const Home: FC = ({
   vacanciesInfo,
@@ -28,13 +26,7 @@ const Home: FC = ({
   header,
   formData,
 }: any) => {
-  const { setIsLoading } = useContext(GlobalContext);
-  const { locale } = useRouter();
   const formRef = useRef(null);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, [locale]);
 
   return (
     <>

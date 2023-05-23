@@ -38,13 +38,11 @@ const languages: Languages = [
 ];
 
 export const SelectLang: React.FC<Props> = ({ chooseLangValue, isDesktopMenuShown }) => {
-  const router = useRouter();
-  const initialLang = router.locale === 'uk' ? 'UA' : router.locale?.toUpperCase()!;
-  const [currentLang, setCurrentLang] = useState<string>(initialLang);
   const [isSelectorShown, setIsSelectorShown] = useState<boolean>(false);
   const [needAddListeners, setNeedAddListeners] = useState<boolean>(false);
   const [needRemoveListeners, setNeedRemoveListeners] = useState<boolean>(false);
-  const { setIsLoading } = useContext(GlobalContext);
+  const { setIsLoading, currentLang, setCurrentLang } = useContext(GlobalContext);
+  const router = useRouter();
   const langBtnRef = useRef(null);
   const langItemRef = useRef(null);
 

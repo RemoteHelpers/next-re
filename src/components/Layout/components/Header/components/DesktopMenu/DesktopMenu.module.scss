@@ -108,9 +108,7 @@
   box-shadow: $darkShadow;
   border-radius: 1rem;
 
-  &:hover,
-  &:focus {
-    // box-shadow: $darkShadow;
+  &:is(:hover, :focus) {
     color: $rgbGray;
     cursor: default;
   }

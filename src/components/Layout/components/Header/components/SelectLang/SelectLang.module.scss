@@ -130,9 +130,14 @@
   align-items: center;
   cursor: pointer;
 
+  &:has(.plug) {
+    pointer-events: none;
+  }
+
   img {
     height: auto;
   }
+
   .plugBox {
     margin-left: auto;
   }

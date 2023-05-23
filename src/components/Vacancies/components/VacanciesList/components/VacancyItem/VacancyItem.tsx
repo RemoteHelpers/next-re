@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import s from './VacancyItem.module.scss';
-import { IVacancy, IVacancyAttr } from '@/shared/types';
+import { IVacancyAttr } from '@/shared/types';
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
 import Link from 'next/link';
+import { GlobalContext } from '@/context';
 
 type Props = {
   attributes: IVacancyAttr;
@@ -12,6 +13,7 @@ type Props = {
 
 export const VacancyItem: React.FC<Props> = ({ attributes, vacanciesInfo, category }) => {
   const { isHot, cardDescription, title, categories, vacancySlug } = attributes;
+  const { setNavURL } = useContext(GlobalContext);
 
   const getPathToVacancy = useCallback((): string => {
     if (category) {
@@ -42,7 +44,11 @@ export const VacancyItem: React.FC<Props> = ({ attributes, vacanciesInfo, catego
         <p className={s.cardDescription}>{`${cardDescription.slice(0, 107)}...`}</p>
       </div>
 
-      <Link href={getPathToVacancy()} className={s.link}>
+      <Link
+        href={getPathToVacancy()}
+        className={s.link}
+        onClick={() => setNavURL(getPathToVacancy())}
+      >
         {vacanciesInfo.button}
       </Link>
     </li>
