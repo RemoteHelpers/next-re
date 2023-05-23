@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import { FC, useState, useEffect, useRef, useContext } from 'react';
 import s from './SelectLang.module.scss';
 import { useRouter } from 'next/router';
 import { LangSelectorIcon } from '@/shared/components/IconComponents/Header';
@@ -37,7 +37,7 @@ const languages: Languages = [
   },
 ];
 
-export const SelectLang: React.FC<Props> = ({ chooseLangValue, isDesktopMenuShown }) => {
+export const SelectLang: FC<Props> = ({ chooseLangValue, isDesktopMenuShown }) => {
   const [isSelectorShown, setIsSelectorShown] = useState<boolean>(false);
   const [needAddListeners, setNeedAddListeners] = useState<boolean>(false);
   const [needRemoveListeners, setNeedRemoveListeners] = useState<boolean>(false);
@@ -53,7 +53,7 @@ export const SelectLang: React.FC<Props> = ({ chooseLangValue, isDesktopMenuShow
     } else setIsSelectorShown(false);
   };
 
-  const listenerHandler = ({ target }: any): void => {
+  const listenerHandler = ({ target }: Event): void => {
     if (target === langBtnRef.current || target === langItemRef.current) return;
     setNeedAddListeners(false);
     setNeedRemoveListeners(true);
