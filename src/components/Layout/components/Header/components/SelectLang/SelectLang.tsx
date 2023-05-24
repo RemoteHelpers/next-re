@@ -43,8 +43,8 @@ export const SelectLang: FC<Props> = ({ chooseLangValue, isDesktopMenuShown }) =
   const [needRemoveListeners, setNeedRemoveListeners] = useState<boolean>(false);
   const { setIsLoading, currentLang, setCurrentLang } = useContext(GlobalContext);
   const router = useRouter();
-  const langBtnRef = useRef(null);
-  const langItemRef = useRef(null);
+  const langBtnRef = useRef<HTMLButtonElement>(null);
+  const langItemRef = useRef<HTMLLIElement>(null);
 
   const handleSelectBtn = () => {
     if (!isSelectorShown) {
