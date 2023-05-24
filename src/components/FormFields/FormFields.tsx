@@ -1,8 +1,13 @@
 import { FC, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { IFormData, IFeedbackFormData, IUploadFile } from '@/shared/types/FormTypes';
+import type {
+  IFormData,
+  IFeedbackFormData,
+  IUploadFile,
+  IEnglishLevel,
+} from '@/shared/types/FormTypes';
 import Api from '@/api';
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
 import PhoneInput from 'react-phone-number-input/react-hook-form';
 import 'react-phone-number-input/style.css';
 import styles from './FormFields.module.scss';
@@ -20,11 +25,8 @@ const FormFields: FC<Props> = ({ formData }) => {
   const [loadFile, setLoadFile] = useState<IUploadFile[]>([]);
 
   const handleFileChange = async () => {
-    if (
-      fileInputRef.current &&
-      fileInputRef.current.files &&
-      fileInputRef.current.files.length > 0
-    ) {
+    if (!fileInputRef?.current?.files) return;
+    if (fileInputRef.current.files.length > 0) {
       const file = fileInputRef.current.files[0];
       setLoadFile(
         await Api.uploadFile({
@@ -41,11 +43,10 @@ const FormFields: FC<Props> = ({ formData }) => {
     try {
       await Api.feedBackForm({
         ...data,
-        CV: loadFile.length > 0 ? loadFile[0]?.files : null,
-        CV_url: loadFile.length > 0 ? loadFile[0]?.files[0]?.url || '' : '',
+        CV: loadFile[0]?.files || null,
+        CV_url: loadFile[0]?.files[0]?.url || '',
         pageFrom: window.location.href,
       });
-
       reset();
       const updatedLoadFile = { ...loadFile[0], name: formData?.cv };
       setLoadFile([updatedLoadFile]);
@@ -54,8 +55,8 @@ const FormFields: FC<Props> = ({ formData }) => {
     }
   });
 
-  const changeEnglishLevel = (value: any) => {
-    setValue('englishLevel', value.value, { shouldValidate: true });
+  const changeEnglishLevel = (englishLevel: SingleValue<IEnglishLevel>) => {
+    setValue('englishLevel', englishLevel?.value, { shouldValidate: true });
   };
 
   return (
