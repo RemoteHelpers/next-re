@@ -1,6 +1,3 @@
-import type { ICategory } from './CategoriesTypes';
-import type { IVacancy } from './VacanciesTypes';
-
 export interface IMenu {
   id: number;
   path_id: string;
@@ -24,10 +21,4 @@ interface ILocalization {
 export interface IHeader extends ILocalization {
   menu: IMenu[];
   localizations: { data: { id: number; attributes: ILocalization }[] };
-}
-
-export interface IHeaderData {
-  header: IHeader;
-  categories: ICategory[];
-  vacancies: IVacancy[];
 }
