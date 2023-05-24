@@ -12,12 +12,10 @@ import { SelectLang } from './components/SelectLang';
 import { DesktopMenu } from './components/DesktopMenu';
 import { GlobalContext } from '@/context';
 
+export type HeaderData = { header: IHeader; categories: ICategory[]; vacancies: IVacancy[] };
+
 type Props = {
-  headerData: {
-    header: IHeader;
-    categories: ICategory[];
-    vacancies: IVacancy[];
-  };
+  headerData: HeaderData;
 };
 
 export const Header: FC<Props> = ({ headerData }) => {
