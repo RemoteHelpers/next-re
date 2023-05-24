@@ -21,6 +21,7 @@ import type { IVacanciesInfo, IVacancy } from '@/shared/types/VacanciesTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
 import type { IHeader } from '@/shared/types/HeaderTypes';
 import type { IHomeData } from '@/shared/types/HomeTypes';
+import type { IFormData } from '@/shared/types/FormTypes';
 
 type Props = {
   vacanciesInfo: IVacanciesInfo;
@@ -29,7 +30,7 @@ type Props = {
   homeData: IHomeData;
   footerData: any;
   header: IHeader;
-  formData: any;
+  formData: IFormData;
 };
 
 const Home: FC<Props> = ({
@@ -41,7 +42,7 @@ const Home: FC<Props> = ({
   header,
   formData,
 }) => {
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLElement>(null);
 
   return (
     <>
