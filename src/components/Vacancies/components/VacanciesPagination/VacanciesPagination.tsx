@@ -1,13 +1,18 @@
-import React, { useCallback } from 'react';
+import { FC, RefObject } from 'react';
 import s from './VacanciesPagination.module.scss';
+import type { PaginationInfo } from '../../Vacancies';
 
+type Props = {
+  paginationConfig: PaginationInfo;
+  titleRef: RefObject<HTMLHeadingElement>;
+};
 type paginationItem = number | 'prevDots' | 'nextDots';
 
-export const VacanciesPagination = ({
+export const VacanciesPagination: FC<Props> = ({
   paginationConfig: { currentPage, totalPages, setCurrentPage },
   titleRef,
-}: any) => {
-  const renderButtons = () => {
+}) => {
+  const renderButtons = (): paginationItem[] => {
     const buttons: paginationItem[] = [];
     for (let i = 1; i <= totalPages; i++) buttons.push(i);
     if (totalPages < 5) return buttons;
@@ -32,16 +37,19 @@ export const VacanciesPagination = ({
     else return false;
   };
 
-  const navToPage = useCallback(
-    (pageNumber: paginationItem): void => {
-      setCurrentPage(pageNumber);
-      titleRef?.current?.scrollIntoView({
-        block: 'start',
-        behavior: 'smooth',
-      });
-    },
-    [titleRef]
-  );
+  const navToPage = (pageNumber: paginationItem): void => {
+    setCurrentPage(+pageNumber);
+    titleRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    // if (titleRef.current?.scrollIntoView) {
+    //   titleRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // } else {
+    //   const titleRect = titleRef.current?.getBoundingClientRect()!;
+    //   const absoluteTitleTop = titleRect.top + window.pageYOffset;
+    //   console.log('absoluteTitleTop', absoluteTitleTop);
+    //   if (window.scrollTo) window.scrollTo({ top: absoluteTitleTop, behavior: 'smooth' });
+    //   else window.scroll(0, absoluteTitleTop);
+    // }
+  };
 
   return (
     <ul className={s.numBar}>

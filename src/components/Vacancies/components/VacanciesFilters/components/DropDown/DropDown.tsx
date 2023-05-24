@@ -1,36 +1,26 @@
-import React, { useEffect } from 'react';
+import { FC, useEffect, MouseEvent } from 'react';
 import s from './DropDown.module.scss';
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
-import type { Category } from '@/shared/types';
-
-type HotState = {
-  isHot: boolean;
-  setIsHot: (boolean: boolean) => void;
-  initialHotState: boolean;
-};
-
-type DropdownState = {
-  isDropdownShown: boolean;
-  setIsDropdownShown: (boolean: boolean) => void;
-};
-
-type CategoriesState = {
-  currentCategory: string;
-  setCurrentCategory: (x: string | null) => void;
-};
+import type { ICategory } from '@/shared/types/CategoriesTypes';
+import type {
+  CurrentCategoryState,
+  DropdownState,
+  HotState,
+  ResetFiltersState,
+} from '../../../../Vacancies';
 
 type Props = {
   categoriesTitle: string;
-  categories: Category[];
+  categories: ICategory[];
   dropdownState: DropdownState;
   hotState: HotState;
   resetCurrentPage: () => void;
   clearSearch: (string: string) => void;
-  categoriesState: CategoriesState;
-  resetFiltersState: any;
+  categoriesState: CurrentCategoryState;
+  resetFiltersState: ResetFiltersState;
 };
 
-export const DropDown: React.FC<Props> = ({
+export const DropDown: FC<Props> = ({
   categories,
   categoriesTitle,
   categoriesState: { currentCategory, setCurrentCategory },
@@ -43,9 +33,9 @@ export const DropDown: React.FC<Props> = ({
     setNeedResetSearch,
   },
 }) => {
-  const handleSelection = (e: any) => {
-    if (currentCategory === e.target.id) setCurrentCategory('');
-    else setCurrentCategory(e.target.id);
+  const handleSelection = ({ currentTarget }: MouseEvent<HTMLLIElement>) => {
+    if (currentCategory === currentTarget.id) setCurrentCategory('');
+    else setCurrentCategory(currentTarget.id);
   };
 
   useEffect(() => {

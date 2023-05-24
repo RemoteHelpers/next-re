@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import s from './Vacancies.module.scss';
 import { VacanciesFilters } from './components/VacanciesFilters';
 import { VacanciesList } from './components/VacanciesList';
-import { useRouter } from 'next/router';
 import { VacanciesPagination } from './components/VacanciesPagination';
+import type { ICategory } from '@/shared/types/CategoriesTypes';
+import type { IVacanciesInfo, IVacancy } from '@/shared/types/VacanciesTypes';
 
+type Props = { vacanciesInfo: IVacanciesInfo; categories: ICategory[]; vacancies: IVacancy[] };
 export type PaginationInfo = {
   vacansPerPage: number;
   totalPages: number;
@@ -13,19 +16,21 @@ export type PaginationInfo = {
   setCurrentPage: (pageNumber: number) => void;
 };
 
-export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const initialHotState = useRouter().asPath === '/' ? true : false;
-  const [isHot, setIsHot] = useState(initialHotState);
-  const [isDropdownShown, setIsDropdownShown] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [needResetCategory, setNeedResetCategory] = useState(false);
-  const [needResetHot, setNeedResetHot] = useState(false);
-  const [needResetSearch, setNeedResetSearch] = useState(false);
+export const Vacancies: React.FC<Props> = ({ vacanciesInfo, categories, vacancies }) => {
+  const { locale, asPath } = useRouter();
+
+  const initialHotState = asPath === '/' ? true : false;
+  const [isHot, setIsHot] = useState<boolean>(initialHotState);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isDropdownShown, setIsDropdownShown] = useState<boolean>(false);
+  const [currentCategory, setCurrentCategory] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [needResetCategory, setNeedResetCategory] = useState<boolean>(false);
+  const [needResetHot, setNeedResetHot] = useState<boolean>(false);
+  const [needResetSearch, setNeedResetSearch] = useState<boolean>(false);
   const vacansPerPage = 9;
-  const [totalPages, setTotalPages] = useState(Math.ceil(vacancies.length / vacansPerPage));
-  const titleRef = useRef(null);
+  const [totalPages, setTotalPages] = useState<number>(Math.ceil(vacancies.length / vacansPerPage));
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   const paginationConfig: PaginationInfo = {
     vacansPerPage,
@@ -34,8 +39,6 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
     currentPage,
     setCurrentPage,
   };
-
-  const { locale } = useRouter();
 
   const resetCurrentPage = (): void => {
     if (currentPage !== 1) setCurrentPage(1);
@@ -78,7 +81,7 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
         <VacanciesList
           vacancies={vacancies}
           vacanciesInfo={vacanciesInfo}
-          hotState={{ isHot, setIsHot, initialHotState }}
+          isHot={isHot}
           searchQuery={searchQuery}
           paginationConfig={paginationConfig}
           currentCategory={currentCategory}
@@ -90,4 +93,34 @@ export const Vacancies = ({ vacanciesInfo, categories, vacancies }: any) => {
       </div>
     </section>
   );
+};
+
+export type HotState = {
+  isHot: boolean;
+  setIsHot: (boolean: boolean) => void;
+  initialHotState: boolean;
+};
+
+export type SearchState = {
+  searchQuery: string;
+  setSearchQuery: (string: string) => void;
+};
+
+export type CurrentCategoryState = {
+  currentCategory: string;
+  setCurrentCategory: (string: string) => void;
+};
+
+export type DropdownState = {
+  isDropdownShown: boolean;
+  setIsDropdownShown: (boolean: boolean) => void;
+};
+
+export type ResetFiltersState = {
+  needResetCategory: boolean;
+  setNeedResetCategory: (boolean: boolean) => void;
+  needResetHot: boolean;
+  setNeedResetHot: (boolean: boolean) => void;
+  needResetSearch: boolean;
+  setNeedResetSearch: (boolean: boolean) => void;
 };
