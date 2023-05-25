@@ -10,14 +10,35 @@ export interface IFeedbackFormData {
   cv_link?: string;
 }
 
+export interface IFileInfo {
+  name: string;
+  caption: string;
+  alternativeText: string;
+  folder: string | null;
+}
+export interface IStateCV {
+  alternativeText: unknown;
+  caption: unknown;
+  createdAt: Date;
+  ext: string;
+  formats: unknown;
+  hash: string;
+  height: unknown;
+  id: number;
+  mime: string;
+  name: string;
+  previewUrl: unknown;
+  provider: string;
+  provider_metadata: unknown;
+  size: number;
+  updatedAt: Date;
+  url: string;
+  width: unknown;
+}
+
 export interface IUploadFile {
   files: any;
-  fileInfo?: {
-    name: string;
-    caption: string;
-    alternativeText: string;
-    folder: string | null;
-  };
+  fileInfo?: IFileInfo;
 }
 
 export interface IFormDataLocalization {

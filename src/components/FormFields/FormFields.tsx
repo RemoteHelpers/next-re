@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import type {
   IFormData,
   IFeedbackFormData,
-  IUploadFile,
+  IStateCV,
   IEnglishLevel,
 } from '@/shared/types/FormTypes';
 import Api from '@/api';
@@ -22,17 +22,15 @@ type Props = {
 const FormFields: FC<Props> = ({ formData }) => {
   const { register, handleSubmit, reset, setValue, control } = useForm<IFeedbackFormData>();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [loadFile, setLoadFile] = useState<IUploadFile[]>([]);
+  const [loadFile, setLoadFile] = useState<IStateCV[]>([]);
+  console.log('loadFile', loadFile);
 
   const handleFileChange = async () => {
     if (!fileInputRef?.current?.files) return;
     if (fileInputRef.current.files.length > 0) {
       const file = fileInputRef.current.files[0];
-      setLoadFile(
-        await Api.uploadFile({
-          files: file,
-        })
-      );
+      console.log('files', file);
+      setLoadFile(await Api.uploadFile({ files: file }));
     } else {
       setLoadFile([]);
       return null;
@@ -40,13 +38,15 @@ const FormFields: FC<Props> = ({ formData }) => {
   };
 
   const submitForm = handleSubmit(async (data: IFeedbackFormData) => {
+    console.log('data', data);
     try {
       await Api.feedBackForm({
         ...data,
-        CV: loadFile[0]?.files || null,
-        CV_url: loadFile[0]?.files[0]?.url || '',
+        CV: loadFile,
+        CV_url: loadFile[0]?.url ?? '',
         pageFrom: window.location.href,
       });
+
       reset();
       const updatedLoadFile = { ...loadFile[0], name: formData?.cv };
       setLoadFile([updatedLoadFile]);
@@ -69,6 +69,7 @@ const FormFields: FC<Props> = ({ formData }) => {
             type="text"
             className={styles.name}
           />
+
           <PhoneInput
             name="number"
             control={control}
@@ -79,6 +80,7 @@ const FormFields: FC<Props> = ({ formData }) => {
             className={styles.number}
           />
         </div>
+
         <div className={styles.second_row}>
           <input
             type="email"
@@ -86,6 +88,7 @@ const FormFields: FC<Props> = ({ formData }) => {
             placeholder={formData?.email}
             className={styles.email}
           />
+
           <input
             type="text"
             minLength={2}
@@ -95,14 +98,17 @@ const FormFields: FC<Props> = ({ formData }) => {
             className={styles.age}
           />
         </div>
+
         <div>
           <p className={styles.english_title}>{formData?.englishLabel}</p>
+
           <Select
             placeholder={formData?.englishLevel}
             onChange={changeEnglishLevel}
             options={formData?.enlishLevels}
           />
         </div>
+
         <div className={styles.work_cv}>
           <input
             type="text"
@@ -110,6 +116,7 @@ const FormFields: FC<Props> = ({ formData }) => {
             placeholder={formData?.cvLink}
             className={styles.cv_link}
           />
+
           <label className={styles.attach_cv}>
             <input
               type="file"
@@ -120,11 +127,15 @@ const FormFields: FC<Props> = ({ formData }) => {
               placeholder="cv_link"
               style={{ display: 'none' }}
             />
-            <span>{loadFile.length > 0 ? loadFile[0]?.fileInfo?.name : formData?.cv}</span>
+
+            <span>{loadFile[0]?.name ?? formData?.cv}</span>
+
             <FormIcon id="pin" />
           </label>
         </div>
+
         <Image className={styles.mobile_cat} src={mainCat} alt={'main cat'} />
+
         <button className={styles.submit} type="submit">
           {formData?.submit}
         </button>
@@ -156,6 +167,7 @@ export default FormFields;
 //   const { register, handleSubmit, reset, setValue, control } = useForm<TFeedbackFormData>();
 //   const fileInputRef = useRef<any>(null);
 //   const [loadFile, setLoadFile] = useState<any>();
+//   console.log('loadFile', loadFile);
 
 //   const handleFileChange = async () => {
 //     if (fileInputRef.current.files.length > 0) {
