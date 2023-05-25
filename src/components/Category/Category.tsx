@@ -1,15 +1,13 @@
 import React, { useMemo, useRef } from "react";
 import s from "./Category.module.scss";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { VacancyCard } from "../VacanciesList/components/VacancyCard";
-import { Breadcrumb } from "antd";
 import Link from "next/link";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
-import { BreadcrumbsIcon } from "@/shared/components/IconComponents/BreadcrumbsIcon";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
 import FormFields from "../FormFields/FormFields";
 import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
 import Image from "next/image";
+import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 
 type CategoryProps = {
 	category: any;
@@ -36,18 +34,14 @@ export const Category = ({
 				title: categoryTitle,
 			},
 		],
-		[header]
+		[header, categoryTitle]
 	);
 	const formRef = useRef<any>(null);
 	return (
 		<section className={s.category}>
 			<div className={s.container}>
 				<div className={s.content}>
-					<Breadcrumb
-						items={breadcrumbsItems}
-						separator={<BreadcrumbsIcon id="separator" />}
-						className={s.breadcrumbs}
-					/>
+					<Breadcrumbs items={breadcrumbsItems} className={s.breadcrumbs} />
 					<h1 className={s.title}>{categoryTitle}</h1>
 					<ReactMarkdown className={s.description}>{description}</ReactMarkdown>
 					<button
