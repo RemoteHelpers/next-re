@@ -1,0 +1,1 @@
+export { VideointerviewPage } from "./Videointerview";
