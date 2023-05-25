@@ -44,6 +44,7 @@ export const Vacancy: FC<VacancyProps> = ({
 	} = vacancy.attributes;
 	const { menu, isHotValue, seeMore } = header;
 	const { categorySlug, categoryTitle, vacancies } = category.attributes;
+	const { respondBtn } = formData;
 	const breadcrumbsItems = useMemo(
 		(): ItemType[] => [
 			{
@@ -95,7 +96,7 @@ export const Vacancy: FC<VacancyProps> = ({
 										behavior: "smooth",
 									})
 								}>
-								{"Откликнуться"}
+								{respondBtn}
 							</button>
 						</div>
 						{videoLink ? (
