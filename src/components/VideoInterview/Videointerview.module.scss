@@ -8,7 +8,7 @@
     padding: 0 30px;
 
     @include on768 {
-        @include container(60px, 3rem);
+        @include container(60px, 5rem);
     }
 }
 
@@ -20,12 +20,22 @@
 .top_section {
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 0 2rem;
 
     article {
-        width: 50%;
+        width: 100%;
+    }
+
+    @include on992 {
+        width: 100%;
+        flex-direction: row;
+
+        article {
+            width: 50%;
+        }
     }
 }
 
@@ -69,39 +79,85 @@
 }
 
 .video_cat {
-    width: 50%;
+    display: none;
+
+    @include on992 {
+        display: block;
+        width: 50%;
+        height: auto;
+    }
+}
+
+.mobile_cat {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    margin: 0 auto 3rem auto;
+
+    @include on992 {
+        display: none;
+    }
 }
 
 .main_section {
     width: 100%;
     position: relative;
-    margin-top: 20.75rem;
+    margin-top: 25rem;
     background-color: $secondaryAzure;
 
     &::after {
         content: "";
         position: absolute;
-        top: -18rem;
+        top: -14rem;
         left: 50%;
         transform: translate(-50%);
-        width: 120vw;
+        width: 180vw;
         height: 130vh;
         background-color: $secondaryAzure;
         border-radius: 50% 50% 0 0;
         z-index: -1;
     }
 
+    @include on992 {
+        &::after {
+            content: "";
+            position: absolute;
+            top: -18rem;
+            left: 50%;
+            transform: translate(-50%);
+            width: 120vw;
+            height: 130vh;
+            z-index: -1;
+        }
+    }
+
     &::before {
         content: "";
         position: absolute;
-        top: -20rem;
+        top: -16rem;
         left: 50%;
         transform: translate(-60%);
-        width: 120vw;
+        width: 180vw;
         height: 130vh;
         background-color: $primaryBlue;
         border-radius: 50% 50% 0 0;
         z-index: -2;
+    }
+
+    @include on992 {
+        &::before {
+            content: "";
+            position: absolute;
+            top: -20rem;
+            left: 50%;
+            transform: translate(-60%);
+            width: 120vw;
+            height: 130vh;
+            background-color: $primaryBlue;
+            border-radius: 50% 50% 0 0;
+            z-index: -2;
+        }
     }
 }
 
@@ -133,14 +189,29 @@
     &::after {
         content: "";
         position: absolute;
-        top: -8rem;
+        top: -13rem;
         left: 50%;
         transform: translateX(-50%);
         height: 100%;
-        width: 105vw;
+        width: 160vw;
         background-color: $secondaryAzure;
         border-radius: 0 0 50% 50%;
         z-index: -1;
+    }
+
+    @include on992 {
+        &::after {
+            content: "";
+            position: absolute;
+            top: -8rem;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: 105vw;
+            background-color: $secondaryAzure;
+            border-radius: 0 0 50% 50%;
+            z-index: -1;
+        }
     }
 
     &_wrapper {
@@ -148,14 +219,24 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-direction: column-reverse;
         gap: 0 2rem;
+
+        @include on992 {
+            flex-direction: row;
+        }
     }
 
     &_video {
-        width: 40%;
+        width: 85%;
+        margin: 0 auto;
         aspect-ratio: 16 / 9;
         border-radius: .5rem;
         overflow: hidden;
+
+        @include on992 {
+            width: 40%;
+        }
     }
 
     &_iframe {
@@ -172,7 +253,13 @@
     }
 
     &_info {
-        width: 60%;
+        width: 100%;
+        margin: 0 0 3rem 0;
+
+        @include on992 {
+            width: 60%;
+            margin: 0;
+        }
 
         h2 {
             font-style: normal;
@@ -200,6 +287,13 @@
 
     &_wrapper {
         gap: 0 2rem;
+        width: 85% !important;
+        margin: 0 auto;
+
+        @include on992 {
+            width: 100%;
+            margin: 0;
+        }
     }
 
     h2 {
@@ -215,10 +309,6 @@
     }
 }
 
-.instruction_video_title {
-    width: 33%;
-}
-
 .video_examples_wrapper {
     width: 100%;
     height: auto;
@@ -229,7 +319,7 @@
     align-items: center;
     margin-top: 2.75rem;
 
-    @include on1440 {
+    @include on992 {
         flex-direction: row;
         row-gap: 0;
     }

@@ -22,6 +22,11 @@ export const VideointerviewPage = ({ videoData, formData }: any) => {
               children={videoData?.firstDescription}
               className={styles.first_description}
             />
+            <Image
+              src={videoCat}
+              alt={"Video cat"}
+              className={styles.mobile_cat}
+            />
             <ReactMarkdown
               children={videoData?.secondDescription}
               className={styles.second_description}
@@ -65,18 +70,12 @@ export const VideointerviewPage = ({ videoData, formData }: any) => {
             <h2>{videoData?.thirdTitle}</h2>
             <div className={styles.video_examples_wrapper}>
               {videoData?.videoList.map((videoItem: any) => (
-                <button
-                  type="button"
-                  id={`${videoItem.id}`}
+                <ReactPlayer
+                  className={styles.instruction_iframe}
+                  url={videoItem.videoLink}
                   key={videoItem.id}
-                  className={styles.instruction_video_title}
-                >
-                  <ReactPlayer
-                    className={styles.instruction_iframe}
-                    url={videoItem.videoLink}
-                    controls
-                  />
-                </button>
+                  controls
+                />
               ))}
             </div>
           </div>
