@@ -8,8 +8,11 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import FormFields from "../FormFields/FormFields";
 import Image from "next/image";
 import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
+import laptopCat from "./assets/laptop_cat.svg";
 import { VacanciesIcon } from "@/shared/components/IconComponents/Vacancies";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 interface VacancyProps {
 	vacancy: any;
@@ -56,7 +59,7 @@ export const Vacancy: FC<VacancyProps> = ({
 				title: title,
 			},
 		],
-		[]
+		[menu, categorySlug, categoryTitle]
 	);
 	const formRef = useRef<any>(null);
 	return (
@@ -80,9 +83,34 @@ export const Vacancy: FC<VacancyProps> = ({
 						<div className={s.short_info}>
 							<h1 className={s.title}>{titleH1}</h1>
 							<h3 className={s.subtitle}>{subTitle}</h3>
-							<p className={s.short_desc}>{cardDescription}</p>
+							<ReactMarkdown className={s.short_desc}>
+								{cardDescription}
+							</ReactMarkdown>
+							<button
+								type="button"
+								className={s.short_btn}
+								onClick={() =>
+									formRef?.current?.scrollIntoView({
+										block: "center",
+										behavior: "smooth",
+									})
+								}>
+								{"Откликнуться"}
+							</button>
 						</div>
-						<div className={s.short_video}></div>
+						{videoLink ? (
+							<div className={s.short_video}>
+								<ReactPlayer
+									className={s.video_iframe}
+									url={videoLink}
+									controls
+								/>
+							</div>
+						) : (
+							<div className={s.cat_placeholder}>
+								<Image src={laptopCat} alt="laptop_cat"/>
+							</div>
+						)}
 					</div>
 					<ReactMarkdown className={s.description}>{description}</ReactMarkdown>
 					<div className={s.form_wrapper} ref={formRef}>
@@ -105,8 +133,8 @@ export const Vacancy: FC<VacancyProps> = ({
 							);
 						}
 					})}
-        </div>
-        <button className={s.see_more}>{seeMore}</button>
+				</div>
+				<Link href={`/${menu[1].path_id}`} className={s.see_more}>{seeMore}</Link>
 			</div>
 		</section>
 	);
