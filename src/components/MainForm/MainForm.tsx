@@ -6,7 +6,7 @@ import type { IFormData } from '@/shared/types/FormTypes';
 
 type Props = {
   formData: IFormData;
-  formRef: React.RefObject<HTMLElement>;
+  formRef?: React.RefObject<HTMLElement>;
 };
 
 const MainForm: React.FC<Props> = ({ formData, formRef }) => {
