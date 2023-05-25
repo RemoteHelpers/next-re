@@ -1,14 +1,14 @@
 import type { FC } from 'react';
-import { Sphere } from './components/Sphere';
 import s from './Spheres.module.scss';
-import { ICategory } from '@/shared/types/CategoriesTypes';
+import type { ICategory } from '@/shared/types/CategoriesTypes';
+import { Sphere } from './components/Sphere';
 
 interface SpheresProps {
   title: string;
   categories: ICategory[];
 }
 
-export const Spheres: FC<SpheresProps> = ({ title, categories }: SpheresProps) => {
+export const Spheres: FC<SpheresProps> = ({ title, categories }) => {
   return (
     <section className={s.spheres}>
       <div className={s.container}>

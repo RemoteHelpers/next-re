@@ -1,18 +1,23 @@
-import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper";
-import styles from "./Testimonials.module.scss";
+import { FC, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper';
+import styles from './Testimonials.module.scss';
 
-import "../../../node_modules/swiper/swiper.scss";
-import "../../../node_modules/swiper/modules/pagination/pagination.scss";
-import "../../../node_modules/swiper/modules/navigation/navigation.scss";
+import '../../../node_modules/swiper/swiper.scss';
+import '../../../node_modules/swiper/modules/pagination/pagination.scss';
+import '../../../node_modules/swiper/modules/navigation/navigation.scss';
 
-import { TestimonialsIcon } from "@/shared/components/IconComponents/Testimonials";
+import { TestimonialsIcon } from '@/shared/components/IconComponents/Testimonials';
 
-import { PhotoAPI } from "@/constants";
-import Image from "next/image";
+import { PhotoAPI } from '@/constants';
+import Image from 'next/image';
+import type { IHomeData } from '@/shared/types/HomeTypes';
 
-const Feedbacks = ({ testimonials }: any) => {
+type Props = {
+  testimonials: IHomeData;
+};
+
+const Feedbacks: FC<Props> = ({ testimonials }) => {
   const [currentId, setCurrentId] = useState<any>();
 
   const handleSlideClick = (event: any) => {
@@ -21,9 +26,7 @@ const Feedbacks = ({ testimonials }: any) => {
 
   return (
     <section className={styles.container}>
-      <h2 className={styles.testimonials_title}>
-        {testimonials.testimonialsTitle}
-      </h2>
+      <h2 className={styles.testimonials_title}>{testimonials.testimonialsTitle}</h2>
       <Swiper
         className={styles.swiper_wrapper}
         modules={[Navigation, Autoplay]}
@@ -33,8 +36,8 @@ const Feedbacks = ({ testimonials }: any) => {
         slidesPerView={1}
         spaceBetween={20}
         navigation={{
-          nextEl: ".next-slider",
-          prevEl: ".prev-slider",
+          nextEl: '.next-slider',
+          prevEl: '.prev-slider',
         }}
         breakpoints={{
           768: {
@@ -62,7 +65,7 @@ const Feedbacks = ({ testimonials }: any) => {
                 <header className={styles.slide_description}>
                   {item.id == currentId ? (
                     <span
-                      style={{ pointerEvents: "all", height: "100%" }}
+                      style={{ pointerEvents: 'all', height: '100%' }}
                       onClick={() => setCurrentId(!currentId)}
                     >
                       {item.Description}

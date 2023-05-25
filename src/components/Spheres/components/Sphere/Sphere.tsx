@@ -4,12 +4,12 @@ import s from './Sphere.module.scss';
 import { CategoryIcon } from '@/shared/components/IconComponents/CategoryIcon';
 import { GlobalContext } from '@/context';
 
-interface SphereProps {
+type SphereProps = {
   categorySlug: string;
   categoryTitle: string;
-}
+};
 
-export const Sphere: FC<SphereProps> = ({ categorySlug, categoryTitle }: SphereProps) => {
+export const Sphere: FC<SphereProps> = ({ categorySlug, categoryTitle }) => {
   const { setNavURL } = useContext(GlobalContext);
 
   return (

@@ -2,7 +2,7 @@ import { FC, useEffect, useState, useContext } from 'react';
 import s from './BurgerMenu.module.scss';
 import Link from 'next/link';
 import type { IMenu } from '@/shared/types/HeaderTypes';
-import type { HeaderData } from '../../Header';
+import type { IHeaderData } from '@/shared/types/HeaderTypes';
 import type { IVacancy } from '@/shared/types/VacanciesTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
 import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
@@ -15,7 +15,7 @@ type MenuState = {
 
 type Props = {
   menuState: MenuState;
-  headerData: HeaderData;
+  headerData: IHeaderData;
 };
 
 export const BurgerMenu: FC<Props> = ({ menuState, headerData }) => {

@@ -1,5 +1,5 @@
 import { FC, useRef } from 'react';
-import { GetServerSidePropsContext } from 'next';
+import type { GetServerSidePropsContext } from 'next';
 import { Layout } from '@/components/Layout';
 import { Vacancies } from '@/components/Vacancies';
 import { Questions } from '@/components/Questions';
@@ -21,15 +21,17 @@ import type { IVacanciesInfo, IVacancy } from '@/shared/types/VacanciesTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
 import type { IHeader } from '@/shared/types/HeaderTypes';
 import type { IHomeData } from '@/shared/types/HomeTypes';
+import type { IFormData } from '@/shared/types/FormTypes';
+import type { IFooterData } from '@/shared/types/FooterTypes';
 
 type Props = {
   vacanciesInfo: IVacanciesInfo;
   categories: ICategory[];
   vacancies: IVacancy[];
   homeData: IHomeData;
-  footerData: any;
+  footerData: IFooterData;
   header: IHeader;
-  formData: any;
+  formData: IFormData;
 };
 
 const Home: FC<Props> = ({
@@ -41,7 +43,7 @@ const Home: FC<Props> = ({
   header,
   formData,
 }) => {
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLElement>(null);
 
   return (
     <>
