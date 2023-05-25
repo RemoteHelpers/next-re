@@ -43,7 +43,6 @@ export const VacanciesIcon: FC<Props> = ({ name }) => {
         >
           <path
             d="M4 9.55176L12 17.5518L20 9.55176"
-            // stroke="#F24E1E"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -62,7 +61,6 @@ export const VacanciesIcon: FC<Props> = ({ name }) => {
         >
           <path
             d="M22 22L2 2M22 2C14.1895 9.81049 9.81049 14.1895 2 22"
-            // stroke="black"
             strokeWidth="2"
             strokeLinecap="square"
             strokeLinejoin="round"
@@ -71,6 +69,6 @@ export const VacanciesIcon: FC<Props> = ({ name }) => {
       );
 
     default:
-      return <svg></svg>;
+      return <></>;
   }
 };

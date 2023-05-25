@@ -1,25 +1,27 @@
-import React, { FC, useCallback, useState, useContext } from 'react';
-import s from './Header.module.scss';
+import { FC, useCallback, useState, useContext } from 'react';
 import Image from 'next/image';
-import re_logo from './assets/re_logo.svg';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import s from './Header.module.scss';
+import re_logo from './assets/re_logo.svg';
 import { BurgerMenu } from './components/BurgerMenu';
 import { SelectLang } from './components/SelectLang';
 import { DesktopMenu } from './components/DesktopMenu';
 import { GlobalContext } from '@/context';
+import type { IHeaderData } from '@/shared/types/HeaderTypes';
 
 type Props = {
-  headerData: any;
+  headerData: IHeaderData;
 };
+
 export const Header: FC<Props> = ({ headerData }) => {
-  const [isBurgerMenu, setIsBurgerMenu] = useState(false);
-  const [isDesktopMenuShown, setIsDesktopMenuShown] = useState(false);
+  const [isBurgerMenu, setIsBurgerMenu] = useState<boolean>(false);
+  const [isDesktopMenuShown, setIsDesktopMenuShown] = useState<boolean>(false);
   const { menu, chooseLangValue } = headerData.header;
   const router = useRouter();
   const { setNavURL } = useContext(GlobalContext);
 
-  const openMenu = (path: string) => {
+  const openMenu = (path: string): void => {
     if (path === 'vacancies' && !isDesktopMenuShown) setIsDesktopMenuShown(true);
   };
 

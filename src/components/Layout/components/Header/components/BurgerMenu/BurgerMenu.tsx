@@ -1,7 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { FC, useEffect, useState, useContext } from 'react';
 import s from './BurgerMenu.module.scss';
 import Link from 'next/link';
-import type { Category, IVacancy } from '@/shared/types';
+import type { IMenu } from '@/shared/types/HeaderTypes';
+import type { IHeaderData } from '@/shared/types/HeaderTypes';
+import type { IVacancy } from '@/shared/types/VacanciesTypes';
+import type { ICategory } from '@/shared/types/CategoriesTypes';
 import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
 import { GlobalContext } from '@/context';
 
@@ -12,32 +15,32 @@ type MenuState = {
 
 type Props = {
   menuState: MenuState;
-  headerData: any;
+  headerData: IHeaderData;
 };
 
-export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
-  const [currentTab, setCurrentTab] = useState(1);
-  const [currentCategory, setCurrentCategory] = useState('');
+export const BurgerMenu: FC<Props> = ({ menuState, headerData }) => {
+  const [currentTab, setCurrentTab] = useState<number>(1);
+  const [currentCategory, setCurrentCategory] = useState<string>('');
   const { isBurgerMenu, setIsBurgerMenu } = menuState;
   const { menu, menuValue, backValue, allVacanciesValue } = headerData.header;
   const { categories, vacancies } = headerData;
   const { setNavURL } = useContext(GlobalContext);
 
-  const navToLink = (path: string) => {
+  const navToLink = (path: string): void => {
     setIsBurgerMenu(false);
     setNavURL(path);
   };
 
-  const navToFirst = () => setCurrentTab(1);
-  const navToSecond = () => setCurrentTab(2);
-  const navToThird = (categoryName: string) => {
+  const navToFirst = (): void => setCurrentTab(1);
+  const navToSecond = (): void => setCurrentTab(2);
+  const navToThird = (categoryName: string): void => {
     setCurrentCategory(categoryName);
     setCurrentTab(3);
   };
 
   const filteredVacancies = (): IVacancy[] => {
     return vacancies
-      .filter((el: IVacancy) => {
+      .filter((el: IVacancy): boolean => {
         return el.attributes.categories.data[0].attributes.categoryTitle === currentCategory;
       })
       .sort((a: IVacancy, b: IVacancy): number => {
@@ -54,7 +57,7 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
 
   useEffect(() => {
     if (!document) return;
-    const body = document.querySelector('body')!;
+    const body = document.querySelector('body') as HTMLBodyElement;
     if (isBurgerMenu) body.classList.add('no-scroll');
     else if (!isBurgerMenu) {
       body.classList.remove('no-scroll');
@@ -69,7 +72,7 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
 
       <nav className={s.navigation}>
         <ul className={currentTab === 1 ? s.firstTab_shown : s.firstTab}>
-          {menu.map(({ title, path_id }: any) => {
+          {menu.map(({ title, path_id }: IMenu) => {
             if (!path_id.trim()) return;
             return (
               <li key={path_id}>
@@ -102,7 +105,7 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
           </li>
 
           {currentTab === 2 &&
-            categories.map(({ attributes }: Category) => {
+            categories.map(({ attributes }: ICategory) => {
               const { categoryTitle, createdAt, categorySlug } = attributes;
               if (categorySlug === 'other') return;
               return (

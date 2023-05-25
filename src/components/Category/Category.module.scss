@@ -25,7 +25,7 @@
 }
 .title {
 	font-weight: 900;
-	font-size: clamp(32px, 3.3vw, 64px);
+	font-size: $fontSize1;
 	margin-top: 2rem;
 }
 .breadcrumbs {
