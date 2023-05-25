@@ -1,25 +1,23 @@
-import React, { useCallback } from 'react';
+import { FC, useCallback, useContext } from 'react';
 import s from './VacancyItem.module.scss';
-import { IVacancy, IVacancyAttr } from '@/shared/types';
+import { IVacanciesInfo, IVacancyAttributes } from '@/shared/types/VacanciesTypes';
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
 import Link from 'next/link';
+import { GlobalContext } from '@/context';
 
 type Props = {
-  attributes: IVacancyAttr;
-  vacanciesInfo: any;
+  attributes: IVacancyAttributes;
+  vacanciesInfo: IVacanciesInfo;
   category?: string;
 };
 
-export const VacancyItem: React.FC<Props> = ({ attributes, vacanciesInfo, category }) => {
+export const VacancyItem: FC<Props> = ({ attributes, vacanciesInfo, category }) => {
   const { isHot, cardDescription, title, categories, vacancySlug } = attributes;
+  const { setNavURL } = useContext(GlobalContext);
 
   const getPathToVacancy = useCallback((): string => {
-    if (category) {
-      return `/${category}/${vacancySlug}`;
-    }
-    if (categories) {
-      return `/${categories?.data[0]?.attributes.categorySlug}/${vacancySlug}`;
-    }
+    if (category) return `/${category}/${vacancySlug}`;
+    if (categories) return `/${categories?.data[0]?.attributes.categorySlug}/${vacancySlug}`;
     return '';
   }, [category, vacancySlug]);
 
@@ -42,7 +40,11 @@ export const VacancyItem: React.FC<Props> = ({ attributes, vacanciesInfo, catego
         <p className={s.cardDescription}>{`${cardDescription.slice(0, 107)}...`}</p>
       </div>
 
-      <Link href={getPathToVacancy()} className={s.link}>
+      <Link
+        href={getPathToVacancy()}
+        className={s.link}
+        onClick={() => setNavURL(getPathToVacancy())}
+      >
         {vacanciesInfo.button}
       </Link>
     </li>

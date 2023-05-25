@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import s from './DesktopMenu.module.scss';
-import { Category, IVacancy } from '@/shared/types';
+import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
-import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
 import { useRouter } from 'next/router';
+import s from './DesktopMenu.module.scss';
+import type { IHeaderData } from '@/shared/types/HeaderTypes';
+import type { ICategory } from '@/shared/types/CategoriesTypes';
+import type { IVacancy } from '@/shared/types/VacanciesTypes';
+import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
+import { GlobalContext } from '@/context';
 
 type Props = {
   desktopMenuState: {
     isDesktopMenuShown: boolean;
     setIsDesktopMenuShown: (boolean: boolean) => void;
   };
-  headerData: any;
+  headerData: IHeaderData;
 };
 
 export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) => {
@@ -18,8 +21,14 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
   const { categories, vacancies } = headerData;
   const {
     attributes: { categoryTitle: initialCategoryState },
-  } = categories.find((el: any) => el.attributes.categorySlug !== 'other');
+  } = categories.find((el: ICategory) => el.attributes.categorySlug !== 'other') as ICategory;
   const [currentCategory, setCurrentCategory] = useState<string>(initialCategoryState);
+  const { setNavURL } = useContext(GlobalContext);
+
+  const navToLink = (path: string): void => {
+    setIsDesktopMenuShown(false);
+    setNavURL(path);
+  };
 
   const filteredVacancies = (): IVacancy[] => {
     return vacancies
@@ -38,12 +47,8 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
       });
   };
 
-  const backdropHandler = ({ target, currentTarget }: any) => {
+  const backdropHandler = ({ target, currentTarget }: React.MouseEvent) => {
     if (target === currentTarget) setIsDesktopMenuShown(false);
-  };
-
-  const closeMenu = () => {
-    if (isDesktopMenuShown) setIsDesktopMenuShown(false);
   };
 
   // useEffect(() => {
@@ -69,7 +74,7 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
     >
       <nav className={s.navMenu}>
         <ul className={s.categoriesList}>
-          {categories.map(({ attributes }: Category) => {
+          {categories.map(({ attributes }: ICategory) => {
             const { categoryTitle, createdAt, categorySlug } = attributes;
 
             if (!currentCategory && categorySlug !== 'other') setCurrentCategory(categoryTitle);
@@ -101,12 +106,11 @@ export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) =
                 vacancySlug,
               } = attributes;
 
+              const path = `/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`;
+
               return (
                 <li key={createdAt.toString()}>
-                  <Link
-                    href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
-                    onClick={closeMenu}
-                  >
+                  <Link href={path} onClick={() => navToLink(path)}>
                     {title}
                   </Link>
                 </li>

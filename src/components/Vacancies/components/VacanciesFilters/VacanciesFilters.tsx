@@ -1,9 +1,30 @@
-import React, { useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, RefObject, ChangeEvent } from 'react';
 import s from './VacanciesFilters.module.scss';
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
 import { DropDown } from './components/DropDown';
+import type { ICategory } from '@/shared/types/CategoriesTypes';
+import type { IVacanciesInfo } from '@/shared/types/VacanciesTypes';
+import type {
+  HotState,
+  SearchState,
+  CurrentCategoryState,
+  DropdownState,
+  ResetFiltersState,
+} from '../../Vacancies';
 
-export const VacanciesFilters = ({
+type Props = {
+  vacanciesInfo: IVacanciesInfo;
+  categories: ICategory[];
+  setTitleRef: RefObject<HTMLHeadingElement>;
+  hotState: HotState;
+  searchState: SearchState;
+  resetCurrentPage: () => void;
+  categoriesState: CurrentCategoryState;
+  dropdownState: DropdownState;
+  resetState: ResetFiltersState;
+};
+
+export const VacanciesFilters: FC<Props> = ({
   vacanciesInfo: { title, placeholder, categoriesTitle, hotVacancies, allVacancies },
   categories,
   hotState,
@@ -13,7 +34,7 @@ export const VacanciesFilters = ({
   categoriesState,
   dropdownState,
   resetState,
-}: any) => {
+}) => {
   const checkboxRef = useRef<HTMLInputElement>(null);
   const { isHot, setIsHot, initialHotState } = hotState;
   const { currentCategory } = categoriesState;
@@ -25,7 +46,7 @@ export const VacanciesFilters = ({
     setNeedResetSearch,
   } = resetState;
 
-  const handleSearchChange = ({ target: { value } }: any) => {
+  const handleSearchChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(value);
   };
 

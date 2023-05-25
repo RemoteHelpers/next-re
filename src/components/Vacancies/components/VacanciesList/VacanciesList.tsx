@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState, ReactElement } from 'react';
+import { useRouter } from 'next/router';
 import s from './VacanciesList.module.scss';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
-import type { IVacancy } from '@/shared/types';
-import { useRouter } from 'next/router';
-import { Oops } from './components/Oops/Oops';
+import type { IVacanciesInfo, IVacancy, IVacancyKeywordTag } from '@/shared/types/VacanciesTypes';
 import { VacancyItem } from './components/VacancyItem';
+import { Oops } from './components/Oops/Oops';
 
 type Props = {
-  vacancies: any;
-  vacanciesInfo: any;
+  vacancies: IVacancy[];
+  vacanciesInfo: IVacanciesInfo;
   currentCategory: string;
   searchQuery: string;
   paginationConfig: PaginationInfo;
-  hotState: any;
+  isHot: boolean;
 };
 
-export const VacanciesList: React.FC<Props> = ({
+export const VacanciesList: FC<Props> = ({
   vacancies,
   vacanciesInfo,
   currentCategory,
   searchQuery,
   paginationConfig,
-  hotState: { isHot },
+  isHot,
 }) => {
   const [vacanciesList, setVacanciesList] = useState(vacancies);
   const { vacansPerPage, currentPage, setTotalPages } = paginationConfig;
   const { locale } = useRouter();
-  
+
   const changeTotalPages = (): void =>
     setTotalPages(Math.ceil(vacanciesList.length / vacansPerPage));
 
-  const slicePerPage = (vacansArr: IVacancy[]): any[] => {
+  const slicePerPage = (vacansArr: ReactElement[]): ReactElement[] => {
     const skipIndex = currentPage > 1 ? vacansPerPage * (currentPage - 1) : 0;
     const limitIndex = skipIndex + vacansPerPage;
     const sliced = vacansArr.slice(skipIndex, limitIndex);
@@ -53,9 +53,9 @@ export const VacanciesList: React.FC<Props> = ({
     return vacancies
       .filter(
         ({ attributes }: IVacancy) =>
-          attributes.title.toLowerCase().includes(searchQuery.toLocaleLowerCase()) ||
-          attributes.vacancySlug.toLowerCase().includes(searchQuery.toLocaleLowerCase()) ||
-          attributes.keyword_tags.data.some((keyword: any) =>
+          attributes.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          attributes.vacancySlug.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          attributes.keyword_tags.data.some((keyword: IVacancyKeywordTag) =>
             keyword.attributes.keyPhrase.toLowerCase().includes(searchQuery.toLowerCase())
           )
       )
@@ -73,10 +73,7 @@ export const VacanciesList: React.FC<Props> = ({
       .sort(sortByHot);
   };
 
-  useEffect(() => {
-    changeTotalPages();
-  });
-  const vacanicesByDate = () => {
+  const vacanicesByDate = (): IVacancy[] => {
     const allVacans = vacancies;
     return allVacans.sort(sortByDate);
   };
@@ -99,7 +96,11 @@ export const VacanciesList: React.FC<Props> = ({
           vacanciesList.map(({ attributes }: IVacancy) => {
             const { createdAt } = attributes;
             return (
-              <VacancyItem key={createdAt} attributes={attributes} vacanciesInfo={vacanciesInfo} />
+              <VacancyItem
+                key={createdAt.toString()}
+                attributes={attributes}
+                vacanciesInfo={vacanciesInfo}
+              />
             );
           })
         )

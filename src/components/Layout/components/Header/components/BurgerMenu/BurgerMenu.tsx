@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState, useContext } from 'react';
 import s from './BurgerMenu.module.scss';
 import Link from 'next/link';
-import type { Category, IVacancy } from '@/shared/types';
+import type { IMenu } from '@/shared/types/HeaderTypes';
+import type { IHeaderData } from '@/shared/types/HeaderTypes';
+import type { IVacancy } from '@/shared/types/VacanciesTypes';
+import type { ICategory } from '@/shared/types/CategoriesTypes';
 import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
+import { GlobalContext } from '@/context';
 
 type MenuState = {
   isBurgerMenu: boolean;
@@ -11,27 +15,32 @@ type MenuState = {
 
 type Props = {
   menuState: MenuState;
-  headerData: any;
+  headerData: IHeaderData;
 };
 
-export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
-  const [currentTab, setCurrentTab] = useState(1);
-  const [currentCategory, setCurrentCategory] = useState('');
+export const BurgerMenu: FC<Props> = ({ menuState, headerData }) => {
+  const [currentTab, setCurrentTab] = useState<number>(1);
+  const [currentCategory, setCurrentCategory] = useState<string>('');
   const { isBurgerMenu, setIsBurgerMenu } = menuState;
   const { menu, menuValue, backValue, allVacanciesValue } = headerData.header;
   const { categories, vacancies } = headerData;
+  const { setNavURL } = useContext(GlobalContext);
 
-  const navToLink = () => setIsBurgerMenu(false);
-  const navToFirst = () => setCurrentTab(1);
-  const navToSecond = () => setCurrentTab(2);
-  const navToThird = (value: string) => {
-    setCurrentCategory(value);
+  const navToLink = (path: string): void => {
+    setIsBurgerMenu(false);
+    setNavURL(path);
+  };
+
+  const navToFirst = (): void => setCurrentTab(1);
+  const navToSecond = (): void => setCurrentTab(2);
+  const navToThird = (categoryName: string): void => {
+    setCurrentCategory(categoryName);
     setCurrentTab(3);
   };
 
   const filteredVacancies = (): IVacancy[] => {
     return vacancies
-      .filter((el: IVacancy) => {
+      .filter((el: IVacancy): boolean => {
         return el.attributes.categories.data[0].attributes.categoryTitle === currentCategory;
       })
       .sort((a: IVacancy, b: IVacancy): number => {
@@ -47,14 +56,13 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
   };
 
   useEffect(() => {
-    if (document) {
-      const body = document.querySelector('body')!;
-      if (isBurgerMenu) body.classList.add('no-scroll');
-      else if (!isBurgerMenu) {
-        body.classList.remove('no-scroll');
-        if (currentTab !== 1) setCurrentTab(1);
-        if (currentCategory) setCurrentCategory('');
-      }
+    if (!document) return;
+    const body = document.querySelector('body') as HTMLBodyElement;
+    if (isBurgerMenu) body.classList.add('no-scroll');
+    else if (!isBurgerMenu) {
+      body.classList.remove('no-scroll');
+      if (currentTab !== 1) setCurrentTab(1);
+      if (currentCategory) setCurrentCategory('');
     }
   }, [isBurgerMenu]);
 
@@ -64,12 +72,12 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
 
       <nav className={s.navigation}>
         <ul className={currentTab === 1 ? s.firstTab_shown : s.firstTab}>
-          {menu.map(({ title, path_id }: any) => {
+          {menu.map(({ title, path_id }: IMenu) => {
             if (!path_id.trim()) return;
             return (
               <li key={path_id}>
                 {path_id !== 'vacancies' ? (
-                  <Link href={`/${path_id}`} onClick={navToLink}>
+                  <Link href={`/${path_id}`} onClick={() => navToLink(path_id)}>
                     {title}
                   </Link>
                 ) : (
@@ -91,13 +99,13 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
           </li>
 
           <li>
-            <Link href={`/vacancies`} onClick={navToLink}>
+            <Link href={`/vacancies`} onClick={() => navToLink('vacancies')}>
               {allVacanciesValue}
             </Link>
           </li>
 
           {currentTab === 2 &&
-            categories.map(({ attributes }: Category) => {
+            categories.map(({ attributes }: ICategory) => {
               const { categoryTitle, createdAt, categorySlug } = attributes;
               if (categorySlug === 'other') return;
               return (
@@ -132,12 +140,11 @@ export const BurgerMenu: React.FC<Props> = ({ menuState, headerData }) => {
                 vacancySlug,
               } = attributes;
 
+              const path = `${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`;
+
               return (
                 <li key={createdAt.toString()}>
-                  <Link
-                    href={`/${categoriesInfo[0].attributes.categorySlug}/${vacancySlug}`}
-                    onClick={navToLink}
-                  >
+                  <Link href={`/${path}`} onClick={() => navToLink(path)}>
                     {title}
                   </Link>
                 </li>

@@ -1,18 +1,27 @@
-import React from 'react';
+import { FC, useContext } from 'react';
 import s from './Footer.module.scss';
 import Image from 'next/image';
 import footerLogo from './assets/footerLogo.svg';
 import Link from 'next/link';
 import { FooterIcon } from '@/shared/components/IconComponents/Footer';
+import { GlobalContext } from '@/context';
+import type { IFooterData } from '@/shared/types/FooterTypes';
+import type { IHeader } from '@/shared/types/HeaderTypes';
+import type { IMenu } from '@/shared/types/HeaderTypes';
 
-export const Footer = ({ footerData, header: { menu } }: any) => {
-  // console.log(footerData);
+type Props = {
+  footerData: IFooterData;
+  header: IHeader;
+};
+
+export const Footer: FC<Props> = ({ footerData, header: { menu } }) => {
+  const { setNavURL } = useContext(GlobalContext);
 
   return (
     <footer className={s.footer}>
       <div className={s.container}>
         <div className={s.footer_info}>
-          <Link href="/">
+          <Link href="/" onClick={() => setNavURL('/')}>
             <Image
               src={footerLogo}
               alt={'Remote Employees'}
@@ -23,7 +32,7 @@ export const Footer = ({ footerData, header: { menu } }: any) => {
           </Link>
           <span className={s.line}></span>
           <div className={s.footer_links}>
-            {menu.map((link: any) => {
+            {menu.map((link: IMenu) => {
               if (!link.path_id.trim()) return;
               return (
                 <Link
@@ -32,6 +41,7 @@ export const Footer = ({ footerData, header: { menu } }: any) => {
                     pathname: `${link.path_id}`,
                   }}
                   className={s.footer_link}
+                  onClick={() => setNavURL(link.path_id)}
                 >
                   {link.title}
                 </Link>
