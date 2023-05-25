@@ -291,7 +291,7 @@
         margin: 0 auto;
 
         @include on992 {
-            width: 100%;
+            width: 100% !important;
             margin: 0;
         }
     }
