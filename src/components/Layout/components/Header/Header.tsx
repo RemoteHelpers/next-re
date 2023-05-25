@@ -4,18 +4,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import s from './Header.module.scss';
 import re_logo from './assets/re_logo.svg';
-import type { IHeader } from '@/shared/types/HeaderTypes';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IVacancy } from '@/shared/types/VacanciesTypes';
 import { BurgerMenu } from './components/BurgerMenu';
 import { SelectLang } from './components/SelectLang';
 import { DesktopMenu } from './components/DesktopMenu';
 import { GlobalContext } from '@/context';
-
-export type HeaderData = { header: IHeader; categories: ICategory[]; vacancies: IVacancy[] };
+import type { IHeaderData } from '@/shared/types/HeaderTypes';
 
 type Props = {
-  headerData: HeaderData;
+  headerData: IHeaderData;
 };
 
 export const Header: FC<Props> = ({ headerData }) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import s from './DesktopMenu.module.scss';
-import type { HeaderData } from '../../Header';
+import type { IHeaderData } from '@/shared/types/HeaderTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
 import type { IVacancy } from '@/shared/types/VacanciesTypes';
 import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
@@ -13,7 +13,7 @@ type Props = {
     isDesktopMenuShown: boolean;
     setIsDesktopMenuShown: (boolean: boolean) => void;
   };
-  headerData: HeaderData;
+  headerData: IHeaderData;
 };
 
 export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) => {
