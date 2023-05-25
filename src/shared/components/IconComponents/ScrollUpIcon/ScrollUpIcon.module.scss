@@ -1,0 +1,17 @@
+.arrow {
+	circle {
+		fill: transparent;
+		transition: 0.2s ease-in-out;
+		+ * {
+			transition: 0.2s ease-in-out;
+		}
+	}
+	&:hover {
+		> circle {
+			fill: #00dcff;
+			+ path {
+				fill: #fff;
+			}
+		}
+	}
+}

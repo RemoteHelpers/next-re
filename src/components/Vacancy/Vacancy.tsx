@@ -1,7 +1,5 @@
 import { FC, useMemo, useRef } from "react";
 import s from "./Vacancy.module.scss";
-import { Breadcrumb } from "antd";
-import { BreadcrumbsIcon } from "@/shared/components/IconComponents/BreadcrumbsIcon";
 import Link from "next/link";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
@@ -12,6 +10,7 @@ import laptopCat from "./assets/laptop_cat.svg";
 import { VacanciesIcon } from "@/shared/components/IconComponents/Vacancies";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
 import dynamic from "next/dynamic";
+import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 interface VacancyProps {
@@ -68,9 +67,8 @@ export const Vacancy: FC<VacancyProps> = ({
 			<div className={s.container}>
 				<div className={s.content}>
 					<div className={s.head}>
-						<Breadcrumb
+						<Breadcrumbs
 							items={breadcrumbsItems}
-							separator={<BreadcrumbsIcon id="separator" />}
 							className={s.breadcrumbs}
 						/>
 						{isHot && (
