@@ -22,12 +22,12 @@ const VacancyPage: FC<any> = ({
 }) => {
   return (
     <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
-      <Category
+      {/* <Category
         category={category}
         header={header}
         vacanciesInfo={vacanciesInfo}
         formData={formData}
-      />
+      /> */}
     </Layout>
   );
 };
@@ -41,13 +41,13 @@ export const getServerSideProps = async (context: any) => {
   const categories = await getCategories(lang);
   const vacancies = await getAllVacancies(lang);
   const footerData = await getFooterData(lang);
-  const category = await getCategoryBySlug(categorySlug, lang);
+  // const category = await getCategoryBySlug(categorySlug, lang);
   const header = await getHeaderData(lang);
   const vacanciesInfo = await getVacancyListData(lang);
   const formData = await getFormData(lang);
   return {
     props: {
-      category,
+      // category,
       categories,
       vacancies,
       footerData,

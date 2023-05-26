@@ -8,15 +8,6 @@ const vacanciesInstance = axios.create({
   },
 });
 
-export const getCategories = async (lang: string) => {
-  try {
-    const res = await vacanciesInstance.get(`/categories?locale=${lang}`);
-    return res.data.data as Promise<[]>;
-  } catch (error) {
-    console.error(error);
-    return error;
-  }
-};
 export const getVacancyListData = async (lang: string) => {
   try {
     const res = await vacanciesInstance.get(`/vacancy-list-data?locale=${lang}`);
@@ -27,7 +18,7 @@ export const getVacancyListData = async (lang: string) => {
   }
 };
 
-export const getAllVacancies = async (lang: any) => {
+export const getAllVacancies = async (lang = 'ru') => {
   const pageStart = 0;
   const perPage = 100;
 

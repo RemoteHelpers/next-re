@@ -7,11 +7,13 @@ import { Loader } from '../Loader';
 import { GlobalContext } from '@/context';
 import type { IFooterData } from '@/shared/types/FooterTypes';
 import type { IHeaderData } from '@/shared/types/HeaderTypes';
+// import { NextIntlClientProvider } from 'next-intl';
 
 type Props = {
   children: ReactNode;
   footerData: IFooterData;
   headerData: IHeaderData;
+  // params: { locale: string };
 };
 
 export const Layout: FC<Props> = ({ children, footerData, headerData }) => {

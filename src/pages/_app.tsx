@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import '@/shared/styles/globals.scss';
 import { GlobalProvider } from '@/context';
 import Head from 'next/head';
+import { IntlProvider } from 'next-intl';
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -12,7 +13,9 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Component {...pageProps} />
+      <IntlProvider messages={pageProps.translations} locale="ru">
+        <Component {...pageProps} />
+      </IntlProvider>
     </GlobalProvider>
   );
 }

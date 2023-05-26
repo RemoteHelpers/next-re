@@ -23,6 +23,9 @@ import type { IHeader } from '@/shared/types/HeaderTypes';
 import type { IHomeData } from '@/shared/types/HomeTypes';
 import type { IFormData } from '@/shared/types/FormTypes';
 import type { IFooterData } from '@/shared/types/FooterTypes';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type Props = {
   vacanciesInfo: IVacanciesInfo;
@@ -32,6 +35,7 @@ type Props = {
   footerData: IFooterData;
   header: IHeader;
   formData: IFormData;
+  translations: any;
 };
 
 const Home: FC<Props> = ({
@@ -42,12 +46,15 @@ const Home: FC<Props> = ({
   footerData,
   header,
   formData,
+  // translations,
 }) => {
   const formRef = useRef<HTMLElement>(null);
 
   return (
     <>
       <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
+        <Link href="translation">To Testing Translation Page</Link>
+
         <Hero data={homeData} formRef={formRef} />
         <Spheres title={homeData.spheresTitle} categories={categories} />
         <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} vacancies={vacancies} />
