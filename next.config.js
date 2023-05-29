@@ -43,7 +43,6 @@ const nextConfig = {
 module.exports = nextConfig;
 
 // const withNextIntl = require('next-intl/plugin')();
-
 // module.exports = withNextIntl({
 //   reactStrictMode: true,
 //   i18n: {

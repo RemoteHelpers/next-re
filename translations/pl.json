@@ -1,7 +1,46 @@
 {
+  "Main": {
+    "title": "Testowanie tłumaczeń"
+  },
   "Test": {
-    "title": "Witaj, świecie!",
+    "title": "<very>Witaj</very>, <important>{name}</important>!",
     "description": "Польська",
-    "t": "pl test pl"
+    "t": { "test": "pl test pl" },
+    "info": { "count": "W tym języku dostępnych jest {num} wolnych miejsc pracy" }
+  },
+
+  "Array": {
+    "items": "<item>Тест 1</item><item>Тест 2</item><item>Тест 3</item><item>Тест 4</item><item>Тест 5</item>"
+  },
+
+  "Langs": {
+    "heading": "Lista języków",
+
+    "list": {
+      "uk": {
+        "title": "UKRAIŃSKI",
+        "descr": "uk element"
+      },
+
+      "en": {
+        "title": "ANGIELSKI",
+        "descr": "en element"
+      },
+
+      "pl": {
+        "title": "POLSKI",
+        "descr": "pl element"
+      },
+
+      "sk": {
+        "title": "SŁOWACKI",
+        "descr": "pl element"
+      },
+
+      "ru": {
+        "title": "rashystski",
+        "descr": "ru element"
+      }
+    }
   }
 }

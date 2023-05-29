@@ -1,7 +1,56 @@
 {
+  "Main": {
+    "title": "Translations testing"
+  },
   "Test": {
-    "title": "Hello world!",
+    "title": "<very>Hello</very> <important>{name}</important>!",
     "description": "Англійська",
-    "t": "test"
+    "info": { "count": "{num} vacancies are available in this language" },
+    "variants": {
+      "test": "...",
+
+      "plural": "You have {numMessages, plural, =0 {no messages} =1 {one message} other {# messages}}.",
+
+      "select": "{gender, select, female {She} male {He} other {Somebody}} is online.",
+
+      "selectordinal": "It's your {year, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} birthday!",
+
+      "escaped": "Escape curly braces with single quotes (e.g. '{name'})"
+    }
+  },
+
+  "Array": {
+    "items": "<item>Works with zero config</item><item>Easy to customize</item><item>Blazingly fast</item>"
+  },
+
+  "Langs": {
+    "heading": "Languages list",
+
+    "list": {
+      "uk": {
+        "title": "UKRAINIAN",
+        "descr": "uk item"
+      },
+
+      "en": {
+        "title": "ENGLISH",
+        "descr": "en item"
+      },
+
+      "pl": {
+        "title": "POLISH",
+        "descr": "pl item"
+      },
+
+      "sk": {
+        "title": "SLOVAKIAN",
+        "descr": "pl item"
+      },
+
+      "ru": {
+        "title": "ruzzian",
+        "descr": "ru item"
+      }
+    }
   }
 }

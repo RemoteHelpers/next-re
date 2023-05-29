@@ -23,9 +23,7 @@ import type { IHeader } from '@/shared/types/HeaderTypes';
 import type { IHomeData } from '@/shared/types/HomeTypes';
 import type { IFormData } from '@/shared/types/FormTypes';
 import type { IFooterData } from '@/shared/types/FooterTypes';
-import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 type Props = {
   vacanciesInfo: IVacanciesInfo;
@@ -46,7 +44,6 @@ const Home: FC<Props> = ({
   footerData,
   header,
   formData,
-  // translations,
 }) => {
   const formRef = useRef<HTMLElement>(null);
 
@@ -69,15 +66,33 @@ const Home: FC<Props> = ({
 
 export default Home;
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const lang = context.locale!;
-  const vacanciesInfo = await getVacancyListData(lang);
-  const categories = await getCategories(lang);
-  const vacancies = await getAllVacancies(lang);
-  const homeData = await getHomeData(lang);
-  const footerData = await getFooterData(lang);
-  const formData = await getFormData(lang);
-  const header = await getHeaderData(lang);
+export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
+  // const lang = context.locale!;
+  // const vacanciesInfo = await getVacancyListData(lang);
+  // const categories = await getCategories(lang);
+  // const vacancies = await getAllVacancies(lang);
+  // const homeData = await getHomeData(lang);
+  // const footerData = await getFooterData(lang);
+  // const formData = await getFormData(lang);
+  // const header = await getHeaderData(lang);
+  const fetchVacanciesInfo: Promise<IVacanciesInfo> = getVacancyListData(locale!);
+  const fetchCategories = getCategories(locale!);
+  const fetchVacancies = getAllVacancies(locale!);
+  const fetchHomeData = getHomeData(locale!);
+  const fetchFooterData = getFooterData(locale!);
+  const fetchFormData = getFormData(locale!);
+  const fetchHeader = getHeaderData(locale!);
+
+  const [vacanciesInfo, categories, vacancies, homeData, footerData, formData, header] =
+    await Promise.all([
+      fetchVacanciesInfo,
+      fetchCategories,
+      fetchVacancies,
+      fetchHomeData,
+      fetchFooterData,
+      fetchFormData,
+      fetchHeader,
+    ]);
 
   return {
     props: {

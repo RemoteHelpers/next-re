@@ -2,7 +2,13 @@ import type { AppProps } from 'next/app';
 import '@/shared/styles/globals.scss';
 import { GlobalProvider } from '@/context';
 import Head from 'next/head';
-import { IntlProvider } from 'next-intl';
+import { IntlProvider, IntlErrorCode } from 'next-intl';
+
+function onError(error: any): void {
+  if (error.code === IntlErrorCode.MISSING_MESSAGE)
+    console.error('ОБРОБНИК ПОМИЛОК, відстуній переклад >>>', error);
+  else console.log('ОБРОБНИК ПОМИЛОК, інша помилка в коді >>>', error);
+}
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,7 +19,7 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <IntlProvider messages={pageProps.translations} locale="ru">
+      <IntlProvider onError={onError} messages={pageProps.translations} locale="ru">
         <Component {...pageProps} />
       </IntlProvider>
     </GlobalProvider>

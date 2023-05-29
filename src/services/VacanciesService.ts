@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API, requestPagLimit, requestPagStart } from '@/constants';
+import { IVacanciesInfo } from '@/shared/types/VacanciesTypes';
 
 const vacanciesInstance = axios.create({
   baseURL: API,
@@ -11,7 +12,7 @@ const vacanciesInstance = axios.create({
 export const getVacancyListData = async (lang: string) => {
   try {
     const res = await vacanciesInstance.get(`/vacancy-list-data?locale=${lang}`);
-    return res.data.data.attributes as Promise<{}>;
+    return res.data.data.attributes as Promise<any>;
   } catch (error) {
     console.error(error);
     return error;

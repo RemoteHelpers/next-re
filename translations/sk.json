@@ -1,7 +1,42 @@
 {
+  "Main": {
+    "title": "Testovanie prekladov"
+  },
+
   "Test": {
-    "title": "Не знаю словацької!",
+    "title": "<very>Не знаю словацької</very>!",
     "description": "Словацька",
-    "t": "sk test sk"
+    "t": { "test": "sk test sk" },
+    "info": { "count": "V tomto jazyku je k dispozícii {num} voľných pracovných miest" }
+  },
+
+  "Array": {
+    "items": "<item>Тест 2</item><item>Тест 3</item>"
+  },
+
+  "Langs": {
+    "heading": "Zoznam jazykov",
+
+    "list": {
+      "uk": {
+        "title": "UKRAINIAN",
+        "descr": "uk item"
+      },
+
+      "en": {
+        "title": "ENGLISH",
+        "descr": "en item"
+      },
+
+      "pl": {
+        "title": "POLISH",
+        "descr": "pl item"
+      },
+
+      "sk": {
+        "title": "SLOVAKIAN",
+        "descr": "pl item"
+      }
+    }
   }
 }

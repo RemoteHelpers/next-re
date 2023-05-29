@@ -1,7 +1,14 @@
 {
+  "Main": {
+    "title": "TEST перкладів"
+  },
   "Test": {
     "title": "АДІН НАРОД!",
     "description": "Москальска",
-    "t": "тест"
+    "t": { "test": "тест" },
+    "info": { "count": "Вакансій {num}" }
+  },
+  "Array": {
+    "items": ""
   }
 }
