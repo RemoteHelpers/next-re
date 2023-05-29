@@ -9,8 +9,8 @@ import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
 import laptopCat from "./assets/laptop_cat.svg";
 import { VacanciesIcon } from "@/shared/components/IconComponents/Vacancies";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
-import dynamic from "next/dynamic";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
+import dynamic from "next/dynamic";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 interface VacancyProps {
@@ -67,10 +67,7 @@ export const Vacancy: FC<VacancyProps> = ({
 			<div className={s.container}>
 				<div className={s.content}>
 					<div className={s.head}>
-						<Breadcrumbs
-							items={breadcrumbsItems}
-							className={s.breadcrumbs}
-						/>
+						<Breadcrumbs items={breadcrumbsItems} />
 						{isHot && (
 							<div className={s.hot_mark}>
 								<VacanciesIcon name="fire" />
@@ -107,7 +104,7 @@ export const Vacancy: FC<VacancyProps> = ({
 							</div>
 						) : (
 							<div className={s.cat_placeholder}>
-								<Image src={laptopCat} alt="laptop_cat"/>
+								<Image src={laptopCat} alt="laptop_cat" />
 							</div>
 						)}
 					</div>
@@ -133,7 +130,9 @@ export const Vacancy: FC<VacancyProps> = ({
 						}
 					})}
 				</div>
-				<Link href={`/${menu[1].path_id}`} className={s.see_more}>{seeMore}</Link>
+				<Link href={`/${menu[1].path_id}`} className={s.see_more}>
+					{seeMore}
+				</Link>
 			</div>
 		</section>
 	);
