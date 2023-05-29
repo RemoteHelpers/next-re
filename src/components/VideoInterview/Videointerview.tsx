@@ -1,13 +1,12 @@
 import { FAQ } from "@/shared/components/FAQ";
 import styles from "./Videointerview.module.scss";
-import videoCat from "@/shared/images/Videointerview/videointerviewCat.svg";
+import videoCat from "@/shared/images/Videointerview/videointerviewCat.png";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import dynamic from "next/dynamic";
 import MainForm from "../MainForm/MainForm";
 
 export const VideointerviewPage = ({ videoData, formData }: any) => {
-  console.log("Video page data >>> ", videoData);
   const ReactPlayer = dynamic(() => import("react-player/lazy"), {
     ssr: false,
   });
@@ -36,6 +35,7 @@ export const VideointerviewPage = ({ videoData, formData }: any) => {
             src={videoCat}
             alt={"Video cat"}
             className={styles.video_cat}
+            quality={100}
           />
         </main>
       </section>
