@@ -9,7 +9,7 @@ const nextConfig = {
     // domains: [
     //   {
     //     domain: 'localhost:3000',
-    //     locale: 'ru',
+    //     locales: ['ru'],
     //   },
     //   {
     //     domain: 'en.localhost:3000',

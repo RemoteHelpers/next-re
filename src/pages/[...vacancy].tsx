@@ -3,12 +3,19 @@ import { Layout } from '@/components/Layout';
 import { Vacancy } from '@/components/Vacancy';
 import { getVacancy } from '@/services';
 import { getAllVacancies, getCategories, getFooterData, getHeaderData } from '@/services';
+import Head from 'next/head';
 
 const VacancyPage: FC<any> = ({ vacancy, categories, vacancies, footerData, header }) => {
   return (
-    <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
-      <Vacancy vacancy={vacancy} />
-    </Layout>
+    <>
+      <Head>
+        <title>{vacancy.title}</title>
+        <meta name="description" content={vacancy.cardDescription} />
+      </Head>
+      <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
+        <Vacancy vacancy={vacancy} />
+      </Layout>
+    </>
   );
 };
 
