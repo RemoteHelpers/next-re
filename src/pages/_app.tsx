@@ -6,8 +6,8 @@ import { IntlProvider, IntlErrorCode } from 'next-intl';
 
 function onError(error: any): void {
   if (error.code === IntlErrorCode.MISSING_MESSAGE)
-    console.error('ОБРОБНИК ПОМИЛОК, відстуній переклад >>>', error);
-  else console.log('ОБРОБНИК ПОМИЛОК, інша помилка в коді >>>', error);
+    console.error('ОБРОБНИК ПОМИЛОК, відстуній переклад');
+  else console.log('ОБРОБНИК ПОМИЛОК, інша помилка в коді');
 }
 
 function App({ Component, pageProps }: AppProps) {
