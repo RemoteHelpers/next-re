@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
 import FormFields from "../FormFields/FormFields";
-import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
+import mainCat from "@/shared/images/Form/MainForm/main-cat.png";
 import Image from "next/image";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 

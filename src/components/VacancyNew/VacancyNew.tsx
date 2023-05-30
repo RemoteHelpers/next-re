@@ -8,7 +8,7 @@ import { VacanciesIcon } from "@/shared/components/IconComponents/Vacancies";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import cat_hearts from "./assets/cat_hearts.png";
 import cat_laptop from "./assets/cat_laptop.png";
-import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
+import mainCat from "@/shared/images/Form/MainForm/main-cat.png";
 import Image from "next/image";
 import FormFields from "../FormFields/FormFields";
 import { PhotoAPI } from "@/constants";

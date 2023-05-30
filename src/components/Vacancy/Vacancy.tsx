@@ -5,7 +5,7 @@ import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import FormFields from "../FormFields/FormFields";
 import Image from "next/image";
-import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
+import mainCat from "@/shared/images/Form/MainForm/main-cat.png";
 import laptopCat from "./assets/laptop_cat.svg";
 import { VacanciesIcon } from "@/shared/components/IconComponents/Vacancies";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
