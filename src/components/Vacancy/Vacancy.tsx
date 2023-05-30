@@ -28,6 +28,9 @@ export const Vacancy: FC<VacancyProps> = ({
 	formData,
 	header,
 }: VacancyProps) => {
+	if (!vacancy.attributes) {
+		return <></>;
+	}
 	const {
 		cardDescription,
 		createdAt,

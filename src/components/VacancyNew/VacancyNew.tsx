@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useEffect } from "react";
 import s from "./VacancyNew.module.scss";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
@@ -12,6 +12,25 @@ import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
 import Image from "next/image";
 import FormFields from "../FormFields/FormFields";
 import { PhotoAPI } from "@/constants";
+import useWebAnimations from "@wellyshen/use-web-animations";
+import { useRouter } from "next/router";
+
+const rotateKeyframes = [
+	{
+		transform: "rotate(0deg)",
+	},
+	{
+		transform: "rotate(360deg)",
+	},
+];
+const rotateOpts:
+	| number
+	| (KeyframeAnimationOptions & { pseudoElement?: string }) = {
+	delay: 0,
+	duration: 30000,
+	iterations: 1,
+	easing: "linear",
+};
 
 interface VacancyNewProps {
 	vacancy: any;
@@ -28,6 +47,9 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 	formData,
 	header,
 }) => {
+	if (!vacancy.attributes) {
+		return <></>;
+	}
 	const {
 		cardDescription,
 		description,
@@ -43,7 +65,6 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 		toolsTitle,
 		tools,
 	} = vacancy.attributes;
-	console.log(["##"].concat(description.split("##")).at(-1));
 	const { menu, isHotValue, seeMore } = header;
 	const { categorySlug, categoryTitle, vacancies } = category.attributes;
 	const { respondBtn } = formData;
@@ -64,10 +85,34 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 		],
 		[menu, categorySlug, categoryTitle]
 	);
+	const router = useRouter();
 	const formRef = useRef<any>(null);
+	const circleRef = useRef<any>(null);
+	const circleAnim = useWebAnimations<any>({
+		ref: circleRef,
+	});
+	useEffect(() => {
+		circleAnim.getAnimation()?.finish();
+		circleAnim.animate({
+			keyframes: rotateKeyframes,
+			animationOptions: rotateOpts,
+		});
+	}, [router.locale]);
+	useEffect(() => {
+		if (circleAnim.playState === "finished") {
+			circleAnim.animate({
+				keyframes: rotateKeyframes,
+				animationOptions: rotateOpts,
+			});
+		}
+	}, [circleAnim, circleAnim.playState]);
 
 	return (
 		<section className={s.vacancy}>
+			<div className={s.design_top}>
+				<div className={s.light_blue}></div>
+				<div className={s.blue}></div>
+			</div>
 			<div className={s.container}>
 				<section className={s.head}>
 					<Breadcrumbs items={breadcrumbsItems} />
@@ -130,7 +175,16 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 				<section className={s.responsibilities}>
 					<h2 className={s.resp_title}>{responsibilityTitle}</h2>
 					<div className={s.resp_content}>
-						<Image src={cat_laptop} alt="resp_cat" className={s.resp_img} />
+						<div className={s.resp_img}>
+							<Image src={cat_laptop} alt="resp_cat" />
+							<svg
+								ref={circleRef}
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 90% 90%">
+								<circle cx="50%" cy="50%" r="48%" />
+								<circle cx="50%" cy="50%" r="48%" />
+							</svg>
+						</div>
 						<ul className={s.resp_list}>
 							{responsibilities.map(({ responsibilityLi, id }: any) => {
 								return (
@@ -169,7 +223,10 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 						})}
 					</div>
 				</section>
-				<section className={s.join_us}>
+			</div>
+			<section className={s.join_us}>
+				<div className={s.design_white}></div>
+				<div className={s.container}>
 					<ReactMarkdown className={s.join_desc}>
 						{"##" + description.split("##").slice(-1)}
 					</ReactMarkdown>
@@ -177,8 +234,8 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 						<FormFields formData={formData} />
 						<Image className={s.form_cat} src={cat_hearts} alt={"form_cat"} />
 					</section>
-				</section>
-			</div>
+				</div>
+			</section>
 		</section>
 	);
 };
