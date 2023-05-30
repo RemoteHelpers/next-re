@@ -6,7 +6,18 @@
     "title": "<very>Привіт</very>, <important>{name}</important>!",
     "description": "Українська",
     "t": { "test": "тест" },
-    "info": { "count": "Цією мовою досутпно {num} вакансій" }
+    "info": { "count": "Цією мовою досутпно {num} вакансій" },
+    "variants": {
+      "test": "...",
+
+      "plural": "У вас {numMessages, plural, =0 {не має повідомлень} =1 {єдине повідомлення} other {# повідомлення}}.",
+
+      "select": "{gender, select, female {Вона} male {Він} other {Хтось}} онлайн.",
+
+      "selectordinal": "Це ваше {year, selectordinal, one {#ший} two {#гий} few {#тій} other {#тий}} день народження!",
+
+      "escaped": "Уникнути зігнутих дужок можна використовуючи одинарні лапки (напр. '{ім''я'})"
+    }
   },
 
   "Array": {

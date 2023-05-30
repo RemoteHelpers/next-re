@@ -3,7 +3,7 @@ import { getAllVacancies, getCategories, getFooterData, getHeaderData } from '@/
 import type { IFooterData } from '@/shared/types/FooterTypes';
 import type { IHeaderData } from '@/shared/types/HeaderTypes';
 import type { GetServerSidePropsContext } from 'next';
-import { createTranslator, useLocale, useTranslations } from 'next-intl';
+import { createTranslator, useFormatter, useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { FastIntl } from './components/FastIntl';
 
@@ -23,15 +23,19 @@ type Props = { translations: IntlMessages; footerData: IFooterData; headerData: 
 export default function TranslationTest({ translations, footerData, headerData }: Props) {
   // console.log('translations', translations);
   // const [arrayOfItems, setArrayOfItems] = useState<[string][]>([]);
-  // const locale = useLocale();
+  const locale = useLocale();
   // console.log('locale', locale);
   const [pluralValue, setPluralValue] = useState<number>(0);
   const [selectValue, setSelectValue] = useState<string>('');
-  const [selectordinal, setSelectordinal] = useState<string | number>('one');
+  const [selectordinal, setSelectordinal] = useState<string | number>(0);
   const tTest = useTranslations('Test');
   const tArray = useTranslations('Array');
   const tList = useTranslations('Langs');
   const tItems = useTranslations('Langs.list');
+  // const json = JSON.stringify(headerData.header);
+  const t = createTranslator({ locale, messages: headerData.header });
+
+  // const tHeader = useTranslations(x);
 
   // const langKeys = Object.keys(translations.Langs?.list || {});
   const langValues = Object.values(translations.Langs?.list || {});
@@ -71,19 +75,20 @@ export default function TranslationTest({ translations, footerData, headerData }
             <p>{tTest('description')}</p>
             {/* <p>{translations.Test.description}</p> */}
             <p>{tTest('info.count', { num: headerData.vacancies.length })}</p>
+
             <p>{tTest('variants.escaped')}</p>
           </div>
 
           <div style={{ borderLeft: '1px solid black', padding: '0 1rem' }}>
             <br />
 
-            <h3>Числовий вибір</h3>
+            <h3>Множиннй</h3>
             <div style={{ display: 'flex' }}>
               <input type="number" onChange={changePlural} value={pluralValue} />
               <p>{tTest('variants.plural', { numMessages: pluralValue })}</p>
             </div>
 
-            <h3>Варіанти на вибір</h3>
+            <h3>Вибірковий</h3>
             <div style={{ display: 'flex' }}>
               <select onChange={changeSelect}>
                 <option value="">Choose gender</option>
@@ -93,7 +98,7 @@ export default function TranslationTest({ translations, footerData, headerData }
               <p>{tTest('variants.select', { gender: selectValue })}</p>
             </div>
 
-            <h3>Множинні варіанти (або не працює, або не розумію як)</h3>
+            <h3>Селекторний (Не працює)</h3>
             <div style={{ display: 'flex' }}>
               <input
                 type="text"
@@ -102,7 +107,7 @@ export default function TranslationTest({ translations, footerData, headerData }
                 placeholder="one | two | few | other"
               />
 
-              <p>{tTest('variants.selectordinal', { year: selectordinal })}</p>
+              <p>{tTest('variants.selectordinal', { year: selectordinal, one: 'st' })}</p>
             </div>
           </div>
         </div>
@@ -118,7 +123,13 @@ export default function TranslationTest({ translations, footerData, headerData }
           <br />
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            borderBottom: '1px solid black',
+          }}
+        >
           <div>
             <h2>{tList('heading')} (статична довжина)</h2>
             <ul>
@@ -131,7 +142,7 @@ export default function TranslationTest({ translations, footerData, headerData }
             </ul>
           </div>
 
-          <div>
+          <div style={{ borderLeft: '1px solid black' }}>
             <h2>
               {translations.Langs?.heading} (<i>Можна плюнути і зробити так</i>)
             </h2>
@@ -145,6 +156,23 @@ export default function TranslationTest({ translations, footerData, headerData }
                 ))}
             </ul>
           </div>
+        </div>
+
+        <div>
+          <h2>Опрацювання даних з бази</h2>
+          <br />
+
+          <p>{t('allVacanciesValue')}</p>
+          <p>{t('backValue')}</p>
+          <p>{t('categoryButton')}</p>
+          <p>{t('chooseLangValue')}</p>
+          <p>{t('meta')}</p>
+          <br />
+
+          <p style={{ fontSize: '1.5rem', color: 'tomato' }}>
+            Бібліотека <i>не вміє опрацьовувати масиви</i>, натомість вона працює з об'єктами,{' '}
+            <b>що містять купу інших одноманітних об'єктів</b>
+          </p>
         </div>
       </div>
     </Layout>
