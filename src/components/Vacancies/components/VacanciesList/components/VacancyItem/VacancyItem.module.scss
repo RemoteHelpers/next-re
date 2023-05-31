@@ -1,164 +1,161 @@
-@import "@/shared/styles/colors";
-@import "@/shared/styles/mixins";
-@import "@/shared/styles/variables";
-@import "@/shared/styles/fonts";
-@import "@/shared/styles/mediaMixins";
+@import '@/shared/styles/colors';
+@import '@/shared/styles/mixins';
+@import '@/shared/styles/variables';
+@import '@/shared/styles/fonts';
+@import '@/shared/styles/mediaMixins';
 
 .card {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
-	gap: 2rem;
+  gap: 2rem;
 
-	height: auto;
+  height: auto;
 
-	padding: 2.5rem 1.56rem;
-	border: 1px solid $rgbGray;
-	border-radius: 1.25rem;
-	outline: 2px solid transparent;
+  padding: 2.5rem 1.56rem;
+  border: 1px solid $rgbGray;
+  border-radius: 1.25rem;
+  outline: 2px solid transparent;
 
-	&:hover {
-		border-color: transparent;
-		outline-color: $primaryOrange;
-	}
+  &:hover {
+    border-color: transparent;
+    outline-color: $primaryOrange;
+  }
 
-	@include on992 {
-		flex-direction: row;
-		align-items: center;
+  @include on992 {
+    flex-direction: row;
+    align-items: center;
 
-		padding: 3.2rem;
-	}
+    padding: 3.2rem;
+  }
 }
 
 .mainWrap {
-	height: auto;
-	max-height: 100%;
-	width: 100%;
+  height: auto;
+  max-height: 100%;
+  width: 100%;
 
-	@include on992 {
-		max-width: 52.5rem;
-	}
+  @include on992 {
+    max-width: 52.5rem;
+  }
 }
 
 .titleWrap {
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
-	margin-bottom: 0.625rem;
-	width: 100%;
+  margin-bottom: 0.625rem;
+  width: 100%;
 
-	@include on992 {
-		flex-direction: row-reverse;
-		justify-content: space-between;
-		align-items: start;
-		gap: 0;
+  @include on992 {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: start;
+    gap: 0;
 
-		width: 100%;
-		max-width: 46rem;
-		margin-bottom: 1rem;
-	}
+    width: 100%;
+    max-width: 46rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .hotLabel {
-	display: flex;
-	align-items: center;
-	gap: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 
-	width: 7.9rem;
-	padding: 0.44rem 0.81rem;
-	border-radius: 0.94rem;
+  width: 7.9rem;
+  padding: 0.44rem 0.81rem;
+  border-radius: 0.94rem;
 
-	background-color: $secondaryTomato;
+  background-color: $secondaryTomato;
 
-	@include on992 {
-		// flex-direction: row-reverse;
-		width: 8.6rem;
-	}
+  @include on992 {
+    // flex-direction: row-reverse;
+    width: 8.6rem;
+  }
 
-	svg {
-		fill: $rgbWhite;
-	}
+  svg {
+    fill: $rgbWhite;
+  }
 }
 
 .labelText {
-	color: $rgbWhite;
-	font-size: 1rem;
-	line-height: 1.2rem;
+  color: $rgbWhite;
+  font-size: 1rem;
+  line-height: 1.2rem;
 }
 
 .title {
-	font-weight: 600;
-	font-size: $fontSize3;
-	line-height: 2rem;
-	color: $primaryBlack;
-	margin-right: auto;
+  font-weight: 600;
+  font-size: $fontSize3;
+  line-height: 2rem;
+  color: $primaryBlack;
+  margin-right: auto;
 
-	@include on992 {
-		font-weight: 700;
-		line-height: 2.5rem;
-	}
+  @include on992 {
+    font-weight: 700;
+    line-height: 2.5rem;
+  }
 }
 
 .salary {
-	margin-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
 
-	color: $secondaryBlack;
-	font-weight: 500;
-	font-size: $fontSize5;
-	line-height: 1.3;
+  color: $secondaryBlack;
+  font-weight: 500;
+  font-size: $fontSize5;
+  line-height: 1.3;
 
-	@include on992 {
-		margin-bottom: 0.81rem;
+  @include on992 {
+    margin-bottom: 0.81rem;
 
-		font-weight: 600;
-		line-height: 1.9;
-	}
+    font-weight: 600;
+    line-height: 1.9;
+  }
 }
 
 .cardDescription {
-	font-size: $fontSize5;
-	line-height: 1.3;
-	color: $rgbGray;
-	// display: -webkit-box; // трансформуємо контейнер
-	// -webkit-line-clamp: 6; // строка на якій буде "..."
-	// -webkit-box-orient: vertical; // додає "..."
-	// overflow: hidden; // ховаємо зайве
-	// text-overflow: ellipsis; // магія
-	a {
-		color: $primaryOrange;
-	}
-	@include on992 {
-		line-height: 1.9;
-	}
+  font-size: $fontSize5;
+  line-height: 1.3;
+  color: $rgbGray;
+  // display: -webkit-box; // трансформуємо контейнер
+  // -webkit-line-clamp: 6; // строка на якій буде "..."
+  // -webkit-box-orient: vertical; // додає "..."
+  // overflow: hidden; // ховаємо зайве
+  // text-overflow: ellipsis; // магія
+  @include on992 {
+    line-height: 1.9;
+  }
 }
 
 .link {
-	padding: 1.19rem 0;
-	border-radius: 0.94rem;
-	width: 100%;
-	max-width: 20rem;
+  padding: 1.19rem 0;
+  border-radius: 0.94rem;
+  width: 100%;
+  max-width: 20rem;
 
-	color: $rgbWhite;
-	text-align: center;
-	font-weight: 700;
-	font-size: $fontSize8;
-	line-height: 1.1;
-	box-shadow: $darkShadow;
+  color: $rgbWhite;
+  text-align: center;
+  font-weight: 700;
+  font-size: $fontSize8;
+  line-height: 1.1;
+  box-shadow: $darkShadow;
 
-	background-color: $primaryYellow;
+  background-color: $primaryYellow;
 
-	transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
 
-	&:hover,
-	&:focus {
-		background-color: $primaryOrange;
-	}
+  &:hover,
+  &:focus {
+    background-color: $primaryOrange;
+  }
 
-	@include on992 {
-		max-width: 18.75rem;
-		line-height: 1.4;
-	}
+  @include on992 {
+    max-width: 18.75rem;
+    line-height: 1.4;
+  }
 }

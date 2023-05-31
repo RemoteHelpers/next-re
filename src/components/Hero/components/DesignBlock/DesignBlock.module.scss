@@ -20,7 +20,7 @@
 .circle {
 	position: relative;
 	z-index: 7;
-	border: 1px solid $rgbZodiac;
+	outline: 1px solid $rgbZodiac;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 	border-radius: 50%;
