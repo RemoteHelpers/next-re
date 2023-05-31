@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /next
+Disallow: /node_modules
+Disallow: /src
+
+User-agent: *
+Allow: /
+Sitemap: https://r-ez.com/sitemap.xml
