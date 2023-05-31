@@ -10,6 +10,12 @@ export interface IVacancyKeywordTag {
   };
 }
 
+export interface SeoData {
+  id: number;
+  seoTitle: string;
+  seoDescription: string;
+}
+
 export interface IVacancyAttributes {
   cardDescription: string;
   categories: {
@@ -30,6 +36,7 @@ export interface IVacancyAttributes {
   vacancySlug: string;
   videoLink: string;
   videoPreview: { data: unknown };
+  seoData?: SeoData;
 }
 
 export interface IVacancy {

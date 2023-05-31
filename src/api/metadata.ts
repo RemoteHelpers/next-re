@@ -1,21 +1,7 @@
 import { AppMetadata } from '@/shared/types/MetadataTypes';
-
 const time = new Date();
 
 export const appMetadata: AppMetadata = {
-  common: {
-    viewport: 'width=device-width, initial-scale=1',
-    icon: '/favicon.ico',
-
-    og: {
-      type: 'website',
-    },
-
-    twitter: {
-      card: 'summary_large_image',
-    },
-  },
-
   uk: {
     title: 'Аутстафінгова Компанія України - RemotEmployees!',
     description:
@@ -28,7 +14,7 @@ export const appMetadata: AppMetadata = {
       description:
         'Аутстафінгова компанія RemotEmployees пропонує Вам дистанційну роботу на міжнародних проектах, можливість працювати з будь-якої точки світу!',
       url: 'https://r-ez.com/ua/',
-      siteName: 'RemotEmployeesUA',
+      siteName: 'RemotEmployees',
       image: 'https://ua.remotemployees.com/wp-content/uploads/2022/05/Frame-30.svg',
     },
 
@@ -69,14 +55,14 @@ export const appMetadata: AppMetadata = {
   },
 
   en: {
-    title: 'Ukrainian outstaffing company - RemotEmployees EN',
+    title: 'Ukrainian outstaffing company - RemotEmployees',
     description:
       'Ukrainian outstaffing company working in the field of marketing, web development and design offers a job in IT remotely.',
     canonical: 'https://r-ez.com/en/',
 
     og: {
-      locale: 'en_US',
-      title: 'Ukrainian outstaffing company - RemotEmployees EN',
+      locale: 'en_GB',
+      title: 'Ukrainian outstaffing company - RemotEmployees',
       description:
         'Ukrainian outstaffing company working in the field of marketing, web development and design offers a job in IT remotely.',
       url: 'https://r-ez.com/en/',
@@ -85,7 +71,7 @@ export const appMetadata: AppMetadata = {
     },
 
     article: {
-      modifiedTime: time.toISOString(), // у форматі ISO: "2023-05-09T09:38:09+00:00"
+      modifiedTime: time.toISOString(), // todo у форматі ISO: "2023-05-09T09:38:09+00:00"
     },
 
     twitter: {
@@ -95,14 +81,14 @@ export const appMetadata: AppMetadata = {
   },
 
   sk: {
-    title: 'Outstaffingova spoločnosť - RemotEmployees SK',
+    title: 'Outstaffingova spoločnosť - RemotEmployees',
     description:
       'Outstaffingová spoločnosť RemotEmployees vám ponúka prácu na diaľku na medzinárodných projektoch, možnosť pracovať odkiaľkoľvek na svete!',
     canonical: 'https://r-ez.com/sk/',
 
     og: {
       locale: 'sk_SK',
-      title: 'Outstaffingova spoločnosť - RemotEmployees SK',
+      title: 'Outstaffingova spoločnosť - RemotEmployees',
       description:
         'Outstaffingová spoločnosť RemotEmployees vám ponúka prácu na diaľku na medzinárodných projektoch, možnosť pracovať odkiaľkoľvek na svete!',
       url: 'https://r-ez.com/sk/',
@@ -121,14 +107,14 @@ export const appMetadata: AppMetadata = {
   },
 
   ru: {
-    title: 'Аутстаффинговая Компания Украины - Получи работу!',
+    title: 'Аутстаффинговая Компания Украины - RemotEmployees!',
     description:
       'Аутстаффинговая компания Украины, работающая в сфере маркетинга, web разработки и дизайна предлагает Вам перспективную работу в IT удаленно.',
     canonical: 'https://r-ez.com/',
 
     og: {
       locale: 'ru_RU',
-      title: 'Аутстаффинговая Компания Украины - Получи работу!',
+      title: 'Аутстаффинговая Компания Украины - RemotEmployees!',
       description:
         'Аутстаффинговая компания Украины, работающая в сфере маркетинга, web разработки и дизайна предлагает Вам перспективную работу в IT удаленно.',
       url: 'https://r-ez.com/',

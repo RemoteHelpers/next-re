@@ -1,18 +1,6 @@
 export type LocalesLiteral = 'uk' | 'pl' | 'en' | 'sk' | 'ru';
 
-export type AppMetadata = {
-  common: {
-    viewport: string;
-    icon: string;
-    og: {
-      type: string;
-    };
-
-    twitter: {
-      card: string;
-    };
-  };
-} & Record<
+export type AppMetadata = Record<
   LocalesLiteral,
   {
     title: string;
