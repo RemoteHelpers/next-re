@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import FormFields from '../FormFields/FormFields';
 import styles from './MainForm.module.scss';
-import mainCat from '@/shared/images/Form/MainForm/main-cat.png';
+import mainCat from '@/shared/images/Form/MainForm/main-cat.svg';
 import type { IFormData } from '@/shared/types/FormTypes';
 
 type Props = {

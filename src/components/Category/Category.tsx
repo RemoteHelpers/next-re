@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
 import FormFields from "../FormFields/FormFields";
-import mainCat from "@/shared/images/Form/MainForm/main-cat.png";
+import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
 import Image from "next/image";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 
@@ -22,9 +22,6 @@ export const Category = ({
 	vacanciesInfo,
 	formData,
 }: CategoryProps) => {
-	if (!category.attributes) {
-		return <></>;
-	}
 	const { categoryTitle, categorySlug, description, vacancies } =
 		category.attributes;
 	const { menu, categoryButton } = header;
@@ -44,13 +41,13 @@ export const Category = ({
 		<section className={s.category}>
 			<div className={s.container}>
 				<div className={s.content}>
-					<Breadcrumbs items={breadcrumbsItems} />
+					<Breadcrumbs items={breadcrumbsItems} className={s.breadcrumbs} />
 					<h1 className={s.title}>{categoryTitle}</h1>
 					<ReactMarkdown className={s.description}>{description}</ReactMarkdown>
 					<button
 						className={s.btn}
 						onClick={() => {
-							formRef!.current!.scrollIntoView({
+							formRef?.current?.scrollIntoView({
 								block: "center",
 								behavior: "smooth",
 							});

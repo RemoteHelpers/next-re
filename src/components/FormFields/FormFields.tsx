@@ -11,9 +11,9 @@ import Select, { SingleValue } from "react-select";
 import PhoneInput from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
 import styles from "./FormFields.module.scss";
-import mainCat from '@/shared/images/Form/MainForm/main-cat.png';
-import Image from 'next/image';
 import { FormIcon } from "@/shared/components/IconComponents/FormIcon";
+import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { Loader } from "../Loader";
 
