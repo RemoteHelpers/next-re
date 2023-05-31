@@ -37,6 +37,7 @@ export interface IVacancyAttributes {
   videoLink: string;
   videoPreview: { data: unknown };
   seoData?: SeoData;
+  newVersion: boolean;
 }
 
 export interface IVacancy {

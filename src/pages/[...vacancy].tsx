@@ -9,6 +9,7 @@ import type { IFooterData } from '@/shared/types/FooterTypes';
 import type { IHeader } from '@/shared/types/HeaderTypes';
 import type { IFormData } from '@/shared/types/FormTypes';
 import { GetServerSidePropsContext } from 'next';
+import { VacancyNew } from '@/components/VacancyNew';
 import Head from 'next/head';
 
 type Props = {
@@ -32,7 +33,7 @@ const VacancyPage: FC<Props> = ({
   category,
   formData,
 }) => {
-  const { seoData, title, cardDescription } = vacancy.attributes;
+  const { seoData, title, cardDescription, newVersion } = vacancy.attributes;
 
   return (
     <>
@@ -42,13 +43,23 @@ const VacancyPage: FC<Props> = ({
       </Head>
 
       <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
-        <Vacancy
-          vacancy={vacancy}
-          vacanciesInfo={vacanciesInfo}
-          category={category}
-          formData={formData}
-          header={header}
-        />
+        {newVersion ? (
+          <VacancyNew
+            vacancy={vacancy}
+            vacanciesInfo={vacanciesInfo}
+            category={category}
+            formData={formData}
+            header={header}
+          />
+        ) : (
+          <Vacancy
+            vacancy={vacancy}
+            vacanciesInfo={vacanciesInfo}
+            category={category}
+            formData={formData}
+            header={header}
+          />
+        )}
       </Layout>
     </>
   );
@@ -69,6 +80,7 @@ export const getServerSideProps = async ({ params, locale }: GetServerSidePropsC
   const vacanciesInfo = await getVacancyListData(locale!);
   const category = await getCategoryBySlug(locale!, categorySlug);
   const formData = await getFormData(locale!);
+
   return {
     props: {
       categories,
