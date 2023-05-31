@@ -10,7 +10,6 @@ import laptopCat from "./assets/laptop_cat.svg";
 import { VacanciesIcon } from "@/shared/components/IconComponents/Vacancies";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
 import dynamic from "next/dynamic";
-import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 interface VacancyProps {
