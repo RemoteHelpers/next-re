@@ -9,11 +9,10 @@ const db = axios.create({
   },
 });
 
-export const getAboutData = async (locale: string) => {
-  const params = { locale };
+export const getAboutData = async (locale: string): Promise<IAbout | any> => {
   try {
-    const res = await db.get(`/about-us`, { params });
-    return res.data.attributes;
+    const res = await db.get(`/about-us`, { params: { locale } });
+    return res.data.data.attributes;
   } catch (error) {
     console.error(error);
     return error;

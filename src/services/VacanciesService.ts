@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { API, requestPagLimit, requestPagStart } from '@/constants';
-import { IVacancy } from '@/shared/types/VacanciesTypes';
+import type { IVacanciesInfo, IVacancy } from '@/shared/types/VacanciesTypes';
 
 type Error = any;
 
@@ -11,44 +11,32 @@ const vacanciesInstance = axios.create({
   },
 });
 
-export const getCategories = async (lang: string) => {
+export const getVacancyListData = async (locale: string): Promise<IVacanciesInfo | Error> => {
   try {
-    const res = await vacanciesInstance.get(`/categories?locale=${lang}`);
-    return res.data.data as Promise<[]>;
-  } catch (error) {
-    console.error(error);
-    return error;
-  }
-};
-export const getVacancyListData = async (lang: string) => {
-  try {
-    const res = await vacanciesInstance.get(`/vacancy-list-data?locale=${lang}`);
-    return res.data.data.attributes as Promise<{}>;
+    const res = await vacanciesInstance.get(`/vacancy-list-data`, { params: { locale } });
+    return res.data.data.attributes;
   } catch (error) {
     console.error(error);
     return error;
   }
 };
 
-export const getAllVacancies = async (lang: string): Promise<IVacancy[] | Error> => {
+export const getAllVacancies = async (locale: string): Promise<IVacancy[] | Error> => {
   const pageStart = 0;
   const perPage = 100;
+  const params = { locale, [requestPagStart]: pageStart, [requestPagLimit]: perPage };
 
-  // const params = { locale: lang, [requestPagStart]: pageStart, [requestPagLimit]: perPage };
   try {
-    const vacanciesPage = await vacanciesInstance.get(
-      `/vacancies?locale=${lang}&${requestPagStart}=${pageStart}&${requestPagLimit}=${perPage}`
-    );
-    const resultVacancies = [...vacanciesPage.data.data];
+    const vacanciesPage: AxiosResponse = await vacanciesInstance.get(`/vacancies`, { params });
+    const resultVacancies: IVacancy[] = [...vacanciesPage.data.data];
 
     const { total } = vacanciesPage.data.meta.pagination;
     if (total <= perPage) return resultVacancies;
 
     for (let i = perPage; i < total; i += perPage) {
-      // { params: { ...params, [requestPagStart]: i } }
-      const nextPage = (await vacanciesInstance.get(
-        `/vacancies?locale=${lang}&${requestPagStart}=${i}&${requestPagLimit}=${perPage}`
-      )) as any;
+      const nextPage: AxiosResponse = await vacanciesInstance.get(`/vacancies`, {
+        params: { ...params, [requestPagStart]: i },
+      });
 
       resultVacancies.push(...nextPage.data.data);
     }
@@ -59,25 +47,12 @@ export const getAllVacancies = async (lang: string): Promise<IVacancy[] | Error>
   }
 };
 
-export const getVacancies = async (lang: string, pageStart = 0, perPage = 25) => {
-  try {
-    const res = await vacanciesInstance.get(
-      `/vacancies?locale=${lang}&${requestPagStart}=${pageStart}&${requestPagLimit}=${perPage}`
-    );
-
-    return res.data as Promise<{}>;
-    // return res.data.data as Promise<[]>;
-  } catch (error) {
-    console.error(error);
-    return error;
-  }
-};
 export const getVacancy = async (lang: string, slug: string) => {
   try {
     const res = await vacanciesInstance.get(
       `/vacancies?locale=${lang}&filters[vacancySlug][$eq]=${slug}`
     );
-    return res.data.data[0] as Promise<{}>;
+    return res.data.data[0] as Promise<IVacancy>;
   } catch (error) {
     console.error(error);
     return error;

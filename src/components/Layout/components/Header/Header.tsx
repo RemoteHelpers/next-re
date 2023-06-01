@@ -15,7 +15,6 @@ type Props = {
 };
 
 export const Header: FC<Props> = ({ headerData }) => {
-  console.log('headerData', headerData);
   const [isBurgerMenu, setIsBurgerMenu] = useState<boolean>(false);
   const [isDesktopMenuShown, setIsDesktopMenuShown] = useState<boolean>(false);
   const { menu, chooseLangValue, languagesList } = headerData.header;
