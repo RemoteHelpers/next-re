@@ -83,3 +83,15 @@ export const getVacancy = async (lang: string, slug: string) => {
 		return error;
 	}
 };
+
+export const getVacancyPageData = async (lang: string) => {
+	try {
+		const res = await vacanciesInstance.get(
+			`/vacancy-page?locale=${lang}&populate=*`
+		);
+		return res.data.data.attributes as Promise<{}>;
+	} catch (error) {
+		console.error(error);
+		return error;
+	}
+};

@@ -105,3 +105,58 @@ interface IVacansInfoLocales {
 export interface IVacanciesInfo extends IVacansInfoLocales {
 	localizations: { data: { id: number; attributes: IVacansInfoLocales }[] };
 }
+
+export interface IVacancyPageData {
+	createdAt: string;
+	description: string;
+	fifthDescription: string;
+	fifthTitle: string;
+	firstImage: {
+		data: {
+			id: number;
+			attributes: {
+				name: string;
+				alternativeText: string;
+				height: number;
+				width: number;
+				url: string;
+			};
+		};
+	};
+	forthDescription: string;
+	fouthTitle: string;
+	listTitle: string;
+	locale: string;
+	publishedAt: string;
+	requirements: string;
+	secondDescription: string;
+	secondImage: {
+		data: {
+			id: number;
+			attributes: {
+				name: string;
+				alternativeText: string;
+				height: number;
+				width: number;
+				url: string;
+			};
+		};
+	};
+	secondTitle: string;
+	thirdDescription: string;
+	thirdImage: {
+		data: {
+			id: number;
+			attributes: {
+				name: string;
+				alternativeText: string;
+				height: number;
+				width: number;
+				url: string;
+			};
+		};
+	};
+	thirdTitle: string;
+	title: string;
+	updatedAt: string;
+}
