@@ -14,19 +14,19 @@ import dynamic from "next/dynamic";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 interface VacancyProps {
-	vacancy: any;
-	vacanciesInfo: any;
-	category: any;
-	formData: any;
-	header: any;
+  vacancy: any;
+  vacanciesInfo: any;
+  category: any;
+  formData: any;
+  header: any;
 }
 
 export const Vacancy: FC<VacancyProps> = ({
-	vacancy,
-	vacanciesInfo,
-	category,
-	formData,
-	header,
+  vacancy,
+  vacanciesInfo,
+  category,
+  formData,
+  header,
 }: VacancyProps) => {
 	if (!vacancy.attributes) {
 		return <></>;
