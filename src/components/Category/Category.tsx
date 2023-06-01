@@ -8,12 +8,16 @@ import FormFields from "../FormFields/FormFields";
 import mainCat from "@/shared/images/Form/MainForm/main-cat.png";
 import Image from "next/image";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
+import { ICategory } from "@/shared/types/CategoriesTypes";
+import { IHeader } from "@/shared/types/HeaderTypes";
+import { IVacanciesInfo, IVacancy } from "@/shared/types/VacanciesTypes";
+import { IFormData } from "@/shared/types/FormTypes";
 
 type CategoryProps = {
-	category: any;
-	header: any;
-	vacanciesInfo: any;
-	formData: any;
+	category: ICategory;
+	header: IHeader;
+	vacanciesInfo: IVacanciesInfo;
+	formData: IFormData;
 };
 
 export const Category = ({
@@ -39,7 +43,7 @@ export const Category = ({
 		],
 		[header, categoryTitle]
 	);
-	const formRef = useRef<any>(null);
+	const formRef = useRef<HTMLDivElement>(null);
 	return (
 		<section className={s.category}>
 			<div className={s.container}>
@@ -58,8 +62,8 @@ export const Category = ({
 						{categoryButton}
 					</button>
 					<div className={s.vacancies_list}>
-						{vacancies.data.map(
-							(vacancy: any) =>
+						{vacancies && vacancies.data.map(
+							(vacancy: IVacancy) =>
 								vacancy.attributes.isHot && (
 									<VacancyItem
 										key={vacancy.id}
@@ -69,8 +73,8 @@ export const Category = ({
 									/>
 								)
 						)}
-						{vacancies.data.map(
-							(vacancy: any) =>
+						{vacancies && vacancies.data.map(
+							(vacancy: IVacancy) =>
 								!vacancy.attributes.isHot && (
 									<VacancyItem
 										key={vacancy.id}

@@ -10,8 +10,23 @@ import {
 	getFormData,
 } from "@/services";
 import { Category } from "@/components/Category";
+import { ICategory } from "@/shared/types/CategoriesTypes";
+import { IVacanciesInfo, IVacancy } from "@/shared/types/VacanciesTypes";
+import { IFooterData } from "@/shared/types/FooterTypes";
+import { IHeader } from "@/shared/types/HeaderTypes";
+import { IFormData } from "@/shared/types/FormTypes";
 
-const VacancyPage: FC<any> = ({
+interface CategoryPageProps {
+	category: ICategory;
+	categories: ICategory[];
+	vacancies: IVacancy[];
+	footerData: IFooterData;
+	header: IHeader;
+	vacanciesInfo: IVacanciesInfo;
+	formData: IFormData;
+}
+
+const CategoryPage: FC<any> = ({
 	category,
 	categories,
 	vacancies,
@@ -34,7 +49,7 @@ const VacancyPage: FC<any> = ({
 	);
 };
 
-export default VacancyPage;
+export default CategoryPage;
 
 export const getServerSideProps = async (context: any) => {
 	const params = context.params;

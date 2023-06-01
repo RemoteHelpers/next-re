@@ -14,6 +14,10 @@ import FormFields from "../FormFields/FormFields";
 import { PhotoAPI } from "@/constants";
 import useWebAnimations from "@wellyshen/use-web-animations";
 import { useRouter } from "next/router";
+import { IVacancy } from "@/shared/types/VacanciesTypes";
+import { ICategory } from "@/shared/types/CategoriesTypes";
+import { IFormData } from "@/shared/types/FormTypes";
+import { IHeader } from "@/shared/types/HeaderTypes";
 
 const rotateKeyframes = [
 	{
@@ -33,16 +37,14 @@ const rotateOpts:
 };
 
 interface VacancyNewProps {
-	vacancy: any;
-	vacanciesInfo: any;
-	category: any;
-	formData: any;
-	header: any;
+	vacancy: IVacancy;
+	category: ICategory;
+	formData: IFormData;
+	header: IHeader;
 }
 
 export const VacancyNew: FC<VacancyNewProps> = ({
 	vacancy,
-	vacanciesInfo,
 	category,
 	formData,
 	header,
@@ -86,8 +88,8 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 		[menu, categorySlug, categoryTitle]
 	);
 	const router = useRouter();
-	const formRef = useRef<any>(null);
-	const circleRef = useRef<any>(null);
+	const formRef = useRef<HTMLDivElement>(null);
+	const circleRef = useRef<SVGSVGElement>(null);
 	const circleAnim = useWebAnimations<any>({
 		ref: circleRef,
 	});
@@ -179,7 +181,7 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 							<Image src={cat_laptop} alt="resp_cat" />
 							<svg
 								ref={circleRef}
-								xmlns="http://www.w3.org/2000/svg"					>
+								xmlns="http://www.w3.org/2000/svg">
 								<circle cx="50%" cy="50%" r="48%" />
 								<circle cx="50%" cy="50%" r="48%" />
 							</svg>

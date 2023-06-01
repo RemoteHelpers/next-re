@@ -52,6 +52,7 @@ export interface IFormDataLocalization {
   locale: string;
   name: string;
   number: string;
+  respondBtn: string;
   submit: string;
   title: string;
   updatedAt: Date;
