@@ -4,6 +4,7 @@ import { IVacanciesInfo, IVacancyAttributes } from '@/shared/types/VacanciesType
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
 import Link from 'next/link';
 import { GlobalContext } from '@/context';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 
 type Props = {
   attributes: IVacancyAttributes;
@@ -37,7 +38,7 @@ export const VacancyItem: FC<Props> = ({ attributes, vacanciesInfo, category }) 
 
         <p className={s.salary}>{vacanciesInfo.salary}</p>
 
-        <p className={s.cardDescription}>{`${cardDescription.slice(0, 107)}...`}</p>
+        <ReactMarkdown className={s.cardDescription}>{`${cardDescription.slice(0, 107)}...`}</ReactMarkdown>
       </div>
 
       <Link

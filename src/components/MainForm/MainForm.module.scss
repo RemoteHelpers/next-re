@@ -5,10 +5,8 @@
 
 .container {
     @include container();
-
     margin-top: 100px;
     margin-bottom: 100px;
-
 	@include on992 {
 		margin-top: 150px;
 	}

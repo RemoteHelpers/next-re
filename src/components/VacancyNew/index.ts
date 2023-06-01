@@ -1,1 +1,1 @@
-export { VacancyNew } from './VacancyNew';
+export { VacancyNew } from "./VacancyNew";

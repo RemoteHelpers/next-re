@@ -1,4 +1,9 @@
-export { getVacancy, getVacancyListData, getAllVacancies } from './VacanciesService';
+export {
+  getVacancy,
+  getVacancyListData,
+  getAllVacancies,
+  getVacancyPageData,
+} from './VacanciesService';
 export { getHomeData } from './HomeDataService';
 export { getFooterData } from './FooterDataService';
 export { getHeaderData } from './HeaderService';

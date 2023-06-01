@@ -5,15 +5,19 @@ import Link from "next/link";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
 import FormFields from "../FormFields/FormFields";
-import mainCat from "@/shared/images/Form/MainForm/main-cat.svg";
+import mainCat from "@/shared/images/Form/MainForm/main-cat.png";
 import Image from "next/image";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
+import { ICategory } from "@/shared/types/CategoriesTypes";
+import { IHeader } from "@/shared/types/HeaderTypes";
+import { IVacanciesInfo, IVacancy } from "@/shared/types/VacanciesTypes";
+import { IFormData } from "@/shared/types/FormTypes";
 
 type CategoryProps = {
-	category: any;
-	header: any;
-	vacanciesInfo: any;
-	formData: any;
+	category: ICategory;
+	header: IHeader;
+	vacanciesInfo: IVacanciesInfo;
+	formData: IFormData;
 };
 
 export const Category = ({
@@ -22,6 +26,9 @@ export const Category = ({
 	vacanciesInfo,
 	formData,
 }: CategoryProps) => {
+	if (!category.attributes) {
+		return <></>;
+	}
 	const { categoryTitle, categorySlug, description, vacancies } =
 		category.attributes;
 	const { menu, categoryButton } = header;
@@ -36,18 +43,18 @@ export const Category = ({
 		],
 		[header, categoryTitle]
 	);
-	const formRef = useRef<any>(null);
+	const formRef = useRef<HTMLDivElement>(null);
 	return (
 		<section className={s.category}>
 			<div className={s.container}>
 				<div className={s.content}>
-					<Breadcrumbs items={breadcrumbsItems} className={s.breadcrumbs} />
+					<Breadcrumbs items={breadcrumbsItems} />
 					<h1 className={s.title}>{categoryTitle}</h1>
 					<ReactMarkdown className={s.description}>{description}</ReactMarkdown>
 					<button
 						className={s.btn}
 						onClick={() => {
-							formRef?.current?.scrollIntoView({
+							formRef!.current!.scrollIntoView({
 								block: "center",
 								behavior: "smooth",
 							});
@@ -55,8 +62,8 @@ export const Category = ({
 						{categoryButton}
 					</button>
 					<div className={s.vacancies_list}>
-						{vacancies.data.map(
-							(vacancy: any) =>
+						{vacancies && vacancies.data.map(
+							(vacancy: IVacancy) =>
 								vacancy.attributes.isHot && (
 									<VacancyItem
 										key={vacancy.id}
@@ -66,8 +73,8 @@ export const Category = ({
 									/>
 								)
 						)}
-						{vacancies.data.map(
-							(vacancy: any) =>
+						{vacancies && vacancies.data.map(
+							(vacancy: IVacancy) =>
 								!vacancy.attributes.isHot && (
 									<VacancyItem
 										key={vacancy.id}

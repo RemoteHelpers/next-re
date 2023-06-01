@@ -20,7 +20,7 @@
 .circle {
 	position: relative;
 	z-index: 7;
-	outline: 1px solid $rgbZodiac;
+	border: 1px solid $rgbZodiac;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 	border-radius: 50%;
@@ -88,7 +88,8 @@
 	transform: scale(0);
 	opacity: 0;
 	width: 60vw;
-	height: 60vw;
+	height: 60vw;	
+	background-color: $primaryBlue;
 	@include on480 {
 		width: clamp(18.75rem, 32.9vw, 30rem);
 		height: clamp(18.75rem, 32.9vw, 30rem);
@@ -100,6 +101,17 @@
 		object-fit: cover;
 		-o-object-position: center center;
 		object-position: center center;
+	}
+	&::after{
+		content: '';
+		position: absolute;
+		width: 80%;
+		height: 80%;
+		background-color: $primaryCyan;
+		left: 50%;
+		top: 50%;		
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
 	}
 }
 .cat {

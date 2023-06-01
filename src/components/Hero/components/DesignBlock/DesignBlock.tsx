@@ -243,7 +243,6 @@ export const DesignBlock: FC<Props> = ({ data }) => {
         ))}
       </div>
       <div className={s.bg_circle} ref={bgCircleRef}>
-        <Image src={circle} alt="blue bg"></Image>
         <div className={s.cat} ref={catRef}>
           <Image src={crazy_cat} alt="cat"></Image>
         </div>
