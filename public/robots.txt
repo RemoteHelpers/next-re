@@ -5,4 +5,8 @@ Disallow: /src
 
 User-agent: *
 Allow: /
+Sitemap: https://r-ez.com/sitemap_uk.xml
+Sitemap: https://r-ez.com/sitemap_pl.xml
+Sitemap: https://r-ez.com/sitemap_en.xml
+Sitemap: https://r-ez.com/sitemap_sk.xml
 Sitemap: https://r-ez.com/sitemap.xml

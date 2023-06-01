@@ -8,16 +8,17 @@ import { BurgerMenu } from './components/BurgerMenu';
 import { SelectLang } from './components/SelectLang';
 import { DesktopMenu } from './components/DesktopMenu';
 import { GlobalContext } from '@/context';
-import type { IHeaderData } from '@/shared/types/HeaderTypes';
+import type { IHeaderData, IMenu } from '@/shared/types/HeaderTypes';
 
 type Props = {
   headerData: IHeaderData;
 };
 
 export const Header: FC<Props> = ({ headerData }) => {
+  console.log('headerData', headerData);
   const [isBurgerMenu, setIsBurgerMenu] = useState<boolean>(false);
   const [isDesktopMenuShown, setIsDesktopMenuShown] = useState<boolean>(false);
-  const { menu, chooseLangValue } = headerData.header;
+  const { menu, chooseLangValue, languagesList } = headerData.header;
   const router = useRouter();
   const { setNavURL } = useContext(GlobalContext);
 
@@ -46,7 +47,7 @@ export const Header: FC<Props> = ({ headerData }) => {
 
           <div className={s.controls}>
             <nav className={s.nav}>
-              {menu.map(({ title, path_id }: any) => {
+              {menu.map(({ title, path_id }: IMenu) => {
                 if (!path_id.trim()) return;
                 return (
                   <Link
@@ -69,7 +70,11 @@ export const Header: FC<Props> = ({ headerData }) => {
               })}
             </nav>
 
-            <SelectLang chooseLangValue={chooseLangValue} isDesktopMenuShown={isDesktopMenuShown} />
+            <SelectLang
+              languages={languagesList}
+              chooseLangValue={chooseLangValue}
+              isDesktopMenuShown={isDesktopMenuShown}
+            />
 
             <button
               type="button"

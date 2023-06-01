@@ -6,20 +6,14 @@ import { getAllVacancies, getCategories, getHeaderData } from '@/services';
 import { generateSiteMap } from '@/shared/functions/sitemapGeneration';
 
 const DOMAIN = process.env.DOMAIN || 'r-ez.com';
-const MAP_LOCALE = 'ru';
+const MAP_LOCALE = 'pl';
 
 function SiteMap() {}
 
 export async function getServerSideProps({ res }: GetServerSidePropsContext) {
-  const fetchHeader: Promise<IHeader> = getHeaderData(MAP_LOCALE);
-  const fetchCategories: Promise<ICategory[]> = getCategories(MAP_LOCALE);
-  const fetchVacancies: Promise<IVacancy[]> = getAllVacancies(MAP_LOCALE);
-
-  const [header, categories, vacancies] = await Promise.all([
-    fetchHeader,
-    fetchCategories,
-    fetchVacancies,
-  ]);
+  const header = (await getHeaderData(MAP_LOCALE)) as IHeader;
+  const categories = (await getCategories(MAP_LOCALE)) as ICategory[];
+  const vacancies = (await getAllVacancies(MAP_LOCALE)) as IVacancy[];
 
   const sitemap = generateSiteMap({
     DOMAIN,

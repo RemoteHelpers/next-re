@@ -6,13 +6,13 @@ const db = axios.create({
   baseURL: API,
   params: {
     populate: '*',
-    locale: 'ru',
   },
 });
 
 export const getAboutData = async (locale: string) => {
+  const params = { locale };
   try {
-    const res = await db.get(`/about-us`, { params: { locale } });
+    const res = await db.get(`/about-us`, { params });
     return res.data.attributes;
   } catch (error) {
     console.error(error);

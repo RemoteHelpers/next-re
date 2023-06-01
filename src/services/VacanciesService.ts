@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { API, requestPagLimit, requestPagStart } from '@/constants';
+import { IVacancy } from '@/shared/types/VacanciesTypes';
+
+type Error = any;
 
 const vacanciesInstance = axios.create({
   baseURL: API,
@@ -27,10 +30,11 @@ export const getVacancyListData = async (lang: string) => {
   }
 };
 
-export const getAllVacancies = async (lang: any) => {
+export const getAllVacancies = async (lang: string): Promise<IVacancy[] | Error> => {
   const pageStart = 0;
   const perPage = 100;
 
+  // const params = { locale: lang, [requestPagStart]: pageStart, [requestPagLimit]: perPage };
   try {
     const vacanciesPage = await vacanciesInstance.get(
       `/vacancies?locale=${lang}&${requestPagStart}=${pageStart}&${requestPagLimit}=${perPage}`
@@ -41,6 +45,7 @@ export const getAllVacancies = async (lang: any) => {
     if (total <= perPage) return resultVacancies;
 
     for (let i = perPage; i < total; i += perPage) {
+      // { params: { ...params, [requestPagStart]: i } }
       const nextPage = (await vacanciesInstance.get(
         `/vacancies?locale=${lang}&${requestPagStart}=${i}&${requestPagLimit}=${perPage}`
       )) as any;

@@ -2,6 +2,8 @@ import axios from 'axios';
 import { API } from '@/constants';
 import { ICategory } from '@/shared/types/CategoriesTypes';
 
+type Error = any;
+
 const categoriesInstance = axios.create({
   baseURL: API,
   params: {
@@ -9,10 +11,10 @@ const categoriesInstance = axios.create({
   },
 });
 
-export const getCategories = async (lang: string) => {
+export const getCategories = async (lang: string): Promise<ICategory[] | Error> => {
   try {
     const res = await categoriesInstance.get(`/categories?locale=${lang}`);
-    return res.data.data as Promise<ICategory[]>;
+    return res.data.data;
   } catch (error) {
     console.error(error);
     return error;
