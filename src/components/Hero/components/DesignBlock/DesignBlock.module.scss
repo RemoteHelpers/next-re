@@ -88,7 +88,7 @@
 	transform: scale(0);
 	opacity: 0;
 	width: 60vw;
-	height: 60vw;
+	height: 60vw;	
 	@include on480 {
 		width: clamp(18.75rem, 32.9vw, 30rem);
 		height: clamp(18.75rem, 32.9vw, 30rem);

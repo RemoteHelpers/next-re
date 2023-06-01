@@ -14,8 +14,24 @@ import {
 	getHeaderData,
 } from "@/services";
 import { VacancyNew } from "@/components/VacancyNew";
+import { IVacancy, IVacanciesInfo } from "@/shared/types/VacanciesTypes";
+import { ICategory } from "@/shared/types/CategoriesTypes";
+import { IFooterData } from "@/shared/types/FooterTypes";
+import { IHeader } from "@/shared/types/HeaderTypes";
+import { IFormData } from "@/shared/types/FormTypes";
 
-const VacancyPage: FC<any> = ({
+interface VacancyPageProps {
+	categories: ICategory[];
+	vacancies: IVacancy[];
+	footerData: IFooterData;
+	header: IHeader;
+	vacancy: IVacancy;
+	vacanciesInfo: IVacanciesInfo;
+	category: ICategory;
+	formData: IFormData;
+}
+
+const VacancyPage: FC<VacancyPageProps> = ({
 	categories,
 	vacancies,
 	footerData,
@@ -24,7 +40,7 @@ const VacancyPage: FC<any> = ({
 	vacanciesInfo,
 	category,
 	formData,
-}) => {
+}: VacancyPageProps) => {
 	const { newVersion } = vacancy.attributes;
 	return (
 		<Layout
@@ -33,7 +49,6 @@ const VacancyPage: FC<any> = ({
 			{newVersion ? (
 				<VacancyNew
 					vacancy={vacancy}
-					vacanciesInfo={vacanciesInfo}
 					category={category}
 					formData={formData}
 					header={header}

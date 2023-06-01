@@ -24,8 +24,13 @@ const rotateOpts:
 	direction: "reverse",
 };
 interface StatItemProps {
-	id: any;
-	image: any;
+	id: string;
+	image: {
+		url: string;
+		alternativeText: string;
+		width: number;
+		height: number;
+	};
 	value: string;
 	text: string;
 }

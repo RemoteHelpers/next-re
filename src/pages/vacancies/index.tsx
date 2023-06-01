@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Layout } from '@/components/Layout';
-import { VacanciesList } from '@/components/VacanciesList';
 import {
   getAllVacancies,
   getCategories,

@@ -17,7 +17,7 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({
 		<Breadcrumb
 			items={items}
 			separator={<BreadcrumbsIcon id="separator" />}
-			className={`${s.breadcrumbs} ${className}`}
+			className={`${s.breadcrumbs} ${className || ''}`}
 			{...props}
 		/>
 	);

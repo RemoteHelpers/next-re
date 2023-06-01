@@ -11,22 +11,26 @@ import { VacanciesIcon } from "@/shared/components/IconComponents/Vacancies";
 import { VacancyItem } from "../Vacancies/components/VacanciesList/components/VacancyItem";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 import dynamic from "next/dynamic";
+import { IVacancy, IVacanciesInfo } from "@/shared/types/VacanciesTypes";
+import { ICategory } from "@/shared/types/CategoriesTypes";
+import { IFormData } from "@/shared/types/FormTypes";
+import { IHeader } from "@/shared/types/HeaderTypes";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 interface VacancyProps {
-  vacancy: any;
-  vacanciesInfo: any;
-  category: any;
-  formData: any;
-  header: any;
+	vacancy: IVacancy;
+	vacanciesInfo: IVacanciesInfo;
+	category: ICategory;
+	formData: IFormData;
+	header: IHeader;
 }
 
 export const Vacancy: FC<VacancyProps> = ({
-  vacancy,
-  vacanciesInfo,
-  category,
-  formData,
-  header,
+	vacancy,
+	vacanciesInfo,
+	category,
+	formData,
+	header,
 }: VacancyProps) => {
 	if (!vacancy.attributes) {
 		return <></>;
@@ -64,7 +68,7 @@ export const Vacancy: FC<VacancyProps> = ({
 		],
 		[menu, categorySlug, categoryTitle]
 	);
-	const formRef = useRef<any>(null);
+	const formRef = useRef<HTMLDivElement>(null);
 	return (
 		<section className={s.vacancy}>
 			<div className={s.container}>
@@ -118,7 +122,7 @@ export const Vacancy: FC<VacancyProps> = ({
 					</div>
 				</div>
 				<div className={s.vacancies_list}>
-					{vacancies.data.map((vacancy: any, index: number) => {
+					{vacancies && vacancies.data.map((vacancy: IVacancy, index: number) => {
 						const { vacancySlug: slug } = vacancy.attributes;
 						const condition = slug !== vacancySlug && index < 3;
 						if (condition) {
