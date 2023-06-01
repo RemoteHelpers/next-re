@@ -6,6 +6,9 @@ type Error = any;
 
 const vacanciesInstance = axios.create({
   baseURL: API,
+  params: {
+    populate: '*',
+  },
 });
 
 export const getVacancyListData = async (locale: string): Promise<IVacanciesInfo | Error> => {
@@ -21,7 +24,11 @@ export const getVacancyListData = async (locale: string): Promise<IVacanciesInfo
 export const getAllVacancies = async (locale: string): Promise<IVacancy[] | Error> => {
   const pageStart = 0;
   const perPage = 100;
-  const params = { locale, [requestPagStart]: pageStart, [requestPagLimit]: perPage };
+  const params = {
+    locale,
+    [requestPagStart]: pageStart,
+    [requestPagLimit]: perPage,
+  };
 
   try {
     const vacanciesPage = await vacanciesInstance.get(`/vacancies`, { params });
@@ -58,7 +65,7 @@ export const getVacancy = async (lang: string, slug: string) => {
 
 export const getVacancyPageData = async (lang: string) => {
   try {
-    const res = await vacanciesInstance.get(`/vacancy-page?locale=${lang}&populate=*`);
+    const res = await vacanciesInstance.get(`/vacancy-page?locale=${lang}`);
     return res.data.data.attributes as Promise<{}>;
   } catch (error) {
     console.error(error);
