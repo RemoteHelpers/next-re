@@ -1,32 +1,32 @@
 import { GetServerSidePropsContext } from 'next';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IVacancy } from '@/shared/types/VacanciesTypes';
-import type { IHeader } from '@/shared/types/HeaderTypes';
-import { getAllVacancies, getCategories, getHeaderData } from '@/services';
-import { generateSiteMap } from '@/shared/functions/sitemapGeneration';
+import { getHeaderData } from '@/services';
+import type { IHeader, ILanguage } from '@/shared/types/HeaderTypes';
 
 const DOMAIN = process.env.DOMAIN || 'r-ez.com';
-const MAP_LOCALE = 'ru';
+
+const generateIndexSiteMap = ({ locales }: { locales: ILanguage[] }) => {
+  return `
+    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      ${locales
+        .map(({ locale }: ILanguage) => {
+          return `
+          <sitemap>
+            <loc>https://${DOMAIN}/sitemap_${locale}.xml</loc>
+          </sitemap>
+      `;
+        })
+        .join('')}
+    </sitemapindex>
+  `;
+};
 
 function SiteMap() {}
 
 export async function getServerSideProps({ res }: GetServerSidePropsContext) {
-  const fetchHeader: Promise<IHeader> = getHeaderData(MAP_LOCALE);
-  const fetchCategories: Promise<ICategory[]> = getCategories(MAP_LOCALE);
-  const fetchVacancies: Promise<IVacancy[]> = getAllVacancies(MAP_LOCALE);
+  const header: IHeader = await getHeaderData();
 
-  const [header, categories, vacancies] = await Promise.all([
-    fetchHeader,
-    fetchCategories,
-    fetchVacancies,
-  ]);
-
-  const sitemap = generateSiteMap({
-    DOMAIN,
-    MAP_LOCALE,
-    header,
-    categories,
-    vacancies,
+  const sitemap = generateIndexSiteMap({
+    locales: header.languagesList,
   });
 
   res.setHeader('Content-Type', 'text/xml');

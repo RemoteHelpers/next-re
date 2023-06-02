@@ -4,16 +4,13 @@ import type { IVacanciesInfo, IVacancy } from '@/shared/types/VacanciesTypes';
 
 type Error = any;
 
-const vacanciesInstance = axios.create({
+const instance = axios.create({
   baseURL: API,
-  params: {
-    populate: '*',
-  },
 });
 
 export const getVacancyListData = async (locale: string): Promise<IVacanciesInfo | Error> => {
   try {
-    const res = await vacanciesInstance.get(`/vacancy-list-data`, { params: { locale } });
+    const res = await instance.get(`/vacancy-list-data`, { params: { locale, populate: '*' } });
     return res.data.data.attributes;
   } catch (error) {
     console.error(error);
@@ -28,17 +25,18 @@ export const getAllVacancies = async (locale: string): Promise<IVacancy[] | Erro
     locale,
     [requestPagStart]: pageStart,
     [requestPagLimit]: perPage,
+    populate: '*',
   };
 
   try {
-    const vacanciesPage = await vacanciesInstance.get(`/vacancies`, { params });
+    const vacanciesPage = await instance.get(`/vacancies`, { params });
     const resultVacancies: IVacancy[] = [...vacanciesPage.data.data];
 
     const { total } = vacanciesPage.data.meta.pagination;
     if (total <= perPage) return resultVacancies;
 
     for (let i = perPage; i < total; i += perPage) {
-      const nextPage = await vacanciesInstance.get(`/vacancies`, {
+      const nextPage = await instance.get(`/vacancies`, {
         params: { ...params, [requestPagStart]: i },
       });
       resultVacancies.push(...nextPage.data.data);
@@ -51,11 +49,17 @@ export const getAllVacancies = async (locale: string): Promise<IVacancy[] | Erro
   }
 };
 
-export const getVacancy = async (lang: string, slug: string) => {
+export const getVacancy = async (locale: string, slug: string) => {
+  const params = {
+    locale,
+    ['filters[vacancySlug][$eq]']: slug,
+    ['populate[products][populate]']: '*',
+    ['populate[responsibilities][populate]']: '*',
+    ['populate[tools][populate]']: '*',
+    populate: '*',
+  };
   try {
-    const res = await vacanciesInstance.get(
-      `/vacancies?locale=${lang}&filters[vacancySlug][$eq]=${slug}&populate[products][populate]=*&populate[responsibilities][populate]=*&populate[tools][populate]=*`
-    );
+    const res = await instance.get(`/vacancies`, { params });
     return res.data.data[0] as Promise<IVacancy>;
   } catch (error) {
     console.error(error);
@@ -63,9 +67,9 @@ export const getVacancy = async (lang: string, slug: string) => {
   }
 };
 
-export const getVacancyPageData = async (lang: string) => {
+export const getVacancyPageData = async (locale: string) => {
   try {
-    const res = await vacanciesInstance.get(`/vacancy-page?locale=${lang}`);
+    const res = await instance.get(`/vacancy-page`, { params: { locale, populate: '*' } });
     return res.data.data.attributes as Promise<{}>;
   } catch (error) {
     console.error(error);
