@@ -30,17 +30,17 @@ type Props = {
 };
 
 const About: FC<Props> = ({ categories, vacancies, footerData, header, about, formData }) => {
-  const tabTitle = header.menu.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
+  const pageTitle = header.menu.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
 
   return (
     <>
       <Head>
-        <title>{tabTitle}</title>
+        <title>{pageTitle}</title>
         <meta name="description" content={about.WhatWeDoTitle} />
       </Head>
 
       <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
-        <AboutUs about={about} tabTitle={tabTitle} />
+        <AboutUs about={about} pageTitle={pageTitle} />
         {/* <Specializations about={about} categories={categories} /> */}
         <MainForm formData={formData} />
       </Layout>

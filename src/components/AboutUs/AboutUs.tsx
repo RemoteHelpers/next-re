@@ -1,16 +1,18 @@
-import type { FC } from 'react';
+import { FC, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import type { IAbout } from '@/shared/types/AboutTypes';
 import s from './AboutUs.module.scss';
-import catAbout from './assets/about-cat.svg';
+import catAbout_S from './assets/aboutCat_small.svg';
+import catAbout_L from './assets/aboutCat_large.svg';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import { features } from 'process';
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
 type Props = {
   about: IAbout;
-  tabTitle: string;
+  pageTitle: string;
 };
 
 const tempData = {
@@ -36,12 +38,13 @@ const tempData = {
   ],
 };
 
-export const AboutUs: FC<Props> = ({ about, tabTitle }) => {
+export const AboutUs: FC<Props> = ({ about, pageTitle }) => {
   return (
     <section className={s.section}>
+      <div className={s.background} />
+
       <div className={s.container}>
-        <div className={s.background} />
-        <h1 className={s.tabTitle}>{tabTitle}</h1>
+        <h1 className={s.pageTitle}>{pageTitle}</h1>
 
         <div className={s.mainAboutBlock}>
           <div className={s.upperWrapper}>
@@ -70,22 +73,20 @@ export const AboutUs: FC<Props> = ({ about, tabTitle }) => {
               </button>
             </div>
 
-            <div>
-              <Image src={catAbout} alt="about-cat" className={s.catImage} />
-            </div>
+            <div className={s.catImgWrap} />
           </div>
         </div>
 
-        {/* <div>
+        <ul className={s.features}>
           {tempData.features.map(({ count, descr }) => {
             return (
-              <div>
-                <h3>{count}</h3>
-                <p>{descr}</p>
-              </div>
+              <li key={`${count}_${descr}`} className={s.feature}>
+                <h3 className={s.featureCount}>{count}</h3>
+                <p className={s.featureDescr}>{descr}</p>
+              </li>
             );
           })}
-        </div> */}
+        </ul>
       </div>
     </section>
   );

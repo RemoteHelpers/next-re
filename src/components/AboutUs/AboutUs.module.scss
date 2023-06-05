@@ -4,9 +4,17 @@
 @import '@/shared/styles/mixins';
 @import '@/shared/styles/mediaMixins';
 
+$mainCardWidth: 41rem;
+
 .section {
   position: relative;
-  padding: 3rem 1.9rem 0;
+  padding: 2rem 1.9rem 0;
+  @include on768 {
+    padding-top: 4rem;
+  }
+  @include on992 {
+    // padding-top: 7.5rem;
+  }
 }
 
 .container {
@@ -20,50 +28,95 @@
   z-index: -1;
 
   width: 150vw;
-  height: 14.15rem;
+  // height: 14.5rem;
+  height: 12rem;
 
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
+  background: red;
   background: $secondaryAzure;
+
+  @include on768 {
+    top: -$headerHeight1;
+    height: 15rem;
+  }
 
   @include on992 {
     top: -$headerHeight2;
+    height: 20rem;
+  }
+
+  @include on1200 {
+    left: 0;
+    // height: 28.6rem;
+    width: 100vw;
+    // ------
+    // height: 1rem;
+    // transform: scaleY(55);
+    // ------
+    // left: 0;
+    // width: 100vw;
+    // height: 100vw;
+    // border-radius: 50%;
+    // transform: translateY(-50%);
   }
 }
 
-.tabTitle {
-  margin-bottom: 8.5rem;
+.pageTitle {
+  margin-bottom: 6rem;
+
   color: $rgbBlack;
   font-weight: 900;
-  //   font-size: 2rem;
-  font-size: clamp(2rem, 4.38vw, 4rem);
+  font-size: clamp(2rem, 6vw, 3.5rem);
   line-height: 130%;
   text-align: center;
   text-decoration-line: underline;
+  text-transform: capitalize;
+
+  @include on768 {
+    margin-bottom: 8rem;
+    // font-size: clamp(2.8rem, 5vw, 4rem);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+  }
 }
 
 .mainAboutBlock {
   display: flex;
   flex-direction: column;
-  gap: 2.65rem;
+  row-gap: 4rem;
 }
 
 .upperWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2.5rem;
+
+  @include on1440 {
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    // margin: 0 auto;
+  }
 }
 
 .lowerWrapper {
+  @extend .upperWrapper;
+  @include on1440 {
+    flex-direction: row;
+  }
 }
 
 .mainTextBlock {
-  margin-bottom: 2.65rem;
+  max-width: $mainCardWidth;
 }
 
 .title {
-  margin-bottom: 2.6rem;
+  margin-bottom: 1.5rem;
 
   color: $rgbZodiac;
   font-weight: 900;
-  font-size: 1.75rem;
+  font-size: clamp(1.75rem, 4.5vw, 3rem);
   line-height: 130%;
   text-decoration-line: underline;
 }
@@ -71,23 +124,30 @@
 .description {
   font-weight: 400;
   font-size: 1rem;
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+
   line-height: 150%;
   color: $rgbBlack;
 }
 
 .previewWrap {
   padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: $mainCardWidth;
 }
 
 .playerWrap {
   flex: 0 0 auto;
   position: relative;
-  width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 0.75rem;
-  overflow: hidden;
+  // overflow: hidden;
   border: 0;
   background-color: $rgbGray;
+
+  @include on768 {
+    border-radius: 2.5rem;
+  }
 
   @include on1200 {
     flex: 0 0 45%;
@@ -97,14 +157,19 @@
 
 .previewBorder {
   position: absolute;
-  z-index: 0;
+  z-index: -1;
   top: 0;
   left: 0;
 
   width: 100%;
   height: 100%;
-  border: 1px solid red;
+  border: 2px solid $primaryOrange;
+  border-radius: 0.75rem;
   transform: rotate(5.88deg);
+
+  @include on768 {
+    border-radius: 2.5rem;
+  }
 }
 
 .videoPlayer {
@@ -115,13 +180,74 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     border-radius: 0.3rem;
+
+    @include on768 {
+      border-radius: 2.5rem;
+    }
   }
 }
 
 .joinBtn {
   display: none;
+  @include on992 {
+  }
 }
 
-.catImage {
-  max-width: 100%;
+.catImgWrap {
+  position: relative;
+  width: 100%;
+  max-width: $mainCardWidth;
+  padding-top: calc(100% / (16 / 9)); /* Висота відношення сторін 16:9 */
+  background-image: url('./assets/aboutCat_small.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @include on768 {
+    padding-top: 24.8rem;
+    background-image: url('./assets/aboutCat_large.svg');
+  }
+
+  // &::before {
+  //   content: '';
+  //   display: block;
+  //   padding-top: 56.25%; /* Висота відношення сторін 16:9 */
+  //   @media (max-width: $mainCardWidth) {
+  //     padding-top: 0;
+  //   }
+  // }
+}
+
+.features {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feature {
+  height: 14.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid $primaryBlue;
+  border-radius: 1rem;
+}
+
+.featureCount {
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 130%;
+  text-align: center;
+  color: #ff6501;
+}
+
+.featureDescr {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 115%;
+  text-align: center;
+  color: $rgbGray;
 }
