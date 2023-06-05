@@ -8,8 +8,6 @@ import type { LocalesLiteral } from '@/shared/types/MetadataTypes';
 
 function App({ Component, pageProps }: AppProps) {
   const locale = useRouter().locale! as LocalesLiteral;
-  // const time = new Date();
-
   return (
     <GlobalProvider>
       <Head>
@@ -24,11 +22,7 @@ function App({ Component, pageProps }: AppProps) {
         <meta property="og:description" content={appMetadata[locale].og.description} />
         <meta property="og:url" content={appMetadata[locale].og.url} />
         <meta property="og:site_name" content={appMetadata[locale].og.siteName} />
-        {/* <meta property="article:modified_time" content={time.toISOString()} /> */}
         <meta property="og:image" content={appMetadata[locale].og.image} />
-        {/* <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:label1" content={appMetadata[locale].twitter.label1} />
-        <meta name="twitter:data1" content={appMetadata[locale].twitter.data1} /> */}
       </Head>
       <Component {...pageProps} />
     </GlobalProvider>

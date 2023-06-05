@@ -38,7 +38,10 @@ export const VacancyItem: FC<Props> = ({ attributes, vacanciesInfo, category }) 
 
         <p className={s.salary}>{vacanciesInfo.salary}</p>
 
-        <ReactMarkdown className={s.cardDescription}>{`${cardDescription.slice(0, 107)}...`}</ReactMarkdown>
+        <ReactMarkdown className={s.cardDescription}>{`${cardDescription.slice(
+          0,
+          107
+        )}...`}</ReactMarkdown>
       </div>
 
       <Link
