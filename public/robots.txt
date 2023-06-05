@@ -6,6 +6,8 @@ Disallow: /src
 User-agent: *
 Allow: /
 
+Host: r-ez.com
+
 Sitemap: https://r-ez.com/sitemap.xml
 Sitemap: https://r-ez.com/sitemap_uk.xml
 Sitemap: https://r-ez.com/sitemap_pl.xml
