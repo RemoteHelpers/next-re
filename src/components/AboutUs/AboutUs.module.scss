@@ -11,8 +11,10 @@ $featureMaxW: 27.8rem;
 .section {
   position: relative;
   padding: 2rem 1.9rem 0;
+  margin-bottom: 6rem;
   @include on768 {
     padding-top: 4rem;
+    margin-bottom: 8rem;
   }
 }
 
@@ -27,12 +29,10 @@ $featureMaxW: 27.8rem;
   z-index: -1;
 
   width: 150vw;
-  // height: 14.5rem;
   height: 12rem;
 
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
-  background: red;
   background: $secondaryAzure;
 
   @include on768 {
@@ -47,17 +47,7 @@ $featureMaxW: 27.8rem;
 
   @include on1200 {
     left: 0;
-    // height: 28.6rem;
     width: 100vw;
-    // ------
-    // height: 1rem;
-    // transform: scaleY(55);
-    // ------
-    // left: 0;
-    // width: 100vw;
-    // height: 100vw;
-    // border-radius: 50%;
-    // transform: translateY(-50%);
   }
 }
 
@@ -74,7 +64,6 @@ $featureMaxW: 27.8rem;
 
   @include on768 {
     margin-bottom: 8rem;
-    // font-size: clamp(2.8rem, 5vw, 4rem);
     font-size: clamp(2.2rem, 5vw, 3.5rem);
   }
 }
@@ -121,7 +110,6 @@ $featureMaxW: 27.8rem;
 
   color: $rgbZodiac;
   font-weight: 900;
-  // font-size: clamp(1.75rem, 4.5vw, 3rem);
   font-size: clamp(1.25rem, 4.5vw, 3rem);
   line-height: 130%;
   text-decoration-line: underline;

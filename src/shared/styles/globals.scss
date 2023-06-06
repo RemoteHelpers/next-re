@@ -221,3 +221,9 @@ body {
 .PhoneInputCountry {
   margin: 0 !important;
 }
+
+.swiper-pagination-about {
+  .swiper-pagination-bullet-active {
+    background-color: red;
+  }
+}

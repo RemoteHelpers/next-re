@@ -42,7 +42,7 @@ const About: FC<Props> = ({ categories, vacancies, footerData, header, about, fo
 
       <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
         <AboutUs about={about} pageTitle={pageTitle} formRef={formRef} />
-        {/* <Specializations about={about} categories={categories} /> */}
+        <Specializations about={about} categories={categories} />
         <MainForm formData={formData} formRef={formRef} />
       </Layout>
     </>

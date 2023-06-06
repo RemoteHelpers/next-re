@@ -1,0 +1,1 @@
+export { SpecializationsIcon } from './Specializations';

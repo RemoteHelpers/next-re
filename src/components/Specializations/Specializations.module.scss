@@ -3,25 +3,166 @@
 @import '@/shared/styles/mixins';
 @import '@/shared/styles/mediaMixins';
 
-.swiper {
-  width: 100%;
-  height: 100%;
+.section {
+  padding: 0 1.9rem;
+  @include on768 {
+    // padding-top: 4rem;
+  }
 }
 
-.swiperSlide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
+.container {
+  @include container();
+}
 
-  /* Center slide text vertically */
+.sectionTitle {
+  margin-bottom: 1.5rem;
+
+  color: $rgbZodiac;
+  font-weight: 900;
+  // font-size: clamp(1.75rem, 4.5vw, 3rem);
+  font-size: clamp(1.25rem, 4.5vw, 3rem);
+  line-height: 130%;
+  text-decoration-line: underline;
+  text-align: center;
+}
+
+.sectionDescription {
+  margin: 0 auto 3.5rem;
+  max-width: 65rem;
+
+  font-weight: 400;
+  font-size: 1rem;
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  line-height: 150%;
+  color: $rgbBlack;
+  text-align: center;
+}
+
+.list {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 4rem;
+
+  @include on992 {
+    display: flex;
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.25rem;
+
+  width: 47%;
+  @media (min-width: 80rem) {
+    width: 30.5%;
+  }
+  padding: 2.9rem 3.3rem;
+  padding: 3rem;
+
+  border-radius: 1.25rem;
+  border: 1px solid $specializationBorder;
+  transition: 0.2s;
+
+  &:is(:hover) {
+    border-color: $primaryOrange;
+  }
+
+  img {
+    width: 7.5rem;
+    height: auto;
+  }
+}
+
+.title {
+  color: $rgbZodiac;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 115%;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 150%;
+  display: -webkit-box; // трансформуємо контейнер
+  -webkit-line-clamp: 6; // строка на якій буде "..."
+  -webkit-box-orient: vertical; // додає "..."
+  overflow: hidden; // ховаємо зайве
+  text-overflow: ellipsis; // магія
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  // padding: ;
+
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 150%;
+  color: $primaryOrange;
+}
+
+// .swiperWrapper {
+//   position: relative;
+
+//   // max-width: 27.8rem;
+//   margin: 0 auto;
+// }
+
+.swiper {
+  @extend .list;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 100%;
+  padding: 0 4rem;
+
+  @include on992 {
+    display: none;
+  }
 }
 
-.swiperSlide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.swiperSlide {
+  @extend .item;
+  border-color: $specializationBorder !important;
+  width: 101% !important;
+
+  &:is(:hover) {
+    border-color: $primaryOrange !important;
+  }
+
+  // max-width: 27.8rem;
+  // margin: 0 auto;
+}
+
+.sliderNav {
+  display: inline-flex;
+  align-self: flex-end;
+  gap: 0 2.25rem;
+  margin-top: 2rem;
+}
+
+.prevSlideBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  svg {
+    stroke: $primaryOrange;
+    fill: $primaryOrange;
+  }
+}
+.nextSlideBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+
+  // right: -100%;
+  // @extend .prevSlideBtn;
 }
