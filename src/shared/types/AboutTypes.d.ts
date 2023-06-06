@@ -12,6 +12,11 @@ export interface IAbout {
   aboutCompanyDescription: string;
   whyUsTitle: string;
   whyUsDescription: string;
+  joinText: string;
+  features: {
+    count: string;
+    description: string;
+  }[];
 }
 
 export interface IAboutData {

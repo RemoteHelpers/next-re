@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import Head from 'next/head';
 import { Layout } from '@/components/Layout';
 import {
@@ -31,6 +31,7 @@ type Props = {
 
 const About: FC<Props> = ({ categories, vacancies, footerData, header, about, formData }) => {
   const pageTitle = header.menu.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
+  const formRef = useRef<HTMLElement>(null);
 
   return (
     <>
@@ -40,9 +41,9 @@ const About: FC<Props> = ({ categories, vacancies, footerData, header, about, fo
       </Head>
 
       <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
-        <AboutUs about={about} pageTitle={pageTitle} />
+        <AboutUs about={about} pageTitle={pageTitle} formRef={formRef} />
         {/* <Specializations about={about} categories={categories} /> */}
-        <MainForm formData={formData} />
+        <MainForm formData={formData} formRef={formRef} />
       </Layout>
     </>
   );

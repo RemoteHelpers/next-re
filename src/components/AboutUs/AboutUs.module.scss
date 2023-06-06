@@ -4,16 +4,15 @@
 @import '@/shared/styles/mixins';
 @import '@/shared/styles/mediaMixins';
 
-$mainCardWidth: 41rem;
+$mainCardMaxW: 41rem;
+$mainBlockMinW: calc($mainCardMaxW * 2);
+$featureMaxW: 27.8rem;
 
 .section {
   position: relative;
   padding: 2rem 1.9rem 0;
   @include on768 {
     padding-top: 4rem;
-  }
-  @include on992 {
-    // padding-top: 7.5rem;
   }
 }
 
@@ -84,6 +83,7 @@ $mainCardWidth: 41rem;
   display: flex;
   flex-direction: column;
   row-gap: 4rem;
+  margin-bottom: 4.8rem;
 }
 
 .upperWrapper {
@@ -91,24 +91,29 @@ $mainCardWidth: 41rem;
   flex-direction: column;
   align-items: center;
   row-gap: 2.5rem;
+  justify-content: center;
 
-  @include on1440 {
-    flex-wrap: wrap;
+  @media (min-width: $mainBlockMinW) {
     flex-direction: row-reverse;
     justify-content: space-between;
-    // margin: 0 auto;
   }
 }
 
 .lowerWrapper {
   @extend .upperWrapper;
-  @include on1440 {
+  .joinBtn {
+    display: none;
+  }
+  @media (min-width: $mainBlockMinW) {
     flex-direction: row;
+    .joinBtn {
+      display: inline-block;
+    }
   }
 }
 
 .mainTextBlock {
-  max-width: $mainCardWidth;
+  max-width: $mainCardMaxW;
 }
 
 .title {
@@ -116,7 +121,8 @@ $mainCardWidth: 41rem;
 
   color: $rgbZodiac;
   font-weight: 900;
-  font-size: clamp(1.75rem, 4.5vw, 3rem);
+  // font-size: clamp(1.75rem, 4.5vw, 3rem);
+  font-size: clamp(1.25rem, 4.5vw, 3rem);
   line-height: 130%;
   text-decoration-line: underline;
 }
@@ -125,7 +131,6 @@ $mainCardWidth: 41rem;
   font-weight: 400;
   font-size: 1rem;
   font-size: clamp(1rem, 3.5vw, 1.25rem);
-
   line-height: 150%;
   color: $rgbBlack;
 }
@@ -133,7 +138,7 @@ $mainCardWidth: 41rem;
 .previewWrap {
   padding: 0.5rem 1rem;
   width: 100%;
-  max-width: $mainCardWidth;
+  max-width: $mainCardMaxW;
 }
 
 .playerWrap {
@@ -141,7 +146,6 @@ $mainCardWidth: 41rem;
   position: relative;
   aspect-ratio: 16 / 9;
   border-radius: 0.75rem;
-  // overflow: hidden;
   border: 0;
   background-color: $rgbGray;
 
@@ -188,15 +192,27 @@ $mainCardWidth: 41rem;
 }
 
 .joinBtn {
-  display: none;
-  @include on992 {
+  margin-top: 3rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  border: 1px solid $primaryOrange;
+  color: $primaryOrange;
+  background-color: transparent;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 115%;
+  cursor: pointer;
+  transition: 200ms;
+  &:is(:hover) {
+    background-color: $primaryOrange;
+    color: $rgbWhite;
   }
 }
 
 .catImgWrap {
   position: relative;
   width: 100%;
-  max-width: $mainCardWidth;
+  max-width: $mainCardMaxW;
   padding-top: calc(100% / (16 / 9)); /* Висота відношення сторін 16:9 */
   background-image: url('./assets/aboutCat_small.svg');
   background-size: contain;
@@ -207,46 +223,48 @@ $mainCardWidth: 41rem;
     padding-top: 24.8rem;
     background-image: url('./assets/aboutCat_large.svg');
   }
-
-  // &::before {
-  //   content: '';
-  //   display: block;
-  //   padding-top: 56.25%; /* Висота відношення сторін 16:9 */
-  //   @media (max-width: $mainCardWidth) {
-  //     padding-top: 0;
-  //   }
-  // }
 }
 
 .features {
-  margin-top: 1rem;
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.5rem;
+
+  @media (min-width: calc($featureMaxW * 2)) {
+    justify-content: space-evenly;
+  }
+  @media (min-width: calc($featureMaxW * 3 + 10rem)) {
+    justify-content: space-between;
+  }
 }
 
 .feature {
-  height: 14.7rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  row-gap: 1rem;
+
+  padding: 5rem 0;
+  width: 100%;
+  max-width: 27.8rem;
+
   border: 1px solid $primaryBlue;
-  border-radius: 1rem;
+  border-radius: 2rem;
 }
 
 .featureCount {
   font-weight: 900;
-  font-size: 64px;
+  font-size: clamp(2rem, 12vw, 4rem);
   line-height: 130%;
   text-align: center;
-  color: #ff6501;
+  color: $primaryOrange;
 }
 
 .featureDescr {
   font-weight: 700;
-  font-size: 36px;
+  font-size: clamp(1.25rem, 8vw, 2rem);
   line-height: 115%;
   text-align: center;
   color: $rgbGray;

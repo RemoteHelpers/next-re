@@ -1,44 +1,36 @@
-import { FC, useEffect } from 'react';
+import { FC, RefObject } from 'react';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import type { IAbout } from '@/shared/types/AboutTypes';
 import s from './AboutUs.module.scss';
-import catAbout_S from './assets/aboutCat_small.svg';
-import catAbout_L from './assets/aboutCat_large.svg';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-import { features } from 'process';
-
+import type { IAbout } from '@/shared/types/AboutTypes';
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
 type Props = {
   about: IAbout;
   pageTitle: string;
+  formRef: RefObject<HTMLElement>;
 };
 
-const tempData = {
-  why: {
-    title: 'Почему выбирают нас',
-    descr:
-      'Наша компания уже более трех лет предоставляет услуги в области IT технологий и маркетинга. Мы сотрудничаем с компаниями со всего мира и поддерживаем положительную репутацию на западном рынке труда.',
-    btn: 'Присоединиться',
+const features = [
+  {
+    count: '300+',
+    descr: 'сотрудников',
   },
-  features: [
-    {
-      count: '300+',
-      descr: 'сотрудников',
-    },
-    {
-      count: '38+',
-      descr: 'проектов',
-    },
-    {
-      count: '99+',
-      descr: 'клиентов',
-    },
-  ],
-};
+  {
+    count: '38+',
+    descr: 'проектов',
+  },
+  {
+    count: '99+',
+    descr: 'клиентов',
+  },
+];
 
-export const AboutUs: FC<Props> = ({ about, pageTitle }) => {
+export const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
+  const scrollToForm = (): void => {
+    if (!formRef?.current) return;
+    formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <section className={s.section}>
       <div className={s.background} />
@@ -53,13 +45,15 @@ export const AboutUs: FC<Props> = ({ about, pageTitle }) => {
               <p className={s.description}>{about.aboutCompanyDescription}</p>
             </div>
 
-            {about.videoUrl && (
+            {about.videoUrl ? (
               <div className={s.previewWrap}>
                 <div className={s.playerWrap}>
                   <div className={s.previewBorder} />
                   <ReactPlayer className={s.videoPlayer} url={about.videoUrl} />
                 </div>
               </div>
+            ) : (
+              <div className={s.catImgWrap} />
             )}
           </div>
 
@@ -68,8 +62,8 @@ export const AboutUs: FC<Props> = ({ about, pageTitle }) => {
               <h2 className={s.title}>{about.whyUsTitle}</h2>
               <p className={s.description}>{about.whyUsDescription}</p>
 
-              <button type="button" className={s.joinBtn}>
-                {tempData.why.btn}
+              <button type="button" className={s.joinBtn} onClick={scrollToForm}>
+                {about.joinText}
               </button>
             </div>
 
@@ -78,7 +72,7 @@ export const AboutUs: FC<Props> = ({ about, pageTitle }) => {
         </div>
 
         <ul className={s.features}>
-          {tempData.features.map(({ count, descr }) => {
+          {features.map(({ count, descr }) => {
             return (
               <li key={`${count}_${descr}`} className={s.feature}>
                 <h3 className={s.featureCount}>{count}</h3>
