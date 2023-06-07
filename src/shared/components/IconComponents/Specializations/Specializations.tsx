@@ -38,15 +38,11 @@ export const SpecializationsIcon: FC<Props> = ({ name }) => {
             cx="25"
             cy="25"
             r="24"
-            fill="#fff"
-            // stroke="#00DCFF"
+            fill="#fbfbfd"
             strokeWidth="2"
             transform="rotate(180 25 25)"
           />
-          <path
-            // fill="#00DCFF"
-            d="M38 26a1 1 0 1 0 0-2v2Zm-25.707-1.707a1 1 0 0 0 0 1.414l6.364 6.364a1 1 0 0 0 1.414-1.414L14.414 25l5.657-5.657a1 1 0 0 0-1.414-1.414l-6.364 6.364ZM38 24H13v2h25v-2Z"
-          />
+          <path d="M38 26a1 1 0 1 0 0-2v2Zm-25.707-1.707a1 1 0 0 0 0 1.414l6.364 6.364a1 1 0 0 0 1.414-1.414L14.414 25l5.657-5.657a1 1 0 0 0-1.414-1.414l-6.364 6.364ZM38 24H13v2h25v-2Z" />
         </svg>
       );
     case 'arrow-next':
@@ -56,15 +52,11 @@ export const SpecializationsIcon: FC<Props> = ({ name }) => {
             cx="25"
             cy="25"
             r="24"
-            fill="#fff"
-            stroke="#00DCFF"
-            stroke-width="2"
+            fill="#fbfbfd"
+            strokeWidth="2"
             transform="matrix(1 0 0 -1 0 50)"
           />
-          <path
-            fill="#00DCFF"
-            d="M12 26a1 1 0 1 1 0-2v2Zm25.707-1.707a1 1 0 0 1 0 1.414l-6.364 6.364a1 1 0 0 1-1.414-1.414L35.586 25l-5.657-5.657a1 1 0 0 1 1.414-1.414l6.364 6.364ZM12 24h25v2H12v-2Z"
-          />
+          <path d="M12 26a1 1 0 1 1 0-2v2Zm25.707-1.707a1 1 0 0 1 0 1.414l-6.364 6.364a1 1 0 0 1-1.414-1.414L35.586 25l-5.657-5.657a1 1 0 0 1 1.414-1.414l6.364 6.364ZM12 24h25v2H12v-2Z" />
         </svg>
       );
 

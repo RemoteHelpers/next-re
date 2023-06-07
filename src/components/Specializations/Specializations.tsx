@@ -1,4 +1,5 @@
-import { FC, useContext, useEffect } from 'react';
+import { FC, useContext } from 'react';
+import Link from 'next/link';
 import { Autoplay, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
@@ -9,7 +10,6 @@ import s from './Specializations.module.scss';
 import type { IAbout } from '@/shared/types/AboutTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
 import { SpecializationsIcon } from '@/shared/components/IconComponents/Specializations';
-import Link from 'next/link';
 import { GlobalContext } from '@/context';
 
 type Props = {
@@ -47,56 +47,54 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
           })}
         </ul>
 
-        {/* <div className={s.swiperWrapper}> */}
         <Swiper
-          className={s.swiper}
+          className={`${s.swiper} about_specializations-swiper`}
           modules={[Pagination, Navigation, Autoplay]}
-          // pagination={false}
           slidesPerView={1}
-          spaceBetween={60}
+          spaceBetween={20}
           centeredSlides={true}
           navigation={{
-            nextEl: '.next-slide-btn',
-            prevEl: '.prev-slide-btn',
+            nextEl: '.about_next-slide-btn',
+            prevEl: '.about_prev-slide-btn',
           }}
           pagination={{
-            el: '.swiper-pagination-about',
+            el: '.about_swiper-pagination',
           }}
         >
-          {categories.map(({ attributes }: ICategory, i: number) => {
+          {categories.map(({ attributes }: ICategory) => {
             const { categorySlug, categoryTitle, description } = attributes;
             if (categorySlug === 'other') return;
             return (
-              <SwiperSlide className={s.swiperSlide} key={`slide_${categorySlug}`}>
-                <SpecializationsIcon name={categorySlug} />
+              <SwiperSlide className={s.slide} key={`slide_${categorySlug}`}>
+                <div className={`${s.slideContent} content`}>
+                  <div className={`${s.slideFade} content--fade`} />
 
-                <h3 className={s.title}>{categoryTitle}</h3>
+                  <SpecializationsIcon name={categorySlug} />
+                  <h3 className={s.title}>{categoryTitle}</h3>
+                  <p className={s.description}>{description}</p>
+                  {/* <ReactMarkdown children={description} /> */}
 
-                <p className={s.description}>{description}</p>
-
-                <Link href={`/${categorySlug}`} className={s.link} onClick={showLoader}>
-                  <span>Дізнатися більше</span>
-                  <SpecializationsIcon name="arrow-more" />
-                </Link>
-                {/* <ReactMarkdown children={description} /> */}
+                  <Link href={`/${categorySlug}`} className={s.link} onClick={showLoader}>
+                    <span>Дізнатися більше</span>
+                    <SpecializationsIcon name="arrow-more" />
+                  </Link>
+                </div>
               </SwiperSlide>
             );
           })}
 
-          <div className={s.sliderNav}>
-            <button type="button" className={`prev-slide-btn ${s.prevSlideBtn}`}>
+          <div className={s.sliderBtns}>
+            <button type="button" className={`${s.prevSlideBtn} about_prev-slide-btn`}>
               <SpecializationsIcon name="arrow-prev" />
             </button>
 
-            <button type="button" className={`next-slide-btn ${s.nextSlideBtn}`}>
+            <button type="button" className={`${s.nextSlideBtn} about_next-slide-btn`}>
               <SpecializationsIcon name="arrow-next" />
             </button>
           </div>
 
-          <div className="swiper-pagination-about"></div>
+          <div className={`${s.sliderPag} about_swiper-pagination`} />
         </Swiper>
-
-        {/* </div> */}
       </div>
     </section>
   );
