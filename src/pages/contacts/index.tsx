@@ -22,7 +22,7 @@ const ContactsPage: FC = ({
       footerData={footerData}
       headerData={{ header, categories, vacancies }}
     >
-      <Contacts contactsData={contacts} formData={formData} />
+      <Contacts contactsData={contacts} formData={formData} header={header} />
     </Layout>
   );
 };

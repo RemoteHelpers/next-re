@@ -11,6 +11,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'strapi.rem-s.com',
+        port: '',
         pathname: '/**',
       },
     ],

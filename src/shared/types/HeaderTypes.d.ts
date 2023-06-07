@@ -28,6 +28,7 @@ interface ILocalization {
 }
 
 export interface IHeader extends ILocalization {
+  mainCat: any;
   menu: IMenu[];
   localizations: { data: { id: number; attributes: ILocalization }[] };
 }

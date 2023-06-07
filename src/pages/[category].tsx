@@ -62,6 +62,13 @@ export const getServerSideProps = async (context: any) => {
 	const header = await getHeaderData(lang);
 	const vacanciesInfo = await getVacancyListData(lang);
 	const formData = await getFormData(lang);
+
+	if (!lang || !categorySlug || !categories || !vacancies || !category || !footerData || !formData || !header || !vacanciesInfo) {
+		return {
+			notFound: true,
+		}
+	}
+
 	return {
 		props: {
 			category,

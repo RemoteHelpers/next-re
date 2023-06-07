@@ -54,7 +54,7 @@ const Home: FC<Props> = ({
         <Questions questions={homeData} />
         <Partners title={homeData.partnersTitle} slides={homeData.partnersSlider.data} />
         <Testimonials testimonials={homeData} />
-        <MainForm formData={formData} formRef={formRef} />
+        <MainForm formData={formData} imageCatProps={header?.mainCat.data.attributes.url} formRef={formRef} />
       </Layout>
     </>
   );
@@ -71,6 +71,12 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const footerData = await getFooterData(lang);
   const formData = await getFormData(lang);
   const header = await getHeaderData(lang);
+
+  if (!lang || !vacanciesInfo || !categories || !vacancies || !homeData || !footerData || !formData || !header) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     props: {
