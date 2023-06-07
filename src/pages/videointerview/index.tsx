@@ -7,7 +7,7 @@ import { getVideointerviewData } from '@/services';
 const Videointerview: FC<any> = ({ categories, vacancies, footerData, header, videoData, formData }) => {
   return (
     <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
-      <VideointerviewPage videoData={videoData} formData={formData} />
+      <VideointerviewPage videoData={videoData} formData={formData} header={header} />
     </Layout>
   );
 };

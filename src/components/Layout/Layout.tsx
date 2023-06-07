@@ -15,6 +15,7 @@ type Props = {
 };
 
 export const Layout: FC<Props> = ({ children, footerData, headerData }) => {
+  if (!headerData) return <></>
   const { header } = headerData;
   const { isLoading } = useContext(GlobalContext);
 

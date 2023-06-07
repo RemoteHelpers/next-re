@@ -68,29 +68,40 @@ const VacancyPage: FC<VacancyPageProps> = ({
 
 export default VacancyPage;
 
-export const getServerSideProps = async ({ params, locale }: GetServerSidePropsContext) => {
-  // const vacancySlug = params?.vacancy.at(-1);
-  const [categorySlug, vacancySlug] = params?.vacancy!;
-  /* queries for layout */
-  const categories = await getCategories(locale!);
-  const vacancies = await getAllVacancies(locale!);
-  const footerData = await getFooterData(locale!);
-  const header = await getHeaderData(locale!);
-  /* queries for vacancy */
-  const vacancy = await getVacancy(locale!, vacancySlug);
-  const vacanciesInfo = await getVacancyListData(locale!);
-  const category = await getCategoryBySlug(locale!, categorySlug);
-  const formData = await getFormData(locale!);
-  return {
-    props: {
-      categories,
-      vacancies,
-      footerData,
-      header,
-      vacancy,
-      vacanciesInfo,
-      category,
-      formData,
-    },
-  };
+export const getServerSideProps = async (context: any) => {
+	const params = context.params;
+	// const vacancySlug = params?.vacancy.at(-1);
+	const [categorySlug, vacancySlug] = params?.vacancy;
+	const lang = context.locale;
+	/* queries for layout */
+	const categories = await getCategories(lang);
+	const vacancies = await getAllVacancies(lang);
+	const footerData = await getFooterData(lang);
+	const header = await getHeaderData(lang);
+	/* queries for vacancy */
+	const vacancy = await getVacancy(lang, vacancySlug);
+	const vacanciesInfo = await getVacancyListData(lang);
+	const category = await getCategoryBySlug(lang, categorySlug);
+	const formData = await getFormData(lang);
+
+
+	if (!lang || !categorySlug || !vacancySlug || !categories || !vacancies 
+		|| !category || !footerData || !formData || !header || !vacanciesInfo || !vacancy) {
+		return {
+			notFound: true,
+		}
+	}
+
+	return {
+		props: {
+			categories,
+			vacancies,
+			footerData,
+			header,
+			vacancy,
+			vacanciesInfo,
+			category,
+			formData,
+		},
+	};
 };
