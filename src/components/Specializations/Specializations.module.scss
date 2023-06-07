@@ -6,6 +6,10 @@
 $maxSlideWidth: 27.8rem;
 $swiperPadding: calc((100% - $maxSlideWidth) / 2);
 $horizPagBtnPosition: calc($swiperPadding - 5rem);
+$spaceBetwSwiperElems: 1.25rem;
+// max bullets pagination's height ---> 1.75rem
+// half pagination button's height ---> 1.56rem
+$vertPagBtnPosition: calc((100% - $spaceBetwSwiperElems - 1.75rem) / 2 - 1.56rem);
 
 .section {
   padding: 0 1.9rem;
@@ -58,7 +62,7 @@ $horizPagBtnPosition: calc($swiperPadding - 5rem);
   @media (min-width: 80rem) {
     width: 30.5%;
   }
-  padding: 2.9rem 3.3rem;
+
   padding: 3rem;
 
   border-radius: 1.25rem;
@@ -70,7 +74,8 @@ $horizPagBtnPosition: calc($swiperPadding - 5rem);
   }
 
   img {
-    width: 7.5rem;
+    width: 100%;
+    max-width: 7.5rem;
     height: auto;
   }
 }
@@ -78,13 +83,13 @@ $horizPagBtnPosition: calc($swiperPadding - 5rem);
 .title {
   color: $rgbZodiac;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: clamp(1rem, 5.7vw, 2rem);
   line-height: 115%;
 }
 
 .description {
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 4.5vw, 1.1rem);
   line-height: 150%;
   display: -webkit-box; // трансформуємо контейнер
   -webkit-line-clamp: 6; // строка на якій буде "..."
@@ -99,18 +104,27 @@ $horizPagBtnPosition: calc($swiperPadding - 5rem);
   gap: 1rem;
 
   font-weight: 400;
-  font-size: 1rem;
+  font-size: clamp(0.5rem, 5.5vw, 1rem);
   line-height: 150%;
   color: $primaryOrange;
+
+  @media (min-width: 17.5rem) {
+    span {
+      min-width: fit-content;
+    }
+  }
+
+  svg {
+    min-width: min-content;
+  }
 }
 
 .swiper {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 1.25rem;
   width: 100%;
-  padding: 0 max(4px, $swiperPadding);
+  padding: 0 max(4px, $swiperPadding) !important;
 
   @include on992 {
     display: none;
@@ -125,21 +139,29 @@ $horizPagBtnPosition: calc($swiperPadding - 5rem);
   @extend .item;
   position: relative;
   width: 100%;
+  padding: 3rem 2rem;
+
+  @include on768 {
+    padding: 3rem 3.5rem;
+  }
+
   &:is(:hover) {
     border-color: $minorGrey;
   }
-}
 
-.slideFade {
-  position: absolute;
-  top: 0;
-  left: 0;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
 
-  width: 100%;
-  height: 100%;
-
-  background: transparent;
-  transition: 0.2s;
+    background: transparent;
+    pointer-events: none;
+    transition: 0.2s;
+  }
 }
 
 .sliderBtns {
@@ -150,7 +172,7 @@ $horizPagBtnPosition: calc($swiperPadding - 5rem);
 
   button {
     position: absolute;
-    top: 15rem;
+    top: $vertPagBtnPosition;
     z-index: 1;
     background: transparent;
 
@@ -174,9 +196,14 @@ $horizPagBtnPosition: calc($swiperPadding - 5rem);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.4rem;
+  gap: 0.5rem;
+  margin-top: $spaceBetwSwiperElems;
 
-  > span {
+  @media (min-width: 20rem) {
+    gap: 1.4rem;
+  }
+
+  span {
     width: $bulletSize;
     height: $bulletSize;
   }

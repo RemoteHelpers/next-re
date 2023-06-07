@@ -226,8 +226,9 @@ body {
 .about_specializations-swiper {
   .swiper-slide:not(.swiper-slide-active) .content {
     border-color: transparent;
-    &--fade {
+    &::after {
       background: $primaryBackground;
+      pointer-events: all;
     }
   }
 

@@ -52,13 +52,13 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
           modules={[Pagination, Navigation, Autoplay]}
           slidesPerView={1}
           spaceBetween={20}
-          centeredSlides={true}
+          // centeredSlides={true}
+          pagination={{
+            el: '.about_swiper-pagination',
+          }}
           navigation={{
             nextEl: '.about_next-slide-btn',
             prevEl: '.about_prev-slide-btn',
-          }}
-          pagination={{
-            el: '.about_swiper-pagination',
           }}
         >
           {categories.map(({ attributes }: ICategory) => {
@@ -67,15 +67,12 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
             return (
               <SwiperSlide className={s.slide} key={`slide_${categorySlug}`}>
                 <div className={`${s.slideContent} content`}>
-                  <div className={`${s.slideFade} content--fade`} />
-
                   <SpecializationsIcon name={categorySlug} />
                   <h3 className={s.title}>{categoryTitle}</h3>
                   <p className={s.description}>{description}</p>
                   {/* <ReactMarkdown children={description} /> */}
-
                   <Link href={`/${categorySlug}`} className={s.link} onClick={showLoader}>
-                    <span>Дізнатися більше</span>
+                    <span>{`Дізнатися більше`}</span>
                     <SpecializationsIcon name="arrow-more" />
                   </Link>
                 </div>
@@ -83,7 +80,7 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
             );
           })}
 
-          <div className={s.sliderBtns}>
+          <nav className={s.sliderBtns}>
             <button type="button" className={`${s.prevSlideBtn} about_prev-slide-btn`}>
               <SpecializationsIcon name="arrow-prev" />
             </button>
@@ -91,7 +88,7 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
             <button type="button" className={`${s.nextSlideBtn} about_next-slide-btn`}>
               <SpecializationsIcon name="arrow-next" />
             </button>
-          </div>
+          </nav>
 
           <div className={`${s.sliderPag} about_swiper-pagination`} />
         </Swiper>
