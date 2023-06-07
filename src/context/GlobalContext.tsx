@@ -7,7 +7,8 @@ import React, {
 } from "react";
 import { useRouter } from "next/router";
 import { IHeader } from "@/shared/types/HeaderTypes";
-import { getHeaderData } from "@/services";
+import { getFooterData, getHeaderData } from "@/services";
+import { IFooterData } from "@/shared/types/FooterTypes";
 
 export type ContextValue = {
 	navURL: string;
@@ -18,6 +19,8 @@ export type ContextValue = {
 	setCurrentLang: (string: string) => void;
 	header: IHeader;
 	setHeader: (header: IHeader) => void;
+	footer: IFooterData,
+	setFooter: (footer: IFooterData) => void,
 };
 export interface ProviderProps {
 	children: ReactNode;
@@ -31,7 +34,9 @@ const defaultValue: ContextValue = {
 	currentLang: "",
 	setCurrentLang: () => {},
 	header: {} as IHeader,
-	setHeader: () => {},
+	setHeader: () => { },
+	footer: {} as IFooterData,
+	setFooter: () => {},
 };
 export const GlobalContext = createContext<ContextValue>(defaultValue);
 
@@ -42,6 +47,7 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
 	const initialLang = locale === "uk" ? "UA" : locale?.toUpperCase()!;
 	const [currentLang, setCurrentLang] = useState<string>(initialLang);
 	const [header, setHeader] = useState<IHeader>({} as IHeader);
+	const [footer, setFooter] = useState<IFooterData>({} as IFooterData);
 
 	useEffect(() => {
 		if (!navURL) return;
@@ -55,16 +61,28 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
 	}, [locale, asPath]);
 
 	useEffect(() => {
-		setIsLoading(true);
+		setIsLoading(prev => true);
 		getHeaderData(locale)
 			.then((res) => {
 				setHeader(res);
-				setIsLoading(false);
+				setIsLoading(prev => false);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	}, [locale]);
+	useEffect(() => {
+		setIsLoading(prev => true);		
+		getFooterData(locale!)
+			.then((res) => {
+				setFooter(res);
+				setIsLoading(prev => false);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, [locale]);
+	
 
 	const contextValue = useMemo(
 		() => ({
@@ -76,8 +94,10 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
 			setCurrentLang,
 			header,
 			setHeader,
+			footer,
+			setFooter,
 		}),
-		[isLoading, navURL, currentLang]
+		[isLoading, navURL, currentLang, header, footer]
 	);
 
 	return (

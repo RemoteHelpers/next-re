@@ -1,4 +1,4 @@
-import { FC, useMemo, useRef } from "react";
+import { FC, useContext, useMemo, useRef } from "react";
 import s from "./Vacancy.module.scss";
 import Link from "next/link";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
@@ -15,6 +15,7 @@ import { IVacancy, IVacanciesInfo } from "@/shared/types/VacanciesTypes";
 import { ICategory } from "@/shared/types/CategoriesTypes";
 import { IFormData } from "@/shared/types/FormTypes";
 import { IHeader } from "@/shared/types/HeaderTypes";
+import { GlobalContext } from "@/context";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 interface VacancyProps {
@@ -22,7 +23,6 @@ interface VacancyProps {
 	vacanciesInfo: IVacanciesInfo;
 	category: ICategory;
 	formData: IFormData;
-	header: IHeader;
 }
 
 export const Vacancy: FC<VacancyProps> = ({
@@ -30,7 +30,6 @@ export const Vacancy: FC<VacancyProps> = ({
 	vacanciesInfo,
 	category,
 	formData,
-	header,
 }: VacancyProps) => {
 	if (!vacancy.attributes) {
 		return <></>;
@@ -48,16 +47,20 @@ export const Vacancy: FC<VacancyProps> = ({
 		videoLink,
 		videoPreview,
 	} = vacancy.attributes;
+	const { header, isLoading } = useContext(GlobalContext);	
 	const { menu, isHotValue, seeMore } = header;
 	const { categorySlug, categoryTitle, vacancies } = category.attributes;
 	const { respondBtn } = formData;
-	const breadcrumbsItems = useMemo(
-		(): ItemType[] => [
+	const breadcrumbsItems = useMemo((): ItemType[] => {
+		if (!menu) {
+			return [];
+		}
+		return [
 			{
-				title: <Link href={"/"}>{menu[0].title}</Link>,
+				title: <Link href={"/"}>{menu[0]?.title}</Link>,
 			},
 			{
-				title: <Link href={`/${menu[1].path_id}`}>{menu[1].title}</Link>,
+				title: <Link href={`/${menu[1].path_id}`}>{menu[1]?.title}</Link>,
 			},
 			{
 				title: <Link href={`/${categorySlug}`}>{categoryTitle}</Link>,
@@ -65,9 +68,8 @@ export const Vacancy: FC<VacancyProps> = ({
 			{
 				title: title,
 			},
-		],
-		[menu, categorySlug, categoryTitle]
-	);
+		];
+	}, [menu, categorySlug, categoryTitle]);
 	const formRef = useRef<HTMLDivElement>(null);
 	return (
 		<section className={s.vacancy}>
@@ -122,20 +124,21 @@ export const Vacancy: FC<VacancyProps> = ({
 					</div>
 				</div>
 				<div className={s.vacancies_list}>
-					{vacancies && vacancies.data.map((vacancy: IVacancy, index: number) => {
-						const { vacancySlug: slug } = vacancy.attributes;
-						const condition = slug !== vacancySlug && index < 3;
-						if (condition) {
-							return (
-								<VacancyItem
-									key={vacancy.id}
-									attributes={vacancy.attributes}
-									vacanciesInfo={vacanciesInfo}
-									category={categorySlug}
-								/>
-							);
-						}
-					})}
+					{vacancies &&
+						vacancies.data.map((vacancy: IVacancy, index: number) => {
+							const { vacancySlug: slug } = vacancy.attributes;
+							const condition = slug !== vacancySlug && index < 3;
+							if (condition) {
+								return (
+									<VacancyItem
+										key={vacancy.id}
+										attributes={vacancy.attributes}
+										vacanciesInfo={vacanciesInfo}
+										category={categorySlug}
+									/>
+								);
+							}
+						})}
 				</div>
 				<Link href={`/${menu[1].path_id}`} className={s.see_more}>
 					{seeMore}

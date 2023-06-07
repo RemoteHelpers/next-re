@@ -22,9 +22,9 @@ export const BurgerMenu: FC<Props> = ({ menuState, headerData }) => {
   const [currentTab, setCurrentTab] = useState<number>(1);
   const [currentCategory, setCurrentCategory] = useState<string>('');
   const { isBurgerMenu, setIsBurgerMenu } = menuState;
-  const { menu, menuValue, backValue, allVacanciesValue } = headerData.header;
   const { categories, vacancies } = headerData;
-  const { setNavURL } = useContext(GlobalContext);
+  const { setNavURL, header } = useContext(GlobalContext);
+  const { menu, menuValue, backValue, allVacanciesValue } = header;
 
   const navToLink = (path: string): void => {
     setIsBurgerMenu(false);
@@ -72,7 +72,7 @@ export const BurgerMenu: FC<Props> = ({ menuState, headerData }) => {
 
       <nav className={s.navigation}>
         <ul className={currentTab === 1 ? s.firstTab_shown : s.firstTab}>
-          {menu.map(({ title, path_id }: IMenu) => {
+          {menu?.map(({ title, path_id }: IMenu) => {
             if (!path_id.trim()) return;
             return (
               <li key={path_id}>

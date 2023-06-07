@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import type { GetServerSidePropsContext } from 'next';
 import { Layout } from '@/components/Layout';
 import { Vacancies } from '@/components/Vacancies';
@@ -10,27 +10,21 @@ import {
   getCategories,
   getAllVacancies,
   getHomeData,
-  getFooterData,
-  getFormData,
-  getHeaderData,
+  getFormData,  
 } from '@/services';
 import { Spheres } from '@/components/Spheres';
 import { Partners } from '@/components/Partners';
 import MainForm from '@/components/MainForm/MainForm';
 import type { IVacanciesInfo, IVacancy } from '@/shared/types/VacanciesTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IHeader } from '@/shared/types/HeaderTypes';
 import type { IHomeData } from '@/shared/types/HomeTypes';
 import type { IFormData } from '@/shared/types/FormTypes';
-import type { IFooterData } from '@/shared/types/FooterTypes';
 
 type Props = {
   vacanciesInfo: IVacanciesInfo;
   categories: ICategory[];
   vacancies: IVacancy[];
   homeData: IHomeData;
-  footerData: IFooterData;
-  header: IHeader;
   formData: IFormData;
 };
 
@@ -39,15 +33,16 @@ const Home: FC<Props> = ({
   categories,
   vacancies,
   homeData,
-  footerData,
-  header,
   formData,
 }) => {
   const formRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [])
 
   return (
     <>
-      <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
+      <Layout headerData={{ categories, vacancies }}>
         <Hero data={homeData} formRef={formRef} />
         <Spheres title={homeData.spheresTitle} categories={categories} />
         <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} vacancies={vacancies} />
@@ -65,12 +60,10 @@ export default Home;
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const lang = context.locale!;
   const vacanciesInfo = await getVacancyListData(lang);
-  const categories = await getCategories(lang);
+  const categories = await getCategories(lang, 'categorySlug,categoryTitle');
   const vacancies = await getAllVacancies(lang);
   const homeData = await getHomeData(lang);
-  const footerData = await getFooterData(lang);
   const formData = await getFormData(lang);
-  const header = await getHeaderData(lang);
 
   return {
     props: {
@@ -78,9 +71,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       categories,
       vacancies,
       homeData,
-      footerData,
       formData,
-      header,
     },
   };
 };

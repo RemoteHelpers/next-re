@@ -1,4 +1,4 @@
-import { FC, useContext, ReactNode } from 'react';
+import { FC, useContext, ReactNode, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Main } from './components/Main';
 import { Footer } from './components/Footer';
@@ -10,20 +10,24 @@ import type { IHeaderData } from '@/shared/types/HeaderTypes';
 
 type Props = {
   children: ReactNode;
-  footerData: IFooterData;
   headerData: IHeaderData;
 };
 
-export const Layout: FC<Props> = ({ children, footerData, headerData }) => {
-  const { header } = headerData;
+export const Layout: FC<Props> = ({ children, headerData }) => {
   const { isLoading } = useContext(GlobalContext);
+
+  useEffect(() => {
+    if (document) {      
+      console.log(JSON.parse(document.getElementById("__NEXT_DATA__")?.textContent!));      
+    }
+  }, [])
 
   return (
     <>
       <div className={s.wrapper}>
         <Header headerData={headerData} />
         <Main>{children}</Main>
-        <Footer footerData={footerData} header={header} />
+        <Footer/>
       </div>
 
       {isLoading && <Loader />}

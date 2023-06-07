@@ -1,80 +1,81 @@
-import { FC } from 'react';
-import Head from 'next/head';
-import { Layout } from '@/components/Layout';
+import { FC, useContext } from "react";
+import Head from "next/head";
+import { Layout } from "@/components/Layout";
 import {
-  getAllVacancies,
-  getCategories,
-  getFooterData,
-  getFormData,
-  getHeaderData,
-} from '@/services';
-import { ICategory } from '@/shared/types/CategoriesTypes';
-import { IVacancy } from '@/shared/types/VacanciesTypes';
-import { IFooterData } from '@/shared/types/FooterTypes';
-import { IHeader, IMenu } from '@/shared/types/HeaderTypes';
-import { GetServerSidePropsContext } from 'next';
-import { getAboutData } from '@/services/AboutService';
-import { IAbout } from '@/shared/types/AboutTypes';
-import { AboutUs } from '@/components/AboutUs';
-import MainForm from '@/components/MainForm/MainForm';
-import type { IFormData } from '@/shared/types/FormTypes';
-import { Specializations } from '@/components/Specializations';
+	getAllVacancies,
+	getCategories,
+	getFormData,
+} from "@/services";
+import { ICategory } from "@/shared/types/CategoriesTypes";
+import { IVacancy } from "@/shared/types/VacanciesTypes";
+import { IMenu } from "@/shared/types/HeaderTypes";
+import { GetServerSidePropsContext } from "next";
+import { getAboutData } from "@/services/AboutService";
+import { IAbout } from "@/shared/types/AboutTypes";
+import { AboutUs } from "@/components/AboutUs";
+import MainForm from "@/components/MainForm/MainForm";
+import type { IFormData } from "@/shared/types/FormTypes";
+import { Specializations } from "@/components/Specializations";
+import { GlobalContext } from "@/context";
 
 type Props = {
-  categories: ICategory[];
-  vacancies: IVacancy[];
-  footerData: IFooterData;
-  header: IHeader;
-  about: IAbout;
-  formData: IFormData;
+	categories: ICategory[];
+	vacancies: IVacancy[];
+	about: IAbout;
+	formData: IFormData;
 };
 
-const About: FC<Props> = ({ categories, vacancies, footerData, header, about, formData }) => {
-  const tabTitle = header.menu.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
+const About: FC<Props> = ({
+	categories,
+	vacancies,
+	about,
+	formData,
+}) => {
+	const { header } = useContext(GlobalContext);
+	const tabTitle = header?.menu?.find(
+		({ path_id }: IMenu) => path_id === "about"
+	)?.title!;
 
-  return (
-    <>
-      <Head>
-        <title>{tabTitle}</title>
-        <meta name="description" content={about.WhatWeDoTitle} />
-      </Head>
+	return (
+		<>
+			<Head>
+				<title>{tabTitle}</title>
+				<meta name="description" content={about.WhatWeDoTitle} />
+			</Head>
 
-      <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
-        <AboutUs about={about} tabTitle={tabTitle} />
-        {/* <Specializations about={about} categories={categories} /> */}
-        <MainForm formData={formData} />
-      </Layout>
-    </>
-  );
+			<Layout headerData={{ categories, vacancies }}>
+				<AboutUs about={about} tabTitle={tabTitle} />
+				{/* <Specializations about={about} categories={categories} /> */}
+				<MainForm formData={formData} />
+			</Layout>
+		</>
+	);
 };
 
 export default About;
 
-export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
-  const fetchCategories: Promise<ICategory[]> = getCategories(locale!);
-  const fetchVacancies: Promise<IVacancy[]> = getAllVacancies(locale!);
-  const fetchFooterData: Promise<IFooterData> = getFooterData(locale!);
-  const fetchHeader: Promise<IHeader> = getHeaderData(locale!);
-  const fetchAbout: Promise<IAbout> = getAboutData(locale!);
-  const fetchFormData = getFormData(locale!);
+export const getServerSideProps = async ({
+	locale,
+}: GetServerSidePropsContext) => {
+	const fetchCategories: Promise<ICategory[]> = getCategories(locale!);
+	const fetchVacancies: Promise<IVacancy[]> = getAllVacancies(locale!);
+	const fetchAbout: Promise<IAbout> = getAboutData(locale!);
+	const fetchFormData = getFormData(locale!);
 
-  const [categories, vacancies, footerData, header, about, formData] = await Promise.all([
-    fetchCategories,
-    fetchVacancies,
-    fetchFooterData,
-    fetchHeader,
-    fetchAbout,
-    fetchFormData,
-  ]);
+	const [categories, vacancies, about, formData] =
+		await Promise.all([
+			fetchCategories,
+			fetchVacancies,
+			fetchAbout,
+			fetchFormData,
+		]);
 
-  return {
-    props: {
-      categories,
-      vacancies,
-      footerData,
-      header,
-      about,
-      formData,
-    },
-  };
+	return {
+		props: {
+			categories,
+			vacancies,
+			about,
+			formData,
+		},
+	};
 };

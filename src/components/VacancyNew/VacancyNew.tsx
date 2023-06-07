@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { FC, useContext } from "react";
 import { useMemo, useRef, useEffect } from "react";
 import s from "./VacancyNew.module.scss";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
@@ -18,6 +18,7 @@ import { IVacancy } from "@/shared/types/VacanciesTypes";
 import { ICategory } from "@/shared/types/CategoriesTypes";
 import { IFormData } from "@/shared/types/FormTypes";
 import { IHeader } from "@/shared/types/HeaderTypes";
+import { GlobalContext } from "@/context";
 
 const rotateKeyframes = [
 	{
@@ -40,14 +41,12 @@ interface VacancyNewProps {
 	vacancy: IVacancy;
 	category: ICategory;
 	formData: IFormData;
-	header: IHeader;
 }
 
 export const VacancyNew: FC<VacancyNewProps> = ({
 	vacancy,
 	category,
 	formData,
-	header,
 }) => {
 	if (!vacancy.attributes) {
 		return <></>;
@@ -67,11 +66,15 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 		toolsTitle,
 		tools,
 	} = vacancy.attributes;
-	const { menu, isHotValue, seeMore } = header;
-	const { categorySlug, categoryTitle, vacancies } = category.attributes;
+	const { header } = useContext(GlobalContext);
+	const { menu, isHotValue } = header;
+	const { categorySlug, categoryTitle } = category.attributes;
 	const { respondBtn } = formData;
-	const breadcrumbsItems = useMemo(
-		(): ItemType[] => [
+	const breadcrumbsItems = useMemo((): ItemType[] => {
+		if (!menu) {
+			return [];
+		}
+		return [
 			{
 				title: <Link href={"/"}>{menu[0].title}</Link>,
 			},
@@ -84,9 +87,8 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 			{
 				title: title,
 			},
-		],
-		[menu, categorySlug, categoryTitle]
-	);
+		];
+	}, [menu, categorySlug, categoryTitle]);
 	const router = useRouter();
 	const formRef = useRef<HTMLDivElement>(null);
 	const circleRef = useRef<SVGSVGElement>(null);
@@ -179,9 +181,7 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 					<div className={s.resp_content}>
 						<div className={s.resp_img}>
 							<Image src={cat_laptop} alt="resp_cat" />
-							<svg
-								ref={circleRef}
-								xmlns="http://www.w3.org/2000/svg">
+							<svg ref={circleRef} xmlns="http://www.w3.org/2000/svg">
 								<circle cx="50%" cy="50%" r="48%" />
 								<circle cx="50%" cy="50%" r="48%" />
 							</svg>
