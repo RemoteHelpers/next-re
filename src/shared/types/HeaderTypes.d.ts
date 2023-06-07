@@ -1,6 +1,11 @@
 import { ICategory } from './CategoriesTypes';
 import { IVacancy } from './VacanciesTypes';
 
+export interface ILanguage {
+  id: number;
+  locale: string;
+  language: string;
+}
 export interface IMenu {
   id: number;
   path_id: string;
@@ -14,6 +19,7 @@ interface ILocalization {
   commonVacancyDetails: unknown;
   createdAt: Date;
   isHotValue: string;
+  languagesList: ILanguage[];
   locale: string;
   menuValue: string;
   meta: string;

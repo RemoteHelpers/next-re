@@ -1,1 +1,0 @@
-export { VacancyCard } from "./VacancyCard";

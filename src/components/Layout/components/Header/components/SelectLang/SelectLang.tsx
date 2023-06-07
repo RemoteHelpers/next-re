@@ -3,41 +3,15 @@ import s from './SelectLang.module.scss';
 import { useRouter } from 'next/router';
 import { LangSelectorIcon } from '@/shared/components/IconComponents/Header';
 import { GlobalContext } from '@/context';
+import { ILanguage } from '@/shared/types/HeaderTypes';
 
 type Props = {
   chooseLangValue: string;
   isDesktopMenuShown: boolean;
+  languages: ILanguage[];
 };
 
-type Languages = {
-  lang: string;
-  locale: string;
-}[];
-
-const languages: Languages = [
-  {
-    lang: 'Українська',
-    locale: 'uk',
-  },
-  {
-    lang: 'Polski',
-    locale: 'pl',
-  },
-  {
-    lang: 'English',
-    locale: 'en',
-  },
-  {
-    lang: 'Slovenský',
-    locale: 'sk',
-  },
-  {
-    lang: 'русский',
-    locale: 'ru',
-  },
-];
-
-export const SelectLang: FC<Props> = ({ chooseLangValue, isDesktopMenuShown }) => {
+export const SelectLang: FC<Props> = ({ chooseLangValue, isDesktopMenuShown, languages }) => {
   const [isSelectorShown, setIsSelectorShown] = useState<boolean>(false);
   const [needAddListeners, setNeedAddListeners] = useState<boolean>(false);
   const [needRemoveListeners, setNeedRemoveListeners] = useState<boolean>(false);
@@ -96,7 +70,7 @@ export const SelectLang: FC<Props> = ({ chooseLangValue, isDesktopMenuShown }) =
         <h3 className={s.langsTitle}>{chooseLangValue}</h3>
 
         <ul className={s.list}>
-          {languages.map(({ lang, locale }) => {
+          {languages.map(({ language, locale }) => {
             const uk = currentLang === 'UA' && 'uk';
             const isCurrentLocale =
               locale === uk ? true : locale === currentLang.toLowerCase() ? true : false;
@@ -104,14 +78,14 @@ export const SelectLang: FC<Props> = ({ chooseLangValue, isDesktopMenuShown }) =
             return (
               <li
                 className={s.item}
-                key={lang}
-                id={lang}
+                key={language}
+                id={language}
                 onClick={() => handleSelection(locale)}
                 ref={langItemRef}
               >
                 <LangSelectorIcon name={locale} />
 
-                <p className={s.language}>{lang}</p>
+                <p className={s.language}>{language}</p>
 
                 <div className={s.plugBox}>{isCurrentLocale && <div className={s.plug}></div>}</div>
               </li>
