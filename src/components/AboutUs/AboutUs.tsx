@@ -1,7 +1,7 @@
 import { FC, RefObject } from 'react';
 import dynamic from 'next/dynamic';
 import s from './AboutUs.module.scss';
-import type { IAbout } from '@/shared/types/AboutTypes';
+import type { IAbout, IAboutLocalizationData } from '@/shared/types/AboutTypes';
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
 type Props = {
@@ -10,26 +10,18 @@ type Props = {
   formRef: RefObject<HTMLElement>;
 };
 
-const features = [
-  {
-    count: '300+',
-    descr: 'сотрудников',
-  },
-  {
-    count: '38+',
-    descr: 'проектов',
-  },
-  {
-    count: '99+',
-    descr: 'клиентов',
-  },
-];
-
 export const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
   const scrollToForm = (): void => {
     if (!formRef?.current) return;
     formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  const findEnVideoUrl = () =>
+    about.localizations.data.find(
+      ({ attributes }: IAboutLocalizationData) => attributes.locale === 'en'
+    )?.attributes.videoUrl;
+
+  const videoUrl = about.videoUrl ? about.videoUrl : findEnVideoUrl();
 
   return (
     <section className={s.section}>
@@ -45,15 +37,13 @@ export const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
               <p className={s.description}>{about.aboutCompanyDescription}</p>
             </div>
 
-            {about.videoUrl ? (
+            {videoUrl && (
               <div className={s.previewWrap}>
                 <div className={s.playerWrap}>
                   <div className={s.previewBorder} />
-                  <ReactPlayer className={s.videoPlayer} url={about.videoUrl} />
+                  <ReactPlayer className={s.videoPlayer} url={videoUrl} />
                 </div>
               </div>
-            ) : (
-              <div className={s.catImgWrap} />
             )}
           </div>
 
@@ -72,11 +62,11 @@ export const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
         </div>
 
         <ul className={s.features}>
-          {features.map(({ count, descr }) => {
+          {about.features.map(({ count, description }) => {
             return (
-              <li key={`${count}_${descr}`} className={s.feature}>
+              <li key={`${count}_${description}`} className={s.feature}>
                 <h3 className={s.featureCount}>{count}</h3>
-                <p className={s.featureDescr}>{descr}</p>
+                <p className={s.featureDescr}>{description}</p>
               </li>
             );
           })}

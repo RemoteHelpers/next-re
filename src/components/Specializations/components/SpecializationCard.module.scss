@@ -1,0 +1,40 @@
+@import '@/shared/styles/colors';
+
+.title {
+  color: $rgbZodiac;
+  font-weight: 600;
+  font-size: clamp(1rem, 5.7vw, 2rem);
+  line-height: 115%;
+}
+
+.description {
+  font-weight: 400;
+  font-size: clamp(0.8rem, 4.5vw, 1.1rem);
+  line-height: 150%;
+  display: -webkit-box; // трансформуємо контейнер
+  -webkit-line-clamp: 6; // строка на якій буде "..."
+  -webkit-box-orient: vertical; // додає "..."
+  overflow: hidden; // ховаємо зайве
+  text-overflow: ellipsis; // магія
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+
+  font-weight: 400;
+  font-size: clamp(0.5rem, 5.5vw, 1rem);
+  line-height: 150%;
+  color: $primaryOrange;
+
+  @media (min-width: 17.5rem) {
+    span {
+      min-width: fit-content;
+    }
+  }
+
+  svg {
+    min-width: min-content;
+  }
+}

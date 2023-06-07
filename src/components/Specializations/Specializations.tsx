@@ -1,8 +1,6 @@
-import { FC, useContext } from 'react';
-import Link from 'next/link';
+import { FC } from 'react';
 import { Autoplay, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -10,7 +8,7 @@ import s from './Specializations.module.scss';
 import type { IAbout } from '@/shared/types/AboutTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
 import { SpecializationsIcon } from '@/shared/components/IconComponents/Specializations';
-import { GlobalContext } from '@/context';
+import { SpecializationCard } from './components';
 
 type Props = {
   about: IAbout;
@@ -18,9 +16,6 @@ type Props = {
 };
 
 export const Specializations: FC<Props> = ({ about, categories }) => {
-  const { setIsLoading } = useContext(GlobalContext);
-  const showLoader = () => setIsLoading(true);
-
   return (
     <section className={s.section}>
       <div className={s.container}>
@@ -29,19 +24,10 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
 
         <ul className={s.list}>
           {categories.map(({ attributes }: ICategory) => {
-            const { categorySlug, categoryTitle, description } = attributes;
-            if (categorySlug === 'other') return;
+            if (attributes.categorySlug === 'other') return;
             return (
-              <li className={s.item} key={`item_${categorySlug}`}>
-                <SpecializationsIcon name={categorySlug} />
-                <h3 className={s.title}>{categoryTitle}</h3>
-                <p className={s.description}>{description}</p>
-                {/* <ReactMarkdown children={description} /> */}
-
-                <Link href={`/${categorySlug}`} className={s.link} onClick={showLoader}>
-                  <span>Узнать больше</span>
-                  <SpecializationsIcon name="arrow" />
-                </Link>
+              <li className={s.item} key={`item_${attributes.categorySlug}`}>
+                <SpecializationCard category={attributes} />
               </li>
             );
           })}
@@ -52,7 +38,6 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
           modules={[Pagination, Navigation, Autoplay]}
           slidesPerView={1}
           spaceBetween={20}
-          // centeredSlides={true}
           pagination={{
             el: '.about_swiper-pagination',
           }}
@@ -62,19 +47,11 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
           }}
         >
           {categories.map(({ attributes }: ICategory) => {
-            const { categorySlug, categoryTitle, description } = attributes;
-            if (categorySlug === 'other') return;
+            if (attributes.categorySlug === 'other') return;
             return (
-              <SwiperSlide className={s.slide} key={`slide_${categorySlug}`}>
+              <SwiperSlide className={s.slide} key={`slide_${attributes.categorySlug}`}>
                 <div className={`${s.slideContent} content`}>
-                  <SpecializationsIcon name={categorySlug} />
-                  <h3 className={s.title}>{categoryTitle}</h3>
-                  <p className={s.description}>{description}</p>
-                  {/* <ReactMarkdown children={description} /> */}
-                  <Link href={`/${categorySlug}`} className={s.link} onClick={showLoader}>
-                    <span>{`Дізнатися більше`}</span>
-                    <SpecializationsIcon name="arrow-more" />
-                  </Link>
+                  <SpecializationCard category={attributes} />
                 </div>
               </SwiperSlide>
             );

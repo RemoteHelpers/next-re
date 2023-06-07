@@ -43,7 +43,11 @@ const About: FC<Props> = ({ categories, vacancies, footerData, header, about, fo
       <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
         <AboutUs about={about} pageTitle={pageTitle} formRef={formRef} />
         <Specializations about={about} categories={categories} />
-        <MainForm formData={formData} formRef={formRef} />
+        <MainForm
+          imageCatProps={header?.mainCat.data.attributes.url}
+          formData={formData}
+          formRef={formRef}
+        />
       </Layout>
     </>
   );
