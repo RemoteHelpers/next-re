@@ -6,16 +6,15 @@ import { GlobalContext } from '@/context';
 import { ILanguage } from '@/shared/types/HeaderTypes';
 
 type Props = {
-  chooseLangValue: string;
   isDesktopMenuShown: boolean;
-  languages: ILanguage[];
 };
 
-export const SelectLang: FC<Props> = ({ chooseLangValue, isDesktopMenuShown, languages }) => {
+export const SelectLang: FC<Props> = ({ isDesktopMenuShown }) => {
   const [isSelectorShown, setIsSelectorShown] = useState<boolean>(false);
   const [needAddListeners, setNeedAddListeners] = useState<boolean>(false);
   const [needRemoveListeners, setNeedRemoveListeners] = useState<boolean>(false);
-  const { setIsLoading, currentLang, setCurrentLang } = useContext(GlobalContext);
+  const { setIsLoading, currentLang, setCurrentLang, header } = useContext(GlobalContext);
+  const { chooseLangValue, languagesList: languages } = header;
   const router = useRouter();
   const langBtnRef = useRef<HTMLButtonElement>(null);
   const langItemRef = useRef<HTMLLIElement>(null);
@@ -70,7 +69,7 @@ export const SelectLang: FC<Props> = ({ chooseLangValue, isDesktopMenuShown, lan
         <h3 className={s.langsTitle}>{chooseLangValue}</h3>
 
         <ul className={s.list}>
-          {languages.map(({ language, locale }) => {
+          {languages?.map(({ language, locale }) => {
             const uk = currentLang === 'UA' && 'uk';
             const isCurrentLocale =
               locale === uk ? true : locale === currentLang.toLowerCase() ? true : false;

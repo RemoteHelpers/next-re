@@ -28,13 +28,9 @@ interface ILocalization {
 }
 
 export interface IHeader extends ILocalization {
+  videoCat: any;
+  vacancyCat: any;
   mainCat: any;
   menu: IMenu[];
   localizations: { data: { id: number; attributes: ILocalization }[] };
-}
-
-export interface IHeaderData {
-  header: IHeader;
-  categories: ICategory[];
-  vacancies: IVacancy[];
 }

@@ -1,35 +1,27 @@
-import { FC } from 'react';
-import { Layout } from '@/components/Layout';
-import { getAllVacancies, getCategories, getFooterData, getFormData, getHeaderData } from '@/services';
-import { VideointerviewPage } from '@/components/VideoInterview';
-import { getVideointerviewData } from '@/services';
+import { FC } from "react";
+import { Layout } from "@/components/Layout";
+import { getAllVacancies, getCategories } from "@/services";
+import { VideointerviewPage } from "@/components/VideoInterview";
+import { getVideointerviewData } from "@/services";
 
-const Videointerview: FC<any> = ({ categories, vacancies, footerData, header, videoData, formData }) => {
-  return (
-    <Layout footerData={footerData} headerData={{ header, categories, vacancies }}>
-      <VideointerviewPage videoData={videoData} formData={formData} header={header} />
-    </Layout>
-  );
+const Videointerview: FC<any> = ({ categories, videoData }) => {
+	return (
+		<Layout categories={categories}>
+			<VideointerviewPage videoData={videoData} />
+		</Layout>
+	);
 };
 
 export default Videointerview;
 
 export const getServerSideProps = async (context: any) => {
-  const lang = context.locale;
-  const categories = await getCategories(lang);
-  const vacancies = await getAllVacancies(lang);
-  const footerData = await getFooterData(lang);
-  const header = await getHeaderData(lang);
-  const videoData = await getVideointerviewData(lang);
-  const formData = await getFormData(lang);
-  return {
-    props: {
-      categories,
-      vacancies,
-      footerData,
-      header,
-      videoData,
-      formData
-    },
-  };
+	const lang = context.locale;
+	const categories = await getCategories(lang);
+	const videoData = await getVideointerviewData(lang);
+	return {
+		props: {
+			categories,
+			videoData,
+		},
+	};
 };
