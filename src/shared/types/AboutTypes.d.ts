@@ -1,4 +1,4 @@
-export interface IAbout {
+interface IAboutLocalization {
   firstDescription: string;
   title: string;
   videoUrl: string;
@@ -12,9 +12,19 @@ export interface IAbout {
   aboutCompanyDescription: string;
   whyUsTitle: string;
   whyUsDescription: string;
+  joinText: string;
+  features: {
+    count: string;
+    description: string;
+  }[];
+  learnMoreText: string;
 }
 
-export interface IAboutData {
+export interface IAboutLocalizationData {
   id: number;
-  attributes: IAbout;
+  attributes: IAboutLocalization;
+}
+
+export interface IAbout extends IAboutLocalization {
+  localizations: { data: IAboutLocalizationData[] };
 }

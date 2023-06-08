@@ -1,10 +1,10 @@
-import Image from "next/image";
-import FormFields from "../FormFields/FormFields";
-import styles from "./MainForm.module.scss";
-import mainCat from "@/shared/images/Form/MainForm/main-cat.png";
-import type { IFormData } from "@/shared/types/FormTypes";
+import Image from 'next/image';
+import FormFields from '../FormFields/FormFields';
+import styles from './MainForm.module.scss';
+import mainCat from '@/shared/images/Form/MainForm/main-cat.png';
+import type { IFormData } from '@/shared/types/FormTypes';
 
-import { PhotoAPI } from "@/constants";
+import { PhotoAPI } from '@/constants';
 
 type Props = {
   formData: IFormData;

@@ -221,3 +221,27 @@ body {
 .PhoneInputCountry {
   margin: 0 !important;
 }
+
+// global styles for swiper library in specializations component
+.about_specializations-swiper {
+  .swiper-slide:not(.swiper-slide-active) .content {
+    border-color: transparent;
+    &::after {
+      background: $primaryBackground;
+      pointer-events: all;
+    }
+  }
+
+  .swiper-button-disabled svg {
+    stroke: $minorGrey;
+    fill: $minorGrey;
+  }
+}
+
+.about_swiper-pagination {
+  .swiper-pagination-bullet-active {
+    background-color: $primaryOrange;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}

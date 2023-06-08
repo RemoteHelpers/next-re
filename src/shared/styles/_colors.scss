@@ -23,9 +23,10 @@ $rgbBlack: #000000;
 $rgbZodiac: #3f455b;
 
 // Shadow
-$shadow: 0 0 1.25rem 0 #ff6501;
+$shadow: 0 0 1.25rem 0 $primaryOrange;
 $orangeShadow: 0px 0px 17px #ff650140;
 $darkShadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
 // Components
 $headerBackground: rgb(251 251 251 / 80%);
+$minorGrey: #e0e0e0;

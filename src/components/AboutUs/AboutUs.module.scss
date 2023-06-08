@@ -4,9 +4,18 @@
 @import '@/shared/styles/mixins';
 @import '@/shared/styles/mediaMixins';
 
+$mainCardMaxW: 41rem;
+$mainBlockMinW: calc($mainCardMaxW * 2);
+$featureMaxW: 27.8rem;
+
 .section {
   position: relative;
-  padding: 3rem 1.9rem 0;
+  padding: 2rem 1.9rem 0;
+  margin-bottom: 6rem;
+  @include on768 {
+    padding-top: 4rem;
+    margin-bottom: 8rem;
+  }
 }
 
 .container {
@@ -20,50 +29,88 @@
   z-index: -1;
 
   width: 150vw;
-  height: 14.15rem;
+  height: 12rem;
 
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
   background: $secondaryAzure;
 
+  @include on768 {
+    top: -$headerHeight1;
+    height: 15rem;
+  }
+
   @include on992 {
     top: -$headerHeight2;
+    height: 20rem;
+  }
+
+  @include on1200 {
+    left: 0;
+    width: 100vw;
   }
 }
 
-.tabTitle {
-  margin-bottom: 8.5rem;
+.pageTitle {
+  margin-bottom: 6rem;
+
   color: $rgbBlack;
   font-weight: 900;
-  //   font-size: 2rem;
-  font-size: clamp(2rem, 4.38vw, 4rem);
+  font-size: clamp(2rem, 6vw, 3.5rem);
   line-height: 130%;
   text-align: center;
   text-decoration-line: underline;
+  text-transform: capitalize;
+
+  @include on768 {
+    margin-bottom: 8rem;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+  }
 }
 
 .mainAboutBlock {
   display: flex;
   flex-direction: column;
-  gap: 2.65rem;
+  row-gap: 4rem;
+  margin-bottom: 4.8rem;
 }
 
 .upperWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2.5rem;
+  justify-content: center;
+
+  @media (min-width: $mainBlockMinW) {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
 }
 
 .lowerWrapper {
+  @extend .upperWrapper;
+  .joinBtn {
+    display: none;
+  }
+  @media (min-width: $mainBlockMinW) {
+    flex-direction: row;
+    .joinBtn {
+      display: inline-block;
+    }
+  }
 }
 
 .mainTextBlock {
-  margin-bottom: 2.65rem;
+  max-width: $mainCardMaxW;
 }
 
 .title {
-  margin-bottom: 2.6rem;
+  margin-bottom: 1.5rem;
 
   color: $rgbZodiac;
   font-weight: 900;
-  font-size: 1.75rem;
+  font-size: clamp(1.25rem, 4.5vw, 3rem);
   line-height: 130%;
   text-decoration-line: underline;
 }
@@ -71,23 +118,28 @@
 .description {
   font-weight: 400;
   font-size: 1rem;
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
   line-height: 150%;
   color: $rgbBlack;
 }
 
 .previewWrap {
   padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: $mainCardMaxW;
 }
 
 .playerWrap {
   flex: 0 0 auto;
   position: relative;
-  width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 0.75rem;
-  overflow: hidden;
   border: 0;
   background-color: $rgbGray;
+
+  @include on768 {
+    border-radius: 2.5rem;
+  }
 
   @include on1200 {
     flex: 0 0 45%;
@@ -97,14 +149,19 @@
 
 .previewBorder {
   position: absolute;
-  z-index: 0;
+  z-index: -1;
   top: 0;
   left: 0;
 
   width: 100%;
   height: 100%;
-  border: 1px solid red;
+  border: 1px solid $primaryOrange;
+  border-radius: 0.75rem;
   transform: rotate(5.88deg);
+
+  @include on768 {
+    border-radius: 2.5rem;
+  }
 }
 
 .videoPlayer {
@@ -115,13 +172,85 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     border-radius: 0.3rem;
+
+    @include on768 {
+      border-radius: 2.5rem;
+    }
   }
 }
 
 .joinBtn {
-  display: none;
+  margin-top: 3rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  border: 1px solid $primaryOrange;
+  color: $primaryOrange;
+  background-color: transparent;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 115%;
+  cursor: pointer;
+  transition: 200ms;
+  &:is(:hover) {
+    background-color: $primaryOrange;
+    color: $rgbWhite;
+  }
 }
 
-.catImage {
-  max-width: 100%;
+.catImgWrap {
+  position: relative;
+  width: 100%;
+  max-width: $mainCardMaxW;
+  padding-top: calc(100% / (16 / 9)); /* Висота відношення сторін 16:9 */
+  background-image: url('./assets/aboutCat_small.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @include on768 {
+    padding-top: 24.8rem;
+    background-image: url('./assets/aboutCat_large.svg');
+  }
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+
+  @media (min-width: calc($featureMaxW * 3 + 9rem)) {
+    justify-content: space-between;
+    gap: 0;
+  }
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1rem;
+
+  padding: 5rem 0;
+  width: 100%;
+  max-width: $featureMaxW;
+
+  border: 1px solid $primaryBlue;
+  border-radius: 2rem;
+}
+
+.featureCount {
+  font-weight: 900;
+  font-size: clamp(2rem, 12vw, 4rem);
+  line-height: 130%;
+  text-align: center;
+  color: $primaryOrange;
+}
+
+.featureDescr {
+  font-weight: 700;
+  font-size: clamp(1.25rem, 8vw, 2rem);
+  line-height: 115%;
+  text-align: center;
+  color: $rgbGray;
 }
