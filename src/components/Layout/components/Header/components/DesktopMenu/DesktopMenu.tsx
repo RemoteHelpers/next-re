@@ -18,12 +18,12 @@ type Props = {
 
 export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, headerData }) => {
   const { isDesktopMenuShown, setIsDesktopMenuShown } = desktopMenuState;
-  const { categories, vacancies } = headerData;
+  const { categories } = headerData;
   const {
     attributes: { categoryTitle: initialCategoryState },
   } = categories.find((el: ICategory) => el.attributes.categorySlug !== 'other') as ICategory;
   const [currentCategory, setCurrentCategory] = useState<string>(initialCategoryState);
-  const { setNavURL } = useContext(GlobalContext);
+  const { setNavURL, vacancies } = useContext(GlobalContext);
 
   const navToLink = (path: string): void => {
     setIsDesktopMenuShown(false);

@@ -1,39 +1,31 @@
 import { FC } from "react";
 import { Layout } from "@/components/Layout";
 import {
-	getAllVacancies,
 	getCategories,
 	getCategoryBySlug,
 	getVacancyListData,
-	getFormData,
 } from "@/services";
 import { Category } from "@/components/Category";
 import { ICategory } from "@/shared/types/CategoriesTypes";
-import { IVacanciesInfo, IVacancy } from "@/shared/types/VacanciesTypes";
-import { IFormData } from "@/shared/types/FormTypes";
+import { IVacanciesInfo } from "@/shared/types/VacanciesTypes";
 
 interface CategoryPageProps {
 	category: ICategory;
 	categories: ICategory[];
-	vacancies: IVacancy[];
 	vacanciesInfo: IVacanciesInfo;
-	formData: IFormData;
 }
 
-const CategoryPage: FC<any> = ({
+const CategoryPage: FC<CategoryPageProps> = ({
 	category,
 	categories,
-	vacancies,
 	vacanciesInfo,
-	formData,
-}) => {
+}: CategoryPageProps) => {
 	return (
 		<Layout
-			headerData={{ categories, vacancies }}>
+			headerData={{ categories }}>
 			<Category
 				category={category}
 				vacanciesInfo={vacanciesInfo}
-				formData={formData}
 			/>
 		</Layout>
 	);
@@ -46,17 +38,13 @@ export const getServerSideProps = async (context: any) => {
 	const categorySlug = params?.category;
 	const lang = context.locale;
 	const categories = await getCategories(lang);
-	const vacancies = await getAllVacancies(lang);
 	const category = await getCategoryBySlug(lang, categorySlug);
 	const vacanciesInfo = await getVacancyListData(lang);
-	const formData = await getFormData(lang);
 	return {
 		props: {
 			category,
 			categories,
-			vacancies,
 			vacanciesInfo,
-			formData,
 		},
 	};
 };

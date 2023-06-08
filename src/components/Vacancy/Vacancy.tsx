@@ -13,8 +13,6 @@ import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 import dynamic from "next/dynamic";
 import { IVacancy, IVacanciesInfo } from "@/shared/types/VacanciesTypes";
 import { ICategory } from "@/shared/types/CategoriesTypes";
-import { IFormData } from "@/shared/types/FormTypes";
-import { IHeader } from "@/shared/types/HeaderTypes";
 import { GlobalContext } from "@/context";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
@@ -22,14 +20,12 @@ interface VacancyProps {
 	vacancy: IVacancy;
 	vacanciesInfo: IVacanciesInfo;
 	category: ICategory;
-	formData: IFormData;
 }
 
 export const Vacancy: FC<VacancyProps> = ({
 	vacancy,
 	vacanciesInfo,
 	category,
-	formData,
 }: VacancyProps) => {
 	if (!vacancy.attributes) {
 		return <></>;
@@ -47,7 +43,7 @@ export const Vacancy: FC<VacancyProps> = ({
 		videoLink,
 		videoPreview,
 	} = vacancy.attributes;
-	const { header, isLoading } = useContext(GlobalContext);	
+	const { header, formData } = useContext(GlobalContext);	
 	const { menu, isHotValue, seeMore } = header;
 	const { categorySlug, categoryTitle, vacancies } = category.attributes;
 	const { respondBtn } = formData;
@@ -119,7 +115,7 @@ export const Vacancy: FC<VacancyProps> = ({
 					</div>
 					<ReactMarkdown className={s.description}>{description}</ReactMarkdown>
 					<div className={s.form_wrapper} ref={formRef}>
-						<FormFields formData={formData} />
+						<FormFields />
 						<Image className={s.main_cat} src={mainCat} alt={"main cat"} />
 					</div>
 				</div>

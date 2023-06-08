@@ -3,7 +3,7 @@ import styles from "./Contacts.module.scss";
 import MainForm from "../MainForm/MainForm";
 import { ContactSvg } from "@/shared/components/IconComponents/Contacts";
 
-export const Contacts = ({ contactsData, formData }: any) => {
+export const Contacts = ({ contactsData}: any) => {
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>{contactsData.title}</h1>
@@ -33,7 +33,7 @@ export const Contacts = ({ contactsData, formData }: any) => {
           </div>
         ))}
       </div>
-      <MainForm formData={formData} />
+      <MainForm />
     </section>
   );
 };

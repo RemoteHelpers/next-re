@@ -9,21 +9,17 @@ import mainCat from "@/shared/images/Form/MainForm/main-cat.png";
 import Image from "next/image";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 import { ICategory } from "@/shared/types/CategoriesTypes";
-import { IHeader } from "@/shared/types/HeaderTypes";
 import { IVacanciesInfo, IVacancy } from "@/shared/types/VacanciesTypes";
-import { IFormData } from "@/shared/types/FormTypes";
 import { GlobalContext } from "@/context";
 
 type CategoryProps = {
 	category: ICategory;
 	vacanciesInfo: IVacanciesInfo;
-	formData: IFormData;
 };
 
 export const Category = ({
 	category,
 	vacanciesInfo,
-	formData,
 }: CategoryProps) => {
 	if (!category.attributes) {
 		return <></>;
@@ -93,7 +89,7 @@ export const Category = ({
 							)}
 					</div>
 					<div className={s.form_wrapper} ref={formRef}>
-						<FormFields formData={formData} />
+						<FormFields/>
 						<Image className={s.main_cat} src={mainCat} alt={"main cat"} />
 					</div>
 				</div>

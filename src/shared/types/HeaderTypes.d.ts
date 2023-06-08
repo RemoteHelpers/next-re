@@ -34,5 +34,4 @@ export interface IHeader extends ILocalization {
 
 export interface IHeaderData {
   categories: ICategory[];
-  vacancies: IVacancy[];
 }

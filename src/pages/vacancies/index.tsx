@@ -1,9 +1,7 @@
 import { FC } from 'react';
 import { Layout } from '@/components/Layout';
 import {
-  getAllVacancies,
   getCategories,
-  getFormData,
   getVacancyListData,
   getVacancyPageData,
 } from '@/services';
@@ -15,14 +13,12 @@ const VacanciesPage: FC<any> = ({
   vacanciesInfo,
   vacancyPageData,
   categories,
-  vacancies,
-  formData,
 }) => {
   return (
-    <Layout headerData={{ categories, vacancies }}>
+    <Layout headerData={{ categories }}>
       <VacanciesHero vacancyPageData={vacancyPageData} />
-      <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} vacancies={vacancies} />
-      <VacanciesForm formData={formData}/>
+      <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} />
+      <VacanciesForm />
     </Layout>
   );
 };
@@ -34,15 +30,11 @@ export const getServerSideProps = async (context: any) => {
   const vacanciesInfo = await getVacancyListData(lang);
   const vacancyPageData = await getVacancyPageData(lang);
   const categories = await getCategories(lang);
-  const vacancies = await getAllVacancies(lang);
-  const formData = await getFormData(lang);
   return {
     props: {
       vacanciesInfo,
       vacancyPageData,
       categories,
-      vacancies,
-      formData,
     },
   };
 };

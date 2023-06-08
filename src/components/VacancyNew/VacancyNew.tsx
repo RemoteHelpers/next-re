@@ -8,7 +8,6 @@ import { VacanciesIcon } from "@/shared/components/IconComponents/Vacancies";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import cat_hearts from "./assets/cat_hearts.png";
 import cat_laptop from "./assets/cat_laptop.png";
-import mainCat from "@/shared/images/Form/MainForm/main-cat.png";
 import Image from "next/image";
 import FormFields from "../FormFields/FormFields";
 import { PhotoAPI } from "@/constants";
@@ -16,8 +15,6 @@ import useWebAnimations from "@wellyshen/use-web-animations";
 import { useRouter } from "next/router";
 import { IVacancy } from "@/shared/types/VacanciesTypes";
 import { ICategory } from "@/shared/types/CategoriesTypes";
-import { IFormData } from "@/shared/types/FormTypes";
-import { IHeader } from "@/shared/types/HeaderTypes";
 import { GlobalContext } from "@/context";
 
 const rotateKeyframes = [
@@ -40,13 +37,11 @@ const rotateOpts:
 interface VacancyNewProps {
 	vacancy: IVacancy;
 	category: ICategory;
-	formData: IFormData;
 }
 
 export const VacancyNew: FC<VacancyNewProps> = ({
 	vacancy,
 	category,
-	formData,
 }) => {
 	if (!vacancy.attributes) {
 		return <></>;
@@ -66,7 +61,7 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 		toolsTitle,
 		tools,
 	} = vacancy.attributes;
-	const { header } = useContext(GlobalContext);
+	const { header, formData } = useContext(GlobalContext);
 	const { menu, isHotValue } = header;
 	const { categorySlug, categoryTitle } = category.attributes;
 	const { respondBtn } = formData;
@@ -232,7 +227,7 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 						{"##" + description.split("##").slice(-1)}
 					</ReactMarkdown>
 					<section className={s.form_wrapper} ref={formRef}>
-						<FormFields formData={formData} />
+						<FormFields />
 						<Image className={s.form_cat} src={cat_hearts} alt={"form_cat"} />
 					</section>
 				</div>

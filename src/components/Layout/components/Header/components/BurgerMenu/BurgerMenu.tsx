@@ -22,8 +22,8 @@ export const BurgerMenu: FC<Props> = ({ menuState, headerData }) => {
   const [currentTab, setCurrentTab] = useState<number>(1);
   const [currentCategory, setCurrentCategory] = useState<string>('');
   const { isBurgerMenu, setIsBurgerMenu } = menuState;
-  const { categories, vacancies } = headerData;
-  const { setNavURL, header } = useContext(GlobalContext);
+  const { categories } = headerData;
+  const { setNavURL, header, vacancies } = useContext(GlobalContext);
   const { menu, menuValue, backValue, allVacanciesValue } = header;
 
   const navToLink = (path: string): void => {

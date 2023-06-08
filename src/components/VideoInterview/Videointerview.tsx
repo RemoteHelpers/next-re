@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 import dynamic from "next/dynamic";
 import MainForm from "../MainForm/MainForm";
 
-export const VideointerviewPage = ({ videoData, formData }: any) => {
+export const VideointerviewPage = ({ videoData }: any) => {
   const ReactPlayer = dynamic(() => import("react-player/lazy"), {
     ssr: false,
   });
@@ -84,7 +84,7 @@ export const VideointerviewPage = ({ videoData, formData }: any) => {
 
       <div className={styles.video_form}>
         <div className={styles.block_container}>
-          <MainForm formData={formData} />
+          <MainForm />
         </div>
       </div>
     </>
