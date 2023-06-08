@@ -27,7 +27,7 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
             if (attributes.categorySlug === 'other') return;
             return (
               <li className={s.item} key={`item_${attributes.categorySlug}`}>
-                <SpecializationCard category={attributes} />
+                <SpecializationCard category={attributes} linkText={about.learnMoreText} />
               </li>
             );
           })}
@@ -51,7 +51,7 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
             return (
               <SwiperSlide className={s.slide} key={`slide_${attributes.categorySlug}`}>
                 <div className={`${s.slideContent} content`}>
-                  <SpecializationCard category={attributes} />
+                  <SpecializationCard category={attributes} linkText={about.learnMoreText} />
                 </div>
               </SwiperSlide>
             );

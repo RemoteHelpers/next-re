@@ -8,9 +8,10 @@ import { GlobalContext } from '@/context';
 
 type Props = {
   category: ICategoryAttributes;
+  linkText: string;
 };
 
-export const SpecializationCard: FC<Props> = ({ category }) => {
+export const SpecializationCard: FC<Props> = ({ category, linkText }) => {
   const { categorySlug, categoryTitle, description } = category;
   const { setIsLoading } = useContext(GlobalContext);
   const showLoader = () => setIsLoading(true);
@@ -19,10 +20,10 @@ export const SpecializationCard: FC<Props> = ({ category }) => {
     <>
       <SpecializationsIcon name={categorySlug} />
       <h3 className={s.title}>{categoryTitle}</h3>
-      <p className={s.description}>{description}</p>
+      {description && <p className={s.description}>{description}</p>}
       {/* <ReactMarkdown children={description} /> */}
       <Link href={`/${categorySlug}`} className={s.link} onClick={showLoader}>
-        <span>{`Дізнатися більше`}</span>
+        <span>{linkText}</span>
         <SpecializationsIcon name="arrow-more" />
       </Link>
     </>

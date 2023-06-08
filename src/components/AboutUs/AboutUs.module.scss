@@ -217,14 +217,11 @@ $featureMaxW: 27.8rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  row-gap: 1.5rem;
+  gap: 1.5rem;
 
-  @media (min-width: calc($featureMaxW * 2)) {
-    justify-content: space-evenly;
-  }
-  @media (min-width: calc($featureMaxW * 3 + 10rem)) {
+  @media (min-width: calc($featureMaxW * 3 + 9rem)) {
     justify-content: space-between;
+    gap: 0;
   }
 }
 
@@ -236,7 +233,7 @@ $featureMaxW: 27.8rem;
 
   padding: 5rem 0;
   width: 100%;
-  max-width: 27.8rem;
+  max-width: $featureMaxW;
 
   border: 1px solid $primaryBlue;
   border-radius: 2rem;

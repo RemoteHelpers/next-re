@@ -17,6 +17,7 @@ interface IAboutLocalization {
     count: string;
     description: string;
   }[];
+  learnMoreText: string;
 }
 
 export interface IAboutLocalizationData {
