@@ -74,28 +74,22 @@ export const VacanciesList: FC<Props> = ({
 	}, [vacancies]);
 
 	const vacanciesBySearch = useCallback(() => {
-		if (vacancies.length) {
-			return vacancies
-				?.filter(
-					({ attributes }: IVacancy) =>
-						attributes.title
+		return vacancies
+			.filter(
+				({ attributes }: IVacancy) =>
+					attributes.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+					attributes.vacancySlug
+						.toLowerCase()
+						.includes(searchQuery.toLowerCase()) ||
+					attributes.keyword_tags.data.some((keyword: IVacancyKeywordTag) =>
+						keyword.attributes.keyPhrase
 							.toLowerCase()
-							.includes(searchQuery.toLowerCase()) ||
-						attributes.vacancySlug
-							.toLowerCase()
-							.includes(searchQuery.toLowerCase()) ||
-						attributes.keyword_tags.data.some((keyword: IVacancyKeywordTag) =>
-							keyword.attributes.keyPhrase
-								.toLowerCase()
-								.includes(searchQuery.toLowerCase())
-						)
-				)
-				.sort(sortByDate)
-				.sort(sortByHot);
-		} else {
-			return [];
-		}
-	}, [vacancies]);
+							.includes(searchQuery.toLowerCase())
+					)
+			)
+			.sort(sortByDate)
+			.sort(sortByHot);
+	}, [vacancies, searchQuery]);
 
 	const vacanciesByCategory = useCallback((): IVacancy[] => {
 		if (vacancies.length) {
@@ -110,7 +104,7 @@ export const VacanciesList: FC<Props> = ({
 		} else {
 			return [];
 		}
-	}, [vacancies]);
+	}, [vacancies, currentCategory]);
 
 	const vacanicesByDate = useCallback((): IVacancy[] => {
 		if (vacancies.length) {
