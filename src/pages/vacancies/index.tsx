@@ -15,7 +15,7 @@ const VacanciesPage: FC<any> = ({
   categories,
 }) => {
   return (
-    <Layout headerData={{ categories }}>
+    <Layout categories={categories}>
       <VacanciesHero vacancyPageData={vacancyPageData} />
       <Vacancies vacanciesInfo={vacanciesInfo} categories={categories} />
       <VacanciesForm />

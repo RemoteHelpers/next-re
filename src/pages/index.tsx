@@ -5,15 +5,11 @@ import { Vacancies } from "@/components/Vacancies";
 import { Questions } from "@/components/Questions";
 import Testimonials from "@/components/Testimonials/Testimonials";
 import { Hero } from "@/components/Hero";
-import {
-	getVacancyListData,
-	getCategories,
-	getHomeData,
-} from "@/services";
+import { getVacancyListData, getCategories, getHomeData } from "@/services";
 import { Spheres } from "@/components/Spheres";
 import { Partners } from "@/components/Partners";
 import MainForm from "@/components/MainForm/MainForm";
-import type { IVacanciesInfo, IVacancy } from "@/shared/types/VacanciesTypes";
+import type { IVacanciesInfo } from "@/shared/types/VacanciesTypes";
 import type { ICategory } from "@/shared/types/CategoriesTypes";
 import type { IHomeData } from "@/shared/types/HomeTypes";
 
@@ -23,11 +19,7 @@ type Props = {
 	homeData: IHomeData;
 };
 
-const Home: FC<Props> = ({
-	vacanciesInfo,
-	categories,
-	homeData,
-}) => {
+const Home: FC<Props> = ({ vacanciesInfo, categories, homeData }) => {
 	const formRef = useRef<HTMLElement>(null);
 	useEffect(() => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
@@ -35,13 +27,10 @@ const Home: FC<Props> = ({
 
 	return (
 		<>
-			<Layout headerData={{ categories }}>
+			<Layout categories={categories}>
 				<Hero data={homeData} formRef={formRef} />
 				<Spheres title={homeData.spheresTitle} categories={categories} />
-				<Vacancies
-					vacanciesInfo={vacanciesInfo}
-					categories={categories}
-				/>
+				<Vacancies vacanciesInfo={vacanciesInfo} categories={categories} />
 				<Questions questions={homeData} />
 				<Partners
 					title={homeData.partnersTitle}

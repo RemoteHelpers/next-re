@@ -5,15 +5,14 @@ import { Footer } from './components/Footer';
 import s from './Layout.module.scss';
 import { Loader } from '../Loader';
 import { GlobalContext } from '@/context';
-import type { IFooterData } from '@/shared/types/FooterTypes';
-import type { IHeaderData } from '@/shared/types/HeaderTypes';
+import { ICategory } from '@/shared/types/CategoriesTypes';
 
 type Props = {
   children: ReactNode;
-  headerData: IHeaderData;
+  categories: ICategory[];
 };
 
-export const Layout: FC<Props> = ({ children, headerData }) => {
+export const Layout: FC<Props> = ({ children, categories }) => {
   const { isLoading } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export const Layout: FC<Props> = ({ children, headerData }) => {
   return (
     <>
       <div className={s.wrapper}>
-        <Header headerData={headerData} />
+        <Header categories={categories} />
         <Main>{children}</Main>
         <Footer/>
       </div>

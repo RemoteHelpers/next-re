@@ -8,13 +8,14 @@ import { BurgerMenu } from "./components/BurgerMenu";
 import { SelectLang } from "./components/SelectLang";
 import { DesktopMenu } from "./components/DesktopMenu";
 import { GlobalContext } from "@/context";
-import type { IHeaderData, IMenu } from "@/shared/types/HeaderTypes";
+import type { IMenu } from "@/shared/types/HeaderTypes";
+import { ICategory } from "@/shared/types/CategoriesTypes";
 
 type Props = {
-	headerData: IHeaderData;
+	categories: ICategory[];
 };
 
-export const Header: FC<Props> = ({ headerData }) => {
+export const Header: FC<Props> = ({ categories }) => {
 	const [isBurgerMenu, setIsBurgerMenu] = useState<boolean>(false);
 	const [isDesktopMenuShown, setIsDesktopMenuShown] = useState<boolean>(false);
 	const router = useRouter();
@@ -92,13 +93,13 @@ export const Header: FC<Props> = ({ headerData }) => {
 
 				<BurgerMenu
 					menuState={{ isBurgerMenu, setIsBurgerMenu }}
-					headerData={headerData}
+					categories={categories}
 				/>
 			</header>
 
 			<DesktopMenu
 				desktopMenuState={{ isDesktopMenuShown, setIsDesktopMenuShown }}
-				headerData={headerData}
+				categories={categories}
 			/>
 		</>
 	);

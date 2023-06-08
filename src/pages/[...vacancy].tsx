@@ -5,7 +5,6 @@ import {
 	getCategoryBySlug,
 	getVacancy,
 	getVacancyListData,
-	getAllVacancies,
 	getCategories,
 } from "@/services";
 import { VacancyNew } from "@/components/VacancyNew";
@@ -40,12 +39,9 @@ const VacancyPage: FC<VacancyPageProps> = ({
 				/>
 			</Head>
 
-			<Layout headerData={{ categories }}>
+			<Layout categories={categories}>
 				{newVersion ? (
-					<VacancyNew
-						vacancy={vacancy}
-						category={category}
-					/>
+					<VacancyNew vacancy={vacancy} category={category} />
 				) : (
 					<Vacancy
 						vacancy={vacancy}

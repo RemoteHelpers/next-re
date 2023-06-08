@@ -1,10 +1,7 @@
 import { FC, useContext } from "react";
 import Head from "next/head";
 import { Layout } from "@/components/Layout";
-import {
-	getAllVacancies,
-	getCategories,
-} from "@/services";
+import { getAllVacancies, getCategories } from "@/services";
 import { ICategory } from "@/shared/types/CategoriesTypes";
 import { IVacancy } from "@/shared/types/VacanciesTypes";
 import { IMenu } from "@/shared/types/HeaderTypes";
@@ -21,10 +18,7 @@ type Props = {
 	about: IAbout;
 };
 
-const About: FC<Props> = ({
-	categories,
-	about,
-}) => {
+const About: FC<Props> = ({ categories, about }) => {
 	const { header } = useContext(GlobalContext);
 	const tabTitle = header?.menu?.find(
 		({ path_id }: IMenu) => path_id === "about"
@@ -37,7 +31,7 @@ const About: FC<Props> = ({
 				<meta name="description" content={about.WhatWeDoTitle} />
 			</Head>
 
-			<Layout headerData={{ categories }}>
+			<Layout categories={categories}>
 				<AboutUs about={about} tabTitle={tabTitle} />
 				{/* <Specializations about={about} categories={categories} /> */}
 				<MainForm />
@@ -53,13 +47,7 @@ export const getServerSideProps = async ({
 }: GetServerSidePropsContext) => {
 	const fetchCategories: Promise<ICategory[]> = getCategories(locale!);
 	const fetchAbout: Promise<IAbout> = getAboutData(locale!);
-
-	const [categories, about] =
-		await Promise.all([
-			fetchCategories,
-			fetchAbout,
-		]);
-
+	const [categories, about] = await Promise.all([fetchCategories, fetchAbout]);
 	return {
 		props: {
 			categories,

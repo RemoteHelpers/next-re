@@ -21,12 +21,8 @@ const CategoryPage: FC<CategoryPageProps> = ({
 	vacanciesInfo,
 }: CategoryPageProps) => {
 	return (
-		<Layout
-			headerData={{ categories }}>
-			<Category
-				category={category}
-				vacanciesInfo={vacanciesInfo}
-			/>
+		<Layout categories={categories}>
+			<Category category={category} vacanciesInfo={vacanciesInfo} />
 		</Layout>
 	);
 };

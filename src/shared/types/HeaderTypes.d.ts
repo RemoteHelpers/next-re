@@ -31,7 +31,3 @@ export interface IHeader extends ILocalization {
   menu: IMenu[];
   localizations: { data: { id: number; attributes: ILocalization }[] };
 }
-
-export interface IHeaderData {
-  categories: ICategory[];
-}

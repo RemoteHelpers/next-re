@@ -6,7 +6,7 @@ import { getCategories } from "@/services";
 
 const ContactsPage: FC = ({ categories, thankyouData }: any) => {
 	return (
-		<Layout headerData={{ categories }}>
+		<Layout categories={categories}>
 			<Thankyou thankyouData={thankyouData} />
 		</Layout>
 	);
