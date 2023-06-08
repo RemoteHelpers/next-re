@@ -1,43 +1,42 @@
 import { FC, useState, useEffect } from "react";
 import Custom404 from "@/components/Custom404";
 import {
-    getHeaderData,
-    getFooterData,
-    getCategories,
-    getAllVacancies,
-    getNotFoundData,
+	getCategories,
+	getNotFoundData,
 } from "@/services";
 import { useRouter } from "next/router";
 import { Layout } from "@/components/Layout";
+import { error } from "console";
+import { ICategory } from "@/shared/types/CategoriesTypes";
 
 const notFoundPage: FC<any> = () => {
-    const [header, setHeader] = useState<any>(null);
-    const [footer, setFooter] = useState<any>(null);
-    const [notFound, setNotFound] = useState<any>(null);
+	const [categories, setCategories] = useState<ICategory[]>([]);
+	const [notFound, setNotFound] = useState<any>();
 
-    const { locale } = useRouter();
+	const { locale } = useRouter();	
 
-    const notFoundData = async () => {
-        const header = await getHeaderData(locale!);
-        const footer = await getFooterData(locale!);
-        const categories = await getCategories(locale!);
-        const vacancies = await getAllVacancies(locale!);
-        const notFoundData = await getNotFoundData(locale!);
+	useEffect(() => {
+		getCategories(locale!).then(res => {
+			setCategories(res);
+		}).catch(error => {
+			console.log(error);
+		});
+		getNotFoundData(locale!).then((res) => {
+			setNotFound(res);			
+		}).catch((error) => {
+			console.log(error);
+		});
+	}, [locale]);
 
-        setHeader({ header, categories, vacancies });
-        setFooter(footer);
-        setNotFound(notFoundData);
-    };
+	if (!categories.length) {
+		return <></>;
+	}
 
-    useEffect(() => {
-        notFoundData();
-    }, []);
-
-    return (
-        <Layout footerData={footer} headerData={header}>
-            <Custom404 notFoundProps={notFound} />
-        </Layout>
-    );
+	return (
+		<Layout categories={categories}>
+			<Custom404 notFoundProps={notFound} />
+		</Layout>
+	);
 };
 
 export default notFoundPage;

@@ -5,17 +5,21 @@ import s from "./VacanciesForm.module.scss";
 import Image from "next/image";
 import { GlobalContext } from "@/context";
 
-interface VacanciesFormProps {
-}
+interface VacanciesFormProps {}
 
-export const VacanciesForm: FC<VacanciesFormProps> = ({ }) => {
-	const {formData} = useContext(GlobalContext);
+export const VacanciesForm: FC<VacanciesFormProps> = ({}) => {
+	const { formData, header } = useContext(GlobalContext);
 	return (
-        <section className={s.vacancies_form}>
-            <h2 className={s.form_title}>{formData?.title}</h2>
+		<section className={s.vacancies_form}>
+			<h2 className={s.form_title}>{formData?.title}</h2>
 			<div className={s.form_wrapper}>
 				<Image className={s.form_cat} src={formCat} alt={"form cat"} />
-				<FormFields />
+				{header && (
+					<FormFields
+						imageCatProps={header?.vacancyCat.data.attributes.url}
+						coloredField={true}
+					/>
+				)}
 			</div>
 		</section>
 	);

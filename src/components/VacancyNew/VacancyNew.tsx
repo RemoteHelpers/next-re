@@ -4,6 +4,7 @@ import s from "./VacancyNew.module.scss";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 import Link from "next/link";
+import useWebAnimations from '@wellyshen/use-web-animations';
 import { VacanciesIcon } from "@/shared/components/IconComponents/Vacancies";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import cat_hearts from "./assets/cat_hearts.png";
@@ -11,7 +12,6 @@ import cat_laptop from "./assets/cat_laptop.png";
 import Image from "next/image";
 import FormFields from "../FormFields/FormFields";
 import { PhotoAPI } from "@/constants";
-import useWebAnimations from "@wellyshen/use-web-animations";
 import { useRouter } from "next/router";
 import { IVacancy } from "@/shared/types/VacanciesTypes";
 import { ICategory } from "@/shared/types/CategoriesTypes";
@@ -227,7 +227,7 @@ export const VacancyNew: FC<VacancyNewProps> = ({
 						{"##" + description.split("##").slice(-1)}
 					</ReactMarkdown>
 					<section className={s.form_wrapper} ref={formRef}>
-						<FormFields />
+						<FormFields imageCatProps={header?.mainCat.data.attributes.url} coloredField={false} />
 						<Image className={s.form_cat} src={cat_hearts} alt={"form_cat"} />
 					</section>
 				</div>

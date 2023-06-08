@@ -89,7 +89,7 @@ export const Category = ({
 							)}
 					</div>
 					<div className={s.form_wrapper} ref={formRef}>
-						<FormFields/>
+						<FormFields imageCatProps={header?.mainCat.data.attributes.url} coloredField={false} />
 						<Image className={s.main_cat} src={mainCat} alt={"main cat"} />
 					</div>
 				</div>

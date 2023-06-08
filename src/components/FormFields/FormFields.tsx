@@ -151,8 +151,8 @@ const FormFields: FC<Props> = ({ imageCatProps, coloredField }) => {
           </label>
         </div>
         
-        <Image className={styles.mobile_cat} src={PhotoAPI + imageCatProps} alt="Mobile-cat" width={450}
-          height={365} />
+        {imageCatProps && <Image className={styles.mobile_cat} src={PhotoAPI + imageCatProps} alt="Mobile-cat" width={450}
+          height={365} />}
 
         <button className={styles.submit} type="submit">
           {formData?.submit}

@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, useContext, useEffect, useRef } from "react";
 import type { GetServerSidePropsContext } from "next";
 import { Layout } from "@/components/Layout";
 import { Vacancies } from "@/components/Vacancies";
@@ -12,6 +12,7 @@ import MainForm from "@/components/MainForm/MainForm";
 import type { IVacanciesInfo } from "@/shared/types/VacanciesTypes";
 import type { ICategory } from "@/shared/types/CategoriesTypes";
 import type { IHomeData } from "@/shared/types/HomeTypes";
+import { GlobalContext } from "@/context";
 
 type Props = {
 	vacanciesInfo: IVacanciesInfo;
@@ -24,6 +25,7 @@ const Home: FC<Props> = ({ vacanciesInfo, categories, homeData }) => {
 	useEffect(() => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	}, []);
+	const { header } = useContext(GlobalContext);
 
 	return (
 		<>
@@ -37,11 +39,15 @@ const Home: FC<Props> = ({ vacanciesInfo, categories, homeData }) => {
 					slides={homeData.partnersSlider.data}
 				/>
 				<Testimonials testimonials={homeData} />
-				<MainForm formRef={formRef} imageCatProps={header?.mainCat.data.attributes.url} />
+				{header && (
+					<MainForm
+						formRef={formRef}
+						imageCatProps={header?.mainCat?.data?.attributes?.url}
+					/>
+				)}
 			</Layout>
 		</>
 	);
-
 };
 
 export default Home;
@@ -57,11 +63,11 @@ export const getServerSideProps = async (
 		"Testimonials.personImg,Faq_Question,partnersSlider,heroStats.heroStatIcon"
 	);
 
-  if (!lang || !vacanciesInfo || !categories || !homeData) {
-    return {
-      notFound: true,
-    }
-  }
+	if (!lang || !vacanciesInfo || !categories || !homeData) {
+		return {
+			notFound: true,
+		};
+	}
 	return {
 		props: {
 			vacanciesInfo,
