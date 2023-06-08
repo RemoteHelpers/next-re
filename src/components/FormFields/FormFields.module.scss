@@ -26,6 +26,62 @@
     }
 }
 
+.white_field_name,
+.white_field_number,
+.white_field_age,
+.white_field_email,
+.white_field_cv_link,
+.white_field_select {
+    background-color: $rgbWhite !important;
+    border-radius: .5rem;
+}
+
+.white_field_name {
+    width: 100%;
+
+    @include on992 {
+        width: 60% !important;
+    }
+}
+
+.white_field_number {
+    width: 100%;
+
+    @include on992 {
+        width: 40% !important;
+    }
+}
+
+.white_field_age {
+    width: 100%;
+
+    @include on992 {
+        width: 20% !important;
+    }
+}
+
+.white_field_email {
+    width: 100%;
+
+    @include on992 {
+        width: 80% !important;
+    }
+}
+
+.white_field_cv_link {
+    width: 100%;
+}
+
+.white_field_select {
+    width: 100%;
+}
+
+.select_lang {
+    background-color: $primaryCyan;
+    border-radius: .5rem;
+}
+
+
 .first_row,
 .second_row,
 .work_cv {
@@ -61,6 +117,7 @@
     background-color: $rgbWhite;
     padding: .5rem .75rem;
     border-radius: .5rem;
+    border: 1px solid $primaryBlue;
 
     display: flex;
     align-items: center;
@@ -78,6 +135,7 @@
 
     @include on992 {
         padding: .5rem 1.25rem;
+
         span {
             display: inline-block;
         }
@@ -94,19 +152,25 @@
 
 .number {
     border: 2px solid $primaryBlue;
-    background-color: $primaryCyan;
+    background-color: transparent !important;
     border-radius: .5rem;
-    padding: 0 1.25rem;
+    padding: 0 0 0 1.25rem;
+    width: 100%;
+
+    input {
+        background-color: transparent !important;
+        border: transparent;
+    }
+}
+
+.number_fill {
     width: 100%;
 
     @include on992 {
         width: 40% !important;
     }
 
-    input {
-        background-color: transparent;
-        border: transparent;
-    }
+    background-color: $primaryCyan !important;
 }
 
 .email {
@@ -119,6 +183,7 @@
 
 .age {
     width: 100%;
+
     @include on992 {
         width: 20% !important;
     }

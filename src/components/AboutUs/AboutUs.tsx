@@ -1,47 +1,34 @@
-import type { FC } from 'react';
+import { FC, RefObject } from 'react';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import type { IAbout } from '@/shared/types/AboutTypes';
 import s from './AboutUs.module.scss';
-import catAbout from './assets/about-cat.svg';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-
+import type { IAbout, IAboutLocalizationData } from '@/shared/types/AboutTypes';
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
 type Props = {
   about: IAbout;
-  tabTitle: string;
+  pageTitle: string;
+  formRef: RefObject<HTMLElement>;
 };
 
-const tempData = {
-  why: {
-    title: 'Почему выбирают нас',
-    descr:
-      'Наша компания уже более трех лет предоставляет услуги в области IT технологий и маркетинга. Мы сотрудничаем с компаниями со всего мира и поддерживаем положительную репутацию на западном рынке труда.',
-    btn: 'Присоединиться',
-  },
-  features: [
-    {
-      count: '300+',
-      descr: 'сотрудников',
-    },
-    {
-      count: '38+',
-      descr: 'проектов',
-    },
-    {
-      count: '99+',
-      descr: 'клиентов',
-    },
-  ],
-};
+export const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
+  const scrollToForm = (): void => {
+    if (!formRef?.current) return;
+    formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
-export const AboutUs: FC<Props> = ({ about, tabTitle }) => {
+  const findEnVideoUrl = () =>
+    about.localizations.data.find(
+      ({ attributes }: IAboutLocalizationData) => attributes.locale === 'en'
+    )?.attributes.videoUrl;
+
+  const videoUrl = about.videoUrl ? about.videoUrl : findEnVideoUrl();
+
   return (
     <section className={s.section}>
+      <div className={s.background} />
+
       <div className={s.container}>
-        <div className={s.background} />
-        <h1 className={s.tabTitle}>{tabTitle}</h1>
+        <h1 className={s.pageTitle}>{pageTitle}</h1>
 
         <div className={s.mainAboutBlock}>
           <div className={s.upperWrapper}>
@@ -50,11 +37,11 @@ export const AboutUs: FC<Props> = ({ about, tabTitle }) => {
               <p className={s.description}>{about.aboutCompanyDescription}</p>
             </div>
 
-            {about.videoUrl && (
+            {videoUrl && (
               <div className={s.previewWrap}>
                 <div className={s.playerWrap}>
                   <div className={s.previewBorder} />
-                  <ReactPlayer className={s.videoPlayer} url={about.videoUrl} />
+                  <ReactPlayer className={s.videoPlayer} url={videoUrl} />
                 </div>
               </div>
             )}
@@ -65,27 +52,25 @@ export const AboutUs: FC<Props> = ({ about, tabTitle }) => {
               <h2 className={s.title}>{about.whyUsTitle}</h2>
               <p className={s.description}>{about.whyUsDescription}</p>
 
-              <button type="button" className={s.joinBtn}>
-                {tempData.why.btn}
+              <button type="button" className={s.joinBtn} onClick={scrollToForm}>
+                {about.joinText}
               </button>
             </div>
 
-            <div>
-              <Image src={catAbout} alt="about-cat" className={s.catImage} />
-            </div>
+            <div className={s.catImgWrap} />
           </div>
         </div>
 
-        {/* <div>
-          {tempData.features.map(({ count, descr }) => {
+        <ul className={s.features}>
+          {about.features.map(({ count, description }) => {
             return (
-              <div>
-                <h3>{count}</h3>
-                <p>{descr}</p>
-              </div>
+              <li key={`${count}_${description}`} className={s.feature}>
+                <h3 className={s.featureCount}>{count}</h3>
+                <p className={s.featureDescr}>{description}</p>
+              </li>
             );
           })}
-        </div> */}
+        </ul>
       </div>
     </section>
   );

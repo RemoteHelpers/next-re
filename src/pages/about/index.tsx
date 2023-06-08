@@ -1,4 +1,4 @@
-import { FC, useContext } from "react";
+import { FC, useContext, useRef } from "react";
 import Head from "next/head";
 import { Layout } from "@/components/Layout";
 import { getAllVacancies, getCategories } from "@/services";
@@ -23,7 +23,9 @@ const About: FC<Props> = ({ categories, about }) => {
 	const tabTitle = header?.menu?.find(
 		({ path_id }: IMenu) => path_id === "about"
 	)?.title!;
-
+    const pageTitle = header.menu.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
+const formRef = useRef<HTMLElement>(null);
+    
 	return (
 		<>
 			<Head>
@@ -32,12 +34,16 @@ const About: FC<Props> = ({ categories, about }) => {
 			</Head>
 
 			<Layout categories={categories}>
-				<AboutUs about={about} tabTitle={tabTitle} />
-				{/* <Specializations about={about} categories={categories} /> */}
-				<MainForm />
+				<AboutUs about={about} pageTitle={pageTitle} formRef={formRef} />
+			<Specializations about={about} categories={categories} />
+				<MainForm
+          imageCatProps={header?.mainCat.data.attributes.url}
+          formRef={formRef}
+        />
 			</Layout>
 		</>
 	);
+
 };
 
 export default About;

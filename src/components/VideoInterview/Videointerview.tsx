@@ -83,9 +83,7 @@ export const VideointerviewPage = ({ videoData }: any) => {
       </div>
 
       <div className={styles.video_form}>
-        <div className={styles.block_container}>
-          <MainForm />
-        </div>
+        <MainForm imageCatProps={header?.videoCat.data.attributes.url} />
       </div>
     </>
   );

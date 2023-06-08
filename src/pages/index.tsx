@@ -37,10 +37,11 @@ const Home: FC<Props> = ({ vacanciesInfo, categories, homeData }) => {
 					slides={homeData.partnersSlider.data}
 				/>
 				<Testimonials testimonials={homeData} />
-				<MainForm formRef={formRef} />
+				<MainForm formRef={formRef} imageCatProps={header?.mainCat.data.attributes.url} />
 			</Layout>
 		</>
 	);
+
 };
 
 export default Home;
@@ -56,6 +57,11 @@ export const getServerSideProps = async (
 		"Testimonials.personImg,Faq_Question,partnersSlider,heroStats.heroStatIcon"
 	);
 
+  if (!lang || !vacanciesInfo || !categories || !homeData) {
+    return {
+      notFound: true,
+    }
+  }
 	return {
 		props: {
 			vacanciesInfo,

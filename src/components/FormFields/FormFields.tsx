@@ -1,7 +1,6 @@
 import { FC, useContext, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type {
-  IFormData,
   IFeedbackFormData,
   IStateCV,
   IEnglishLevel,
@@ -18,11 +17,17 @@ import { useRouter } from 'next/router';
 import { Loader } from '../Loader';
 import { GlobalContext } from '@/context';
 
-type Props = {
+import { PhotoAPI } from "@/constants";
+
+type Props = {  
+  imageCatProps: any;
+  coloredField: boolean;
 };
 
-const FormFields: FC<Props> = ({ }) => {
-  const { register, handleSubmit, reset, setValue, control } = useForm<IFeedbackFormData>();
+const FormFields: FC<Props> = ({ imageCatProps, coloredField }) => {
+  const { register, handleSubmit, reset, setValue, control } =
+    useForm<IFeedbackFormData>();
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [loadFile, setLoadFile] = useState<IStateCV[]>([]);
   const [load, setLoad] = useState(false);
@@ -64,6 +69,7 @@ const FormFields: FC<Props> = ({ }) => {
     setValue('englishLevel', englishLevel?.value, { shouldValidate: true });
   };
 
+
   return (
     <>
       <form onSubmit={submitForm} className={styles.form}>
@@ -72,18 +78,20 @@ const FormFields: FC<Props> = ({ }) => {
             {...register('name', { required: true })}
             placeholder={formData?.name}
             type="text"
-            className={styles.name}
+            className={coloredField ? styles.name : styles.white_field_name}
           />
 
-          <PhoneInput
-            name="number"
-            control={control}
-            defaultCountry="UA"
-            international
-            rules={{ required: true }}
-            placeholder={formData?.number}
-            className={styles.number}
-          />
+          <div className={coloredField ? styles.number_fill : styles.white_field_number}>
+            <PhoneInput
+              name="number"
+              control={control}
+              defaultCountry="UA"
+              international
+              rules={{ required: true }}
+              placeholder={formData?.number}
+              className={styles.number}
+            />
+          </div>
         </div>
 
         <div className={styles.second_row}>
@@ -91,7 +99,7 @@ const FormFields: FC<Props> = ({ }) => {
             type="email"
             {...register('eMail', { required: true })}
             placeholder={formData?.email}
-            className={styles.email}
+            className={coloredField ? styles.email : styles.white_field_email}
           />
 
           <input
@@ -100,19 +108,21 @@ const FormFields: FC<Props> = ({ }) => {
             maxLength={2}
             {...register('age', { pattern: /\d+/, required: true })}
             placeholder={formData?.age}
-            className={styles.age}
+            className={coloredField ? styles.age : styles.white_field_age}
           />
         </div>
 
         <div>
           <p className={styles.english_title}>{formData?.englishLabel}</p>
 
-          <Select
-            instanceId={formData?.englishLevel}
-            placeholder={formData?.englishLevel}
-            onChange={changeEnglishLevel}
-            options={formData?.enlishLevels}
-          />
+          <div className={coloredField ? styles.select_lang : styles.white_field_select}>
+            <Select
+              instanceId={formData?.englishLevel}
+              placeholder={formData?.englishLevel}
+              onChange={changeEnglishLevel}
+              options={formData?.enlishLevels}
+            />
+          </div>
         </div>
 
         <div className={styles.work_cv}>
@@ -120,7 +130,8 @@ const FormFields: FC<Props> = ({ }) => {
             type="text"
             {...register('cv_link', { required: true })}
             placeholder={formData?.cvLink}
-            className={styles.cv_link}
+            className={coloredField ? styles.cv_link : styles.white_field_cv_link}
+            
           />
 
           <label className={styles.attach_cv}>
@@ -139,8 +150,9 @@ const FormFields: FC<Props> = ({ }) => {
             <FormIcon id="pin" />
           </label>
         </div>
-
-        <Image className={styles.mobile_cat} src={mainCat} alt={'main cat'} />
+        
+        <Image className={styles.mobile_cat} src={PhotoAPI + imageCatProps} alt="Mobile-cat" width={450}
+          height={365} />
 
         <button className={styles.submit} type="submit">
           {formData?.submit}

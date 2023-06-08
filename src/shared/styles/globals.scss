@@ -186,10 +186,10 @@ body {
 // global styles for react select library in form fields component
 .css-13cymwt-control,
 .css-t3ipsp-control {
-  border: 2px solid $primaryBlue;
-  background-color: $primaryCyan;
+  border: 2px solid $primaryBlue !important;
+  background-color: transparent !important;
   cursor: pointer;
-  border-radius: 0.5rem;
+  border-radius: 0.5rem !important;
   padding: 0.4rem;
   font-size: $fontSize5;
   color: $rgbGray;
@@ -220,4 +220,28 @@ body {
 }
 .PhoneInputCountry {
   margin: 0 !important;
+}
+
+// global styles for swiper library in specializations component
+.about_specializations-swiper {
+  .swiper-slide:not(.swiper-slide-active) .content {
+    border-color: transparent;
+    &::after {
+      background: $primaryBackground;
+      pointer-events: all;
+    }
+  }
+
+  .swiper-button-disabled svg {
+    stroke: $minorGrey;
+    fill: $minorGrey;
+  }
+}
+
+.about_swiper-pagination {
+  .swiper-pagination-bullet-active {
+    background-color: $primaryOrange;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
 }

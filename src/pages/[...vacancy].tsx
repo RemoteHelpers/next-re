@@ -60,7 +60,6 @@ export const getServerSideProps = async ({
 	params,
 	locale,
 }: GetServerSidePropsContext) => {
-	// const vacancySlug = params?.vacancy.at(-1);
 	const [categorySlug, vacancySlug] = params?.vacancy!;
 	/* queries for layout */
 	const categories = await getCategories(locale!);
@@ -68,6 +67,12 @@ export const getServerSideProps = async ({
 	const vacancy = await getVacancy(locale!, vacancySlug);
 	const vacanciesInfo = await getVacancyListData(locale!);
 	const category = await getCategoryBySlug(locale!, categorySlug);
+  if (!locale || !categorySlug || !vacancySlug || !categories || !vacancy 
+		|| !category || !vacanciesInfo) {
+		return {
+			notFound: true,
+		}
+	}
 	return {
 		props: {
 			categories,

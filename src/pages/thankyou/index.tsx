@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Layout } from "@/components/Layout";
-import { Thankyou } from "@/components/Thankyou";
-import { getThankyouData } from "@/services/ThankyouService";
+import { Thankyou } from "@/components/Thankyou";       
+import { getThankyouData } from "@/services";
 import { getCategories } from "@/services";
 
 const ContactsPage: FC = ({ categories, thankyouData }: any) => {

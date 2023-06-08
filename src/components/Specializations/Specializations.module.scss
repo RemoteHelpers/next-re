@@ -3,25 +3,177 @@
 @import '@/shared/styles/mixins';
 @import '@/shared/styles/mediaMixins';
 
-.swiper {
-  width: 100%;
-  height: 100%;
+$maxSlideWidth: 27.8rem;
+$swiperPadding: calc((100% - $maxSlideWidth) / 2);
+$horizPagBtnPosition: calc($swiperPadding - 5rem);
+$spaceBetwSwiperElems: 1.25rem;
+// max bullets pagination's height ---> 1.75rem
+// half pagination button's height ---> 1.56rem
+$vertPagBtnPosition: calc((100% - $spaceBetwSwiperElems - 1.75rem) / 2 - 1.56rem);
+$bulletSize: 0.75rem;
+$wideSliderWidth: calc($maxSlideWidth + 14rem);
+
+.section {
+  padding: 0 1.9rem;
 }
 
-.swiperSlide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
+.container {
+  @include container();
+}
 
-  /* Center slide text vertically */
+.sectionTitle {
+  margin-bottom: 1.5rem;
+
+  color: $rgbZodiac;
+  font-weight: 900;
+  font-size: clamp(1.25rem, 4.5vw, 3rem);
+  line-height: 130%;
+  text-decoration-line: underline;
+  text-align: center;
+}
+
+.sectionDescription {
+  margin: 0 auto 3.5rem;
+  max-width: 65rem;
+
+  font-weight: 400;
+  font-size: 1rem;
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  line-height: 150%;
+  color: $rgbBlack;
+  text-align: center;
+}
+
+.list {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 4rem;
+
+  @include on992 {
+    display: flex;
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.25rem;
+
+  width: 47%;
+  @media (min-width: 80rem) {
+    width: 30.5%;
+  }
+
+  padding: 3rem;
+
+  border-radius: 1.25rem;
+  border: 1px solid $minorGrey;
+  transition: 0.2s;
+
+  &:is(:hover) {
+    border-color: $primaryOrange;
+  }
+
+  &:not(:has(p)) {
+    align-items: center;
+  }
+
+  img {
+    width: 100%;
+    max-width: 7.5rem;
+    height: auto;
+  }
+}
+
+.swiper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 0 max(4px, $swiperPadding) !important;
+
+  @include on992 {
+    display: none !important;
+  }
+}
+
+.slide {
+  border: none !important;
+}
+
+.slideContent {
+  @extend .item;
+  position: relative;
+  width: 100%;
+  padding: 3rem 2rem;
+
+  @include on768 {
+    padding: 3rem 3.5rem;
+  }
+
+  &:is(:hover) {
+    border-color: $minorGrey;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    background: transparent;
+    pointer-events: none;
+    transition: 0.2s;
+  }
+}
+
+.sliderBtns {
+  display: none;
+  @media (min-width: $wideSliderWidth) {
+    display: block;
+  }
+
+  button {
+    position: absolute;
+    top: $vertPagBtnPosition;
+    z-index: 1;
+    background: transparent;
+
+    svg {
+      stroke: $primaryBlue;
+      fill: $primaryBlue;
+    }
+  }
+}
+
+.prevSlideBtn {
+  left: $horizPagBtnPosition;
+}
+
+.nextSlideBtn {
+  right: $horizPagBtnPosition;
+}
+
+.sliderPag {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+  gap: 0.5rem;
+  margin-top: $spaceBetwSwiperElems;
 
-.swiperSlide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  @media (min-width: 20rem) {
+    gap: 1.4rem;
+  }
+  @media (min-width: $wideSliderWidth) {
+    margin-top: 2rem;
+  }
+
+  span {
+    width: $bulletSize;
+    height: $bulletSize;
+  }
 }

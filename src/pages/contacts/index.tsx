@@ -10,6 +10,7 @@ const ContactsPage: FC = ({ categories, contacts }: any) => {
 			<Contacts contactsData={contacts} />
 		</Layout>
 	);
+
 };
 
 export default ContactsPage;
