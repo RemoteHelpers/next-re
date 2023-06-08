@@ -1,7 +1,6 @@
-import { FC, useRef, useState } from 'react';
+import { FC, useContext, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type {
-  IFormData,
   IFeedbackFormData,
   IStateCV,
   IEnglishLevel,
@@ -16,22 +15,23 @@ import Image from 'next/image';
 import { FormIcon } from '@/shared/components/IconComponents/FormIcon';
 import { useRouter } from 'next/router';
 import { Loader } from '../Loader';
+import { GlobalContext } from '@/context';
 
 import { PhotoAPI } from "@/constants";
 
-type Props = {
-  formData: IFormData;
+type Props = {  
   imageCatProps: any;
   coloredField: boolean;
 };
 
-const FormFields: FC<Props> = ({ formData, imageCatProps, coloredField }) => {
+const FormFields: FC<Props> = ({ imageCatProps, coloredField }) => {
   const { register, handleSubmit, reset, setValue, control } =
     useForm<IFeedbackFormData>();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [loadFile, setLoadFile] = useState<IStateCV[]>([]);
   const [load, setLoad] = useState(false);
+  const { formData } = useContext(GlobalContext);
 
   const { locale } = useRouter();
 

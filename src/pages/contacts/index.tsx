@@ -1,51 +1,29 @@
 import { FC } from "react";
 import { Layout } from "@/components/Layout";
 import { Contacts } from "@/components/Contacts";
-import { getContactData, getFormData } from '@/services';
-import {
-  getAllVacancies,
-  getCategories,
-  getFooterData,
-  getHeaderData,
-} from "@/services";
+import { getContactData } from "@/services";
+import { getCategories } from "@/services";
 
-const ContactsPage: FC = ({
-  footerData,
-  header,
-  categories,
-  vacancies,
-  contacts,
-  formData
-}: any) => {
-  return (
-    <Layout
-      footerData={footerData}
-      headerData={{ header, categories, vacancies }}
-    >
-      <Contacts contactsData={contacts} formData={formData} header={header} />
-    </Layout>
-  );
+const ContactsPage: FC = ({ categories, contacts }: any) => {
+	return (
+		<Layout categories={categories}>
+			<Contacts contactsData={contacts} />
+		</Layout>
+	);
+
 };
 
 export default ContactsPage;
 
 export const getServerSideProps = async (context: any) => {
-  const lang = context.locale === "ua" ? "uk" : context.locale;
-  const categories = await getCategories(lang);
-  const vacancies = await getAllVacancies(lang);
-  const footerData = await getFooterData(lang);
-  const header = await getHeaderData(lang);
-  const contacts = await getContactData(lang);
-  const formData = await getFormData(lang);
+	const lang = context.locale === "ua" ? "uk" : context.locale;
+	const categories = await getCategories(lang);
+	const contacts = await getContactData(lang);
 
-  return {
-    props: {
-      categories,
-      vacancies,
-      footerData,
-      header,
-      contacts,
-      formData
-    },
-  };
+	return {
+		props: {
+			categories,
+			contacts,
+		},
+	};
 };

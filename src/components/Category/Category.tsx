@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useContext, useMemo, useRef } from "react";
 import s from "./Category.module.scss";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import Link from "next/link";
@@ -9,40 +9,41 @@ import mainCat from "@/shared/images/Form/MainForm/main-cat.png";
 import Image from "next/image";
 import { Breadcrumbs } from "@/shared/components/Breadcrumbs";
 import { ICategory } from "@/shared/types/CategoriesTypes";
-import { IHeader } from "@/shared/types/HeaderTypes";
 import { IVacanciesInfo, IVacancy } from "@/shared/types/VacanciesTypes";
-import { IFormData } from "@/shared/types/FormTypes";
+import { GlobalContext } from "@/context";
 
 type CategoryProps = {
 	category: ICategory;
-	header: IHeader;
 	vacanciesInfo: IVacanciesInfo;
-	formData: IFormData;
 };
 
 export const Category = ({
 	category,
-	header,
 	vacanciesInfo,
-	formData,
 }: CategoryProps) => {
 	if (!category.attributes) {
 		return <></>;
 	}
 	const { categoryTitle, categorySlug, description, vacancies } =
 		category.attributes;
+	const { header, isLoading } = useContext(GlobalContext);	
 	const { menu, categoryButton } = header;
-	const breadcrumbsItems = useMemo(
-		(): ItemType[] => [
+	const breadcrumbsItems = useMemo((): ItemType[] => {
+		if (!menu) {
+			return [];
+		}
+		return [
 			{
 				title: <Link href={"/"}>{menu[0].title}</Link>,
 			},
 			{
+				title: <Link href={`/${menu[1].path_id}`}>{menu[1].title}</Link>,
+			},
+			{
 				title: categoryTitle,
 			},
-		],
-		[header, categoryTitle]
-	);
+		];
+	}, [header, categoryTitle]);
 	const formRef = useRef<HTMLDivElement>(null);
 	return (
 		<section className={s.category}>
@@ -62,31 +63,33 @@ export const Category = ({
 						{categoryButton}
 					</button>
 					<div className={s.vacancies_list}>
-						{vacancies && vacancies.data.map(
-							(vacancy: IVacancy) =>
-								vacancy.attributes.isHot && (
-									<VacancyItem
-										key={vacancy.id}
-										attributes={vacancy.attributes}
-										vacanciesInfo={vacanciesInfo}
-										category={categorySlug}
-									/>
-								)
-						)}
-						{vacancies && vacancies.data.map(
-							(vacancy: IVacancy) =>
-								!vacancy.attributes.isHot && (
-									<VacancyItem
-										key={vacancy.id}
-										attributes={vacancy.attributes}
-										vacanciesInfo={vacanciesInfo}
-										category={categorySlug}
-									/>
-								)
-						)}
+						{vacancies &&
+							vacancies.data.map(
+								(vacancy: IVacancy) =>
+									vacancy.attributes.isHot && (
+										<VacancyItem
+											key={vacancy.id}
+											attributes={vacancy.attributes}
+											vacanciesInfo={vacanciesInfo}
+											category={categorySlug}
+										/>
+									)
+							)}
+						{vacancies &&
+							vacancies.data.map(
+								(vacancy: IVacancy) =>
+									!vacancy.attributes.isHot && (
+										<VacancyItem
+											key={vacancy.id}
+											attributes={vacancy.attributes}
+											vacanciesInfo={vacanciesInfo}
+											category={categorySlug}
+										/>
+									)
+							)}
 					</div>
 					<div className={s.form_wrapper} ref={formRef}>
-						<FormFields formData={formData} />
+						<FormFields/>
 						<Image className={s.main_cat} src={mainCat} alt={"main cat"} />
 					</div>
 				</div>

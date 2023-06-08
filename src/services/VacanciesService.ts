@@ -18,14 +18,14 @@ export const getVacancyListData = async (locale: string): Promise<IVacanciesInfo
   }
 };
 
-export const getAllVacancies = async (locale: string): Promise<IVacancy[] | Error> => {
+export const getAllVacancies = async (locale: string, pop: string = '*'): Promise<IVacancy[] | Error> => {
   const pageStart = 0;
   const perPage = 100;
   const params = {
     locale,
     [requestPagStart]: pageStart,
     [requestPagLimit]: perPage,
-    populate: '*',
+    populate: pop,
   };
 
   try {

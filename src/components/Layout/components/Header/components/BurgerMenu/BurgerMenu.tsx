@@ -2,7 +2,6 @@ import { FC, useEffect, useState, useContext } from 'react';
 import s from './BurgerMenu.module.scss';
 import Link from 'next/link';
 import type { IMenu } from '@/shared/types/HeaderTypes';
-import type { IHeaderData } from '@/shared/types/HeaderTypes';
 import type { IVacancy } from '@/shared/types/VacanciesTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
 import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
@@ -15,16 +14,15 @@ type MenuState = {
 
 type Props = {
   menuState: MenuState;
-  headerData: IHeaderData;
+  categories: ICategory[];
 };
 
-export const BurgerMenu: FC<Props> = ({ menuState, headerData }) => {
+export const BurgerMenu: FC<Props> = ({ menuState, categories }) => {
   const [currentTab, setCurrentTab] = useState<number>(1);
   const [currentCategory, setCurrentCategory] = useState<string>('');
   const { isBurgerMenu, setIsBurgerMenu } = menuState;
-  const { menu, menuValue, backValue, allVacanciesValue } = headerData.header;
-  const { categories, vacancies } = headerData;
-  const { setNavURL } = useContext(GlobalContext);
+  const { setNavURL, header, vacancies } = useContext(GlobalContext);
+  const { menu, menuValue, backValue, allVacanciesValue } = header;
 
   const navToLink = (path: string): void => {
     setIsBurgerMenu(false);
@@ -72,7 +70,7 @@ export const BurgerMenu: FC<Props> = ({ menuState, headerData }) => {
 
       <nav className={s.navigation}>
         <ul className={currentTab === 1 ? s.firstTab_shown : s.firstTab}>
-          {menu.map(({ title, path_id }: IMenu) => {
+          {menu?.map(({ title, path_id }: IMenu) => {
             if (!path_id.trim()) return;
             return (
               <li key={path_id}>

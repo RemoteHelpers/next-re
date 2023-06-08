@@ -3,7 +3,8 @@ import styles from "./Contacts.module.scss";
 import MainForm from "../MainForm/MainForm";
 import { ContactSvg } from "@/shared/components/IconComponents/Contacts";
 
-export const Contacts = ({ contactsData, formData, header }: any) => {
+
+export const Contacts = ({ contactsData}: any) => {
   return (
     <>
       <section className={styles.container}>
@@ -35,7 +36,7 @@ export const Contacts = ({ contactsData, formData, header }: any) => {
           ))}
         </div>
       </section>
-      <MainForm formData={formData} imageCatProps={header?.mainCat.data.attributes.url} />
+      <MainForm imageCatProps={header?.mainCat.data.attributes.url} />
     </>
   );
 };

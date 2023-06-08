@@ -2,17 +2,18 @@ import Image from 'next/image';
 import FormFields from '../FormFields/FormFields';
 import styles from './MainForm.module.scss';
 import mainCat from '@/shared/images/Form/MainForm/main-cat.png';
-import type { IFormData } from '@/shared/types/FormTypes';
+import { useContext } from 'react';
+import { GlobalContext } from '@/context';
 
 import { PhotoAPI } from '@/constants';
 
 type Props = {
-  formData: IFormData;
   formRef?: React.RefObject<HTMLElement>;
   imageCatProps: any;
 };
 
-const MainForm: React.FC<Props> = ({ formData, formRef, imageCatProps }) => {
+const MainForm: React.FC<Props> = ({ formRef, imageCatProps }) => {
+  const { formData } = useContext(GlobalContext);
   return (
     <section className={styles.container} ref={formRef}>
       <h2 className={styles.main_title}>{formData?.title}</h2>
@@ -24,7 +25,7 @@ const MainForm: React.FC<Props> = ({ formData, formRef, imageCatProps }) => {
           width={500}
           height={440}
         />
-        <FormFields formData={formData} imageCatProps={imageCatProps} coloredField={true} />
+        <FormFields imageCatProps={imageCatProps} coloredField={true} />
       </main>
     </section>
   );
