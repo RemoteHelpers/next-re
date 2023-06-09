@@ -25,12 +25,15 @@ export const Header: FC<Props> = ({ categories }) => {
     if (path === 'vacancies' && !isDesktopMenuShown) setIsDesktopMenuShown(true);
   };
 
-  const comparePath = useCallback((currPathId: string, menuPathId: string): boolean => {
-    if (!currPathId || !menuPathId) return false;
-    const currPath = currPathId.split('/');
-    const menuPath = menuPathId.split('/');
-    return currPath[currPath.length - 1] === menuPath[menuPath.length - 1];
-  }, []);
+  const comparePath = useCallback(
+    (currPathId: string, menuPathId: string): boolean => {
+      if (!currPathId || !menuPathId) return false;
+      const currPath = currPathId.split('/');
+      const menuPath = menuPathId.split('/');
+      return currPath[currPath.length - 1] === menuPath[menuPath.length - 1];
+    },
+    [header]
+  );
 
   return (
     <>
