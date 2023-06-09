@@ -20,7 +20,7 @@ type Props = {
 const About: FC<Props> = ({ categories, about }) => {
   const { header } = useContext(GlobalContext);
   const tabTitle = header?.menu?.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
-  const pageTitle = header.menu.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
+  const pageTitle = header?.menu?.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
   const formRef = useRef<HTMLElement>(null);
 
   return (

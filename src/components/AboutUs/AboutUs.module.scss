@@ -7,6 +7,7 @@
 $mainCardMaxW: 41rem;
 $mainBlockMinW: calc($mainCardMaxW * 2);
 $featureMaxW: 27.8rem;
+$featuresGap: 1.5rem;
 
 .section {
   position: relative;
@@ -82,9 +83,10 @@ $featureMaxW: 27.8rem;
   row-gap: 2.5rem;
   justify-content: center;
 
-  @media (min-width: $mainBlockMinW) {
+  @include on992 {
     flex-direction: row-reverse;
     justify-content: space-between;
+    column-gap: 1rem;
   }
 }
 
@@ -93,8 +95,10 @@ $featureMaxW: 27.8rem;
   .joinBtn {
     display: none;
   }
-  @media (min-width: $mainBlockMinW) {
+
+  @include on992 {
     flex-direction: row;
+
     .joinBtn {
       display: inline-block;
     }
@@ -103,6 +107,9 @@ $featureMaxW: 27.8rem;
 
 .mainTextBlock {
   max-width: $mainCardMaxW;
+  @include on992 {
+    max-width: min($mainCardMaxW, calc(50% - 1rem));
+  }
 }
 
 .title {
@@ -113,6 +120,10 @@ $featureMaxW: 27.8rem;
   font-size: clamp(1.25rem, 4.5vw, 3rem);
   line-height: 130%;
   text-decoration-line: underline;
+
+  @include on992 {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+  }
 }
 
 .description {
@@ -121,6 +132,10 @@ $featureMaxW: 27.8rem;
   font-size: clamp(1rem, 3.5vw, 1.25rem);
   line-height: 150%;
   color: $rgbBlack;
+
+  @include on992 {
+    font-size: clamp(1.25rem, 3vw, 1.25rem);
+  }
 }
 
 .previewWrap {
@@ -215,13 +230,13 @@ $featureMaxW: 27.8rem;
 
 .features {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: $featuresGap;
 
-  @media (min-width: calc($featureMaxW * 3 + 9rem)) {
+  @include on992 {
+    flex-direction: row;
     justify-content: space-between;
-    gap: 0;
   }
 }
 
@@ -237,6 +252,10 @@ $featureMaxW: 27.8rem;
 
   border: 1px solid $primaryBlue;
   border-radius: 2rem;
+
+  @include on992 {
+    max-width: min($featureMaxW, calc(33% - featuresGap));
+  }
 }
 
 .featureCount {
