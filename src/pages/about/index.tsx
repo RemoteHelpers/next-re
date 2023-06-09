@@ -1,4 +1,4 @@
-import { FC, useContext, useRef } from 'react';
+import { FC, useContext, useRef, useCallback } from 'react';
 import Head from 'next/head';
 import { Layout } from '@/components/Layout';
 import { getCategories } from '@/services';
@@ -18,20 +18,21 @@ type Props = {
 };
 
 const About: FC<Props> = ({ categories, about }) => {
-  const { header } = useContext(GlobalContext);
-  const tabTitle = header?.menu?.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
-  const pageTitle = header.menu.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
   const formRef = useRef<HTMLElement>(null);
+  const { header } = useContext(GlobalContext);
+  const pageTitle = useCallback(() => {
+    return header.menu.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
+  }, [header]);
 
   return (
     <>
       <Head>
-        <title>{tabTitle}</title>
+        <title>{pageTitle()}</title>
         <meta name="description" content={about.WhatWeDoTitle} />
       </Head>
 
       <Layout categories={categories}>
-        <AboutUs about={about} pageTitle={pageTitle} formRef={formRef} />
+        <AboutUs about={about} pageTitle={pageTitle()} formRef={formRef} />
         <Specializations about={about} categories={categories} />
         <MainForm imageCatProps={header?.mainCat.data.attributes.url} formRef={formRef} />
       </Layout>
