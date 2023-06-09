@@ -18,7 +18,10 @@ export const getVacancyListData = async (locale: string): Promise<IVacanciesInfo
   }
 };
 
-export const getAllVacancies = async (locale: string, pop: string = '*'): Promise<IVacancy[] | Error> => {
+export const getAllVacancies = async (
+  locale: string,
+  pop: string = '*'
+): Promise<IVacancy[] | Error> => {
   const pageStart = 0;
   const perPage = 100;
   const params = {
@@ -56,6 +59,7 @@ export const getVacancy = async (locale: string, slug: string) => {
     ['populate[products][populate]']: '*',
     ['populate[responsibilities][populate]']: '*',
     ['populate[tools][populate]']: '*',
+    ['populate[seoData][populate]']: '*',
     populate: '*',
   };
   try {
