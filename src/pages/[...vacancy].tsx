@@ -22,13 +22,12 @@ const VacancyPage: FC<VacancyPageProps> = ({
   category,
 }: VacancyPageProps) => {
   const { newVersion, seoData, title, cardDescription } = vacancy.attributes;
-
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{seoData ? seoData.seoTitle : `${title} - Remote Employees!`}</title>
         <meta name="description" content={seoData ? seoData.seoDescription : cardDescription} />
-      </Head>
+      </Head> */}
 
       <Layout categories={categories}>
         {newVersion ? (

@@ -11,13 +11,16 @@ import { AboutUs } from '@/components/AboutUs';
 import MainForm from '@/components/MainForm/MainForm';
 import { Specializations } from '@/components/Specializations';
 import { GlobalContext } from '@/context';
+import { MetaWrapper } from '@/components/MetaWrapper';
+import { useRouter } from 'next/router';
 
 type Props = {
   categories: ICategory[];
   about: IAbout;
+  greetings: string;
 };
 
-const About: FC<Props> = ({ categories, about }) => {
+const About: FC<Props> = ({ categories, about, greetings }) => {
   const formRef = useRef<HTMLElement>(null);
   const { header } = useContext(GlobalContext);
   const pageTitle = useCallback(() => {
@@ -26,13 +29,8 @@ const About: FC<Props> = ({ categories, about }) => {
 
   return (
     <>
-      <Head>
-        <title>{pageTitle()}</title>
-        <meta name="description" content={about.WhatWeDoTitle} />
-      </Head>
-
       <Layout categories={categories}>
-        <AboutUs about={about} pageTitle={pageTitle()} formRef={formRef} />
+        <AboutUs about={about} pageTitle={greetings || pageTitle()} formRef={formRef} />
         <Specializations about={about} categories={categories} />
         <MainForm imageCatProps={header?.mainCat.data.attributes.url} formRef={formRef} />
       </Layout>

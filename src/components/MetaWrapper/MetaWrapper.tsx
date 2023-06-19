@@ -1,16 +1,28 @@
-import { Html, Head, Main, NextScript } from 'next/document';
-import { GetServerSidePropsContext } from 'next';
-// import { appMetadata } from '@/api/metadata';
+import { FC, ReactNode } from 'react';
+import Head from 'next/head';
+import { appMetadata } from '@/api/metadata';
 import type { LocalesLiteral } from '@/shared/types/MetadataTypes';
 
-export default function Document({ locale }: { locale: LocalesLiteral | undefined }) {
-  // const appMeta = appMetadata[locale || 'en'];
+type Props = {
+  locale: LocalesLiteral;
+  metaConfig?: {
+    title?: string;
+    description?: string;
+  };
+  children: ReactNode;
+};
+
+export const MetaWrapper: FC<Props> = ({ locale, children, metaConfig }) => {
+  console.log('locale', locale);
+  const appMeta = appMetadata[locale];
   return (
-    <Html>
-      <Head />
-      {/* <Head>
-        <title>{appMeta.title}</title>
-        <meta name="description" content={appMeta.description} />
+    <>
+      <Head>
+        <title>{metaConfig?.title ? metaConfig.title : appMeta.title}</title>
+        <meta
+          name="description"
+          content={metaConfig?.description ? metaConfig.description : appMeta.description}
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href={appMeta.canonical} />
@@ -21,15 +33,8 @@ export default function Document({ locale }: { locale: LocalesLiteral | undefine
         <meta property="og:url" content={appMeta.og.url} />
         <meta property="og:site_name" content={appMeta.og.siteName} />
         <meta property="og:image" content={appMeta.og.image} />
-      </Head> */}
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
+      </Head>
+      {children}
+    </>
   );
-}
-
-export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
-  return { props: { locale } };
-}
+};
