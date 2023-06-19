@@ -11,16 +11,17 @@ import { AboutUs } from '@/components/AboutUs';
 import MainForm from '@/components/MainForm/MainForm';
 import { Specializations } from '@/components/Specializations';
 import { GlobalContext } from '@/context';
-import { MetaWrapper } from '@/components/MetaWrapper';
-import { useRouter } from 'next/router';
+import { IFooterData } from '@/shared/types/FooterTypes';
 
 type Props = {
   categories: ICategory[];
   about: IAbout;
   greetings: string;
+  // footer: IFooterData;
+  globalData: any;
 };
 
-const About: FC<Props> = ({ categories, about, greetings }) => {
+const About: FC<Props> = ({ categories, about, greetings, globalData }) => {
   const formRef = useRef<HTMLElement>(null);
   const { header } = useContext(GlobalContext);
   const pageTitle = useCallback(() => {
@@ -29,7 +30,7 @@ const About: FC<Props> = ({ categories, about, greetings }) => {
 
   return (
     <>
-      <Layout categories={categories}>
+      <Layout categories={categories} footer={globalData.footer} header={globalData.header}>
         <AboutUs about={about} pageTitle={greetings || pageTitle()} formRef={formRef} />
         <Specializations about={about} categories={categories} />
         <MainForm imageCatProps={header?.mainCat.data.attributes.url} formRef={formRef} />

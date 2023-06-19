@@ -1,39 +1,23 @@
 import type { AppProps } from 'next/app';
-import { useCallback } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
+// import { useEffect, useState } from 'react';
 import '@/shared/styles/globals.scss';
 import { GlobalProvider } from '@/context';
-import Head from 'next/head';
 import { appMetadata } from '@/api/metadata';
-import { LocalesLiteral } from '@/shared/types/MetadataTypes';
+import type { LocalesLiteral } from '@/shared/types/MetadataTypes';
+import type { IHeader } from '@/shared/types/HeaderTypes';
+import type { IFooterData } from '@/shared/types/FooterTypes';
+import type { IVacancy } from '@/shared/types/VacanciesTypes';
+import type { IFormData } from '@/shared/types/FormTypes';
+import { getAllVacancies, getFooterData, getFormData, getHeaderData } from '@/services';
+import { NextPageContext } from 'next';
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps, globalData }: AppProps & any) {
   const { locale } = useRouter();
   const appMeta = appMetadata[(locale as LocalesLiteral) || 'en'];
 
-  let greetings = 'hello world';
-  const getGreetings = useCallback(
-    (locale: string) => {
-      switch (locale) {
-        case 'uk':
-          greetings = 'Привіт світе';
-          break;
-
-        case 'ru':
-          greetings = 'адін народ';
-          break;
-
-        default:
-          greetings = 'hello world';
-          break;
-      }
-
-      return greetings;
-    },
-    [locale]
-  );
-  const updatedProps = { ...pageProps, greetings: getGreetings(locale!) };
-
+  const props = { ...pageProps, globalData };
   return (
     <>
       <Head>
@@ -50,11 +34,32 @@ function App({ Component, pageProps }: AppProps) {
         <meta property="og:site_name" content={appMeta.og.siteName} />
         <meta property="og:image" content={appMeta.og.image} />
       </Head>
+
       <GlobalProvider>
-        <Component {...updatedProps} />
+        <Component {...props} />
       </GlobalProvider>
     </>
   );
 }
+
+App.getInitialProps = async ({ locale, req, asPath }: NextPageContext) => {
+  // const locale = defaultLocale ? defaultLocale : 'en';
+  // const fullUrl = req ? `${req.headers.host}${req.url}` : 'NO URL';
+
+  const headerData: IHeader = await getHeaderData(locale || 'en');
+  const footerData: IFooterData = await getFooterData(locale || 'en');
+  const vacanciesData: IVacancy[] = await getAllVacancies(locale || 'en');
+  const formData: IFormData = await getFormData(locale || 'en');
+
+  const globalData = {
+    header: headerData,
+    footer: footerData,
+    vacancies: vacanciesData,
+    formData: formData,
+    asPath,
+  };
+
+  return { globalData };
+};
 
 export default App;
