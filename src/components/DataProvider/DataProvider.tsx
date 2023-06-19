@@ -1,27 +1,10 @@
-import { FC, ReactNode } from 'react';
-import Head from 'next/head';
-import { appMetadata } from '@/api/metadata';
-import type { LocalesLiteral } from '@/shared/types/MetadataTypes';
-
-type Props = {
-  locale: LocalesLiteral;
-  metaConfig?: {
-    title?: string;
-    description?: string;
-  };
-  children: ReactNode;
-};
-
-export const MetaWrapper: FC<Props> = ({ locale, metaConfig, children }) => {
-  const appMeta = appMetadata[locale];
+export const DataProvider = ({ children }: any) => {
+  const data = { x: 1 };
   return (
     <>
-      <Head>
-        <title>{metaConfig?.title ? metaConfig.title : appMeta.title}</title>
-        <meta
-          name="description"
-          content={metaConfig?.description ? metaConfig.description : appMeta.description}
-        />
+      {/* <Head>
+        <title>{appMeta.title}</title>
+        <meta name="description" content={appMeta.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href={appMeta.canonical} />
@@ -32,7 +15,7 @@ export const MetaWrapper: FC<Props> = ({ locale, metaConfig, children }) => {
         <meta property="og:url" content={appMeta.og.url} />
         <meta property="og:site_name" content={appMeta.og.siteName} />
         <meta property="og:image" content={appMeta.og.image} />
-      </Head>
+      </Head> */}
       {children}
     </>
   );
