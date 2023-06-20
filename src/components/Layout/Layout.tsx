@@ -1,28 +1,29 @@
-import { FC, useContext, ReactNode, useEffect } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Main } from './components/Main';
 import { Footer } from './components/Footer';
 import s from './Layout.module.scss';
 import { Loader } from '../Loader';
-import { GlobalContext } from '@/context';
-import { ICategory } from '@/shared/types/CategoriesTypes';
-import { IFooterData } from '@/shared/types/FooterTypes';
-import { IHeader } from '@/shared/types/HeaderTypes';
-import { IVacancy } from '@/shared/types/VacanciesTypes';
-import { IFormData } from '@/shared/types/FormTypes';
+import type { ICategory } from '@/shared/types/CategoriesTypes';
+import type { IGlobalData, IMainData } from '@/shared/types/GlobalTypes';
+import { useRouter } from 'next/router';
 
 type Props = {
   children: ReactNode;
   categories: ICategory[];
-  header: IHeader;
-  footer: IFooterData;
-  // vacancies: IVacancy[];
-  // formData: IFormData;
-  // mainData: any;
+  mainData: IMainData;
 };
 
-export const Layout: FC<Props> = ({ children, categories, footer, header }) => {
-  const { isLoading } = useContext(GlobalContext);
+export const Layout: FC<Props> = ({ children, categories, mainData }) => {
+  const { locale, asPath } = useRouter();
+  const [navURL, setNavURL] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const globalData: IGlobalData = {
+    ...mainData,
+    setNavURL,
+    setIsLoading,
+  };
 
   useEffect(() => {
     if (document) {
@@ -30,12 +31,23 @@ export const Layout: FC<Props> = ({ children, categories, footer, header }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (!navURL) return;
+    if (asPath === navURL || asPath === `/${navURL}`) setNavURL('');
+    else setIsLoading(true);
+  }, [navURL]);
+
+  useEffect(() => {
+    setIsLoading(false);
+    setNavURL('');
+  }, [locale, asPath]);
+
   return (
     <>
       <div className={s.wrapper}>
-        <Header categories={categories} />
+        <Header categories={categories} globalData={globalData} />
         <Main>{children}</Main>
-        <Footer footer={footer} />
+        <Footer globalData={globalData} />
       </div>
 
       {isLoading && <Loader />}

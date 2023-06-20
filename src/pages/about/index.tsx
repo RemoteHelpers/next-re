@@ -1,39 +1,46 @@
-import { FC, useContext, useRef, useCallback } from 'react';
+import { FC, useRef, useCallback } from 'react';
 import Head from 'next/head';
 import { Layout } from '@/components/Layout';
 import { getCategories } from '@/services';
 import type { GetServerSidePropsContext } from 'next';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IMenu } from '@/shared/types/HeaderTypes';
 import type { IAbout } from '@/shared/types/AboutTypes';
 import { getAboutData } from '@/services/AboutService';
 import { AboutUs } from '@/components/AboutUs';
 import MainForm from '@/components/MainForm/MainForm';
 import { Specializations } from '@/components/Specializations';
-import { GlobalContext } from '@/context';
-import { IFooterData } from '@/shared/types/FooterTypes';
+import type { IMainData } from '@/shared/types/GlobalTypes';
+import { getPageTitle } from '@/shared/functions/pageTitleGetter';
+import { titleCompanyInfo } from '@/constants';
 
 type Props = {
   categories: ICategory[];
   about: IAbout;
   greetings: string;
-  // footer: IFooterData;
-  globalData: any;
+  mainData: IMainData;
 };
-
-const About: FC<Props> = ({ categories, about, greetings, globalData }) => {
+const About: FC<Props> = ({ categories, about, greetings, mainData }) => {
   const formRef = useRef<HTMLElement>(null);
-  const { header } = useContext(GlobalContext);
-  const pageTitle = useCallback(() => {
-    return header.menu.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
-  }, [header]);
+  const { header, formData } = mainData;
+  const pageTitle = useCallback(() => getPageTitle(header, 'about'), [header]);
 
   return (
     <>
-      <Layout categories={categories} footer={globalData.footer} header={globalData.header}>
+      <Head>
+        <title>{pageTitle() + titleCompanyInfo}</title>
+        <meta name="description" content={about.WhatWeDoTitle} />
+        <meta property="og:title" content={pageTitle() + titleCompanyInfo} />
+        <meta property="og:description" content={about.WhatWeDoTitle} />
+      </Head>
+
+      <Layout categories={categories} mainData={mainData}>
         <AboutUs about={about} pageTitle={greetings || pageTitle()} formRef={formRef} />
         <Specializations about={about} categories={categories} />
-        <MainForm imageCatProps={header?.mainCat.data.attributes.url} formRef={formRef} />
+        <MainForm
+          formData={formData}
+          imageCatProps={header?.mainCat.data.attributes.url}
+          formRef={formRef}
+        />
       </Layout>
     </>
   );

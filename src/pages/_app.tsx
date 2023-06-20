@@ -1,23 +1,25 @@
 import type { AppProps } from 'next/app';
+import type { GetServerSidePropsContext, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-// import { useEffect, useState } from 'react';
 import '@/shared/styles/globals.scss';
-import { GlobalProvider } from '@/context';
 import { appMetadata } from '@/api/metadata';
+import { getAllVacancies, getFooterData, getFormData, getHeaderData } from '@/services';
 import type { LocalesLiteral } from '@/shared/types/MetadataTypes';
 import type { IHeader } from '@/shared/types/HeaderTypes';
 import type { IFooterData } from '@/shared/types/FooterTypes';
 import type { IVacancy } from '@/shared/types/VacanciesTypes';
 import type { IFormData } from '@/shared/types/FormTypes';
-import { getAllVacancies, getFooterData, getFormData, getHeaderData } from '@/services';
-import { NextPageContext } from 'next';
+import type { IMainData } from '@/shared/types/GlobalTypes';
 
-function App({ Component, pageProps, globalData }: AppProps & any) {
+function App({ Component, pageProps, mainData }: AppProps & { mainData: IMainData }) {
   const { locale } = useRouter();
   const appMeta = appMetadata[(locale as LocalesLiteral) || 'en'];
+  // const getHeaderByLocale = () => {
+  //   if (locale === 'ru') return mainData.header;
+  // };
+  const props = { ...pageProps, mainData };
 
-  const props = { ...pageProps, globalData };
   return (
     <>
       <Head>
@@ -34,32 +36,29 @@ function App({ Component, pageProps, globalData }: AppProps & any) {
         <meta property="og:site_name" content={appMeta.og.siteName} />
         <meta property="og:image" content={appMeta.og.image} />
       </Head>
-
-      <GlobalProvider>
-        <Component {...props} />
-      </GlobalProvider>
+      <Component {...props} />
     </>
   );
 }
 
-App.getInitialProps = async ({ locale, req, asPath }: NextPageContext) => {
+App.getInitialProps = async ({ locale }: NextPageContext) => {
+  // App.getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
   // const locale = defaultLocale ? defaultLocale : 'en';
   // const fullUrl = req ? `${req.headers.host}${req.url}` : 'NO URL';
+  const localeProvider = locale || 'ru';
+  const headerData: IHeader = await getHeaderData(localeProvider);
+  const footerData: IFooterData = await getFooterData(localeProvider);
+  const vacanciesData: IVacancy[] = await getAllVacancies(localeProvider);
+  const formData: IFormData = await getFormData(localeProvider);
 
-  const headerData: IHeader = await getHeaderData(locale || 'en');
-  const footerData: IFooterData = await getFooterData(locale || 'en');
-  const vacanciesData: IVacancy[] = await getAllVacancies(locale || 'en');
-  const formData: IFormData = await getFormData(locale || 'en');
-
-  const globalData = {
-    header: headerData,
-    footer: footerData,
-    vacancies: vacanciesData,
-    formData: formData,
-    asPath,
+  return {
+    mainData: {
+      header: headerData,
+      footer: footerData,
+      vacancies: vacanciesData,
+      formData: formData,
+    },
   };
-
-  return { globalData };
 };
 
 export default App;

@@ -1,26 +1,22 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import s from './Footer.module.scss';
 import Image from 'next/image';
 import footerLogo from './assets/footerLogo.svg';
 import Link from 'next/link';
 import { FooterIcon } from '@/shared/components/IconComponents/Footer';
-import { GlobalContext } from '@/context';
-import type { IFooterData } from '@/shared/types/FooterTypes';
-import type { IHeader } from '@/shared/types/HeaderTypes';
 import type { IMenu } from '@/shared/types/HeaderTypes';
+import type { IGlobalData } from '@/shared/types/GlobalTypes';
 
 type Props = {
-  footer: IFooterData;
+  globalData: IGlobalData;
 };
 
-export const Footer: FC<Props> = ({ footer }) => {
+export const Footer: FC<Props> = ({ globalData }) => {
   const {
     setNavURL,
     header: { menu },
-    // footer: footerData,
-  } = useContext(GlobalContext);
-
-  const footerData = footer;
+    footer: footerData,
+  } = globalData;
 
   return (
     <footer className={s.footer}>

@@ -1,37 +1,35 @@
-import { FC, useContext, useRef, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type {
   IFeedbackFormData,
   IStateCV,
   IEnglishLevel,
+  IFormData,
 } from '@/shared/types/FormTypes';
 import Api from '@/api';
 import Select, { SingleValue } from 'react-select';
 import PhoneInput from 'react-phone-number-input/react-hook-form';
 import 'react-phone-number-input/style.css';
 import styles from './FormFields.module.scss';
-import mainCat from '@/shared/images/Form/MainForm/main-cat.png';
 import Image from 'next/image';
 import { FormIcon } from '@/shared/components/IconComponents/FormIcon';
 import { useRouter } from 'next/router';
 import { Loader } from '../Loader';
-import { GlobalContext } from '@/context';
 
-import { PhotoAPI } from "@/constants";
+import { PhotoAPI } from '@/constants';
 
-type Props = {  
+type Props = {
   imageCatProps: any;
   coloredField: boolean;
+  formData: IFormData;
 };
 
-const FormFields: FC<Props> = ({ imageCatProps, coloredField }) => {
-  const { register, handleSubmit, reset, setValue, control } =
-    useForm<IFeedbackFormData>();
+const FormFields: FC<Props> = ({ imageCatProps, coloredField, formData }) => {
+  const { register, handleSubmit, reset, setValue, control } = useForm<IFeedbackFormData>();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [loadFile, setLoadFile] = useState<IStateCV[]>([]);
   const [load, setLoad] = useState(false);
-  const { formData } = useContext(GlobalContext);
 
   const { locale } = useRouter();
 
@@ -68,7 +66,6 @@ const FormFields: FC<Props> = ({ imageCatProps, coloredField }) => {
   const changeEnglishLevel = (englishLevel: SingleValue<IEnglishLevel>) => {
     setValue('englishLevel', englishLevel?.value, { shouldValidate: true });
   };
-
 
   return (
     <>
@@ -131,7 +128,6 @@ const FormFields: FC<Props> = ({ imageCatProps, coloredField }) => {
             {...register('cv_link', { required: true })}
             placeholder={formData?.cvLink}
             className={coloredField ? styles.cv_link : styles.white_field_cv_link}
-            
           />
 
           <label className={styles.attach_cv}>
@@ -150,9 +146,16 @@ const FormFields: FC<Props> = ({ imageCatProps, coloredField }) => {
             <FormIcon id="pin" />
           </label>
         </div>
-        
-        {imageCatProps && <Image className={styles.mobile_cat} src={PhotoAPI + imageCatProps} alt="Mobile-cat" width={450}
-          height={365} />}
+
+        {imageCatProps && (
+          <Image
+            className={styles.mobile_cat}
+            src={PhotoAPI + imageCatProps}
+            alt="Mobile-cat"
+            width={450}
+            height={365}
+          />
+        )}
 
         <button className={styles.submit} type="submit">
           {formData?.submit}

@@ -7,12 +7,14 @@ import { IVacancy, IVacanciesInfo } from '@/shared/types/VacanciesTypes';
 import { ICategory } from '@/shared/types/CategoriesTypes';
 import type { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import type { IMainData } from '@/shared/types/GlobalTypes';
 
 interface VacancyPageProps {
   categories: ICategory[];
   vacancy: IVacancy;
   vacanciesInfo: IVacanciesInfo;
   category: ICategory;
+  mainData: IMainData;
 }
 
 const VacancyPage: FC<VacancyPageProps> = ({
@@ -20,16 +22,17 @@ const VacancyPage: FC<VacancyPageProps> = ({
   vacancy,
   vacanciesInfo,
   category,
+  mainData,
 }: VacancyPageProps) => {
   const { newVersion, seoData, title, cardDescription } = vacancy.attributes;
   return (
     <>
-      {/* <Head>
+      <Head>
         <title>{seoData ? seoData.seoTitle : `${title} - Remote Employees!`}</title>
         <meta name="description" content={seoData ? seoData.seoDescription : cardDescription} />
-      </Head> */}
+      </Head>
 
-      <Layout categories={categories}>
+      <Layout categories={categories} mainData={mainData}>
         {newVersion ? (
           <VacancyNew vacancy={vacancy} category={category} />
         ) : (
