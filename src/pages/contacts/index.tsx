@@ -4,21 +4,22 @@ import { GetServerSidePropsContext } from 'next';
 import { Layout } from '@/components/Layout';
 import { Contacts } from '@/components/Contacts';
 import { getContactData, getCategories } from '@/services';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IMainData } from '@/shared/types/GlobalTypes';
-import type { IContacts } from '@/shared/types/ContactsTypes';
-import { getPageTitle } from '@/shared/functions/pageTitleGetter';
+import type { IMainData, ICategory, IContacts } from '@/shared/types';
+import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
 
 type Props = { categories: ICategory[]; contacts: IContacts; mainData: IMainData };
 const ContactsPage: FC<Props> = ({ categories, contacts, mainData }) => {
   const { header, formData } = mainData;
-  const pageTitle = useCallback(() => getPageTitle(header, 'contacts'), [header]);
+  const metaTitle = useCallback(
+    () => getPageTitle(header, 'contacts') + titleCompanyInfo,
+    [header]
+  );
   return (
     <>
       <Head>
-        <title>{pageTitle() + titleCompanyInfo}</title>
-        <meta property="og:title" content={pageTitle() + titleCompanyInfo} />
+        <title>{metaTitle() + titleCompanyInfo}</title>
+        <meta property="og:title" content={metaTitle()} />
       </Head>
 
       <Layout categories={categories} mainData={mainData}>

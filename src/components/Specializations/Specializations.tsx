@@ -5,13 +5,13 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import s from './Specializations.module.scss';
-import type { IAbout } from '@/shared/types/AboutTypes';
+import type { IAboutData } from '@/shared/types/AboutTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
 import { SpecializationsIcon } from '@/shared/components/IconComponents/Specializations';
 import { SpecializationCard } from './components';
 
 type Props = {
-  about: IAbout;
+  about: IAboutData;
   categories: ICategory[];
 };
 

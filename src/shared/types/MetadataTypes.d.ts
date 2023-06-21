@@ -22,8 +22,3 @@ export interface IMetaData {
 }
 
 export type AppMetadata = Record<LocalesLiteral, IMetaData>;
-
-export interface ISeoData {
-  seoTitle?: string;
-  seoDescription?: string;
-}

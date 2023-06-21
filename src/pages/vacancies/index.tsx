@@ -1,16 +1,14 @@
 import { FC, useCallback } from 'react';
-import { Layout } from '@/components/Layout';
-import { getCategories, getVacancyListData, getVacancyPageData } from '@/services';
-import { Vacancies } from '@/components/Vacancies';
-import { VacanciesHero } from '@/components/Vacancies/components/VacanciesHero/VacanciesHero';
-import { VacanciesForm } from '@/components/Vacancies/components/VacanciesForm';
-import type { IVacanciesInfo, IVacancyPageData } from '@/shared/types/VacanciesTypes';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IMainData } from '@/shared/types/GlobalTypes';
-import Head from 'next/head';
-import { getPageTitle } from '@/shared/functions/pageTitleGetter';
-import { titleCompanyInfo } from '@/constants';
 import { GetServerSidePropsContext } from 'next';
+import Head from 'next/head';
+import type { IMainData, IVacanciesInfo, IVacancyPageData, ICategory } from '@/shared/types';
+import { getCategories, getVacancyListData, getVacancyPageData } from '@/services';
+import { Layout } from '@/components/Layout';
+import { Vacancies } from '@/components/Vacancies';
+import { VacanciesHero } from '@/components/Vacancies/components/VacanciesHero';
+import { VacanciesForm } from '@/components/Vacancies/components/VacanciesForm';
+import { titleCompanyInfo } from '@/constants';
+import getPageTitle from '@/shared/functions/pageTitleGetter';
 
 type Props = {
   vacanciesInfo: IVacanciesInfo;
@@ -20,14 +18,16 @@ type Props = {
 };
 
 const VacanciesPage: FC<Props> = ({ vacanciesInfo, vacancyPageData, categories, mainData }) => {
-  const { header } = mainData;
-  const pageTitle = useCallback(() => getPageTitle(header, 'vacancies'), [header]);
+  const metaTitle = useCallback(
+    () => getPageTitle(mainData.header, 'vacancies') + titleCompanyInfo,
+    [mainData.header]
+  );
 
   return (
     <>
       <Head>
-        <title>{pageTitle() + titleCompanyInfo}</title>
-        <meta property="og:title" content={pageTitle() + titleCompanyInfo} />
+        <title>{metaTitle()}</title>
+        <meta property="og:title" content={metaTitle()} />
       </Head>
 
       <Layout categories={categories} mainData={mainData}>

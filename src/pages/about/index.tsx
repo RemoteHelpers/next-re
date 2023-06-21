@@ -1,25 +1,21 @@
 import { FC, useRef, useCallback } from 'react';
-import Head from 'next/head';
-import { Layout } from '@/components/Layout';
-import { getCategories } from '@/services';
 import type { GetServerSidePropsContext } from 'next';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IAbout } from '@/shared/types/AboutTypes';
-import { getAboutData } from '@/services/AboutService';
-import { AboutUs } from '@/components/AboutUs';
-import MainForm from '@/components/MainForm/MainForm';
-import { Specializations } from '@/components/Specializations';
-import type { IMainData } from '@/shared/types/GlobalTypes';
-import { getPageTitle } from '@/shared/functions/pageTitleGetter';
+import Head from 'next/head';
+import { getCategories, getAboutData } from '@/services';
+import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
+import { Layout } from '@/components/Layout';
+import { AboutUs } from '@/components/AboutUs';
+import { Specializations } from '@/components/Specializations';
+import MainForm from '@/components/MainForm/MainForm';
+import type { IAboutData, ICategory, IMainData } from '@/shared/types';
 
 type Props = {
   categories: ICategory[];
-  about: IAbout;
-  greetings: string;
+  about: IAboutData;
   mainData: IMainData;
 };
-const About: FC<Props> = ({ categories, about, greetings, mainData }) => {
+const About: FC<Props> = ({ categories, about, mainData }) => {
   const formRef = useRef<HTMLElement>(null);
   const { header, formData } = mainData;
   const pageTitle = useCallback(() => getPageTitle(header, 'about'), [header]);
@@ -34,7 +30,7 @@ const About: FC<Props> = ({ categories, about, greetings, mainData }) => {
       </Head>
 
       <Layout categories={categories} mainData={mainData}>
-        <AboutUs about={about} pageTitle={greetings || pageTitle()} formRef={formRef} />
+        <AboutUs about={about} pageTitle={pageTitle()} formRef={formRef} />
         <Specializations about={about} categories={categories} />
         <MainForm
           formData={formData}
@@ -50,7 +46,7 @@ export default About;
 
 export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
   const fetchCategories: Promise<ICategory[]> = getCategories(locale!);
-  const fetchAbout: Promise<IAbout> = getAboutData(locale!);
+  const fetchAbout: Promise<IAboutData> = getAboutData(locale!);
   const [categories, about] = await Promise.all([fetchCategories, fetchAbout]);
   return {
     props: {

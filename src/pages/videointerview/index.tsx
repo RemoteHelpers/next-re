@@ -4,22 +4,24 @@ import Head from 'next/head';
 import { getCategories, getVideointerviewData } from '@/services';
 import { Layout } from '@/components/Layout';
 import { VideointerviewPage } from '@/components/VideoInterview';
-import { getPageTitle } from '@/shared/functions/pageTitleGetter';
+import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IMainData } from '@/shared/types/GlobalTypes';
+import type { ICategory, IMainData } from '@/shared/types';
 
 type Props = { categories: ICategory[]; videoData: any; mainData: IMainData };
 const Videointerview: FC<Props> = ({ categories, videoData, mainData }) => {
   const { header, formData } = mainData;
-  const pageTitle = useCallback(() => getPageTitle(header, 'videointerview'), [header]);
+  const metaTitle = useCallback(
+    () => getPageTitle(header, 'videointerview') + titleCompanyInfo,
+    [header]
+  );
 
   console.log('videoData', videoData);
   return (
     <>
       <Head>
-        <title>{pageTitle() + titleCompanyInfo}</title>
-        <meta property="og:title" content={pageTitle() + titleCompanyInfo} />
+        <title>{metaTitle()}</title>
+        <meta property="og:title" content={metaTitle()} />
       </Head>
 
       <Layout categories={categories} mainData={mainData}>

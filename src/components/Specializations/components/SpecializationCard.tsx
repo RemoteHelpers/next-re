@@ -1,14 +1,14 @@
 import { FC, useContext } from 'react';
 import Link from 'next/link';
 import type { ICategoryAttributes } from '@/shared/types/CategoriesTypes';
-import type { IAbout } from '@/shared/types/AboutTypes';
+import type { IAboutData } from '@/shared/types/AboutTypes';
 import s from './SpecializationCard.module.scss';
 import { SpecializationsIcon } from '@/shared/components/IconComponents/Specializations';
 import { GlobalContext } from '@/context';
 
 type Props = {
   category: ICategoryAttributes;
-  about: IAbout;
+  about: IAboutData;
 };
 
 export const SpecializationCard: FC<Props> = ({ category, about }) => {

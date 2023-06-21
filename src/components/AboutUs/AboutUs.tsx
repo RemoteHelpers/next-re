@@ -1,11 +1,11 @@
 import { FC, RefObject } from 'react';
 import dynamic from 'next/dynamic';
 import s from './AboutUs.module.scss';
-import type { IAbout, IAboutLocalizationData } from '@/shared/types/AboutTypes';
+import type { IAboutData, IAboutLocalization } from '@/shared/types/AboutTypes';
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
 type Props = {
-  about: IAbout;
+  about: IAboutData;
   pageTitle: string;
   formRef: RefObject<HTMLElement>;
 };
@@ -18,7 +18,7 @@ export const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
 
   const findEnVideoUrl = () =>
     about.localizations.data.find(
-      ({ attributes }: IAboutLocalizationData) => attributes.locale === 'en'
+      ({ attributes }: IAboutLocalization) => attributes.locale === 'en'
     )?.attributes.videoUrl;
 
   const videoUrl = about.videoUrl ? about.videoUrl : findEnVideoUrl();

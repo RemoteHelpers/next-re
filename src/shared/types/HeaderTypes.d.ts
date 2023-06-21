@@ -1,6 +1,3 @@
-import { ICategory } from './CategoriesTypes';
-import { IVacancy } from './VacanciesTypes';
-
 export interface ILanguage {
   id: number;
   locale: string;

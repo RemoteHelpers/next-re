@@ -8,9 +8,7 @@ import { VacancyItem } from '../Vacancies/components/VacanciesList/components/Va
 import { Breadcrumbs } from '@/shared/components/Breadcrumbs';
 import FormFields from '../FormFields/FormFields';
 import mainCat from '@/shared/images/Form/MainForm/main-cat.png';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IVacanciesInfo, IVacancy } from '@/shared/types/VacanciesTypes';
-import type { IMainData } from '@/shared/types/GlobalTypes';
+import type { IMainData, ICategory, IVacanciesInfo, IVacancy } from '@/shared/types';
 
 type Props = { category: ICategory; vacanciesInfo: IVacanciesInfo; mainData: IMainData };
 export const Category: FC<Props> = ({ category, vacanciesInfo, mainData }) => {
