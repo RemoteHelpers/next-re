@@ -1,13 +1,14 @@
 import { FC } from 'react';
+import Head from 'next/head';
+import type { GetServerSidePropsContext } from 'next';
 import { Layout } from '@/components/Layout';
 import { Vacancy } from '@/components/Vacancy';
 import { getCategoryBySlug, getVacancy, getVacancyListData, getCategories } from '@/services';
 import { VacancyNew } from '@/components/VacancyNew';
-import { IVacancy, IVacanciesInfo } from '@/shared/types/VacanciesTypes';
-import { ICategory } from '@/shared/types/CategoriesTypes';
-import type { GetServerSidePropsContext } from 'next';
-import Head from 'next/head';
+import type { IVacancy, IVacanciesInfo } from '@/shared/types/VacanciesTypes';
+import type { ICategory } from '@/shared/types/CategoriesTypes';
 import type { IMainData } from '@/shared/types/GlobalTypes';
+import { titleCompanyInfo } from '@/constants';
 
 interface VacancyPageProps {
   categories: ICategory[];
@@ -24,19 +25,31 @@ const VacancyPage: FC<VacancyPageProps> = ({
   category,
   mainData,
 }: VacancyPageProps) => {
+  if (!vacancy.attributes) return <></>;
   const { newVersion, seoData, title, cardDescription } = vacancy.attributes;
+
+  const metaTitle = seoData ? seoData.seoTitle : title + titleCompanyInfo;
+  const metaDescr = seoData ? seoData.seoDescription : cardDescription;
+
   return (
     <>
       <Head>
-        <title>{seoData ? seoData.seoTitle : `${title} - Remote Employees!`}</title>
-        <meta name="description" content={seoData ? seoData.seoDescription : cardDescription} />
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescr} />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescr} />
       </Head>
 
       <Layout categories={categories} mainData={mainData}>
         {newVersion ? (
-          <VacancyNew vacancy={vacancy} category={category} />
+          <VacancyNew mainData={mainData} vacancy={vacancy} category={category} />
         ) : (
-          <Vacancy vacancy={vacancy} vacanciesInfo={vacanciesInfo} category={category} />
+          <Vacancy
+            mainData={mainData}
+            vacancy={vacancy}
+            vacanciesInfo={vacanciesInfo}
+            category={category}
+          />
         )}
       </Layout>
     </>
@@ -62,10 +75,9 @@ export const getServerSideProps = async ({ params, locale }: GetServerSidePropsC
     !category ||
     !vacanciesInfo
   ) {
-    return {
-      notFound: true,
-    };
+    return { notFound: true };
   }
+
   return {
     props: {
       categories,

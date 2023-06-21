@@ -1,14 +1,13 @@
 import { FC, useCallback } from 'react';
-import { Layout } from '@/components/Layout';
-import { getCategories } from '@/services';
-import { VideointerviewPage } from '@/components/VideoInterview';
-import { getVideointerviewData } from '@/services';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IMainData } from '@/shared/types/GlobalTypes';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import { getCategories, getVideointerviewData } from '@/services';
+import { Layout } from '@/components/Layout';
+import { VideointerviewPage } from '@/components/VideoInterview';
 import { getPageTitle } from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
+import type { ICategory } from '@/shared/types/CategoriesTypes';
+import type { IMainData } from '@/shared/types/GlobalTypes';
 
 type Props = { categories: ICategory[]; videoData: any; mainData: IMainData };
 const Videointerview: FC<Props> = ({ categories, videoData, mainData }) => {

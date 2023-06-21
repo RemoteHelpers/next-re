@@ -12,13 +12,11 @@ import type { IVacancy } from '@/shared/types/VacanciesTypes';
 import type { IFormData } from '@/shared/types/FormTypes';
 import type { IMainData } from '@/shared/types/GlobalTypes';
 
-function App({ Component, pageProps, mainData }: AppProps & { mainData: IMainData }) {
+function App({ Component, pageProps, initialData }: AppProps & { initialData: IMainData }) {
   const { locale } = useRouter();
   const appMeta = appMetadata[(locale as LocalesLiteral) || 'en'];
-  // const getHeaderByLocale = () => {
-  //   if (locale === 'ru') return mainData.header;
-  // };
-  const props = { ...pageProps, mainData };
+
+  const props = { ...pageProps, mainData: initialData };
 
   return (
     <>
@@ -52,7 +50,7 @@ App.getInitialProps = async ({ locale }: NextPageContext) => {
   const formData: IFormData = await getFormData(localeProvider);
 
   return {
-    mainData: {
+    initialData: {
       header: headerData,
       footer: footerData,
       vacancies: vacanciesData,
