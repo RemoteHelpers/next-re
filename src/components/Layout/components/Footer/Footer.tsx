@@ -4,18 +4,18 @@ import Image from 'next/image';
 import footerLogo from './assets/footerLogo.svg';
 import Link from 'next/link';
 import { FooterIcon } from '@/shared/components/IconComponents/Footer';
-import type { IGlobalData, IMenu } from '@/shared/types';
+import type { ILayoutData, IMenu } from '@/shared/types';
 
 type Props = {
-  globalData: IGlobalData;
+  layoutData: ILayoutData;
 };
 
-export const Footer: FC<Props> = ({ globalData }) => {
+export const Footer: FC<Props> = ({ layoutData }) => {
   const {
     setNavURL,
     header: { menu },
     footer: footerData,
-  } = globalData;
+  } = layoutData;
 
   return (
     <footer className={s.footer}>

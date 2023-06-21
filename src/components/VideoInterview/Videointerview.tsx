@@ -1,15 +1,14 @@
 import { FC } from 'react';
-import { FAQ } from '@/shared/components/FAQ';
-import styles from './Videointerview.module.scss';
-import videoCat from '@/shared/images/Videointerview/videointerviewCat.png';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import dynamic from 'next/dynamic';
+import type { IVideointerview, IHeader, IFormData } from '@/shared/types';
+import { FAQ } from '@/shared/components/FAQ';
+import styles from './Videointerview.module.scss';
+import videoCat from '@/shared/images/Videointerview/videointerviewCat.png';
 import MainForm from '../MainForm/MainForm';
-import type { IFormData } from '@/shared/types/FormTypes';
-import type { IHeader } from '@/shared/types/HeaderTypes';
 
-type Props = { videoData: any; header: IHeader; formData: IFormData };
+type Props = { videoData: IVideointerview; header: IHeader; formData: IFormData };
 export const VideointerviewPage: FC<Props> = ({ videoData, header, formData }) => {
   const ReactPlayer = dynamic(() => import('react-player/lazy'), {
     ssr: false,
@@ -60,7 +59,7 @@ export const VideointerviewPage: FC<Props> = ({ videoData, header, formData }) =
         </div>
       </div>
       <div className={styles.block_container}>
-        {videoData?.videoList === 0 || (
+        {videoData?.videoList.length === 0 || (
           <div className={styles.video_examples}>
             <h2>{videoData?.thirdTitle}</h2>
             <div className={styles.video_examples_wrapper}>

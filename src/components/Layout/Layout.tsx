@@ -4,7 +4,7 @@ import { Main } from './components/Main';
 import { Footer } from './components/Footer';
 import s from './Layout.module.scss';
 import { Loader } from '../Loader';
-import type { IGlobalData, IMainData, ICategory } from '@/shared/types';
+import type { ILayoutData, IMainData, ICategory } from '@/shared/types';
 import { useRouter } from 'next/router';
 
 type Props = {
@@ -18,7 +18,7 @@ export const Layout: FC<Props> = ({ children, categories, mainData }) => {
   const [navURL, setNavURL] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  const globalData: IGlobalData = {
+  const layoutData: ILayoutData = {
     ...mainData,
     setNavURL,
     setIsLoading,
@@ -44,9 +44,9 @@ export const Layout: FC<Props> = ({ children, categories, mainData }) => {
   return (
     <>
       <div className={s.wrapper}>
-        <Header categories={categories} globalData={globalData} />
+        <Header categories={categories} layoutData={layoutData} />
         <Main>{children}</Main>
-        <Footer globalData={globalData} />
+        <Footer layoutData={layoutData} />
       </div>
 
       {isLoading && <Loader />}

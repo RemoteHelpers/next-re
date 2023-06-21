@@ -7,15 +7,15 @@ import re_logo from './assets/re_logo.svg';
 import { BurgerMenu } from './components/BurgerMenu';
 import { SelectLang } from './components/SelectLang';
 import { DesktopMenu } from './components/DesktopMenu';
-import type { IGlobalData, ICategory, IMenu } from '@/shared/types';
+import type { ILayoutData, ICategory, IMenu } from '@/shared/types';
 
-type Props = { categories: ICategory[]; globalData: IGlobalData };
+type Props = { categories: ICategory[]; layoutData: ILayoutData };
 
-export const Header: FC<Props> = ({ categories, globalData }) => {
+export const Header: FC<Props> = ({ categories, layoutData }) => {
   const [isBurgerMenu, setIsBurgerMenu] = useState<boolean>(false);
   const [isDesktopMenuShown, setIsDesktopMenuShown] = useState<boolean>(false);
   const router = useRouter();
-  const { header, setNavURL } = globalData;
+  const { header, setNavURL } = layoutData;
 
   const openMenu = (path: string): void => {
     if (path === 'vacancies' && !isDesktopMenuShown) setIsDesktopMenuShown(true);
@@ -71,7 +71,7 @@ export const Header: FC<Props> = ({ categories, globalData }) => {
               })}
             </nav>
 
-            <SelectLang isDesktopMenuShown={isDesktopMenuShown} globalData={globalData} />
+            <SelectLang isDesktopMenuShown={isDesktopMenuShown} layoutData={layoutData} />
 
             <button
               type="button"
@@ -91,7 +91,7 @@ export const Header: FC<Props> = ({ categories, globalData }) => {
       <DesktopMenu
         desktopMenuState={{ isDesktopMenuShown, setIsDesktopMenuShown }}
         categories={categories}
-        globalData={globalData}
+        layoutData={layoutData}
       />
     </>
   );

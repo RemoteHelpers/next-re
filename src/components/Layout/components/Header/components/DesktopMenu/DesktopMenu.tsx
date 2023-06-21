@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import s from './DesktopMenu.module.scss';
-import type { IGlobalData, IVacancy, ICategory } from '@/shared/types';
+import type { ILayoutData, IVacancy, ICategory } from '@/shared/types';
 import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
 
 type Props = {
@@ -11,11 +11,11 @@ type Props = {
     setIsDesktopMenuShown: (boolean: boolean) => void;
   };
   categories: ICategory[];
-  globalData: IGlobalData;
+  layoutData: ILayoutData;
 };
 
-export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, categories, globalData }) => {
-  const { setNavURL, vacancies } = globalData;
+export const DesktopMenu: React.FC<Props> = ({ desktopMenuState, categories, layoutData }) => {
+  const { setNavURL, vacancies } = layoutData;
   const { isDesktopMenuShown, setIsDesktopMenuShown } = desktopMenuState;
   const {
     attributes: { categoryTitle: initialCategoryState },

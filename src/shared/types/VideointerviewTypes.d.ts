@@ -1,14 +1,21 @@
-import type { IImageData } from './CommonTypes';
-import type { LocalesLiteral } from './MetadataTypes';
+import type { IImageData, LocalesLiteral } from './CommonTypes';
 
-interface IVideointerview {
+interface IVideoFAQ {
+  Answer: string;
+  Question: string;
+  id: number;
+}
+
+interface IVideo {
+  id: number;
+  videoLink: string;
+}
+
+interface IVideointerviewAttr {
   createdAt: Date;
-  firstCat: IImageData;
   firstDescription: string;
-  firstVideo: url;
+  firstVideo: string;
   locale: LocalesLiteral;
-  localizations: { data: [] }; // <--------------------------------
-  secondCat: IImageData;
   secondDescription: string;
   secondTitle: string;
   thirdDescription: string;
@@ -16,6 +23,12 @@ interface IVideointerview {
   title: string;
   updatedAt: Date;
   videoFaqTitle: string;
-  videoList: {}[]; // <--------------------------------
-  videointerview_faq: {}[]; // <--------------------------------
+}
+
+export interface IVideointerview extends IVideointerviewAttr {
+  localizations: { data: { id: number; attributes: IVideointerviewAttr }[] };
+  firstCat: IImageData;
+  secondCat: IImageData;
+  videoList: IVideo[];
+  videointerview_faq: IVideoFAQ[];
 }

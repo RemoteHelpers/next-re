@@ -2,18 +2,18 @@ import { FC, useState, useEffect, useRef } from 'react';
 import s from './SelectLang.module.scss';
 import { useRouter } from 'next/router';
 import { LangSelectorIcon } from '@/shared/components/IconComponents/Header';
-import type { IGlobalData, ILanguage } from '@/shared/types';
+import type { ILayoutData, ILanguage } from '@/shared/types';
 
-type Props = { isDesktopMenuShown: boolean; globalData: IGlobalData };
+type Props = { isDesktopMenuShown: boolean; layoutData: ILayoutData };
 
-export const SelectLang: FC<Props> = ({ isDesktopMenuShown, globalData }) => {
+export const SelectLang: FC<Props> = ({ isDesktopMenuShown, layoutData }) => {
   const router = useRouter();
   const initialLang = router.locale === 'uk' ? 'UA' : router.locale!.toUpperCase();
   const [currentLang, setCurrentLang] = useState<string>(initialLang);
   const [isSelectorShown, setIsSelectorShown] = useState<boolean>(false);
   const [needAddListeners, setNeedAddListeners] = useState<boolean>(false);
   const [needRemoveListeners, setNeedRemoveListeners] = useState<boolean>(false);
-  const { setIsLoading, header } = globalData;
+  const { setIsLoading, header } = layoutData;
   const { chooseLangValue, languagesList: languages } = header;
   const langBtnRef = useRef<HTMLButtonElement>(null);
   const langItemRef = useRef<HTMLLIElement>(null);

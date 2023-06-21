@@ -3,8 +3,7 @@ import { IFormData } from './FormTypes';
 import { IHeader } from './HeaderTypes';
 import { IVacancy } from './VacanciesTypes';
 
-export type LocalesLiteral = 'uk' | 'pl' | 'en' | 'sk' | 'ru';
-
+/* --------- global (as context) data types --------- */
 export interface IMainData {
   header: IHeader;
   footer: IFooterData;
@@ -12,11 +11,15 @@ export interface IMainData {
   formData: IFormData;
 }
 
-export interface IGlobalData extends IMainData {
+export interface ILayoutData extends IMainData {
   setNavURL: (url: string) => void;
   setIsLoading: (isLoading: boolean) => void;
 }
 
+/* --------- locales types --------- */
+export type LocalesLiteral = 'uk' | 'pl' | 'en' | 'sk' | 'ru';
+
+/* --------- image types --------- */
 interface IImgFormat {
   ext: string;
   hash: string;

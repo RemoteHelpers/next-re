@@ -6,9 +6,9 @@ import { Layout } from '@/components/Layout';
 import { VideointerviewPage } from '@/components/VideoInterview';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
-import type { ICategory, IMainData } from '@/shared/types';
+import type { ICategory, IMainData, IVideointerview } from '@/shared/types';
 
-type Props = { categories: ICategory[]; videoData: any; mainData: IMainData };
+type Props = { categories: ICategory[]; videoData: IVideointerview; mainData: IMainData };
 const Videointerview: FC<Props> = ({ categories, videoData, mainData }) => {
   const { header, formData } = mainData;
   const metaTitle = useCallback(
@@ -16,7 +16,6 @@ const Videointerview: FC<Props> = ({ categories, videoData, mainData }) => {
     [header]
   );
 
-  console.log('videoData', videoData);
   return (
     <>
       <Head>

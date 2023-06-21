@@ -1,4 +1,4 @@
-export type { IMainData, IGlobalData, LocalesLiteral, IImage, IImageData } from './CommonTypes';
+export type { IMainData, ILayoutData, LocalesLiteral, IImage, IImageData } from './CommonTypes';
 export type { IAboutData, IAboutLocalization } from './AboutTypes';
 export type { ICategory, ICategoryAttributes } from './CategoriesTypes';
 export type { IContacts, IRecruiter } from './ContactsTypes';
@@ -25,4 +25,4 @@ export type {
   IVacancyPageData,
   IVacancySEO,
 } from './VacanciesTypes';
-export type {} from './VideointerviewTypes';
+export type { IVideointerview } from './VideointerviewTypes';
