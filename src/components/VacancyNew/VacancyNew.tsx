@@ -4,6 +4,7 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
+import type { IMainData, ICategory, IVacancy } from '@/shared/types';
 import s from './VacancyNew.module.scss';
 import { PhotoAPI } from '@/constants';
 import { Breadcrumbs } from '@/shared/components/Breadcrumbs';
@@ -12,9 +13,6 @@ import useWebAnimations from '@wellyshen/use-web-animations';
 import cat_hearts from './assets/cat_hearts.png';
 import cat_laptop from './assets/cat_laptop.png';
 import FormFields from '../FormFields/FormFields';
-import type { IVacancy } from '@/shared/types/VacanciesTypes';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IMainData } from '@/shared/types/GlobalTypes';
 
 const rotateKeyframes = [
   {

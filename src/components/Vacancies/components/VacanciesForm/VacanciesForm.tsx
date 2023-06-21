@@ -3,7 +3,7 @@ import { FC } from 'react';
 import formCat from '@/shared/images/Form/MainForm/main-cat.png';
 import s from './VacanciesForm.module.scss';
 import Image from 'next/image';
-import type { IMainData } from '@/shared/types/GlobalTypes';
+import type { IMainData } from '@/shared/types';
 
 interface VacanciesFormProps {
   mainData: IMainData;

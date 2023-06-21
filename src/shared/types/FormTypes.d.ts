@@ -1,3 +1,5 @@
+import type { IImgAttributes } from './CommonTypes';
+
 export interface IFeedbackFormData {
   name?: string;
   number?: string;
@@ -16,24 +18,8 @@ export interface IFileInfo {
   alternativeText: string;
   folder: string | null;
 }
-export interface IStateCV {
-  alternativeText: unknown;
-  caption: unknown;
-  createdAt: Date;
-  ext: string;
-  formats: unknown;
-  hash: string;
-  height: unknown;
+export interface IStateCV extends IImgAttributes {
   id: number;
-  mime: string;
-  name: string;
-  previewUrl: unknown;
-  provider: string;
-  provider_metadata: unknown;
-  size: number;
-  updatedAt: Date;
-  url: string;
-  width: unknown;
 }
 
 export interface IUploadFile {

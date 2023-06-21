@@ -4,8 +4,7 @@ import Image from 'next/image';
 import footerLogo from './assets/footerLogo.svg';
 import Link from 'next/link';
 import { FooterIcon } from '@/shared/components/IconComponents/Footer';
-import type { IMenu } from '@/shared/types/HeaderTypes';
-import type { IGlobalData } from '@/shared/types/GlobalTypes';
+import type { IGlobalData, IMenu } from '@/shared/types';
 
 type Props = {
   globalData: IGlobalData;

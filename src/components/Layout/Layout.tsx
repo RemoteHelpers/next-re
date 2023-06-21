@@ -4,8 +4,7 @@ import { Main } from './components/Main';
 import { Footer } from './components/Footer';
 import s from './Layout.module.scss';
 import { Loader } from '../Loader';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IGlobalData, IMainData } from '@/shared/types/GlobalTypes';
+import type { IGlobalData, IMainData, ICategory } from '@/shared/types';
 import { useRouter } from 'next/router';
 
 type Props = {

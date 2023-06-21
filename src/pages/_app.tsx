@@ -5,12 +5,14 @@ import { useRouter } from 'next/router';
 import '@/shared/styles/globals.scss';
 import { appMetadata } from '@/api/metadata';
 import { getAllVacancies, getFooterData, getFormData, getHeaderData } from '@/services';
-import type { LocalesLiteral } from '@/shared/types/MetadataTypes';
-import type { IHeader } from '@/shared/types/HeaderTypes';
-import type { IFooterData } from '@/shared/types/FooterTypes';
-import type { IVacancy } from '@/shared/types/VacanciesTypes';
-import type { IFormData } from '@/shared/types/FormTypes';
-import type { IMainData } from '@/shared/types/GlobalTypes';
+import type {
+  LocalesLiteral,
+  IHeader,
+  IFooterData,
+  IVacancy,
+  IFormData,
+  IMainData,
+} from '@/shared/types';
 
 function App({ Component, pageProps, initialData }: AppProps & { initialData: IMainData }) {
   const { locale } = useRouter();

@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import s from './DesktopMenu.module.scss';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IVacancy } from '@/shared/types/VacanciesTypes';
-import type { IGlobalData } from '@/shared/types/GlobalTypes';
+import type { IGlobalData, IVacancy, ICategory } from '@/shared/types';
 import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
 
 type Props = {

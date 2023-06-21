@@ -2,8 +2,7 @@ import { FC, useState, useEffect, useRef } from 'react';
 import s from './SelectLang.module.scss';
 import { useRouter } from 'next/router';
 import { LangSelectorIcon } from '@/shared/components/IconComponents/Header';
-import type { ILanguage } from '@/shared/types/HeaderTypes';
-import type { IGlobalData } from '@/shared/types/GlobalTypes';
+import type { IGlobalData, ILanguage } from '@/shared/types';
 
 type Props = { isDesktopMenuShown: boolean; globalData: IGlobalData };
 

@@ -7,9 +7,7 @@ import re_logo from './assets/re_logo.svg';
 import { BurgerMenu } from './components/BurgerMenu';
 import { SelectLang } from './components/SelectLang';
 import { DesktopMenu } from './components/DesktopMenu';
-import type { IMenu } from '@/shared/types/HeaderTypes';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IGlobalData } from '@/shared/types/GlobalTypes';
+import type { IGlobalData, ICategory, IMenu } from '@/shared/types';
 
 type Props = { categories: ICategory[]; globalData: IGlobalData };
 

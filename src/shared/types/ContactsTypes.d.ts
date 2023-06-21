@@ -1,45 +1,8 @@
-interface IImgFormat {
-  ext: string;
-  hash: string;
-  height: number;
-  mime: string;
-  name: string;
-  path: unknown;
-  size: number;
-  url: string;
-  width: number;
-}
+import { IImageData } from './CommonTypes';
 
 export interface IRecruiter {
   id: number;
-  img: {
-    data: {
-      id: number;
-      attributes: {
-        alternativeText: string;
-        caption: string;
-        createdAt: Date;
-        ext: string;
-        formats: {
-          small?: IImgFormat;
-          medium?: IImgFormat;
-          large?: IImgFormat;
-          thumbnail: IImgFormat;
-        };
-        hash: string;
-        height: number;
-        mime: string;
-        name: string;
-        previewUrl: unknown;
-        provider: string;
-        provider_metadata: unknown;
-        size: number;
-        updatedAt: Date;
-        url: string;
-        width: number;
-      };
-    };
-  }; // ANYYYYYYY
+  img: IImageData;
   name: string;
   phoneNumber: string | unknown | number;
   telegramNickname: 'RemotEmployees_Diana';

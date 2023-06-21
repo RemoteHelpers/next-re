@@ -1,11 +1,6 @@
 import { FC, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import type {
-  IFeedbackFormData,
-  IStateCV,
-  IEnglishLevel,
-  IFormData,
-} from '@/shared/types/FormTypes';
+import type { IFeedbackFormData, IStateCV, IEnglishLevel, IFormData } from '@/shared/types';
 import Api from '@/api';
 import Select, { SingleValue } from 'react-select';
 import PhoneInput from 'react-phone-number-input/react-hook-form';

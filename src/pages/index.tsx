@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 import type { GetServerSidePropsContext } from 'next';
+import type { IMainData, IHomeData, ICategory, IVacanciesInfo } from '@/shared/types';
 import { Layout } from '@/components/Layout';
 import { Vacancies } from '@/components/Vacancies';
 import { Questions } from '@/components/Questions';
@@ -9,11 +10,6 @@ import { getVacancyListData, getCategories, getHomeData } from '@/services';
 import { Spheres } from '@/components/Spheres';
 import { Partners } from '@/components/Partners';
 import MainForm from '@/components/MainForm/MainForm';
-import type { IVacanciesInfo } from '@/shared/types/VacanciesTypes';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IHomeData } from '@/shared/types/HomeTypes';
-import type { IMainData } from '@/shared/types/GlobalTypes';
-import Head from 'next/head';
 
 type Props = {
   vacanciesInfo: IVacanciesInfo;

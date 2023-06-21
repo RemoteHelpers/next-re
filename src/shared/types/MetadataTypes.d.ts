@@ -1,4 +1,4 @@
-export type LocalesLiteral = 'uk' | 'pl' | 'en' | 'sk' | 'ru';
+import { LocalesLiteral } from './CommonTypes';
 
 export interface IMetaData {
   title: string;

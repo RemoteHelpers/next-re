@@ -1,13 +1,11 @@
 import { FC } from 'react';
 import Head from 'next/head';
 import type { GetServerSidePropsContext } from 'next';
+import type { IMainData, ICategory, IVacancy, IVacanciesInfo } from '@/shared/types';
 import { Layout } from '@/components/Layout';
 import { Vacancy } from '@/components/Vacancy';
 import { getCategoryBySlug, getVacancy, getVacancyListData, getCategories } from '@/services';
 import { VacancyNew } from '@/components/VacancyNew';
-import type { IVacancy, IVacanciesInfo } from '@/shared/types/VacanciesTypes';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IMainData } from '@/shared/types/GlobalTypes';
 import { titleCompanyInfo } from '@/constants';
 
 interface VacancyPageProps {

@@ -4,15 +4,13 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
+import type { IMainData, ICategory, IVacancy, IVacanciesInfo } from '@/shared/types';
 import s from './Vacancy.module.scss';
 import laptopCat from './assets/laptop_cat.svg';
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
 import { VacancyItem } from '../Vacancies/components/VacanciesList/components/VacancyItem';
 import { Breadcrumbs } from '@/shared/components/Breadcrumbs';
 import { VacancyForm } from '../VacancyForm';
-import type { IVacancy, IVacanciesInfo } from '@/shared/types/VacanciesTypes';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IMainData } from '@/shared/types/GlobalTypes';
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
