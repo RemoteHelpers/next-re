@@ -1,7 +1,14 @@
 import { FC, useRef, useCallback } from 'react';
 import type { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { getCategories, getAboutData } from '@/services';
+import {
+  getCategories,
+  getAboutData,
+  getHeaderData,
+  getFooterData,
+  getAllVacancies,
+  getFormData,
+} from '@/services';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
 import { Layout } from '@/components/Layout';
@@ -29,7 +36,7 @@ const About: FC<Props> = ({ categories, about, mainData }) => {
         <meta property="og:description" content={about.WhatWeDoTitle} />
       </Head>
 
-      <Layout categories={categories} mainData={mainData}>
+      <Layout categories={categories} initialData={mainData}>
         <AboutUs about={about} pageTitle={pageTitle()} formRef={formRef} />
         <Specializations about={about} categories={categories} />
         <MainForm
@@ -45,13 +52,29 @@ const About: FC<Props> = ({ categories, about, mainData }) => {
 export default About;
 
 export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
-  const fetchCategories: Promise<ICategory[]> = getCategories(locale!);
-  const fetchAbout: Promise<IAboutData> = getAboutData(locale!);
-  const [categories, about] = await Promise.all([fetchCategories, fetchAbout]);
+  // const fetchCategories: Promise<ICategory[]> = getCategories(locale!);
+  // const fetchAbout: Promise<IAboutData> = getAboutData(locale!);
+  // const [categories, about] = await Promise.all([fetchCategories, fetchAbout]);
+
+  const [header, footer, vacancies, formData, categories, about] = await Promise.all([
+    getHeaderData(locale!),
+    getFooterData(locale!),
+    getAllVacancies(locale!),
+    getFormData(locale!),
+    getCategories(locale!),
+    getAboutData(locale!),
+  ]);
+
   return {
     props: {
       categories,
       about,
+      mainData: {
+        header,
+        footer,
+        vacancies,
+        formData,
+      },
     },
   };
 };

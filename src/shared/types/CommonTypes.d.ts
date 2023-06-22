@@ -4,15 +4,21 @@ import { IHeader } from './HeaderTypes';
 import { IVacancy } from './VacanciesTypes';
 
 /* --------- global (as context) data types --------- */
-export interface IMainData {
+export interface IInitialData {
   header: IHeader;
   footer: IFooterData;
   vacancies: IVacancy[];
+}
+
+export interface IMainData extends IInitialData {
   formData: IFormData;
 }
 
-export interface ILayoutData extends IMainData {
+export interface INavUrlState {
+  navURL: string;
   setNavURL: (url: string) => void;
+}
+export interface ILayoutData extends IInitialData, INavUrlState {
   setIsLoading: (isLoading: boolean) => void;
 }
 

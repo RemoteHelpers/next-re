@@ -1,7 +1,14 @@
 import { FC, useCallback } from 'react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { getCategories, getVideointerviewData } from '@/services';
+import {
+  getAllVacancies,
+  getCategories,
+  getFooterData,
+  getFormData,
+  getHeaderData,
+  getVideointerviewData,
+} from '@/services';
 import { Layout } from '@/components/Layout';
 import { VideointerviewPage } from '@/components/VideoInterview';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
@@ -23,7 +30,7 @@ const Videointerview: FC<Props> = ({ categories, videoData, mainData }) => {
         <meta property="og:title" content={metaTitle()} />
       </Head>
 
-      <Layout categories={categories} mainData={mainData}>
+      <Layout categories={categories} initialData={mainData}>
         <VideointerviewPage videoData={videoData} header={header} formData={formData} />
       </Layout>
     </>
@@ -33,10 +40,25 @@ const Videointerview: FC<Props> = ({ categories, videoData, mainData }) => {
 export default Videointerview;
 
 export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
-  const categories = await getCategories(locale!);
-  const videoData = await getVideointerviewData(locale!);
+  // const categories = await getCategories(locale!);
+  // const videoData = await getVideointerviewData(locale!);
+  const [header, footer, vacancies, formData, categories, videoData] = await Promise.all([
+    getHeaderData(locale!),
+    getFooterData(locale!),
+    getAllVacancies(locale!),
+    getFormData(locale!),
+    getCategories(locale!),
+    getVideointerviewData(locale!),
+  ]);
+
   return {
     props: {
+      mainData: {
+        header,
+        footer,
+        vacancies,
+        formData,
+      },
       categories,
       videoData,
     },

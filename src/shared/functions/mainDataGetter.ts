@@ -1,5 +1,5 @@
 import { getAllVacancies, getFooterData, getFormData, getHeaderData } from '@/services';
-import { IFooterData, IFormData, IHeader, IMainData, IVacancy, LocalesLiteral } from '../types';
+import { IMainData } from '../types';
 
 const getDataByLocale = async (locale: string, initialData: IMainData) => {
   'use server';

@@ -85,7 +85,11 @@ export const Header: FC<Props> = ({ categories, layoutData }) => {
           </div>
         </div>
 
-        <BurgerMenu menuState={{ isBurgerMenu, setIsBurgerMenu }} categories={categories} />
+        <BurgerMenu
+          menuState={{ isBurgerMenu, setIsBurgerMenu }}
+          categories={categories}
+          layoutData={layoutData}
+        />
       </header>
 
       <DesktopMenu

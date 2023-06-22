@@ -6,7 +6,15 @@ import { Vacancies } from '@/components/Vacancies';
 import { Questions } from '@/components/Questions';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import { Hero } from '@/components/Hero';
-import { getVacancyListData, getCategories, getHomeData } from '@/services';
+import {
+  getVacancyListData,
+  getCategories,
+  getHomeData,
+  getAllVacancies,
+  getFooterData,
+  getFormData,
+  getHeaderData,
+} from '@/services';
 import { Spheres } from '@/components/Spheres';
 import { Partners } from '@/components/Partners';
 import MainForm from '@/components/MainForm/MainForm';
@@ -29,7 +37,7 @@ const Home: FC<Props> = ({ vacanciesInfo, categories, homeData, mainData }) => {
 
   return (
     <>
-      <Layout categories={categories} mainData={mainData}>
+      <Layout categories={categories} initialData={mainData}>
         <Hero data={homeData} formRef={formRef} />
         <Spheres title={homeData.spheresTitle} categories={categories} />
         <Vacancies
@@ -52,22 +60,42 @@ const Home: FC<Props> = ({ vacanciesInfo, categories, homeData, mainData }) => {
 
 export default Home;
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const lang = context.locale!;
-  const vacanciesInfo = await getVacancyListData(lang);
-  const categories = await getCategories(lang, 'categorySlug,categoryTitle');
-  const homeData = await getHomeData(
-    lang,
-    'Testimonials.personImg,Faq_Question,partnersSlider,heroStats.heroStatIcon'
-  );
+export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
+  // const lang = context.locale!;
+  // const vacanciesInfo = await getVacancyListData(lang);
+  // const categories = await getCategories(lang, 'categorySlug,categoryTitle');
+  // const homeData = await getHomeData(
+  //   lang,
+  //   'Testimonials.personImg,Faq_Question,partnersSlider,heroStats.heroStatIcon'
+  // );
 
-  if (!lang || !vacanciesInfo || !categories || !homeData) {
+  const [header, footer, vacancies, formData, vacanciesInfo, categories, homeData] =
+    await Promise.all([
+      getHeaderData(locale!),
+      getFooterData(locale!),
+      getAllVacancies(locale!),
+      getFormData(locale!),
+      getVacancyListData(locale!),
+      getCategories(locale!, 'categorySlug,categoryTitle'),
+      getHomeData(
+        locale!,
+        'Testimonials.personImg,Faq_Question,partnersSlider,heroStats.heroStatIcon'
+      ),
+    ]);
+
+  if (!locale || !vacanciesInfo || !categories || !homeData) {
     return {
       notFound: true,
     };
   }
   return {
     props: {
+      mainData: {
+        header,
+        footer,
+        vacancies,
+        formData,
+      },
       vacanciesInfo,
       categories,
       homeData,

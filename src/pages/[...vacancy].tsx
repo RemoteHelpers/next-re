@@ -4,7 +4,16 @@ import type { GetServerSidePropsContext } from 'next';
 import type { IMainData, ICategory, IVacancy, IVacanciesInfo } from '@/shared/types';
 import { Layout } from '@/components/Layout';
 import { Vacancy } from '@/components/Vacancy';
-import { getCategoryBySlug, getVacancy, getVacancyListData, getCategories } from '@/services';
+import {
+  getCategoryBySlug,
+  getVacancy,
+  getVacancyListData,
+  getCategories,
+  getHeaderData,
+  getFooterData,
+  getAllVacancies,
+  getFormData,
+} from '@/services';
 import { VacancyNew } from '@/components/VacancyNew';
 import { titleCompanyInfo } from '@/constants';
 
@@ -38,7 +47,7 @@ const VacancyPage: FC<VacancyPageProps> = ({
         <meta property="og:description" content={metaDescr} />
       </Head>
 
-      <Layout categories={categories} mainData={mainData}>
+      <Layout categories={categories} initialData={mainData}>
         {newVersion ? (
           <VacancyNew mainData={mainData} vacancy={vacancy} category={category} />
         ) : (
@@ -59,11 +68,24 @@ export default VacancyPage;
 export const getServerSideProps = async ({ params, locale }: GetServerSidePropsContext) => {
   const [categorySlug, vacancySlug] = params?.vacancy!;
   /* queries for layout */
-  const categories = await getCategories(locale!);
+  // const categories = await getCategories(locale!);
   /* queries for vacancy */
-  const vacancy = await getVacancy(locale!, vacancySlug);
-  const vacanciesInfo = await getVacancyListData(locale!);
-  const category = await getCategoryBySlug(locale!, categorySlug);
+  // const vacancy = await getVacancy(locale!, vacancySlug);
+  // const vacanciesInfo = await getVacancyListData(locale!);
+  // const category = await getCategoryBySlug(locale!, categorySlug);
+
+  const [header, footer, vacancies, formData, categories, vacancy, vacanciesInfo, category] =
+    await Promise.all([
+      getHeaderData(locale!),
+      getFooterData(locale!),
+      getAllVacancies(locale!),
+      getFormData(locale!),
+      getCategories(locale!),
+      getVacancy(locale!, vacancySlug),
+      getVacancyListData(locale!),
+      getCategoryBySlug(locale!, categorySlug),
+    ]);
+
   if (
     !locale ||
     !categorySlug ||
@@ -78,6 +100,12 @@ export const getServerSideProps = async ({ params, locale }: GetServerSidePropsC
 
   return {
     props: {
+      mainData: {
+        header,
+        footer,
+        vacancies,
+        formData,
+      },
       categories,
       vacancy,
       vacanciesInfo,

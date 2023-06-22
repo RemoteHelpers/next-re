@@ -2,7 +2,15 @@ import { FC, useCallback } from 'react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import type { IMainData, IVacanciesInfo, IVacancyPageData, ICategory } from '@/shared/types';
-import { getCategories, getVacancyListData, getVacancyPageData } from '@/services';
+import {
+  getAllVacancies,
+  getCategories,
+  getFooterData,
+  getFormData,
+  getHeaderData,
+  getVacancyListData,
+  getVacancyPageData,
+} from '@/services';
 import { Layout } from '@/components/Layout';
 import { Vacancies } from '@/components/Vacancies';
 import { VacanciesHero } from '@/components/Vacancies/components/VacanciesHero';
@@ -30,7 +38,7 @@ const VacanciesPage: FC<Props> = ({ vacanciesInfo, vacancyPageData, categories, 
         <meta property="og:title" content={metaTitle()} />
       </Head>
 
-      <Layout categories={categories} mainData={mainData}>
+      <Layout categories={categories} initialData={mainData}>
         <VacanciesHero vacancyPageData={vacancyPageData} />
         <Vacancies
           vacanciesInfo={vacanciesInfo}
@@ -46,11 +54,29 @@ const VacanciesPage: FC<Props> = ({ vacanciesInfo, vacancyPageData, categories, 
 export default VacanciesPage;
 
 export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
-  const vacanciesInfo = await getVacancyListData(locale!);
-  const vacancyPageData = await getVacancyPageData(locale!);
-  const categories = await getCategories(locale!);
+  // const vacanciesInfo = await getVacancyListData(locale!);
+  // const vacancyPageData = await getVacancyPageData(locale!);
+  // const categories = await getCategories(locale!);
+
+  const [header, footer, vacancies, formData, vacanciesInfo, vacancyPageData, categories] =
+    await Promise.all([
+      getHeaderData(locale!),
+      getFooterData(locale!),
+      getAllVacancies(locale!),
+      getFormData(locale!),
+      getVacancyListData(locale!),
+      getVacancyPageData(locale!),
+      getCategories(locale!),
+    ]);
+
   return {
     props: {
+      mainData: {
+        header,
+        footer,
+        vacancies,
+        formData,
+      },
       vacanciesInfo,
       vacancyPageData,
       categories,

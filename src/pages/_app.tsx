@@ -18,14 +18,14 @@ import getDataByLocale from '@/shared/functions/mainDataGetter';
 
 function App({ Component, pageProps, initialData }: AppProps & { initialData: IMainData }) {
   const locale = (useRouter().locale || 'en') as LocalesLiteral;
-  const [mainData, setMainData] = useState<IMainData>(initialData);
-  useEffect(() => {
-    getDataByLocale(locale, initialData).then(data => setMainData(data));
-  }, [locale]);
-
   const appMeta = appMetadata[locale];
-
-  const props = { ...pageProps, mainData };
+  const [navURL, setNavURL] = useState<string>('');
+  // const [mainData, setMainData] = useState<IMainData>(initialData);
+  // useEffect(() => {
+  //   getDataByLocale(locale, initialData).then(data => setMainData(data));
+  // }, [locale]);
+  // const props = { ...pageProps, mainData };
+  const props = { ...pageProps, navUrlState: { navURL, setNavURL } };
 
   return (
     <>
@@ -48,21 +48,21 @@ function App({ Component, pageProps, initialData }: AppProps & { initialData: IM
   );
 }
 
-App.getInitialProps = async ({ locale }: NextPageContext) => {
-  const localeProvider = locale || 'ru';
-  const headerData: IHeader = await getHeaderData(localeProvider);
-  const footerData: IFooterData = await getFooterData(localeProvider);
-  const vacanciesData: IVacancy[] = await getAllVacancies(localeProvider);
-  const formData: IFormData = await getFormData(localeProvider);
+// App.getInitialProps = async ({ locale }: NextPageContext) => {
+//   const localeProvider = locale || 'ru';
+//   const headerData: IHeader = await getHeaderData(localeProvider);
+//   const footerData: IFooterData = await getFooterData(localeProvider);
+//   const vacanciesData: IVacancy[] = await getAllVacancies(localeProvider);
+//   const formData: IFormData = await getFormData(localeProvider);
 
-  return {
-    initialData: {
-      header: headerData,
-      footer: footerData,
-      vacancies: vacanciesData,
-      formData: formData,
-    },
-  };
-};
+//   return {
+//     initialData: {
+//       header: headerData,
+//       footer: footerData,
+//       vacancies: vacanciesData,
+//       formData: formData,
+//     },
+//   };
+// };
 
 export default App;
