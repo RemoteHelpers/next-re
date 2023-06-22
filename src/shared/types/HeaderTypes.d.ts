@@ -1,3 +1,5 @@
+import type { IImageData } from './CommonTypes';
+
 export interface ILanguage {
   id: number;
   locale: string;
@@ -25,9 +27,9 @@ interface ILocalization {
 }
 
 export interface IHeader extends ILocalization {
-  videoCat: any;
-  vacancyCat: any;
-  mainCat: any;
+  videoCat: IImageData;
+  vacancyCat: IImageData;
+  mainCat: IImageData;
   menu: IMenu[];
   localizations: { data: { id: number; attributes: ILocalization }[] };
 }

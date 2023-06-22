@@ -19,10 +19,13 @@ type Props = {
 };
 
 const Home: FC<Props> = ({ vacanciesInfo, categories, homeData, mainData }) => {
+  console.log('mainData', mainData);
   const formRef = useRef<HTMLElement>(null);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
+
+  if (!mainData) return <></>;
 
   return (
     <>

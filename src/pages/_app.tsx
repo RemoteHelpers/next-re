@@ -1,7 +1,8 @@
-import type { AppProps } from 'next/app';
-import type { GetServerSidePropsContext, NextPageContext } from 'next';
 import Head from 'next/head';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import type { AppProps } from 'next/app';
+import type { NextPageContext } from 'next';
 import '@/shared/styles/globals.scss';
 import { appMetadata } from '@/api/metadata';
 import { getAllVacancies, getFooterData, getFormData, getHeaderData } from '@/services';
@@ -13,12 +14,18 @@ import type {
   IFormData,
   IMainData,
 } from '@/shared/types';
+import getDataByLocale from '@/shared/functions/mainDataGetter';
 
 function App({ Component, pageProps, initialData }: AppProps & { initialData: IMainData }) {
-  const { locale } = useRouter();
-  const appMeta = appMetadata[(locale as LocalesLiteral) || 'en'];
+  const locale = (useRouter().locale || 'en') as LocalesLiteral;
+  const [mainData, setMainData] = useState<IMainData>(initialData);
+  useEffect(() => {
+    getDataByLocale(locale, initialData).then(data => setMainData(data));
+  }, [locale]);
 
-  const props = { ...pageProps, mainData: initialData };
+  const appMeta = appMetadata[locale];
+
+  const props = { ...pageProps, mainData };
 
   return (
     <>
@@ -42,9 +49,6 @@ function App({ Component, pageProps, initialData }: AppProps & { initialData: IM
 }
 
 App.getInitialProps = async ({ locale }: NextPageContext) => {
-  // App.getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
-  // const locale = defaultLocale ? defaultLocale : 'en';
-  // const fullUrl = req ? `${req.headers.host}${req.url}` : 'NO URL';
   const localeProvider = locale || 'ru';
   const headerData: IHeader = await getHeaderData(localeProvider);
   const footerData: IFooterData = await getFooterData(localeProvider);
