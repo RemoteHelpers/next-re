@@ -14,7 +14,7 @@ import { Layout } from '@/components/Layout';
 import { titleCompanyInfo } from '@/constants';
 
 type Props = { navUrlState: INavUrlState };
-const notFoundPage: FC<Props> = ({}) => {
+const notFoundPage: FC<Props> = ({ navUrlState }) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [notFound, setNotFound] = useState<INotFoundData>();
   const [initialData, setInitialLayoutData] = useState<IInitialData>();
@@ -42,8 +42,8 @@ const notFoundPage: FC<Props> = ({}) => {
       </Head>
 
       {initialData && (
-        <Layout initialData={initialData} categories={categories}>
-          <Custom404 notFoundProps={notFound} />
+        <Layout data={{ ...initialData, ...navUrlState }} categories={categories}>
+          <Custom404 notFoundProps={{ ...(notFound as INotFoundData), ...navUrlState }} />
         </Layout>
       )}
     </>

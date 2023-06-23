@@ -102,6 +102,7 @@ export const Vacancy: FC<Props> = ({ vacancy, vacanciesInfo, category, mainData 
               if (condition) {
                 return (
                   <VacancyItem
+                    setNavURL={mainData.setNavURL}
                     key={vacancy.id}
                     attributes={vacancy.attributes}
                     vacanciesInfo={vacanciesInfo}

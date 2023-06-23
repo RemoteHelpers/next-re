@@ -11,6 +11,6 @@ export { getCategories, getCategoryBySlug } from './CategoryService';
 export { getFormData } from './FormDataService';
 export { getContactData } from './ContactsDataService';
 export { getVideointerviewData } from './VideointerviewService';
-export { getThankyouData } from './ThankyouService';
+export { getThankYouData } from './ThankyouService';
 export { getNotFoundData } from './NotFoundService';
 export { getAboutData } from './AboutService';

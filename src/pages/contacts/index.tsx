@@ -11,14 +11,28 @@ import {
   getAllVacancies,
   getFormData,
 } from '@/services';
-import type { IMainData, ICategory, IContacts } from '@/shared/types';
+import type {
+  IMainData,
+  ICategory,
+  IContacts,
+  IFormData,
+  INavUrlState,
+  IInitialData,
+} from '@/shared/types';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
 
-type Props = { categories: ICategory[]; contacts: IContacts; mainData: IMainData };
-const ContactsPage: FC<Props> = ({ categories, contacts, mainData }) => {
-  const { header, formData } = mainData;
+type Props = {
+  categories: ICategory[];
+  contacts: IContacts;
+  initialData: IInitialData;
+  formData: IFormData;
+  navUrlState: INavUrlState;
+};
+const ContactsPage: FC<Props> = ({ categories, contacts, initialData, formData, navUrlState }) => {
+  const { header } = initialData;
   const metaTitle = useCallback(() => getPageTitle(header, 'contacts'), [header]);
+
   return (
     <>
       <Head>
@@ -26,7 +40,7 @@ const ContactsPage: FC<Props> = ({ categories, contacts, mainData }) => {
         <meta property="og:title" content={metaTitle()} />
       </Head>
 
-      <Layout categories={categories} initialData={mainData}>
+      <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>
         <Contacts contactsData={contacts} header={header} formData={formData} />
       </Layout>
     </>
@@ -49,12 +63,12 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) 
 
   return {
     props: {
-      mainData: {
+      initialData: {
         header,
         footer,
         vacancies,
-        formData,
       },
+      formData,
       categories,
       contacts,
     },

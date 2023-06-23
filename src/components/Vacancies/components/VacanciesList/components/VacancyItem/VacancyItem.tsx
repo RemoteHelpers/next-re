@@ -1,20 +1,19 @@
-import { FC, useCallback, useContext } from 'react';
-import s from './VacancyItem.module.scss';
-import { IVacanciesInfo, IVacancyAttributes } from '@/shared/types/VacanciesTypes';
-import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
+import { FC, useCallback } from 'react';
 import Link from 'next/link';
-import { GlobalContext } from '@/context';
+import s from './VacancyItem.module.scss';
+import type { IVacanciesInfo, IVacancyAttributes } from '@/shared/types';
+import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 
 type Props = {
   attributes: IVacancyAttributes;
   vacanciesInfo: IVacanciesInfo;
   category?: string;
+  setNavURL: (string: string) => void;
 };
 
-export const VacancyItem: FC<Props> = ({ attributes, vacanciesInfo, category }) => {
+export const VacancyItem: FC<Props> = ({ attributes, vacanciesInfo, category, setNavURL }) => {
   const { isHot, cardDescription, title, categories, vacancySlug } = attributes;
-  const { setNavURL } = useContext(GlobalContext);
 
   const getPathToVacancy = useCallback((): string => {
     if (category) return `/${category}/${vacancySlug}`;

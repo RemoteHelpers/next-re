@@ -1,15 +1,12 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
-import type { ICategoryAttributes } from '@/shared/types/CategoriesTypes';
-import type { IAboutData } from '@/shared/types/AboutTypes';
+import type { IAboutData, ICategoryAttributes, INavUrlState } from '@/shared/types';
 import s from './SpecializationCard.module.scss';
 import { SpecializationsIcon } from '@/shared/components/IconComponents/Specializations';
-import { GlobalContext } from '@/context';
 
-type Props = { category: ICategoryAttributes; about: IAboutData };
-export const SpecializationCard: FC<Props> = ({ category, about }) => {
+type Props = { category: ICategoryAttributes; about: IAboutData; navUrlState: INavUrlState };
+export const SpecializationCard: FC<Props> = ({ category, about, navUrlState: { setNavURL } }) => {
   const { categorySlug, categoryTitle, shortDescription } = category;
-  const { setNavURL } = useContext(GlobalContext);
 
   return (
     <>

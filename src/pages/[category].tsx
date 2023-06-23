@@ -1,7 +1,14 @@
 import { FC, useCallback } from 'react';
 import Head from 'next/head';
 import type { GetServerSidePropsContext } from 'next';
-import type { IMainData, IVacanciesInfo, ICategory } from '@/shared/types';
+import type {
+  IMainData,
+  IVacanciesInfo,
+  ICategory,
+  IFormData,
+  INavUrlState,
+  IInitialData,
+} from '@/shared/types';
 import {
   getAllVacancies,
   getCategories,
@@ -20,13 +27,22 @@ interface CategoryPageProps {
   category: ICategory;
   categories: ICategory[];
   vacanciesInfo: IVacanciesInfo;
-  mainData: IMainData;
+  initialData: IInitialData;
+  formData: IFormData;
+  navUrlState: INavUrlState;
 }
 
-const CategoryPage: FC<CategoryPageProps> = ({ category, categories, vacanciesInfo, mainData }) => {
+const CategoryPage: FC<CategoryPageProps> = ({
+  category,
+  categories,
+  vacanciesInfo,
+  initialData,
+  formData,
+  navUrlState,
+}) => {
   const metaTitle = useCallback(() => {
     return (
-      getPageTitle(mainData.header, 'vacancies') +
+      getPageTitle(initialData.header, 'vacancies') +
       ' - ' +
       category.attributes.categoryTitle +
       titleCompanyInfo
@@ -39,8 +55,12 @@ const CategoryPage: FC<CategoryPageProps> = ({ category, categories, vacanciesIn
         <meta name="og:title" content={metaTitle()} />
       </Head>
 
-      <Layout initialData={mainData} categories={categories}>
-        <Category mainData={mainData} category={category} vacanciesInfo={vacanciesInfo} />
+      <Layout data={{ ...initialData, ...navUrlState }} categories={categories}>
+        <Category
+          mainData={{ ...initialData, formData, ...navUrlState }}
+          category={category}
+          vacanciesInfo={vacanciesInfo}
+        />
       </Layout>
     </>
   );
@@ -69,12 +89,12 @@ export const getServerSideProps = async ({ locale, params }: GetServerSidePropsC
 
   return {
     props: {
-      mainData: {
+      initialData: {
         header,
         footer,
         vacancies,
-        formData,
       },
+      formData,
       category,
       categories,
       vacanciesInfo,

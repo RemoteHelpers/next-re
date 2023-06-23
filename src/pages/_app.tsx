@@ -1,30 +1,17 @@
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';
 import type { NextPageContext } from 'next';
 import '@/shared/styles/globals.scss';
 import { appMetadata } from '@/api/metadata';
-import { getAllVacancies, getFooterData, getFormData, getHeaderData } from '@/services';
-import type {
-  LocalesLiteral,
-  IHeader,
-  IFooterData,
-  IVacancy,
-  IFormData,
-  IMainData,
-} from '@/shared/types';
-import getDataByLocale from '@/shared/functions/mainDataGetter';
+import type { LocalesLiteral } from '@/shared/types';
+// import getDataByLocale from '@/shared/functions/mainDataGetter';
 
-function App({ Component, pageProps, initialData }: AppProps & { initialData: IMainData }) {
-  const locale = (useRouter().locale || 'en') as LocalesLiteral;
-  const appMeta = appMetadata[locale];
+function App({ Component, pageProps }: AppProps) {
+  // const locale = (useRouter().locale || 'en') as LocalesLiteral;
+  const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
   const [navURL, setNavURL] = useState<string>('');
-  // const [mainData, setMainData] = useState<IMainData>(initialData);
-  // useEffect(() => {
-  //   getDataByLocale(locale, initialData).then(data => setMainData(data));
-  // }, [locale]);
-  // const props = { ...pageProps, mainData };
   const props = { ...pageProps, navUrlState: { navURL, setNavURL } };
 
   return (
@@ -47,22 +34,5 @@ function App({ Component, pageProps, initialData }: AppProps & { initialData: IM
     </>
   );
 }
-
-// App.getInitialProps = async ({ locale }: NextPageContext) => {
-//   const localeProvider = locale || 'ru';
-//   const headerData: IHeader = await getHeaderData(localeProvider);
-//   const footerData: IFooterData = await getFooterData(localeProvider);
-//   const vacanciesData: IVacancy[] = await getAllVacancies(localeProvider);
-//   const formData: IFormData = await getFormData(localeProvider);
-
-//   return {
-//     initialData: {
-//       header: headerData,
-//       footer: footerData,
-//       vacancies: vacanciesData,
-//       formData: formData,
-//     },
-//   };
-// };
 
 export default App;

@@ -11,7 +11,7 @@ interface INotFoundAttr {
   updatedAt: Date;
 }
 
-export interface INotFoundData extends NotFoundAttr {
-  localizations: { data: { id: number; attributes: NotFoundAttr }[] };
+export interface INotFoundData extends INotFoundAttr {
+  localizations: { data: { id: number; attributes: INotFoundAttr }[] };
   notFoundCat: { data: IImage[] };
 }

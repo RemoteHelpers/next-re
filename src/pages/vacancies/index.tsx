@@ -1,7 +1,15 @@
 import { FC, useCallback } from 'react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import type { IMainData, IVacanciesInfo, IVacancyPageData, ICategory } from '@/shared/types';
+import type {
+  IMainData,
+  IVacanciesInfo,
+  IVacancyPageData,
+  ICategory,
+  IFormData,
+  INavUrlState,
+  IInitialData,
+} from '@/shared/types';
 import {
   getAllVacancies,
   getCategories,
@@ -22,13 +30,22 @@ type Props = {
   vacanciesInfo: IVacanciesInfo;
   categories: ICategory[];
   vacancyPageData: IVacancyPageData;
-  mainData: IMainData;
+  initialData: IInitialData;
+  formData: IFormData;
+  navUrlState: INavUrlState;
 };
 
-const VacanciesPage: FC<Props> = ({ vacanciesInfo, vacancyPageData, categories, mainData }) => {
+const VacanciesPage: FC<Props> = ({
+  vacanciesInfo,
+  vacancyPageData,
+  categories,
+  initialData,
+  formData,
+  navUrlState,
+}) => {
   const metaTitle = useCallback(
-    () => getPageTitle(mainData.header, 'vacancies') + titleCompanyInfo,
-    [mainData.header]
+    (): string => getPageTitle(initialData.header, 'vacancies') + titleCompanyInfo,
+    [initialData.header]
   );
 
   return (
@@ -38,14 +55,15 @@ const VacanciesPage: FC<Props> = ({ vacanciesInfo, vacancyPageData, categories, 
         <meta property="og:title" content={metaTitle()} />
       </Head>
 
-      <Layout categories={categories} initialData={mainData}>
+      <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>
         <VacanciesHero vacancyPageData={vacancyPageData} />
         <Vacancies
           vacanciesInfo={vacanciesInfo}
           categories={categories}
-          vacancies={mainData.vacancies}
+          vacancies={initialData.vacancies}
+          navUrlState={navUrlState}
         />
-        <VacanciesForm mainData={mainData} />
+        <VacanciesForm formData={formData} header={initialData.header} />
       </Layout>
     </>
   );
@@ -57,7 +75,6 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) 
   // const vacanciesInfo = await getVacancyListData(locale!);
   // const vacancyPageData = await getVacancyPageData(locale!);
   // const categories = await getCategories(locale!);
-
   const [header, footer, vacancies, formData, vacanciesInfo, vacancyPageData, categories] =
     await Promise.all([
       getHeaderData(locale!),
@@ -71,12 +88,12 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) 
 
   return {
     props: {
-      mainData: {
+      initialData: {
         header,
         footer,
         vacancies,
-        formData,
       },
+      formData,
       vacanciesInfo,
       vacancyPageData,
       categories,

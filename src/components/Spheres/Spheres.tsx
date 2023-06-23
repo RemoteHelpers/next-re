@@ -1,14 +1,15 @@
 import type { FC } from 'react';
 import s from './Spheres.module.scss';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
+import type { INavUrlState, ICategory } from '@/shared/types';
 import { Sphere } from './components/Sphere';
 
 interface SpheresProps {
   title: string;
   categories: ICategory[];
+  navUrlState: INavUrlState;
 }
 
-export const Spheres: FC<SpheresProps> = ({ title, categories }) => {
+export const Spheres: FC<SpheresProps> = ({ title, categories, navUrlState }) => {
   return (
     <section className={s.spheres}>
       <div className={s.container}>
@@ -23,6 +24,7 @@ export const Spheres: FC<SpheresProps> = ({ title, categories }) => {
                 key={cat.id}
                 categorySlug={cat.attributes.categorySlug}
                 categoryTitle={cat.attributes.categoryTitle}
+                navUrlState={navUrlState}
               />
             );
           })}

@@ -40,15 +40,6 @@ export const VacanciesPagination: FC<Props> = ({
   const navToPage = (pageNumber: paginationItem): void => {
     setCurrentPage(+pageNumber);
     titleRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
-    // if (titleRef.current?.scrollIntoView) {
-    //   titleRef.current?.scrollIntoView({ behavior: 'smooth' });
-    // } else {
-    //   const titleRect = titleRef.current?.getBoundingClientRect()!;
-    //   const absoluteTitleTop = titleRect.top + window.pageYOffset;
-    //   console.log('absoluteTitleTop', absoluteTitleTop);
-    //   if (window.scrollTo) window.scrollTo({ top: absoluteTitleTop, behavior: 'smooth' });
-    //   else window.scroll(0, absoluteTitleTop);
-    // }
   };
 
   return (

@@ -1,15 +1,16 @@
-import styles from './Custom404.module.scss';
-import Link from 'next/link';
+import { FC } from 'react';
 import { useRouter } from 'next/router';
-import { PhotoAPI } from '@/constants';
 import Image from 'next/image';
-import { useContext } from 'react';
-import { GlobalContext } from '@/context';
+import Link from 'next/link';
+import styles from './Custom404.module.scss';
+import type { INavUrlState, INotFoundData } from '@/shared/types';
+import { PhotoAPI } from '@/constants';
 
-const Custom404 = ({ notFoundProps }: any) => {
+type Props = { notFoundProps: INotFoundData & INavUrlState };
+const Custom404: FC<Props> = ({ notFoundProps }) => {
   if (!notFoundProps) return <></>;
   const { locale } = useRouter();
-  const { setNavURL } = useContext(GlobalContext);
+  const { setNavURL } = notFoundProps;
 
   return (
     <section className={styles.container}>

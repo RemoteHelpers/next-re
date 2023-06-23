@@ -2,7 +2,7 @@ import { FC, useEffect, useState, ReactElement, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import s from './VacanciesList.module.scss';
 import type { PaginationInfo } from '../../../Vacancies/Vacancies';
-import type { IVacanciesInfo, IVacancy, IVacancyKeywordTag } from '@/shared/types/VacanciesTypes';
+import type { INavUrlState, IVacanciesInfo, IVacancy, IVacancyKeywordTag } from '@/shared/types';
 import { VacancyItem } from './components/VacancyItem';
 import { Oops } from './components/Oops/Oops';
 
@@ -13,6 +13,7 @@ type Props = {
   paginationConfig: PaginationInfo;
   isHot: boolean;
   vacancies: IVacancy[];
+  navUrlState: INavUrlState;
 };
 
 export const VacanciesList: FC<Props> = ({
@@ -22,6 +23,7 @@ export const VacanciesList: FC<Props> = ({
   paginationConfig,
   isHot,
   vacancies,
+  navUrlState,
 }) => {
   const [vacanciesList, setVacanciesList] = useState(vacancies);
   const { vacansPerPage, currentPage, setTotalPages } = paginationConfig;
@@ -118,6 +120,7 @@ export const VacanciesList: FC<Props> = ({
                 key={createdAt.toString()}
                 attributes={attributes}
                 vacanciesInfo={vacanciesInfo}
+                setNavURL={navUrlState.setNavURL}
               />
             );
           })

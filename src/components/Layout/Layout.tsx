@@ -4,20 +4,20 @@ import { Main } from './components/Main';
 import { Footer } from './components/Footer';
 import s from './Layout.module.scss';
 import { Loader } from '../Loader';
-import type { ILayoutData, IInitialData, ICategory } from '@/shared/types';
+import type { ILayoutData, IInitialData, ICategory, INavUrlState } from '@/shared/types';
 import { useRouter } from 'next/router';
 
 type Props = {
   children: ReactNode;
   categories: ICategory[];
-  initialData: IInitialData;
+  data: IInitialData & INavUrlState;
 };
 
-export const Layout: FC<Props> = ({ children, categories, initialData }) => {
-  const { locale, asPath } = useRouter();
-  const [navURL, setNavURL] = useState('');
+export const Layout: FC<Props> = ({ children, categories, data }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const layoutData: ILayoutData = { ...initialData, navURL, setNavURL, setIsLoading };
+  const { locale, asPath } = useRouter();
+  const { navURL, setNavURL } = data;
+  const layoutData: ILayoutData = { ...data, setIsLoading };
 
   useEffect(() => {
     if (document) {

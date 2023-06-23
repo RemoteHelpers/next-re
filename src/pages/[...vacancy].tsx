@@ -1,7 +1,15 @@
 import { FC } from 'react';
 import Head from 'next/head';
 import type { GetServerSidePropsContext } from 'next';
-import type { IMainData, ICategory, IVacancy, IVacanciesInfo } from '@/shared/types';
+import type {
+  IMainData,
+  ICategory,
+  IVacancy,
+  IVacanciesInfo,
+  IInitialData,
+  IFormData,
+  INavUrlState,
+} from '@/shared/types';
 import { Layout } from '@/components/Layout';
 import { Vacancy } from '@/components/Vacancy';
 import {
@@ -22,7 +30,9 @@ interface VacancyPageProps {
   vacancy: IVacancy;
   vacanciesInfo: IVacanciesInfo;
   category: ICategory;
-  mainData: IMainData;
+  initialData: IInitialData;
+  formData: IFormData;
+  navUrlState: INavUrlState;
 }
 
 const VacancyPage: FC<VacancyPageProps> = ({
@@ -30,9 +40,12 @@ const VacancyPage: FC<VacancyPageProps> = ({
   vacancy,
   vacanciesInfo,
   category,
-  mainData,
+  initialData,
+  formData,
+  navUrlState,
 }: VacancyPageProps) => {
   if (!vacancy.attributes) return <></>;
+  const mainData: IMainData = { ...initialData, formData, ...navUrlState };
   const { newVersion, seoData, title, cardDescription } = vacancy.attributes;
 
   const metaTitle = seoData ? seoData.seoTitle : title + titleCompanyInfo;
@@ -47,7 +60,7 @@ const VacancyPage: FC<VacancyPageProps> = ({
         <meta property="og:description" content={metaDescr} />
       </Head>
 
-      <Layout categories={categories} initialData={mainData}>
+      <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>
         {newVersion ? (
           <VacancyNew mainData={mainData} vacancy={vacancy} category={category} />
         ) : (
@@ -73,7 +86,6 @@ export const getServerSideProps = async ({ params, locale }: GetServerSidePropsC
   // const vacancy = await getVacancy(locale!, vacancySlug);
   // const vacanciesInfo = await getVacancyListData(locale!);
   // const category = await getCategoryBySlug(locale!, categorySlug);
-
   const [header, footer, vacancies, formData, categories, vacancy, vacanciesInfo, category] =
     await Promise.all([
       getHeaderData(locale!),
@@ -100,12 +112,12 @@ export const getServerSideProps = async ({ params, locale }: GetServerSidePropsC
 
   return {
     props: {
-      mainData: {
+      initialData: {
         header,
         footer,
         vacancies,
-        formData,
       },
+      formData,
       categories,
       vacancy,
       vacanciesInfo,

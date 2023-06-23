@@ -15,7 +15,7 @@ export const Category: FC<Props> = ({ category, vacanciesInfo, mainData }) => {
   if (!category.attributes) return <></>;
 
   const { categoryTitle, categorySlug, description, vacancies } = category.attributes;
-  const { header, formData } = mainData;
+  const { header, formData, setNavURL } = mainData;
   const { menu, categoryButton } = header;
   const breadcrumbsItems = useMemo((): ItemType[] => {
     if (!menu) return [];
@@ -62,6 +62,7 @@ export const Category: FC<Props> = ({ category, vacanciesInfo, mainData }) => {
                       attributes={vacancy.attributes}
                       vacanciesInfo={vacanciesInfo}
                       category={categorySlug}
+                      setNavURL={setNavURL}
                     />
                   )
               )}
@@ -74,6 +75,7 @@ export const Category: FC<Props> = ({ category, vacanciesInfo, mainData }) => {
                       attributes={vacancy.attributes}
                       vacanciesInfo={vacanciesInfo}
                       category={categorySlug}
+                      setNavURL={setNavURL}
                     />
                   )
               )}

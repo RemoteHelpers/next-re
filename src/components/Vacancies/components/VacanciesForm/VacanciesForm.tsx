@@ -3,14 +3,10 @@ import { FC } from 'react';
 import formCat from '@/shared/images/Form/MainForm/main-cat.png';
 import s from './VacanciesForm.module.scss';
 import Image from 'next/image';
-import type { IMainData } from '@/shared/types';
+import type { IFormData, IHeader } from '@/shared/types';
 
-interface VacanciesFormProps {
-  mainData: IMainData;
-}
-
-export const VacanciesForm: FC<VacanciesFormProps> = ({ mainData }) => {
-  const { formData, header } = mainData;
+type Props = { formData: IFormData; header: IHeader };
+export const VacanciesForm: FC<Props> = ({ formData, header }) => {
   return (
     <section className={s.vacancies_form}>
       <h2 className={s.form_title}>{formData?.title}</h2>

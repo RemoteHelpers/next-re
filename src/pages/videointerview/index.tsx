@@ -13,11 +13,30 @@ import { Layout } from '@/components/Layout';
 import { VideointerviewPage } from '@/components/VideoInterview';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
-import type { ICategory, IMainData, IVideointerview } from '@/shared/types';
+import type {
+  ICategory,
+  IFormData,
+  IInitialData,
+  IMainData,
+  INavUrlState,
+  IVideointerview,
+} from '@/shared/types';
 
-type Props = { categories: ICategory[]; videoData: IVideointerview; mainData: IMainData };
-const Videointerview: FC<Props> = ({ categories, videoData, mainData }) => {
-  const { header, formData } = mainData;
+type Props = {
+  categories: ICategory[];
+  videoData: IVideointerview;
+  initialData: IInitialData;
+  formData: IFormData;
+  navUrlState: INavUrlState;
+};
+const Videointerview: FC<Props> = ({
+  categories,
+  videoData,
+  initialData,
+  formData,
+  navUrlState,
+}) => {
+  const { header } = initialData;
   const metaTitle = useCallback(
     () => getPageTitle(header, 'videointerview') + titleCompanyInfo,
     [header]
@@ -30,7 +49,7 @@ const Videointerview: FC<Props> = ({ categories, videoData, mainData }) => {
         <meta property="og:title" content={metaTitle()} />
       </Head>
 
-      <Layout categories={categories} initialData={mainData}>
+      <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>
         <VideointerviewPage videoData={videoData} header={header} formData={formData} />
       </Layout>
     </>
@@ -53,12 +72,12 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) 
 
   return {
     props: {
-      mainData: {
+      initialData: {
         header,
         footer,
         vacancies,
-        formData,
       },
+      formData,
       categories,
       videoData,
     },

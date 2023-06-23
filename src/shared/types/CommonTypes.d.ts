@@ -10,14 +10,15 @@ export interface IInitialData {
   vacancies: IVacancy[];
 }
 
-export interface IMainData extends IInitialData {
-  formData: IFormData;
-}
-
 export interface INavUrlState {
   navURL: string;
   setNavURL: (url: string) => void;
 }
+
+export interface IMainData extends IInitialData, INavUrlState {
+  formData: IFormData;
+}
+
 export interface ILayoutData extends IInitialData, INavUrlState {
   setIsLoading: (isLoading: boolean) => void;
 }

@@ -1,4 +1,4 @@
-import { FC, useCallback, useState, useContext } from 'react';
+import { FC, useCallback, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

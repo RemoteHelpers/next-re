@@ -9,13 +9,10 @@ import type { IAboutData } from '@/shared/types/AboutTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
 import { SpecializationsIcon } from '@/shared/components/IconComponents/Specializations';
 import { SpecializationCard } from './components';
+import { INavUrlState } from '@/shared/types';
 
-type Props = {
-  about: IAboutData;
-  categories: ICategory[];
-};
-
-export const Specializations: FC<Props> = ({ about, categories }) => {
+type Props = { about: IAboutData; categories: ICategory[]; navUrlState: INavUrlState };
+export const Specializations: FC<Props> = ({ about, categories, navUrlState }) => {
   return (
     <section className={s.section}>
       <div className={s.container}>
@@ -27,7 +24,7 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
             if (attributes.categorySlug === 'other') return;
             return (
               <li className={s.item} key={`item_${attributes.categorySlug}`}>
-                <SpecializationCard category={attributes} about={about} />
+                <SpecializationCard category={attributes} about={about} navUrlState={navUrlState} />
               </li>
             );
           })}
@@ -51,7 +48,11 @@ export const Specializations: FC<Props> = ({ about, categories }) => {
             return (
               <SwiperSlide className={s.slide} key={`slide_${attributes.categorySlug}`}>
                 <div className={`${s.slideContent} content`}>
-                  <SpecializationCard category={attributes} about={about} />
+                  <SpecializationCard
+                    category={attributes}
+                    about={about}
+                    navUrlState={navUrlState}
+                  />
                 </div>
               </SwiperSlide>
             );

@@ -1,6 +1,13 @@
 import { FC, useEffect, useRef } from 'react';
 import type { GetServerSidePropsContext } from 'next';
-import type { IMainData, IHomeData, ICategory, IVacanciesInfo } from '@/shared/types';
+import type {
+  IHomeData,
+  ICategory,
+  IVacanciesInfo,
+  IFormData,
+  INavUrlState,
+  IInitialData,
+} from '@/shared/types';
 import { Layout } from '@/components/Layout';
 import { Vacancies } from '@/components/Vacancies';
 import { Questions } from '@/components/Questions';
@@ -23,35 +30,42 @@ type Props = {
   vacanciesInfo: IVacanciesInfo;
   categories: ICategory[];
   homeData: IHomeData;
-  mainData: IMainData;
+  initialData: IInitialData;
+  formData: IFormData;
+  navUrlState: INavUrlState;
 };
 
-const Home: FC<Props> = ({ vacanciesInfo, categories, homeData, mainData }) => {
-  console.log('mainData', mainData);
+const Home: FC<Props> = ({
+  vacanciesInfo,
+  categories,
+  homeData,
+  initialData,
+  formData,
+  navUrlState,
+}) => {
   const formRef = useRef<HTMLElement>(null);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  if (!mainData) return <></>;
-
   return (
     <>
-      <Layout categories={categories} initialData={mainData}>
+      <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>
         <Hero data={homeData} formRef={formRef} />
-        <Spheres title={homeData.spheresTitle} categories={categories} />
+        <Spheres title={homeData.spheresTitle} categories={categories} navUrlState={navUrlState} />
         <Vacancies
+          navUrlState={navUrlState}
           vacanciesInfo={vacanciesInfo}
           categories={categories}
-          vacancies={mainData.vacancies}
+          vacancies={initialData.vacancies}
         />
         <Questions questions={homeData} />
         <Partners title={homeData.partnersTitle} slides={homeData.partnersSlider.data} />
         <Testimonials testimonials={homeData} />
         <MainForm
           formRef={formRef}
-          imageCatProps={mainData.header.mainCat?.data?.attributes?.url}
-          formData={mainData.formData}
+          imageCatProps={initialData.header.mainCat?.data?.attributes?.url}
+          formData={formData}
         />
       </Layout>
     </>
@@ -68,7 +82,6 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) 
   //   lang,
   //   'Testimonials.personImg,Faq_Question,partnersSlider,heroStats.heroStatIcon'
   // );
-
   const [header, footer, vacancies, formData, vacanciesInfo, categories, homeData] =
     await Promise.all([
       getHeaderData(locale!),
@@ -90,12 +103,12 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) 
   }
   return {
     props: {
-      mainData: {
+      initialData: {
         header,
         footer,
         vacancies,
-        formData,
       },
+      formData,
       vacanciesInfo,
       categories,
       homeData,

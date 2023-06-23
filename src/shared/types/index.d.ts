@@ -1,11 +1,11 @@
 export type {
-  IMainData,
   IInitialData,
   ILayoutData,
   INavUrlState,
   LocalesLiteral,
   IImage,
   IImageData,
+  IMainData,
 } from './CommonTypes';
 export type { IAboutData, IAboutLocalization } from './AboutTypes';
 export type { ICategory, ICategoryAttributes } from './CategoriesTypes';
@@ -35,3 +35,4 @@ export type {
 } from './VacanciesTypes';
 export type { IVideointerview } from './VideointerviewTypes';
 export type { INotFoundData } from './NotFoundTypes';
+export type { IThankYouData } from './ThankYouTypes';
