@@ -1,14 +1,17 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import s from './Vacancies.module.scss';
+import type { INavUrlState, IVacanciesInfo, IVacancy, ICategory } from '@/shared/types';
 import { VacanciesFilters } from './components/VacanciesFilters';
 import { VacanciesList } from './components/VacanciesList';
 import { VacanciesPagination } from './components/VacanciesPagination';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IVacanciesInfo, IVacancy } from '@/shared/types/VacanciesTypes';
-import { GlobalContext } from '@/context';
 
-type Props = { vacanciesInfo: IVacanciesInfo; categories: ICategory[]; };
+type Props = {
+  vacanciesInfo: IVacanciesInfo;
+  categories: ICategory[];
+  vacancies: IVacancy[];
+  navUrlState: INavUrlState;
+};
 export type PaginationInfo = {
   vacansPerPage: number;
   totalPages: number;
@@ -17,10 +20,13 @@ export type PaginationInfo = {
   setCurrentPage: (pageNumber: number) => void;
 };
 
-export const Vacancies: React.FC<Props> = ({ vacanciesInfo, categories }) => {
+export const Vacancies: React.FC<Props> = ({
+  vacanciesInfo,
+  categories,
+  vacancies,
+  navUrlState,
+}) => {
   const { locale, asPath } = useRouter();
-  const { vacancies } = useContext(GlobalContext);
-
   const initialHotState = asPath === '/' ? true : false;
   const [isHot, setIsHot] = useState<boolean>(initialHotState);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -86,6 +92,8 @@ export const Vacancies: React.FC<Props> = ({ vacanciesInfo, categories }) => {
           searchQuery={searchQuery}
           paginationConfig={paginationConfig}
           currentCategory={currentCategory}
+          vacancies={vacancies}
+          navUrlState={navUrlState}
         />
 
         {totalPages > 1 && (

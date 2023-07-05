@@ -1,5 +1,4 @@
-import { ICategory } from './CategoriesTypes';
-import { IVacancy } from './VacanciesTypes';
+import type { IImageData } from './CommonTypes';
 
 export interface ILanguage {
   id: number;
@@ -28,9 +27,9 @@ interface ILocalization {
 }
 
 export interface IHeader extends ILocalization {
-  videoCat: any;
-  vacancyCat: any;
-  mainCat: any;
+  videoCat: IImageData;
+  vacancyCat: IImageData;
+  mainCat: IImageData;
   menu: IMenu[];
   localizations: { data: { id: number; attributes: ILocalization }[] };
 }

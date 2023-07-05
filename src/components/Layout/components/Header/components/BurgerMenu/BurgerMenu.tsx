@@ -1,27 +1,24 @@
-import { FC, useEffect, useState, useContext } from 'react';
+import { FC, useEffect, useState } from 'react';
 import s from './BurgerMenu.module.scss';
 import Link from 'next/link';
 import type { IMenu } from '@/shared/types/HeaderTypes';
 import type { IVacancy } from '@/shared/types/VacanciesTypes';
 import type { ICategory } from '@/shared/types/CategoriesTypes';
 import { BurgerMenuIcon } from '@/shared/components/IconComponents/Header';
-import { GlobalContext } from '@/context';
+import { ILayoutData } from '@/shared/types';
 
 type MenuState = {
   isBurgerMenu: boolean;
   setIsBurgerMenu: (boolean: boolean) => void;
 };
 
-type Props = {
-  menuState: MenuState;
-  categories: ICategory[];
-};
+type Props = { menuState: MenuState; categories: ICategory[]; layoutData: ILayoutData };
 
-export const BurgerMenu: FC<Props> = ({ menuState, categories }) => {
+export const BurgerMenu: FC<Props> = ({ menuState, categories, layoutData }) => {
   const [currentTab, setCurrentTab] = useState<number>(1);
   const [currentCategory, setCurrentCategory] = useState<string>('');
   const { isBurgerMenu, setIsBurgerMenu } = menuState;
-  const { setNavURL, header, vacancies } = useContext(GlobalContext);
+  const { setNavURL, header, vacancies } = layoutData;
   const { menu, menuValue, backValue, allVacanciesValue } = header;
 
   const navToLink = (path: string): void => {

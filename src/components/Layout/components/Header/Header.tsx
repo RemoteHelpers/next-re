@@ -1,4 +1,4 @@
-import { FC, useCallback, useState, useContext } from 'react';
+import { FC, useCallback, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,19 +7,15 @@ import re_logo from './assets/re_logo.svg';
 import { BurgerMenu } from './components/BurgerMenu';
 import { SelectLang } from './components/SelectLang';
 import { DesktopMenu } from './components/DesktopMenu';
-import { GlobalContext } from '@/context';
-import type { IMenu } from '@/shared/types/HeaderTypes';
-import { ICategory } from '@/shared/types/CategoriesTypes';
+import type { ILayoutData, ICategory, IMenu } from '@/shared/types';
 
-type Props = {
-  categories: ICategory[];
-};
+type Props = { categories: ICategory[]; layoutData: ILayoutData };
 
-export const Header: FC<Props> = ({ categories }) => {
+export const Header: FC<Props> = ({ categories, layoutData }) => {
   const [isBurgerMenu, setIsBurgerMenu] = useState<boolean>(false);
   const [isDesktopMenuShown, setIsDesktopMenuShown] = useState<boolean>(false);
   const router = useRouter();
-  const { setNavURL, header } = useContext(GlobalContext);
+  const { header, setNavURL } = layoutData;
 
   const openMenu = (path: string): void => {
     if (path === 'vacancies' && !isDesktopMenuShown) setIsDesktopMenuShown(true);
@@ -57,9 +53,7 @@ export const Header: FC<Props> = ({ categories }) => {
                 return (
                   <Link
                     key={path_id}
-                    href={{
-                      pathname: `${path_id}`,
-                    }}
+                    href={`/${path_id}`}
                     className={
                       comparePath(router.pathname, path_id)
                         ? `${s.nav_item} ${s.active}`
@@ -75,7 +69,7 @@ export const Header: FC<Props> = ({ categories }) => {
               })}
             </nav>
 
-            <SelectLang isDesktopMenuShown={isDesktopMenuShown} />
+            <SelectLang isDesktopMenuShown={isDesktopMenuShown} layoutData={layoutData} />
 
             <button
               type="button"
@@ -89,12 +83,17 @@ export const Header: FC<Props> = ({ categories }) => {
           </div>
         </div>
 
-        <BurgerMenu menuState={{ isBurgerMenu, setIsBurgerMenu }} categories={categories} />
+        <BurgerMenu
+          menuState={{ isBurgerMenu, setIsBurgerMenu }}
+          categories={categories}
+          layoutData={layoutData}
+        />
       </header>
 
       <DesktopMenu
         desktopMenuState={{ isDesktopMenuShown, setIsDesktopMenuShown }}
         categories={categories}
+        layoutData={layoutData}
       />
     </>
   );

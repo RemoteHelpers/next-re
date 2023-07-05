@@ -5,11 +5,11 @@ import 'swiper/css';
 import s from './Partners.module.scss';
 import Image from 'next/image';
 import { PhotoAPI } from '@/constants';
-import type { IPartnersSlider } from '@/shared/types/HomeTypes';
+import type { IImage } from '@/shared/types';
 
 type Props = {
   title: string;
-  slides: IPartnersSlider[];
+  slides: IImage[];
 };
 
 export const Partners: FC<Props> = ({ title, slides }) => {
@@ -37,7 +37,7 @@ export const Partners: FC<Props> = ({ title, slides }) => {
             },
           }}
         >
-          {slides.map((slide: IPartnersSlider) => {
+          {slides.map((slide: IImage) => {
             return (
               <SwiperSlide className={s.slide} key={slide.id}>
                 <Image

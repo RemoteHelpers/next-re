@@ -1,40 +1,60 @@
-import { FC, useContext, useRef, useCallback } from 'react';
-import Head from 'next/head';
-import { Layout } from '@/components/Layout';
-import { getCategories } from '@/services';
+import { FC, useRef, useCallback } from 'react';
 import type { GetServerSidePropsContext } from 'next';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
-import type { IMenu } from '@/shared/types/HeaderTypes';
-import type { IAbout } from '@/shared/types/AboutTypes';
-import { getAboutData } from '@/services/AboutService';
+import Head from 'next/head';
+import type {
+  IAboutData,
+  ICategory,
+  IFormData,
+  IInitialData,
+  IMainData,
+  INavUrlState,
+} from '@/shared/types';
+import {
+  getCategories,
+  getAboutData,
+  getHeaderData,
+  getFooterData,
+  getAllVacancies,
+  getFormData,
+} from '@/services';
+import getPageTitle from '@/shared/functions/pageTitleGetter';
+import { titleCompanyInfo } from '@/constants';
+import { Layout } from '@/components/Layout';
 import { AboutUs } from '@/components/AboutUs';
-import MainForm from '@/components/MainForm/MainForm';
 import { Specializations } from '@/components/Specializations';
-import { GlobalContext } from '@/context';
+import MainForm from '@/components/MainForm/MainForm';
 
 type Props = {
   categories: ICategory[];
-  about: IAbout;
+  about: IAboutData;
+  initialData: IInitialData;
+  formData: IFormData;
+  navUrlState: INavUrlState;
 };
-
-const About: FC<Props> = ({ categories, about }) => {
+const About: FC<Props> = ({ categories, about, initialData, formData, navUrlState }) => {
   const formRef = useRef<HTMLElement>(null);
-  const { header } = useContext(GlobalContext);
-  const pageTitle = useCallback(() => {
-    return header.menu.find(({ path_id }: IMenu) => path_id === 'about')?.title!;
-  }, [header]);
+  const pageTitle = useCallback(
+    () => getPageTitle(initialData.header, 'about'),
+    [initialData.header]
+  );
 
   return (
     <>
       <Head>
-        <title>{pageTitle()}</title>
+        <title>{pageTitle() + titleCompanyInfo}</title>
         <meta name="description" content={about.WhatWeDoTitle} />
+        <meta property="og:title" content={pageTitle() + titleCompanyInfo} />
+        <meta property="og:description" content={about.WhatWeDoTitle} />
       </Head>
 
-      <Layout categories={categories}>
+      <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>
         <AboutUs about={about} pageTitle={pageTitle()} formRef={formRef} />
-        <Specializations about={about} categories={categories} />
-        <MainForm imageCatProps={header?.mainCat.data.attributes.url} formRef={formRef} />
+        <Specializations about={about} categories={categories} navUrlState={navUrlState} />
+        <MainForm
+          formData={formData}
+          imageCatProps={initialData.header?.mainCat.data.attributes.url}
+          formRef={formRef}
+        />
       </Layout>
     </>
   );
@@ -43,11 +63,26 @@ const About: FC<Props> = ({ categories, about }) => {
 export default About;
 
 export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
-  const fetchCategories: Promise<ICategory[]> = getCategories(locale!);
-  const fetchAbout: Promise<IAbout> = getAboutData(locale!);
-  const [categories, about] = await Promise.all([fetchCategories, fetchAbout]);
+  // const fetchCategories: Promise<ICategory[]> = getCategories(locale!);
+  // const fetchAbout: Promise<IAboutData> = getAboutData(locale!);
+  // const [categories, about] = await Promise.all([fetchCategories, fetchAbout]);
+  const [header, footer, vacancies, formData, categories, about] = await Promise.all([
+    getHeaderData(locale!),
+    getFooterData(locale!),
+    getAllVacancies(locale!),
+    getFormData(locale!),
+    getCategories(locale!),
+    getAboutData(locale!),
+  ]);
+
   return {
     props: {
+      initialData: {
+        header,
+        footer,
+        vacancies,
+      },
+      formData,
       categories,
       about,
     },
