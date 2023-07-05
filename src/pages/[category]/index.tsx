@@ -1,13 +1,14 @@
 import { FC, useCallback } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import type { GetServerSidePropsContext } from 'next';
 import type {
-  IMainData,
   IVacanciesInfo,
   ICategory,
   IFormData,
   INavUrlState,
   IInitialData,
+  LocalesLiteral,
 } from '@/shared/types';
 import {
   getAllVacancies,
@@ -22,6 +23,7 @@ import { Layout } from '@/components/Layout';
 import { Category } from '@/components/Category';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
+import { appMetadata } from '@/api/metadata';
 
 interface CategoryPageProps {
   category: ICategory;
@@ -40,6 +42,7 @@ const CategoryPage: FC<CategoryPageProps> = ({
   formData,
   navUrlState,
 }) => {
+  const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
   const metaTitle = useCallback(() => {
     return (
       getPageTitle(initialData.header, 'vacancies') +
@@ -48,11 +51,15 @@ const CategoryPage: FC<CategoryPageProps> = ({
       titleCompanyInfo
     );
   }, [category]);
+
   return (
     <>
       <Head>
         <title>{metaTitle()}</title>
         <meta name="og:title" content={metaTitle()} />
+
+        <meta name="description" content={appMeta.description} />
+        <meta property="og:description" content={appMeta.og.description} />
       </Head>
 
       <Layout data={{ ...initialData, ...navUrlState }} categories={categories}>
@@ -69,9 +76,6 @@ const CategoryPage: FC<CategoryPageProps> = ({
 export default CategoryPage;
 
 export const getServerSideProps = async ({ locale, params }: GetServerSidePropsContext) => {
-  // const categories = await getCategories(locale!);
-  // const category = await getCategoryBySlug(locale!, params?.category as string);
-  // const vacanciesInfo = await getVacancyListData(locale!);
   const [header, footer, vacancies, formData, categories, category, vacanciesInfo] =
     await Promise.all([
       getHeaderData(locale!),

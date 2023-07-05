@@ -1,4 +1,5 @@
 import { FC, useCallback } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { GetServerSidePropsContext } from 'next';
 import { Layout } from '@/components/Layout';
@@ -18,9 +19,11 @@ import type {
   IFormData,
   INavUrlState,
   IInitialData,
+  LocalesLiteral,
 } from '@/shared/types';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
+import { appMetadata } from '@/api/metadata';
 
 type Props = {
   categories: ICategory[];
@@ -32,12 +35,16 @@ type Props = {
 const ContactsPage: FC<Props> = ({ categories, contacts, initialData, formData, navUrlState }) => {
   const { header } = initialData;
   const metaTitle = useCallback(() => getPageTitle(header, 'contacts'), [header]);
+  const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
 
   return (
     <>
       <Head>
         <title>{metaTitle() + titleCompanyInfo}</title>
         <meta property="og:title" content={metaTitle()} />
+
+        <meta name="description" content={appMeta.description} />
+        <meta property="og:description" content={appMeta.og.description} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>

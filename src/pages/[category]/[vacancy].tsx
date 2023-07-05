@@ -25,7 +25,7 @@ import {
 import { VacancyNew } from '@/components/VacancyNew';
 import { titleCompanyInfo } from '@/constants';
 
-interface VacancyPageProps {
+type Props = {
   categories: ICategory[];
   vacancy: IVacancy;
   vacanciesInfo: IVacanciesInfo;
@@ -33,9 +33,10 @@ interface VacancyPageProps {
   initialData: IInitialData;
   formData: IFormData;
   navUrlState: INavUrlState;
-}
+};
+type Params = { category: string; vacancy: string };
 
-const VacancyPage: FC<VacancyPageProps> = ({
+const VacancyPage: FC<Props> = ({
   categories,
   vacancy,
   vacanciesInfo,
@@ -43,11 +44,9 @@ const VacancyPage: FC<VacancyPageProps> = ({
   initialData,
   formData,
   navUrlState,
-}: VacancyPageProps) => {
-  if (!vacancy.attributes) return <></>;
+}) => {
   const mainData: IMainData = { ...initialData, formData, ...navUrlState };
   const { newVersion, seoData, title, cardDescription } = vacancy.attributes;
-
   const metaTitle = seoData ? seoData.seoTitle : title + titleCompanyInfo;
   const metaDescr = seoData ? seoData.seoDescription : cardDescription;
 
@@ -79,44 +78,25 @@ const VacancyPage: FC<VacancyPageProps> = ({
 export default VacancyPage;
 
 export const getServerSideProps = async ({ params, locale }: GetServerSidePropsContext) => {
-  const [categorySlug, vacancySlug] = params?.vacancy!;
-  /* queries for layout */
-  // const categories = await getCategories(locale!);
-  /* queries for vacancy */
-  // const vacancy = await getVacancy(locale!, vacancySlug);
-  // const vacanciesInfo = await getVacancyListData(locale!);
-  // const category = await getCategoryBySlug(locale!, categorySlug);
-  const [header, footer, vacancies, formData, categories, vacancy, vacanciesInfo, category] =
-    await Promise.all([
-      getHeaderData(locale!),
-      getFooterData(locale!),
-      getAllVacancies(locale!),
-      getFormData(locale!),
-      getCategories(locale!),
-      getVacancy(locale!, vacancySlug),
-      getVacancyListData(locale!),
-      getCategoryBySlug(locale!, categorySlug),
-    ]);
+  const { category: categorySlug, vacancy: vacancySlug } = params as Params;
 
-  if (
-    !locale ||
-    !categorySlug ||
-    !vacancySlug ||
-    !categories ||
-    !vacancy ||
-    !category ||
-    !vacanciesInfo
-  ) {
-    return { notFound: true };
-  }
+  const data = await Promise.all([
+    getHeaderData(locale!),
+    getFooterData(locale!),
+    getAllVacancies(locale!),
+    getFormData(locale!),
+    getCategories(locale!),
+    getVacancy(locale!, vacancySlug),
+    getVacancyListData(locale!),
+    getCategoryBySlug(locale!, categorySlug),
+  ]);
+  const isAnyValueMissing = data.some(value => !value);
+  if (isAnyValueMissing) return { notFound: true };
+  const [header, footer, vacancies, formData, categories, vacancy, vacanciesInfo, category] = data;
 
   return {
     props: {
-      initialData: {
-        header,
-        footer,
-        vacancies,
-      },
+      initialData: { header, footer, vacancies },
       formData,
       categories,
       vacancy,
