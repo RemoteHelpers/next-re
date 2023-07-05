@@ -1,7 +1,11 @@
 // import { getAllVacancies, getFooterData, getFormData, getHeaderData } from '@/services';
 // import type { IMainData, INavUrlState } from '../types';
 
-// const getDataByLocale = async (locale: string, initialData: IMainData, navUrlState: INavUrlState) => {
+// const getDataByLocale = async (
+//   locale: string,
+//   initialData: IMainData,
+//   navUrlState: INavUrlState
+// ) => {
 //   'use server';
 //   if (locale === 'ru') return initialData;
 
@@ -16,7 +20,7 @@
 //     header,
 //     footer,
 //     vacancies,
-//     formData,
+//     // formData,
 //   };
 //   return dataByLocale;
 // };

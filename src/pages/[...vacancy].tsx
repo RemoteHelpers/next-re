@@ -44,7 +44,7 @@ const VacancyPage: FC<VacancyPageProps> = ({
   formData,
   navUrlState,
 }: VacancyPageProps) => {
-  if (!vacancy.attributes) return <></>;
+  if (!vacancy?.attributes) return <></>;
   const mainData: IMainData = { ...initialData, formData, ...navUrlState };
   const { newVersion, seoData, title, cardDescription } = vacancy.attributes;
 

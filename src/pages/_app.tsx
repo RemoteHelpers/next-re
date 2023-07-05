@@ -2,13 +2,14 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';
-import type { NextPageContext } from 'next';
 import '@/shared/styles/globals.scss';
 import { appMetadata } from '@/api/metadata';
 import type { LocalesLiteral } from '@/shared/types';
+import { getFullFooterData, getFullFormData, getFullHeaderData } from '@/services/MainDataService';
 // import getDataByLocale from '@/shared/functions/mainDataGetter';
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps, data }: AppProps & { data: any }) {
+  console.log('data', data);
   // const locale = (useRouter().locale || 'en') as LocalesLiteral;
   const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
   const [navURL, setNavURL] = useState<string>('');
@@ -34,5 +35,22 @@ function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
+
+App.getInitialProps = async () => {
+  // const [header, footer, form] = await Promise.all([
+  //   getFullHeaderData(),
+  //   getFullFooterData(),
+  //   getFullFormData(),
+  // ]);
+
+  const header = await getFullHeaderData();
+  const footer = await getFullFooterData();
+  const form = await getFullFormData();
+
+  return {
+    data: { header, footer, form },
+    // data: header,
+  };
+};
 
 export default App;
