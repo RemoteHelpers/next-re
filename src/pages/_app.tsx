@@ -1,16 +1,13 @@
-import Head from 'next/head';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import type { AppProps } from 'next/app';
+import type { LocalesLiteral } from '@/shared/types';
 import '@/shared/styles/globals.scss';
 import { appMetadata } from '@/api/metadata';
-import type { LocalesLiteral } from '@/shared/types';
 import { getFullFooterData, getFullFormData, getFullHeaderData } from '@/services/MainDataService';
-// import getDataByLocale from '@/shared/functions/mainDataGetter';
 
-function App({ Component, pageProps, data }: AppProps & { data: any }) {
-  console.log('data', data);
-  // const locale = (useRouter().locale || 'en') as LocalesLiteral;
+function App({ Component, pageProps }: AppProps) {
   const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
   const [navURL, setNavURL] = useState<string>('');
   const props = { ...pageProps, navUrlState: { navURL, setNavURL } };
@@ -18,19 +15,16 @@ function App({ Component, pageProps, data }: AppProps & { data: any }) {
   return (
     <>
       <Head>
-        <title>{appMeta.title}</title>
-        <meta name="description" content={appMeta.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href={appMeta.canonical} />
         <meta property="og:locale" content={appMeta.og.locale} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={appMeta.og.title} />
-        <meta property="og:description" content={appMeta.og.description} />
         <meta property="og:url" content={appMeta.og.url} />
         <meta property="og:site_name" content={appMeta.og.siteName} />
-        <meta property="og:image" content={appMeta.og.image} />
+        <meta property="og:image" content="/logo.jpg" />
       </Head>
+
       <Component {...props} />
     </>
   );

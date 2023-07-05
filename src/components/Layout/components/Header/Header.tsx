@@ -53,9 +53,7 @@ export const Header: FC<Props> = ({ categories, layoutData }) => {
                 return (
                   <Link
                     key={path_id}
-                    href={{
-                      pathname: `${path_id}`,
-                    }}
+                    href={`/${path_id}`}
                     className={
                       comparePath(router.pathname, path_id)
                         ? `${s.nav_item} ${s.active}`

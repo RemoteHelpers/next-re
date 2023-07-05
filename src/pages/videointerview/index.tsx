@@ -1,6 +1,15 @@
 import { FC, useCallback } from 'react';
-import { GetServerSidePropsContext } from 'next';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
+import type { GetServerSidePropsContext } from 'next';
+import type {
+  ICategory,
+  IFormData,
+  IInitialData,
+  INavUrlState,
+  IVideointerview,
+  LocalesLiteral,
+} from '@/shared/types';
 import {
   getAllVacancies,
   getCategories,
@@ -13,14 +22,7 @@ import { Layout } from '@/components/Layout';
 import { VideointerviewPage } from '@/components/VideoInterview';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
-import type {
-  ICategory,
-  IFormData,
-  IInitialData,
-  IMainData,
-  INavUrlState,
-  IVideointerview,
-} from '@/shared/types';
+import { appMetadata } from '@/api/metadata';
 
 type Props = {
   categories: ICategory[];
@@ -36,6 +38,7 @@ const Videointerview: FC<Props> = ({
   formData,
   navUrlState,
 }) => {
+  const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
   const { header } = initialData;
   const metaTitle = useCallback(
     () => getPageTitle(header, 'videointerview') + titleCompanyInfo,
@@ -47,6 +50,9 @@ const Videointerview: FC<Props> = ({
       <Head>
         <title>{metaTitle()}</title>
         <meta property="og:title" content={metaTitle()} />
+
+        <meta name="description" content={appMeta.description} />
+        <meta property="og:description" content={appMeta.og.description} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>
@@ -59,8 +65,6 @@ const Videointerview: FC<Props> = ({
 export default Videointerview;
 
 export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
-  // const categories = await getCategories(locale!);
-  // const videoData = await getVideointerviewData(locale!);
   const [header, footer, vacancies, formData, categories, videoData] = await Promise.all([
     getHeaderData(locale!),
     getFooterData(locale!),
