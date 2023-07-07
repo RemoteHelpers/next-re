@@ -14,6 +14,7 @@
 //     getFooterData(locale),
 //     getAllVacancies(locale),
 //     getFormData(locale),
+
 //   ]);
 
 //   const dataByLocale: IMainData = {

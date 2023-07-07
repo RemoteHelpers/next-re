@@ -5,11 +5,23 @@ import type { AppProps } from 'next/app';
 import type { LocalesLiteral } from '@/shared/types';
 import '@/shared/styles/globals.scss';
 import { appMetadata } from '@/api/metadata';
-import { getFullFooterData, getFullFormData, getFullHeaderData } from '@/services/MainDataService';
+// import {
+//   getFullFooterData,
+//   getFullFormData,
+//   getFullHeaderData,
+//   getFullVacanciesData,
+// } from '@/services/MainDataService';
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps, data }: AppProps & any) {
+  // const { locale } = useRouter();
   const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
   const [navURL, setNavURL] = useState<string>('');
+  // const appData = {
+  //   header: data.header[locale!],
+  //   footer: data.footer[locale!],
+  //   form: data.form[locale!],
+  //   vacancies: data.vacancies[locale!],
+  // };
   const props = { ...pageProps, navUrlState: { navURL, setNavURL } };
 
   return (
@@ -30,21 +42,18 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-App.getInitialProps = async () => {
-  // const [header, footer, form] = await Promise.all([
-  //   getFullHeaderData(),
-  //   getFullFooterData(),
-  //   getFullFormData(),
-  // ]);
+// App.getInitialProps = async () => {
+//   const [header, footer, form] = await Promise.all([
+//     getFullHeaderData(),
+//     getFullFooterData(),
+//     getFullFormData(),
+//   ]);
 
-  const header = await getFullHeaderData();
-  const footer = await getFullFooterData();
-  const form = await getFullFormData();
+//   const vacancies = await getFullVacanciesData();
 
-  return {
-    data: { header, footer, form },
-    // data: header,
-  };
-};
+//   return {
+//     data: { header, footer, form, vacancies },
+//   };
+// };
 
 export default App;
