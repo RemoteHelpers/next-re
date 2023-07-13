@@ -1,24 +1,12 @@
 import { LocalesLiteral } from './CommonTypes';
 
-export interface IMetaData {
+export interface IMetadata {
   title: string;
   description: string;
-  canonical: string;
-  og: {
-    locale: string;
-    title: string;
-    description: string;
-    url: string;
-    siteName: string;
-    image: string;
-  };
-  article: {
-    modifiedTime: string;
-  };
-  twitter: {
-    label1: string;
-    data1: string;
-  };
+  locale: string;
+  url: string;
+  image: string;
+  sitename: string;
 }
 
-export type AppMetadata = Record<LocalesLiteral, IMetaData>;
+export type AppMetadata = Record<LocalesLiteral, IMetadata>;

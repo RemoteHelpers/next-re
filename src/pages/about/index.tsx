@@ -1,14 +1,8 @@
 import { FC, useRef, useCallback } from 'react';
 import type { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import type {
-  IAboutData,
-  ICategory,
-  IFormData,
-  IInitialData,
-  IMainData,
-  INavUrlState,
-} from '@/shared/types';
+import dynamic from 'next/dynamic';
+import type { IAboutData, ICategory, IFormData, IInitialData, INavUrlState } from '@/shared/types';
 import {
   getCategories,
   getAboutData,
@@ -20,9 +14,9 @@ import {
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
 import { Layout } from '@/components/Layout';
-import { AboutUs } from '@/components/AboutUs';
-import { Specializations } from '@/components/Specializations';
-import MainForm from '@/components/MainForm/MainForm';
+const AboutUs = dynamic(() => import('@/components/AboutUs/AboutUs'));
+const Specializations = dynamic(() => import('@/components/Specializations/Specializations'));
+const MainForm = dynamic(() => import('@/components/MainForm/MainForm'));
 
 type Props = {
   categories: ICategory[];
@@ -33,8 +27,7 @@ type Props = {
 };
 const About: FC<Props> = ({ categories, about, initialData, formData, navUrlState }) => {
   const formRef = useRef<HTMLElement>(null);
-  const pageTitle = useCallback(
-    () => getPageTitle(initialData.header, 'about'),
+  const pageTitle = useCallback(() => getPageTitle(initialData.header, 'about'),
     [initialData.header]
   );
 
@@ -63,9 +56,6 @@ const About: FC<Props> = ({ categories, about, initialData, formData, navUrlStat
 export default About;
 
 export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
-  // const fetchCategories: Promise<ICategory[]> = getCategories(locale!);
-  // const fetchAbout: Promise<IAboutData> = getAboutData(locale!);
-  // const [categories, about] = await Promise.all([fetchCategories, fetchAbout]);
   const [header, footer, vacancies, formData, categories, about] = await Promise.all([
     getHeaderData(locale!),
     getFooterData(locale!),
@@ -77,11 +67,7 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) 
 
   return {
     props: {
-      initialData: {
-        header,
-        footer,
-        vacancies,
-      },
+      initialData: { header, footer, vacancies },
       formData,
       categories,
       about,

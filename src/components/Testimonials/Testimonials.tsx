@@ -1,22 +1,16 @@
 import { FC, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper';
-import styles from './Testimonials.module.scss';
-
+import Image from 'next/image';
 import '../../../node_modules/swiper/swiper.scss';
 import '../../../node_modules/swiper/modules/pagination/pagination.scss';
 import '../../../node_modules/swiper/modules/navigation/navigation.scss';
-
+import styles from './Testimonials.module.scss';
+import type { IHomeData } from '@/shared/types';
 import { TestimonialsIcon } from '@/shared/components/IconComponents/Testimonials';
-
 import { PhotoAPI } from '@/constants';
-import Image from 'next/image';
-import type { IHomeData } from '@/shared/types/HomeTypes';
 
-type Props = {
-  testimonials: IHomeData;
-};
-
+type Props = { testimonials: IHomeData; };
 const Feedbacks: FC<Props> = ({ testimonials }) => {
   const [currentId, setCurrentId] = useState<any>();
 

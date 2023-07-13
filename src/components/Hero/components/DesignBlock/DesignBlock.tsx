@@ -1,15 +1,14 @@
-import Image from 'next/image';
 import { FC, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
+import useWebAnimations from '@wellyshen/use-web-animations';
+import Image from 'next/image';
 import s from './DesignBlock.module.scss';
-import circle from '@/shared/images/home/hero/blue_circle.svg';
+import type { IHeroStat, IHomeData } from '@/shared/types/HomeTypes';
+import { StatItem } from './components/StatItem';
 import crazy_cat from '@/shared/images/home/hero/crazy_cat.svg';
 import like from '@/shared/icons/home/hero/like.svg';
 import smile from '@/shared/icons/home/hero/smile.svg';
 import globe from '@/shared/icons/home/hero/globe.svg';
-import { StatItem } from './components/StatItem';
-import useWebAnimations from '@wellyshen/use-web-animations';
-import { useRouter } from 'next/router';
-import type { IHeroStat, IHomeData } from '@/shared/types/HomeTypes';
 
 const icons = [
   {

@@ -12,7 +12,7 @@ type Props = {
   slides: IImage[];
 };
 
-export const Partners: FC<Props> = ({ title, slides }) => {
+const Partners: FC<Props> = ({ title, slides }) => {
   return (
     <section className={s.partners}>
       <div className={s.container}>
@@ -55,3 +55,5 @@ export const Partners: FC<Props> = ({ title, slides }) => {
     </section>
   );
 };
+
+export default Partners

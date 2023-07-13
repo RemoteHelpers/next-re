@@ -1,18 +1,17 @@
 import { FC } from 'react';
 import { Autoplay, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import dynamic from 'next/dynamic';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import s from './Specializations.module.scss';
-import type { IAboutData } from '@/shared/types/AboutTypes';
-import type { ICategory } from '@/shared/types/CategoriesTypes';
+import type { IAboutData, ICategory, INavUrlState } from '@/shared/types';
 import { SpecializationsIcon } from '@/shared/components/IconComponents/Specializations';
-import { SpecializationCard } from './components';
-import { INavUrlState } from '@/shared/types';
+const SpecializationCard = dynamic(() => import('./SpecializationCard'))
 
 type Props = { about: IAboutData; categories: ICategory[]; navUrlState: INavUrlState };
-export const Specializations: FC<Props> = ({ about, categories, navUrlState }) => {
+const Specializations: FC<Props> = ({ about, categories, navUrlState }) => {
   return (
     <section className={s.section}>
       <div className={s.container}>
@@ -35,9 +34,7 @@ export const Specializations: FC<Props> = ({ about, categories, navUrlState }) =
           modules={[Pagination, Navigation, Autoplay]}
           slidesPerView={1}
           spaceBetween={20}
-          pagination={{
-            el: '.about_swiper-pagination',
-          }}
+          pagination={{ el: '.about_swiper-pagination' }}
           navigation={{
             nextEl: '.about_next-slide-btn',
             prevEl: '.about_prev-slide-btn',
@@ -48,11 +45,7 @@ export const Specializations: FC<Props> = ({ about, categories, navUrlState }) =
             return (
               <SwiperSlide className={s.slide} key={`slide_${attributes.categorySlug}`}>
                 <div className={`${s.slideContent} content`}>
-                  <SpecializationCard
-                    category={attributes}
-                    about={about}
-                    navUrlState={navUrlState}
-                  />
+                  <SpecializationCard category={attributes} about={about} navUrlState={navUrlState} />
                 </div>
               </SwiperSlide>
             );
@@ -74,3 +67,5 @@ export const Specializations: FC<Props> = ({ about, categories, navUrlState }) =
     </section>
   );
 };
+
+export default Specializations

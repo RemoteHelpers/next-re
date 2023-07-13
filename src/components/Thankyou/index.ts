@@ -1,1 +1,2 @@
-export { Thankyou } from "./Thankyou";
+import { Thankyou } from "./Thankyou";
+export default Thankyou

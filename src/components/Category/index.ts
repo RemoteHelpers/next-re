@@ -1,1 +1,2 @@
-export { Category } from "./Category";
+import { Category } from "./Category";
+export default Category

@@ -1,1 +1,2 @@
-export { VacancyNew } from "./VacancyNew";
+import { VacancyNew } from "./VacancyNew";
+export default VacancyNew

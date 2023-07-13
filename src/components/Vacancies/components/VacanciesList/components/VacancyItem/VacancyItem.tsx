@@ -1,9 +1,9 @@
 import { FC, useCallback } from 'react';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import Link from 'next/link';
 import s from './VacancyItem.module.scss';
 import type { IVacanciesInfo, IVacancyAttributes } from '@/shared/types';
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 
 type Props = {
   attributes: IVacancyAttributes;

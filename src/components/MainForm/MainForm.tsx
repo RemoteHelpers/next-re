@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import FormFields from '../FormFields/FormFields';
 import styles from './MainForm.module.scss';
-// import mainCat from '@/shared/images/Form/MainForm/main-cat.png';
 
 import { PhotoAPI } from '@/constants';
 import type { IFormData } from '@/shared/types/FormTypes';

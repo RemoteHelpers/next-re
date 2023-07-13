@@ -1,1 +1,2 @@
-export { VideointerviewPage } from "./Videointerview";
+import { VideointerviewPage } from "./Videointerview";
+export default VideointerviewPage

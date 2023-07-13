@@ -1,1 +1,1 @@
-export { Specializations } from './Specializations';
+export default './Specializations';

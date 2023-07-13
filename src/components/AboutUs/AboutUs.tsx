@@ -10,7 +10,7 @@ type Props = {
   formRef: RefObject<HTMLElement>;
 };
 
-export const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
+const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
   const scrollToForm = (): void => {
     if (!formRef?.current) return;
     formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -75,3 +75,5 @@ export const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
     </section>
   );
 };
+
+export default AboutUs

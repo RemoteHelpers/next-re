@@ -19,11 +19,11 @@ export const Layout: FC<Props> = ({ children, categories, data }) => {
   const { navURL, setNavURL } = data;
   const layoutData: ILayoutData = { ...data, setIsLoading };
 
-  useEffect(() => {
-    if (document) {
-      console.log(JSON.parse(document.getElementById('__NEXT_DATA__')?.textContent!));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (document) {
+  //     console.log(JSON.parse(document.getElementById('__NEXT_DATA__')?.textContent!));
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (!navURL) return;

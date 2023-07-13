@@ -2,13 +2,14 @@ import { FC, useMemo, useRef } from 'react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import type { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import s from './Category.module.scss';
 import { VacancyItem } from '../Vacancies/components/VacanciesList/components/VacancyItem';
 import { Breadcrumbs } from '@/shared/components/Breadcrumbs';
-import FormFields from '../FormFields/FormFields';
 import mainCat from '@/shared/images/Form/MainForm/main-cat.png';
 import type { IMainData, ICategory, IVacanciesInfo, IVacancy } from '@/shared/types';
+const FormFields = dynamic(() => import('../FormFields/FormFields'));
 
 type Props = { category: ICategory; vacanciesInfo: IVacanciesInfo; mainData: IMainData };
 export const Category: FC<Props> = ({ category, vacanciesInfo, mainData }) => {

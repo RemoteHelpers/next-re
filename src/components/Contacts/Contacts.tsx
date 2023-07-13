@@ -1,11 +1,10 @@
 import { FC } from 'react';
-import { PhotoAPI } from '@/constants';
+import dynamic from 'next/dynamic';
 import styles from './Contacts.module.scss';
-import MainForm from '../MainForm/MainForm';
 import { ContactSvg } from '@/shared/components/IconComponents/Contacts';
-import type { IHeader } from '@/shared/types/HeaderTypes';
-import type { IFormData } from '@/shared/types/FormTypes';
-import type { IContacts, IRecruiter } from '@/shared/types/ContactsTypes';
+import type { IContacts, IRecruiter, IFormData, IHeader } from '@/shared/types';
+import { PhotoAPI } from '@/constants';
+const MainForm = dynamic(() => import('@/components/MainForm/MainForm'));
 
 type Props = { contactsData: IContacts; header: IHeader; formData: IFormData };
 export const Contacts: FC<Props> = ({ contactsData, header, formData }) => {

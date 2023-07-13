@@ -1,6 +1,7 @@
 import { FC, useCallback } from 'react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import type {
   IVacanciesInfo,
   IVacancyPageData,
@@ -8,7 +9,7 @@ import type {
   IFormData,
   INavUrlState,
   IInitialData,
-  LocalesLiteral,
+  IMetadata,
 } from '@/shared/types';
 import {
   getAllVacancies,
@@ -20,13 +21,11 @@ import {
   getVacancyPageData,
 } from '@/services';
 import { Layout } from '@/components/Layout';
-import { Vacancies } from '@/components/Vacancies';
-import { VacanciesHero } from '@/components/Vacancies/components/VacanciesHero';
-import { VacanciesForm } from '@/components/Vacancies/components/VacanciesForm';
 import { titleCompanyInfo } from '@/constants';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
-import { useRouter } from 'next/router';
-import { appMetadata } from '@/api/metadata';
+const VacanciesHero = dynamic(() => import('@/components/Vacancies/components/VacanciesHero'));
+const Vacancies = dynamic(() => import('@/components/Vacancies/Vacancies'));
+const VacanciesForm = dynamic(() => import('@/components/Vacancies/components/VacanciesForm'));
 
 type Props = {
   vacanciesInfo: IVacanciesInfo;
@@ -35,6 +34,8 @@ type Props = {
   initialData: IInitialData;
   formData: IFormData;
   navUrlState: INavUrlState;
+  metadata: IMetadata;
+
 };
 
 const VacanciesPage: FC<Props> = ({
@@ -44,20 +45,19 @@ const VacanciesPage: FC<Props> = ({
   initialData,
   formData,
   navUrlState,
+  metadata
 }) => {
-  const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
   const metaTitle = useCallback(
     (): string => getPageTitle(initialData.header, 'vacancies') + titleCompanyInfo,
     [initialData.header]
   );
-
   return (
     <>
       <Head>
         <title>{metaTitle()}</title>
         <meta property="og:title" content={metaTitle()} />
-        <meta name="description" content={appMeta.description} />
-        <meta property="og:description" content={appMeta.og.description} />
+        <meta name="description" content={metadata.description} />
+        <meta property="og:description" content={metadata.description} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>
@@ -90,11 +90,7 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) 
 
   return {
     props: {
-      initialData: {
-        header,
-        footer,
-        vacancies,
-      },
+      initialData: { header, footer, vacancies },
       formData,
       vacanciesInfo,
       vacancyPageData,

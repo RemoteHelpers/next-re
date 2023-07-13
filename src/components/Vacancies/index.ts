@@ -1,1 +1,0 @@
-export { Vacancies } from './Vacancies';

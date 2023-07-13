@@ -12,6 +12,6 @@ export const getThankYouData = async (lang: string) => {
     return res.data.data.attributes;
   } catch (error) {
     console.error('Error >>> ', error);
-    return error;
+    return null;
   }
 };

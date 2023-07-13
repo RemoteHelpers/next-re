@@ -1,9 +1,7 @@
 import { FC, useCallback } from 'react';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
 import { GetServerSidePropsContext } from 'next';
-import { Layout } from '@/components/Layout';
-import { Contacts } from '@/components/Contacts';
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import {
   getContactData,
   getCategories,
@@ -12,18 +10,11 @@ import {
   getAllVacancies,
   getFormData,
 } from '@/services';
-import type {
-  IMainData,
-  ICategory,
-  IContacts,
-  IFormData,
-  INavUrlState,
-  IInitialData,
-  LocalesLiteral,
-} from '@/shared/types';
+import type { ICategory, IContacts, IFormData, INavUrlState, IInitialData, IMetadata } from '@/shared/types';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
-import { appMetadata } from '@/api/metadata';
+import { Layout } from '@/components/Layout';
+const Contacts = dynamic(() => import('@/components/Contacts'));
 
 type Props = {
   categories: ICategory[];
@@ -31,20 +22,19 @@ type Props = {
   initialData: IInitialData;
   formData: IFormData;
   navUrlState: INavUrlState;
+  metadata: IMetadata;
 };
-const ContactsPage: FC<Props> = ({ categories, contacts, initialData, formData, navUrlState }) => {
+const ContactsPage: FC<Props> = ({ categories, contacts, initialData, metadata, formData, navUrlState, }) => {
   const { header } = initialData;
   const metaTitle = useCallback(() => getPageTitle(header, 'contacts'), [header]);
-  const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
 
   return (
     <>
       <Head>
         <title>{metaTitle() + titleCompanyInfo}</title>
         <meta property="og:title" content={metaTitle()} />
-
-        <meta name="description" content={appMeta.description} />
-        <meta property="og:description" content={appMeta.og.description} />
+        <meta name="description" content={metadata.description} />
+        <meta property="og:description" content={metadata.description} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>
@@ -57,8 +47,6 @@ const ContactsPage: FC<Props> = ({ categories, contacts, initialData, formData, 
 export default ContactsPage;
 
 export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) => {
-  // const categories = await getCategories(locale!);
-  // const contacts = await getContactData(locale!);
   const [header, footer, vacancies, formData, categories, contacts] = await Promise.all([
     getHeaderData(locale!),
     getFooterData(locale!),
@@ -70,11 +58,7 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) 
 
   return {
     props: {
-      initialData: {
-        header,
-        footer,
-        vacancies,
-      },
+      initialData: { header, footer, vacancies },
       formData,
       categories,
       contacts,

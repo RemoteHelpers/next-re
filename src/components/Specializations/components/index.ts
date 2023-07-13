@@ -1,1 +1,0 @@
-export { SpecializationCard } from './SpecializationCard';

@@ -31,6 +31,11 @@ export const Header: FC<Props> = ({ categories, layoutData }) => {
     [header]
   );
 
+  const navigateToPage = (pathToPage: string) => {
+    router.push(pathToPage);
+    setNavURL(pathToPage);
+  };
+
   return (
     <>
       <header

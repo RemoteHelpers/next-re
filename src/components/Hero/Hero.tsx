@@ -1,15 +1,11 @@
 import type { FC, RefObject } from 'react';
-import { InfoBlock } from './components/InfoBlock';
-import { DesignBlock } from './components/DesignBlock';
 import s from './Hero.module.scss';
 import type { IHomeData } from '@/shared/types/HomeTypes';
+import { DesignBlock } from './components/DesignBlock';
+import { InfoBlock } from './components/InfoBlock';
 
-interface HeroProps {
-  data: IHomeData;
-  formRef: RefObject<HTMLElement>;
-}
-
-export const Hero: FC<HeroProps> = ({ data, formRef }) => {
+type Props = { data: IHomeData; formRef: RefObject<HTMLElement>; }
+const Hero: FC<Props> = ({ data, formRef }) => {
   return (
     <section className={s.hero}>
       <div className={s.container}>
@@ -19,3 +15,5 @@ export const Hero: FC<HeroProps> = ({ data, formRef }) => {
     </section>
   );
 };
+
+export default Hero

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import type { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import type { IMainData, ICategory, IVacancy } from '@/shared/types';
 import s from './VacancyNew.module.scss';
@@ -12,7 +13,8 @@ import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
 import useWebAnimations from '@wellyshen/use-web-animations';
 import cat_hearts from './assets/cat_hearts.png';
 import cat_laptop from './assets/cat_laptop.png';
-import FormFields from '../FormFields/FormFields';
+const FormFields = dynamic(() => import('../FormFields/FormFields'));
+
 
 const rotateKeyframes = [
   {

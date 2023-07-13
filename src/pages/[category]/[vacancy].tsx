@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import type { GetServerSidePropsContext } from 'next';
 import type {
   IMainData,
@@ -10,8 +11,6 @@ import type {
   IFormData,
   INavUrlState,
 } from '@/shared/types';
-import { Layout } from '@/components/Layout';
-import { Vacancy } from '@/components/Vacancy';
 import {
   getCategoryBySlug,
   getVacancy,
@@ -22,8 +21,11 @@ import {
   getAllVacancies,
   getFormData,
 } from '@/services';
-import { VacancyNew } from '@/components/VacancyNew';
+import { Layout } from '@/components/Layout';
 import { titleCompanyInfo } from '@/constants';
+
+const VacancyNew = dynamic(()=>import('@/components/VacancyNew'))
+const Vacancy = dynamic(()=>import('@/components/Vacancy'))
 
 type Props = {
   categories: ICategory[];

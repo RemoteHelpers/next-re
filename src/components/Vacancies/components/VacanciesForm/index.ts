@@ -1,1 +1,2 @@
-export { VacanciesForm } from "./VacanciesForm";
+import { VacanciesForm } from "./VacanciesForm";
+export default VacanciesForm

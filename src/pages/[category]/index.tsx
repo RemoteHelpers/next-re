@@ -1,15 +1,8 @@
 import { FC, useCallback } from 'react';
-import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import type { GetServerSidePropsContext } from 'next';
-import type {
-  IVacanciesInfo,
-  ICategory,
-  IFormData,
-  INavUrlState,
-  IInitialData,
-  LocalesLiteral,
-} from '@/shared/types';
+import type { IVacanciesInfo, ICategory, IFormData, INavUrlState, IInitialData, IMetadata } from '@/shared/types';
 import {
   getAllVacancies,
   getCategories,
@@ -20,10 +13,9 @@ import {
   getVacancyListData,
 } from '@/services';
 import { Layout } from '@/components/Layout';
-import { Category } from '@/components/Category';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
-import { appMetadata } from '@/api/metadata';
+const Category = dynamic(() => import('@/components/Category'))
 
 interface CategoryPageProps {
   category: ICategory;
@@ -32,6 +24,7 @@ interface CategoryPageProps {
   initialData: IInitialData;
   formData: IFormData;
   navUrlState: INavUrlState;
+  metadata: IMetadata;
 }
 
 const CategoryPage: FC<CategoryPageProps> = ({
@@ -41,8 +34,8 @@ const CategoryPage: FC<CategoryPageProps> = ({
   initialData,
   formData,
   navUrlState,
+  metadata
 }) => {
-  const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
   const metaTitle = useCallback(() => {
     return (
       getPageTitle(initialData.header, 'vacancies') +
@@ -58,8 +51,8 @@ const CategoryPage: FC<CategoryPageProps> = ({
         <title>{metaTitle()}</title>
         <meta name="og:title" content={metaTitle()} />
 
-        <meta name="description" content={appMeta.description} />
-        <meta property="og:description" content={appMeta.og.description} />
+        <meta name="description" content={metadata.description} />
+        <meta property="og:description" content={metadata.description} />
       </Head>
 
       <Layout data={{ ...initialData, ...navUrlState }} categories={categories}>
@@ -93,11 +86,7 @@ export const getServerSideProps = async ({ locale, params }: GetServerSidePropsC
 
   return {
     props: {
-      initialData: {
-        header,
-        footer,
-        vacancies,
-      },
+      initialData: { header, footer, vacancies },
       formData,
       category,
       categories,

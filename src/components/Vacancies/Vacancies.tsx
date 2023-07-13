@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import s from './Vacancies.module.scss';
 import type { INavUrlState, IVacanciesInfo, IVacancy, ICategory } from '@/shared/types';
@@ -20,12 +20,7 @@ export type PaginationInfo = {
   setCurrentPage: (pageNumber: number) => void;
 };
 
-export const Vacancies: React.FC<Props> = ({
-  vacanciesInfo,
-  categories,
-  vacancies,
-  navUrlState,
-}) => {
+const Vacancies: FC<Props> = ({ vacanciesInfo, categories, vacancies, navUrlState }) => {
   const { locale, asPath } = useRouter();
   const initialHotState = asPath === '/' ? true : false;
   const [isHot, setIsHot] = useState<boolean>(initialHotState);
@@ -133,3 +128,5 @@ export type ResetFiltersState = {
   needResetSearch: boolean;
   setNeedResetSearch: (boolean: boolean) => void;
 };
+
+export default Vacancies

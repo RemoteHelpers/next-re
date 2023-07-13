@@ -20,3 +20,5 @@ export const SpecializationCard: FC<Props> = ({ category, about, navUrlState: { 
     </>
   );
 };
+
+// export default SpecializationCard

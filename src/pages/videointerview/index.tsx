@@ -1,44 +1,23 @@
 import { FC, useCallback } from 'react';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import type { GetServerSidePropsContext } from 'next';
-import type {
-  ICategory,
-  IFormData,
-  IInitialData,
-  INavUrlState,
-  IVideointerview,
-  LocalesLiteral,
-} from '@/shared/types';
-import {
-  getAllVacancies,
-  getCategories,
-  getFooterData,
-  getFormData,
-  getHeaderData,
-  getVideointerviewData,
-} from '@/services';
+import type { IMetadata, ICategory, IFormData, IInitialData, INavUrlState, IVideointerview } from '@/shared/types';
+import { getAllVacancies, getCategories, getFooterData, getFormData, getHeaderData, getVideointerviewData } from '@/services';
 import { Layout } from '@/components/Layout';
-import { VideointerviewPage } from '@/components/VideoInterview';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
-import { appMetadata } from '@/api/metadata';
+
+const VideointerviewPage = dynamic(() => import('@/components/VideoInterview'));
 
 type Props = {
-  categories: ICategory[];
-  videoData: IVideointerview;
-  initialData: IInitialData;
-  formData: IFormData;
-  navUrlState: INavUrlState;
+  categories: ICategory[]; videoData: IVideointerview; initialData: IInitialData;
+  formData: IFormData; navUrlState: INavUrlState; metadata: IMetadata;
 };
 const Videointerview: FC<Props> = ({
-  categories,
-  videoData,
-  initialData,
-  formData,
-  navUrlState,
+  categories, videoData, initialData,
+  formData, navUrlState, metadata,
 }) => {
-  const appMeta = appMetadata[useRouter().locale as LocalesLiteral];
   const { header } = initialData;
   const metaTitle = useCallback(
     () => getPageTitle(header, 'videointerview') + titleCompanyInfo,
@@ -50,9 +29,8 @@ const Videointerview: FC<Props> = ({
       <Head>
         <title>{metaTitle()}</title>
         <meta property="og:title" content={metaTitle()} />
-
-        <meta name="description" content={appMeta.description} />
-        <meta property="og:description" content={appMeta.og.description} />
+        <meta name="description" content={metadata.description} />
+        <meta property="og:description" content={metadata.description} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>
@@ -76,11 +54,7 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext) 
 
   return {
     props: {
-      initialData: {
-        header,
-        footer,
-        vacancies,
-      },
+      initialData: { header, footer, vacancies },
       formData,
       categories,
       videoData,

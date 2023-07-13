@@ -1,18 +1,17 @@
 import { FC } from 'react';
 import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
 import dynamic from 'next/dynamic';
+import ReactMarkdown from 'react-markdown';
 import type { IVideointerview, IHeader, IFormData } from '@/shared/types';
-import { FAQ } from '@/shared/components/FAQ';
 import styles from './Videointerview.module.scss';
 import videoCat from '@/shared/images/Videointerview/videointerviewCat.png';
-import MainForm from '../MainForm/MainForm';
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
+const FAQ = dynamic(() => import('@/shared/components/FAQ'))
+const MainForm = dynamic(() => import('../MainForm/MainForm'))
+
 
 type Props = { videoData: IVideointerview; header: IHeader; formData: IFormData };
 export const VideointerviewPage: FC<Props> = ({ videoData, header, formData }) => {
-  const ReactPlayer = dynamic(() => import('react-player/lazy'), {
-    ssr: false,
-  });
 
   return (
     <>

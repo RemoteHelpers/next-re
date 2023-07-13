@@ -8,11 +8,10 @@ import type { IMainData, ICategory, IVacancy, IVacanciesInfo } from '@/shared/ty
 import s from './Vacancy.module.scss';
 import laptopCat from './assets/laptop_cat.svg';
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
-import { VacancyItem } from '../Vacancies/components/VacanciesList/components/VacancyItem';
 import { Breadcrumbs } from '@/shared/components/Breadcrumbs';
-import { VacancyForm } from '../VacancyForm';
-
+import { VacancyItem } from '../Vacancies/components/VacanciesList/components/VacancyItem';
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
+const VacancyForm = dynamic(() => import('../VacancyForm'));
 
 type Props = {
   vacancy: IVacancy;
@@ -20,7 +19,6 @@ type Props = {
   category: ICategory;
   mainData: IMainData;
 };
-
 export const Vacancy: FC<Props> = ({ vacancy, vacanciesInfo, category, mainData }) => {
   if (!vacancy.attributes) return <></>;
 

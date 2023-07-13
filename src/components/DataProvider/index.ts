@@ -1,1 +1,0 @@
-export { DataProvider } from './DataProvider';

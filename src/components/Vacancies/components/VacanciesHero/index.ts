@@ -1,1 +1,3 @@
-export { VacanciesHero } from "./VacanciesHero";
+import { VacanciesHero } from "./VacanciesHero";
+export default VacanciesHero
+
