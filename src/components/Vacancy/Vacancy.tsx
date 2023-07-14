@@ -79,7 +79,7 @@ export const Vacancy: FC<Props> = ({ vacancy, vacanciesInfo, category, mainData 
             </div>
             {videoLink ? (
               <div className={s.short_video}>
-                <ReactPlayer className={s.video_iframe} url={videoLink} controls />
+                <ReactPlayer className={s.video_iframe} url={videoLink} light={true} controls />
               </div>
             ) : (
               <div className={s.cat_placeholder}>

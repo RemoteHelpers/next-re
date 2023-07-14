@@ -47,6 +47,7 @@ export const VideointerviewPage: FC<Props> = ({ videoData, header, formData }) =
               <ReactPlayer
                 className={styles.instruction_iframe}
                 url={videoData?.firstVideo}
+                light={true}
                 controls
               />
             </div>

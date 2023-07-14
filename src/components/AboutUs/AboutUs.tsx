@@ -4,11 +4,7 @@ import s from './AboutUs.module.scss';
 import type { IAboutData, IAboutLocalization } from '@/shared/types/AboutTypes';
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
-type Props = {
-  about: IAboutData;
-  pageTitle: string;
-  formRef: RefObject<HTMLElement>;
-};
+type Props = { about: IAboutData; pageTitle: string; formRef: RefObject<HTMLElement>; };
 
 const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
   const scrollToForm = (): void => {
@@ -41,7 +37,7 @@ const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
               <div className={s.previewWrap}>
                 <div className={s.playerWrap}>
                   <div className={s.previewBorder} />
-                  <ReactPlayer className={s.videoPlayer} url={videoUrl} />
+                  <ReactPlayer className={s.videoPlayer} url={videoUrl} light={true} />
                 </div>
               </div>
             )}
@@ -76,4 +72,4 @@ const AboutUs: FC<Props> = ({ about, pageTitle, formRef }) => {
   );
 };
 
-export default AboutUs
+export default AboutUs;
