@@ -13,9 +13,10 @@ import {
   getHeaderData,
 } from '@/services';
 import { Layout } from '@/components/Layout';
+import Hero from '@/components/Hero/Hero';
 const Vacancies = dynamic(() => import('@/components/Vacancies/Vacancies'));
 const Questions = dynamic(() => import('@/components/Questions/Questions'));
-const Hero = dynamic(() => import('@/components/Hero/Hero'));
+// const Hero = dynamic(() => import('@/components/Hero/Hero'));
 const Spheres = dynamic(() => import('@/components/Spheres/Spheres'));
 const Partners = dynamic(() => import('@/components/Partners/Partners'));
 const Testimonials = dynamic(() => import('@/components/Testimonials/Testimonials'));
