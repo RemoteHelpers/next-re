@@ -68,6 +68,7 @@ export const VideointerviewPage: FC<Props> = ({ videoData, header, formData }) =
                   className={styles.instruction_iframe}
                   url={videoItem.videoLink}
                   key={videoItem.id}
+                  light={true}
                   controls
                 />
               ))}
