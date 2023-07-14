@@ -142,7 +142,7 @@ const FormFields: FC<Props> = ({ imageCatProps, coloredField, formData }) => {
           </label>
         </div>
 
-        {imageCatProps && (
+        {/* {imageCatProps && (
           <Image
             className={styles.mobile_cat}
             src={PhotoAPI + imageCatProps}
@@ -150,7 +150,7 @@ const FormFields: FC<Props> = ({ imageCatProps, coloredField, formData }) => {
             width={450}
             height={365}
           />
-        )}
+        )} */}
 
         <button className={styles.submit} type="submit">
           {formData?.submit}

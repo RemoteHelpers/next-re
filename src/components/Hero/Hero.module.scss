@@ -13,7 +13,7 @@
 	@include container(20px);
 	display: flex;
 	flex-direction: column;
-	padding: 0px 1.875rem;
+	padding: 0px 1rem;
 	gap: 2.875rem;
 	@include on768 {
 		gap: 3.75rem;

@@ -9,6 +9,7 @@ const Spheres: FC<Props> = ({ title, categories, navUrlState }) => {
     <section className={s.spheres}>
       <div className={s.container}>
         <h2 className={s.title}>{title}</h2>
+        
         <div className={s.spheres_cards}>
           {categories.map(cat => {
             if (cat.attributes.categorySlug === 'other') return null;

@@ -1,29 +1,28 @@
-@import "../../shared/styles/mixins.scss";
-@import "../../shared/styles/mediaMixins.scss";
-@import "../../shared/styles/colors.scss";
-@import "../../shared/styles/fonts.scss";
-
+@import '../../shared/styles/mixins.scss';
+@import '../../shared/styles/mediaMixins.scss';
+@import '../../shared/styles/colors.scss';
+@import '../../shared/styles/fonts.scss';
 
 .form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0;
+
+  @include on992 {
+    gap: 1.5rem 0;
+  }
+
+  input {
+    border: 2px solid $primaryBlue;
+    background-color: $primaryCyan;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem 0;
-
-    @include on992 {
-        gap: 1.5rem 0;
-    }
-
-    input {
-        border: 2px solid $primaryBlue;
-        background-color: $primaryCyan;
-        width: 100%;
-        padding: 1rem;
-        border-radius: .5rem;
-        font-size: $fontSize5;
-        font-weight: 500;
-        color: $rgbGray;
-    }
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: $fontSize5;
+    font-weight: 500;
+    color: $rgbGray;
+  }
 }
 
 .white_field_name,
@@ -32,201 +31,200 @@
 .white_field_email,
 .white_field_cv_link,
 .white_field_select {
-    background-color: $rgbWhite !important;
-    border-radius: .5rem;
+  background-color: $rgbWhite !important;
+  border-radius: 0.5rem;
 }
 
 .white_field_name {
-    width: 100%;
+  width: 100%;
 
-    @include on992 {
-        width: 60% !important;
-    }
+  @include on992 {
+    width: 60% !important;
+  }
 }
 
 .white_field_number {
-    width: 100%;
+  width: 100%;
 
-    @include on992 {
-        width: 40% !important;
-    }
+  @include on992 {
+    width: 40% !important;
+  }
 }
 
 .white_field_age {
-    width: 100%;
+  width: 100%;
 
-    @include on992 {
-        width: 20% !important;
-    }
+  @include on992 {
+    width: 20% !important;
+  }
 }
 
 .white_field_email {
-    width: 100%;
+  width: 100%;
 
-    @include on992 {
-        width: 80% !important;
-    }
+  @include on992 {
+    width: 80% !important;
+  }
 }
 
 .white_field_cv_link {
-    width: 100%;
+  width: 100%;
 }
 
 .white_field_select {
-    width: 100%;
+  width: 100%;
 }
 
 .select_lang {
-    background-color: $primaryCyan;
-    border-radius: .5rem;
+  background-color: $primaryCyan;
+  border-radius: 0.5rem;
 }
-
 
 .first_row,
 .second_row,
 .work_cv {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem 0;
 
-    @include on992 {
-        flex-direction: row;
-        gap: 0 2rem;
-    }
+  @include on992 {
+    flex-direction: row;
+    gap: 0 2rem;
+  }
 }
 
 .english_title {
-    font-size: $fontSize5;
-    font-weight: 600;
-    color: $primaryBlack;
-    margin-bottom: 1rem;
+  font-size: $fontSize5;
+  font-weight: 600;
+  color: $primaryBlack;
+  margin-bottom: 1rem;
 }
 
 .work_cv {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .attach_cv {
-    position: absolute;
-    top: 50%;
-    right: 1rem;
-    transform: translate(0, -50%);
-    cursor: pointer;
-    background-color: $rgbWhite;
-    padding: .5rem .75rem;
-    border-radius: .5rem;
-    border: 1px solid $primaryBlue;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  background-color: $rgbWhite;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid $primaryBlue;
 
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
-    transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 
-    &:hover {
-        box-shadow: $orangeShadow;
-    }
+  &:hover {
+    box-shadow: $orangeShadow;
+  }
+
+  span {
+    display: none;
+  }
+
+  @include on992 {
+    padding: 0.5rem 1.25rem;
 
     span {
-        display: none;
+      display: inline-block;
     }
-
-    @include on992 {
-        padding: .5rem 1.25rem;
-
-        span {
-            display: inline-block;
-        }
-    }
+  }
 }
 
 .name {
-    width: 100%;
+  width: 100%;
 
-    @include on992 {
-        width: 60% !important;
-    }
+  @include on992 {
+    width: 60% !important;
+  }
 }
 
 .number {
-    border: 2px solid $primaryBlue;
-    background-color: transparent !important;
-    border-radius: .5rem;
-    padding: 0 0 0 1.25rem;
-    width: 100%;
+  border: 2px solid $primaryBlue;
+  background-color: transparent !important;
+  border-radius: 0.5rem;
+  padding: 0 0 0 1.25rem;
+  width: 100%;
 
-    input {
-        background-color: transparent !important;
-        border: transparent;
-    }
+  input {
+    background-color: transparent !important;
+    border: transparent;
+  }
 }
 
 .number_fill {
-    width: 100%;
+  width: 100%;
 
-    @include on992 {
-        width: 40% !important;
-    }
+  @include on992 {
+    width: 40% !important;
+  }
 
-    background-color: $primaryCyan !important;
+  background-color: $primaryCyan !important;
 }
 
 .email {
-    width: 100%;
+  width: 100%;
 
-    @include on992 {
-        width: 80% !important;
-    }
+  @include on992 {
+    width: 80% !important;
+  }
 }
 
 .age {
-    width: 100%;
+  width: 100%;
 
-    @include on992 {
-        width: 20% !important;
-    }
+  @include on992 {
+    width: 20% !important;
+  }
 }
 
 .mobile_cat {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 1.5rem auto 0;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto 0;
 
-    @include on1200 {
-        display: none;
-    }
+  @include on1200 {
+    display: none;
+  }
 }
 
 .submit {
-    width: 100%;
-    align-self: center;
-    background-color: $primaryOrange;
-    border-radius: 1rem;
-    padding: 1rem 0;
-    text-align: center;
-    color: $rgbWhite;
-    font-size: $fontSize5;
-    font-weight: 600;
-    box-shadow: $shadow;
-    margin-top: 1.5rem;
+  width: 100%;
+  align-self: center;
+  background-color: $primaryOrange;
+  border-radius: 1rem;
+  padding: 1rem 0;
+  text-align: center;
+  color: $rgbWhite;
+  font-size: $fontSize5;
+  font-weight: 600;
+  box-shadow: $shadow;
+  margin-top: 1.5rem;
 
-    transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 
-    &:hover {
-        background-color: $primaryYellow;
-    }
+  &:hover {
+    background-color: $primaryYellow;
+  }
 
-    @include on768 {
-        width: 50%;
-    }
+  @include on768 {
+    width: 50%;
+  }
 
-    @include on1200 {
-        align-self: flex-start;
-        margin-top: 0;
-        width: auto;
-        padding: 1rem 5rem;
-    }
+  @include on1200 {
+    align-self: flex-start;
+    margin-top: 0;
+    width: auto;
+    padding: 1rem 5rem;
+  }
 }

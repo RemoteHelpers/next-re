@@ -1,34 +1,33 @@
-@import "../../shared/styles/mixins.scss";
-@import "../../shared/styles/mediaMixins.scss";
-@import "../../shared/styles/colors.scss";
-@import "../../shared/styles/fonts.scss";
+@import '../../shared/styles/mixins.scss';
+@import '../../shared/styles/mediaMixins.scss';
+@import '../../shared/styles/colors.scss';
+@import '../../shared/styles/fonts.scss';
 
 .vacancy {
-
-    &_wrapper {
-        width: 100%;
-        border: 2px solid $primaryBlue;
-        background-color: $primaryCyan;
-        padding: 2.5rem 1.625rem;
-        @include on992 {
-            flex-direction: row;
-            padding: 3rem 2.5rem;
-        }
-
-        border-radius: 1.875rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0 5rem;
+  &_wrapper {
+    width: 100%;
+    border: 2px solid $primaryBlue;
+    background-color: $primaryCyan;
+    padding: 2.5rem 1.625rem;
+    @include on992 {
+      flex-direction: row;
+      padding: 3rem 2.5rem;
     }
 
-    &_cat {
+    border-radius: 1.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 5rem;
+  }
+
+  &_cat {
     display: none;
 
     @include on1200 {
-        display: block;
-        width: 50% !important;
-        height: 100%;
+      display: block;
+      width: 50% !important;
+      height: 100%;
     }
-}
+  }
 }
