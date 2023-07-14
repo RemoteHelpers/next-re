@@ -16,7 +16,7 @@ export const VideointerviewHero: FC<Props> = ({ videoData }) => {
             children={videoData?.firstDescription}
             className={styles.first_description}
           />
-          <Image src={videoCat} alt={'Video cat'} className={styles.mobile_cat} />
+          <Image src={videoCat} alt={'Video cat'} className={styles.mobile_cat} priority />
           <ReactMarkdown
             children={videoData?.secondDescription}
             className={styles.second_description}
