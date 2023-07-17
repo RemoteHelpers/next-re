@@ -1,5 +1,6 @@
 import { FC, useCallback } from 'react';
 import { GetServerSidePropsContext } from 'next';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import type {
@@ -35,7 +36,6 @@ type Props = {
   formData: IFormData;
   navUrlState: INavUrlState;
   metadata: IMetadata;
-
 };
 
 const VacanciesPage: FC<Props> = ({
@@ -45,12 +45,13 @@ const VacanciesPage: FC<Props> = ({
   initialData,
   formData,
   navUrlState,
-  metadata
+  metadata,
 }) => {
   const metaTitle = useCallback(
     (): string => getPageTitle(initialData.header, 'vacancies') + titleCompanyInfo,
     [initialData.header]
   );
+
   return (
     <>
       <Head>
@@ -58,6 +59,7 @@ const VacanciesPage: FC<Props> = ({
         <meta property="og:title" content={metaTitle()} />
         <meta name="description" content={metadata.description} />
         <meta property="og:description" content={metadata.description} />
+        <link rel="canonical" href={metadata.url + useRouter().asPath.substring(1)} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>

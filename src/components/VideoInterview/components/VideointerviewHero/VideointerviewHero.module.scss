@@ -1,12 +1,11 @@
-@import "@/shared/styles/mixins.scss";
-@import "@/shared/styles/mediaMixins.scss";
-@import "@/shared/styles/colors.scss";
-@import "@/shared/styles/fonts.scss";
-
+@import '@/shared/styles/mixins.scss';
+@import '@/shared/styles/mediaMixins.scss';
+@import '@/shared/styles/colors.scss';
+@import '@/shared/styles/fonts.scss';
 
 .container {
   @include container(60px, 2rem);
-  padding: 0 30px;
+  padding: 0 1rem;
 
   @include on768 {
     @include container(60px, 5rem);

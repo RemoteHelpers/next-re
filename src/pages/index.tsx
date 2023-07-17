@@ -1,4 +1,5 @@
 import { FC, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import type { GetServerSidePropsContext } from 'next';
@@ -16,7 +17,6 @@ import { Layout } from '@/components/Layout';
 import Hero from '@/components/Hero/Hero';
 const Vacancies = dynamic(() => import('@/components/Vacancies/Vacancies'));
 const Questions = dynamic(() => import('@/components/Questions/Questions'));
-// const Hero = dynamic(() => import('@/components/Hero/Hero'));
 const Spheres = dynamic(() => import('@/components/Spheres/Spheres'));
 const Partners = dynamic(() => import('@/components/Partners/Partners'));
 const Testimonials = dynamic(() => import('@/components/Testimonials/Testimonials'));
@@ -47,6 +47,7 @@ const Home: FC<Props> = ({
         <meta name="description" content={metadata.description} />
         <meta property="og:title" content={metadata.title} />
         <meta property="og:description" content={metadata.description} />
+        <link rel="canonical" href={metadata.url} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>

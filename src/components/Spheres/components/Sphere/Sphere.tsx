@@ -18,7 +18,7 @@ export const Sphere: FC<SphereProps> = ({
   return (
     <Link href={`/${categorySlug}`} onClick={() => setNavURL(categorySlug)} className={s.sphere}>
       <CategoryIcon id={categorySlug} />
-      <h5 className={s.title}>{categoryTitle}</h5>
+      <h3 className={s.title}>{categoryTitle}</h3>
     </Link>
   );
 };

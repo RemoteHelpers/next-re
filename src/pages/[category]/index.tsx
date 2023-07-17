@@ -1,4 +1,5 @@
 import { FC, useCallback } from 'react';
+import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import type { GetServerSidePropsContext } from 'next';
@@ -50,9 +51,9 @@ const CategoryPage: FC<CategoryPageProps> = ({
       <Head>
         <title>{metaTitle()}</title>
         <meta name="og:title" content={metaTitle()} />
-
         <meta name="description" content={metadata.description} />
         <meta property="og:description" content={metadata.description} />
+        <link rel="canonical" href={metadata.url + useRouter().asPath.substring(1)} />
       </Head>
 
       <Layout data={{ ...initialData, ...navUrlState }} categories={categories}>

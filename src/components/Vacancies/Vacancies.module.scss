@@ -21,7 +21,7 @@
 
 .container {
   @include container;
-  padding: 0 1.875rem;
+  padding: 0 1rem;
 
   @include on992 {
     @include container(20px);
