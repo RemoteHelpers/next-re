@@ -10,13 +10,12 @@ function App({ Component, pageProps, meta }: AppProps & { meta: AppMetadata }) {
   const metadata = meta[useRouter().locale as LocalesLiteral];
   const [navURL, setNavURL] = useState<string>('');
   const props = { ...pageProps, navUrlState: { navURL, setNavURL }, metadata };
-
+  
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="canonical" href={metadata.url} />
         <meta property="og:locale" content={metadata.locale} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={metadata.url} />

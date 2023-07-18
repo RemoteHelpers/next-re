@@ -21,7 +21,7 @@
   margin-bottom: 3.125rem;
   @include on768 {
     @include container(20px);
-    padding: 0px 0.625rem;
+    padding: 0px 1rem;
     margin-bottom: 4rem;
   }
   @include on992 {

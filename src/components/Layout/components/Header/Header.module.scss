@@ -16,9 +16,7 @@
 
   @include on992 {
     height: $headerHeight2;
-  }
-  @include on992 {
-    padding: 2.5rem 0.625rem;
+    padding: 2.5rem 1rem;
   }
 }
 

@@ -1,8 +1,9 @@
 import { FC, useRef, useCallback } from 'react';
-import type { GetServerSidePropsContext } from 'next';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import type { IAboutData, ICategory, IFormData, IInitialData, INavUrlState } from '@/shared/types';
+import type { GetServerSidePropsContext } from 'next';
+import type { IAboutData, ICategory, IFormData, IInitialData, IMetadata, INavUrlState } from '@/shared/types';
 import {
   getCategories,
   getAboutData,
@@ -24,8 +25,9 @@ type Props = {
   initialData: IInitialData;
   formData: IFormData;
   navUrlState: INavUrlState;
+  metadata: IMetadata;
 };
-const About: FC<Props> = ({ categories, about, initialData, formData, navUrlState }) => {
+const About: FC<Props> = ({ categories, about, initialData, formData, navUrlState, metadata }) => {
   const formRef = useRef<HTMLElement>(null);
   const pageTitle = useCallback(() => getPageTitle(initialData.header, 'about'),
     [initialData.header]
@@ -38,6 +40,7 @@ const About: FC<Props> = ({ categories, about, initialData, formData, navUrlStat
         <meta name="description" content={about.WhatWeDoTitle} />
         <meta property="og:title" content={pageTitle() + titleCompanyInfo} />
         <meta property="og:description" content={about.WhatWeDoTitle} />
+        <link rel="canonical" href={metadata.url + useRouter().asPath.substring(1)} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>

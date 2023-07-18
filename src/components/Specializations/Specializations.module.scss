@@ -7,14 +7,12 @@ $maxSlideWidth: 27.8rem;
 $swiperPadding: calc((100% - $maxSlideWidth) / 2);
 $horizPagBtnPosition: calc($swiperPadding - 5rem);
 $spaceBetwSwiperElems: 1.25rem;
-// max bullets pagination's height ---> 1.75rem
-// half pagination button's height ---> 1.56rem
 $vertPagBtnPosition: calc((100% - $spaceBetwSwiperElems - 1.75rem) / 2 - 1.56rem);
 $bulletSize: 0.75rem;
 $wideSliderWidth: calc($maxSlideWidth + 14rem);
 
 .section {
-  padding: 0 1.9rem;
+  padding: 0 1rem;
 }
 
 .container {

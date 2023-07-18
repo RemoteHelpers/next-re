@@ -1,7 +1,9 @@
 import { FC, useCallback } from 'react';
-import { GetServerSidePropsContext } from 'next';
+import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import type { GetServerSidePropsContext } from 'next';
+import type { ICategory, IContacts, IFormData, INavUrlState, IInitialData, IMetadata } from '@/shared/types';
 import {
   getContactData,
   getCategories,
@@ -10,7 +12,6 @@ import {
   getAllVacancies,
   getFormData,
 } from '@/services';
-import type { ICategory, IContacts, IFormData, INavUrlState, IInitialData, IMetadata } from '@/shared/types';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
 import { Layout } from '@/components/Layout';
@@ -35,6 +36,7 @@ const ContactsPage: FC<Props> = ({ categories, contacts, initialData, metadata, 
         <meta property="og:title" content={metaTitle()} />
         <meta name="description" content={metadata.description} />
         <meta property="og:description" content={metadata.description} />
+        <link rel="canonical" href={metadata.url + useRouter().asPath.substring(1)} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>

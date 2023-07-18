@@ -1,70 +1,70 @@
-@import "@/shared/styles/mixins.scss";
-@import "@/shared/styles/mediaMixins.scss";
-@import "@/shared/styles/colors.scss";
-@import "@/shared/styles/fonts.scss";
+@import '@/shared/styles/mixins.scss';
+@import '@/shared/styles/mediaMixins.scss';
+@import '@/shared/styles/colors.scss';
+@import '@/shared/styles/fonts.scss';
 
 .vacancies_form {
-	@include container(60px);
-	padding: 0px 30px;
-	margin-bottom: 3rem;
-	@include on768 {
-		@include container(20px);
-		padding: 0px 10px;
-		margin-bottom: 6rem;
-	}
-	@include on992 {
-		margin-bottom: 10rem;
-	}
-	@include on1200 {
-		position: relative;
-		&::after {
-			content: "";
-			position: absolute;
-			z-index: -1;
-			top: 40%;
-			left: 50%;
-			transform: translate(-50%, 0);
-			width: 170%;
-			height: 100vh;
-			border-radius: 50% 50% 0 0;
-			background-color: $primaryCyan;
-		}
-	}
+  @include container(60px);
+  padding: 0px 1rem;
+  margin-bottom: 3rem;
+  @include on768 {
+    @include container(20px);
+    padding: 0px 1rem;
+    margin-bottom: 6rem;
+  }
+  @include on992 {
+    margin-bottom: 10rem;
+  }
+  @include on1200 {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 170%;
+      height: 100vh;
+      border-radius: 50% 50% 0 0;
+      background-color: $primaryCyan;
+    }
+  }
 }
 .form_title {
-	font-size: $fontSize2;
-	color: $rgbZodiac;
-	font-weight: 700;
-	margin-bottom: 3rem;
-	@include on992 {
-		margin-bottom: 6rem;
-	}
+  font-size: $fontSize2;
+  color: $rgbZodiac;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  @include on992 {
+    margin-bottom: 6rem;
+  }
 }
 .form_wrapper {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: space-between;
-	border: 3px solid $primaryOrange;
-	background-color: $primaryBackground;
-	gap: 0 7rem;
-	border-radius: 1rem;
-	padding: 1.5rem;
-	@include on992 {
-		flex-direction: row;
-		border-radius: 2rem;
-		padding: 3rem;
-	}
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 3px solid $primaryOrange;
+  background-color: $primaryBackground;
+  gap: 0 7rem;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  @include on992 {
+    flex-direction: row;
+    border-radius: 2rem;
+    padding: 3rem;
+  }
 }
 .form_cat {
-	display: none;
-	@include on1200 {
-		display: block;
-		height: 100%;
-		flex: 0 0 30%;
-		transform: scale(1.3);
-		transform-origin: bottom;
-		margin-left: 3rem;
-	}
+  display: none;
+  @include on1200 {
+    display: block;
+    height: 100%;
+    flex: 0 0 30%;
+    transform: scale(1.3);
+    transform-origin: bottom;
+    margin-left: 3rem;
+  }
 }

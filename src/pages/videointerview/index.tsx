@@ -1,4 +1,5 @@
 import { FC, useCallback } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import type { GetServerSidePropsContext } from 'next';
@@ -54,6 +55,7 @@ const Videointerview: FC<Props> = ({
         <meta property="og:title" content={metaTitle()} />
         <meta name="description" content={metadata.description} />
         <meta property="og:description" content={metadata.description} />
+        <link rel="canonical" href={metadata.url + useRouter().asPath.substring(1)} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>

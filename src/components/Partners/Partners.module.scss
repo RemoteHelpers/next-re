@@ -16,7 +16,7 @@
 }
 .container {
 	@include container(60px);
-	padding: 0px 1.875rem;
+	padding: 0px 1rem;
 	@include on768 {
 		@include container(20px);
 		padding: 0px 0.625rem;

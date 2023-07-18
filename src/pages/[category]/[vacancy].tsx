@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import type { GetServerSidePropsContext } from 'next';
@@ -10,6 +11,7 @@ import type {
   IInitialData,
   IFormData,
   INavUrlState,
+  IMetadata,
 } from '@/shared/types';
 import {
   getCategoryBySlug,
@@ -35,6 +37,7 @@ type Props = {
   initialData: IInitialData;
   formData: IFormData;
   navUrlState: INavUrlState;
+  metadata: IMetadata;
 };
 type Params = { category: string; vacancy: string };
 
@@ -46,6 +49,7 @@ const VacancyPage: FC<Props> = ({
   initialData,
   formData,
   navUrlState,
+  metadata
 }) => {
   const mainData: IMainData = { ...initialData, formData, ...navUrlState };
   const { newVersion, seoData, title, cardDescription } = vacancy.attributes;
@@ -59,6 +63,7 @@ const VacancyPage: FC<Props> = ({
         <meta name="description" content={metaDescr} />
         <meta property="og:title" content={metaTitle} />
         <meta property="og:description" content={metaDescr} />
+        <link rel="canonical" href={metadata.url + useRouter().asPath.substring(1)} />
       </Head>
 
       <Layout categories={categories} data={{ ...initialData, ...navUrlState }}>

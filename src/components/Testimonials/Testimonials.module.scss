@@ -1,83 +1,82 @@
-@import "../../shared/styles/colors";
-@import "../../shared/styles/mixins";
-@import "../../shared/styles/mediaMixins";
-@import "../../shared/styles/fonts";
+@import '../../shared/styles/colors';
+@import '../../shared/styles/mixins';
+@import '../../shared/styles/mediaMixins';
+@import '../../shared/styles/fonts';
 
 .container {
-    @include container();
-    padding: 0 30px;
+  @include container();
+  padding: 0 1rem;
 
-    @include on1440 {
-        padding: 0;
-    }
-    margin-top: 100px;
-	@include on768 {
-		margin-top: 120px;
-	}
-	@include on992 {
-		margin-top: 150px;
-	}
-	@include on1200 {
-		margin-top: 200px;
-	}
+  @include on1440 {
+    padding: 0;
+  }
+  margin-top: 100px;
+  @include on768 {
+    margin-top: 120px;
+  }
+  @include on992 {
+    margin-top: 150px;
+  }
+  @include on1200 {
+    margin-top: 200px;
+  }
 }
 
-
 .testimonials_title {
-    font-size: $fontSize2;
-    font-weight: 700;
-    color: $rgbZodiac;
-    margin-bottom: 2rem;
+  font-size: $fontSize2;
+  font-weight: 700;
+  color: $rgbZodiac;
+  margin-bottom: 2rem;
 
-    @include on992 {
-        margin-bottom: 4rem;
-    }
+  @include on992 {
+    margin-bottom: 4rem;
+  }
 }
 
 .swiper_slide {
-    padding: 3.125rem 1.75rem;
-    border: 1px solid $rgbGray;
-    border-radius: 1.875rem;
-    cursor: pointer;
+  padding: 3.125rem 1.75rem;
+  border: 1px solid $rgbGray;
+  border-radius: 1.875rem;
+  cursor: pointer;
 
-    article {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        pointer-events: none;
-    }
+  article {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    pointer-events: none;
+  }
 }
 
 .slide_description {
-    flex: 1 1 auto;
-    display: flex;
-    height: 100% !important;
-    font-size: $fontSize6;
-    cursor: pointer;
+  flex: 1 1 auto;
+  display: flex;
+  height: 100% !important;
+  font-size: $fontSize6;
+  cursor: pointer;
 }
 
 .swiper_wrapper {
-    width: 100%;
-    display: flex !important;
-    flex-direction: column;
-    padding: 0 3px !important;
+  width: 100%;
+  display: flex !important;
+  flex-direction: column;
+  padding: 0 3px !important;
 }
 
 .slider_arrows {
-    display: inline-flex;
-    align-self: flex-end;
-    gap: 0 2.25rem;
-    margin-top: 2rem;
+  display: inline-flex;
+  align-self: flex-end;
+  gap: 0 2.25rem;
+  margin-top: 2rem;
 }
 
 .employee_img {
-    -o-object-fit: cover;
-    object-fit: cover;
-    border-radius: 50%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .slide_employee {
-    display: flex;
-    align-items: center;
-    gap: 0 1.625rem;
+  display: flex;
+  align-items: center;
+  gap: 0 1.625rem;
 }

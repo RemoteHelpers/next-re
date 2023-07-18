@@ -1,83 +1,83 @@
-@import "@/shared/styles/colors";
-@import "@/shared/styles/fonts";
-@import "@/shared/styles/mixins";
-@import "@/shared/styles/mediaMixins";
+@import '@/shared/styles/colors';
+@import '@/shared/styles/fonts';
+@import '@/shared/styles/mixins';
+@import '@/shared/styles/mediaMixins';
 .hero {
-	margin-top: 3rem;
+  margin-top: 3rem;
 }
 .container {
-	display: flex;
-	flex-direction: column-reverse;
-	@include container(60px);
-	padding: 0px 30px;
-	@include on768 {
-		@include container(20px);
-		padding: 0px 10px;
-	}
-	@include on992 {
-		flex-direction: row;
-		justify-content: space-between;
-		margin-top: 6rem;
-	}
+  display: flex;
+  flex-direction: column-reverse;
+  @include container(60px);
+  padding: 0px 1rem;
+  @include on768 {
+    @include container(20px);
+    padding: 0px 1rem;
+  }
+  @include on992 {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 6rem;
+  }
 }
 .info {
-	flex: 1 1 100%;
-	@include on992 {
-		flex: 0 1 50%;
-	}
+  flex: 1 1 100%;
+  @include on992 {
+    flex: 0 1 50%;
+  }
 }
 .title {
-	font-size: $fontSize12;
-	font-weight: 900;
-	line-height: 1.2;
+  font-size: $fontSize12;
+  font-weight: 900;
+  line-height: 1.2;
 }
 .desc {
-	margin-top: 1rem;
-	@include on992 {
-		margin-top: 2rem;
-	}
-	font-size: $fontSize54;
-	font-weight: 400;
-	color: $rgbBlack;
+  margin-top: 1rem;
+  @include on992 {
+    margin-top: 2rem;
+  }
+  font-size: $fontSize54;
+  font-weight: 400;
+  color: $rgbBlack;
 }
 .design {
-	flex: 1 1 100%;
-	margin-bottom: 2rem;
-	@include on992 {
-		flex: 0 1 50%;
-	}
+  flex: 1 1 100%;
+  margin-bottom: 2rem;
+  @include on992 {
+    flex: 0 1 50%;
+  }
 }
 .cat {
-	position: relative;
-	width: 80%;
-    max-width: 20rem;
-	height: auto;
-	margin: 0 auto;
-	float: none;
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
-		object-position: center center;
-	}
-	@include on768 {
-		width: 50%;
-	}
-	@include on992 {
-        max-width: none;
-		width: 60%;
-		float: right;
-		margin: none;
-		&:before {
-			content: "";
-			position: absolute;
-			z-index: -1;
-			top: -10%;
-			left: -30%;
-			width: 80%;
-			aspect-ratio: 1/1;
-			background-color: $primaryCyan;
-			border-radius: 50%;
-		}
-	}
+  position: relative;
+  width: 80%;
+  max-width: 20rem;
+  height: auto;
+  margin: 0 auto;
+  float: none;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+  }
+  @include on768 {
+    width: 50%;
+  }
+  @include on992 {
+    max-width: none;
+    width: 60%;
+    float: right;
+    margin: none;
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: -10%;
+      left: -30%;
+      width: 80%;
+      aspect-ratio: 1/1;
+      background-color: $primaryCyan;
+      border-radius: 50%;
+    }
+  }
 }
