@@ -19,6 +19,7 @@ export const CategoryMainBlock: FC<Props> = ({ category, header, formRef }) => {
       { title: <Link href={'/'}>{menu[0].title}</Link> },
       { title: <Link href={`/${menu[1].path_id}`}>{menu[1].title}</Link> },
       { title: categoryTitle },
+
     ];
   }, [header, categoryTitle]);
 
