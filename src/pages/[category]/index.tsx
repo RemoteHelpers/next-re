@@ -1,9 +1,16 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import type { GetServerSidePropsContext } from 'next';
-import type { IVacanciesInfo, ICategory, IFormData, INavUrlState, IInitialData, IMetadata } from '@/shared/types';
+import type {
+  IVacanciesInfo,
+  ICategory,
+  IFormData,
+  INavUrlState,
+  IInitialData,
+  IMetadata,
+} from '@/shared/types';
 import {
   getAllVacancies,
   getCategories,
@@ -14,9 +21,10 @@ import {
   getVacancyListData,
 } from '@/services';
 import { Layout } from '@/components/Layout';
-import getPageTitle from '@/shared/functions/pageTitleGetter';
 import { titleCompanyInfo } from '@/constants';
-const Category = dynamic(() => import('@/components/Category'))
+import getPageTitle from '@/shared/functions/pageTitleGetter';
+import CategoryMainBlock from '@/components/CategoryMainBlock';
+const Category = dynamic(() => import('@/components/Category'));
 
 interface CategoryPageProps {
   category: ICategory;
@@ -35,16 +43,18 @@ const CategoryPage: FC<CategoryPageProps> = ({
   initialData,
   formData,
   navUrlState,
-  metadata
+  metadata,
 }) => {
+  const { header } = initialData;
   const metaTitle = useCallback(() => {
     return (
-      getPageTitle(initialData.header, 'vacancies') +
+      getPageTitle(header, 'vacancies') +
       ' - ' +
       category.attributes.categoryTitle +
       titleCompanyInfo
     );
   }, [category]);
+  const formRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -57,10 +67,12 @@ const CategoryPage: FC<CategoryPageProps> = ({
       </Head>
 
       <Layout data={{ ...initialData, ...navUrlState }} categories={categories}>
+        <CategoryMainBlock category={category} formRef={formRef} header={header} />
         <Category
           mainData={{ ...initialData, formData, ...navUrlState }}
           category={category}
           vacanciesInfo={vacanciesInfo}
+          formRef={formRef}
         />
       </Layout>
     </>
