@@ -8,8 +8,8 @@ import type { IMainData, ICategory, IVacancy, IVacanciesInfo } from '@/shared/ty
 import s from './Vacancy.module.scss';
 import laptopCat from './assets/laptop_cat.svg';
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
-import { Breadcrumbs } from '@/shared/components/Breadcrumbs';
 import { VacancyItem } from '../Vacancies/components/VacanciesList/components/VacancyItem';
+const Breadcrumbs = dynamic(() => import('@/shared/components/Breadcrumbs'));
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 const VacancyForm = dynamic(() => import('../VacancyForm'));
 

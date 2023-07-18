@@ -23,7 +23,8 @@ import {
 import { Layout } from '@/components/Layout';
 import { titleCompanyInfo } from '@/constants';
 import getPageTitle from '@/shared/functions/pageTitleGetter';
-import CategoryMainBlock from '@/components/CategoryMainBlock';
+// import CategoryMainBlock from '@/components/CategoryMainBlock';
+const CategoryMainBlock = dynamic(() => import('@/components/CategoryMainBlock'));
 const Category = dynamic(() => import('@/components/Category'));
 
 interface CategoryPageProps {

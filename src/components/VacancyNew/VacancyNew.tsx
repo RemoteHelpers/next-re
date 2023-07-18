@@ -8,22 +8,14 @@ import type { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import type { IMainData, ICategory, IVacancy } from '@/shared/types';
 import s from './VacancyNew.module.scss';
 import { PhotoAPI } from '@/constants';
-import { Breadcrumbs } from '@/shared/components/Breadcrumbs';
 import { VacanciesIcon } from '@/shared/components/IconComponents/Vacancies';
 import useWebAnimations from '@wellyshen/use-web-animations';
 import cat_hearts from './assets/cat_hearts.png';
 import cat_laptop from './assets/cat_laptop.png';
+const Breadcrumbs = dynamic(() => import('@/shared/components/Breadcrumbs'));
 const FormFields = dynamic(() => import('../FormFields/FormFields'));
 
-
-const rotateKeyframes = [
-  {
-    transform: 'rotate(0deg)',
-  },
-  {
-    transform: 'rotate(360deg)',
-  },
-];
+const rotateKeyframes = [{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }];
 const rotateOpts: number | (KeyframeAnimationOptions & { pseudoElement?: string }) = {
   delay: 0,
   duration: 30000,
@@ -56,18 +48,10 @@ export const VacancyNew: FC<Props> = ({ vacancy, category, mainData }) => {
   const breadcrumbsItems = useMemo((): ItemType[] => {
     if (!menu) return [];
     return [
-      {
-        title: <Link href={'/'}>{menu[0].title}</Link>,
-      },
-      {
-        title: <Link href={`/${menu[1].path_id}`}>{menu[1].title}</Link>,
-      },
-      {
-        title: <Link href={`/${categorySlug}`}>{categoryTitle}</Link>,
-      },
-      {
-        title: title,
-      },
+      { title: <Link href={'/'}>{menu[0].title}</Link> },
+      { title: <Link href={`/${menu[1].path_id}`}>{menu[1].title}</Link> },
+      { title: <Link href={`/${categorySlug}`}>{categoryTitle}</Link> },
+      { title: title },
     ];
   }, [menu, categorySlug, categoryTitle]);
 

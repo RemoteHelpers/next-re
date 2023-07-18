@@ -1,10 +1,11 @@
 import { FC, useMemo, RefObject } from 'react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import type { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import type { ICategory, IHeader } from '@/shared/types';
 import s from './CategoryMainBlock.module.scss';
-import { Breadcrumbs } from '@/shared/components/Breadcrumbs';
+const Breadcrumbs = dynamic(() => import('@/shared/components/Breadcrumbs'));
 
 type Props = { category: ICategory; header: IHeader; formRef: RefObject<HTMLDivElement> };
 export const CategoryMainBlock: FC<Props> = ({ category, header, formRef }) => {
@@ -15,15 +16,9 @@ export const CategoryMainBlock: FC<Props> = ({ category, header, formRef }) => {
     if (!menu) return [];
 
     return [
-      {
-        title: <Link href={'/'}>{menu[0].title}</Link>,
-      },
-      {
-        title: <Link href={`/${menu[1].path_id}`}>{menu[1].title}</Link>,
-      },
-      {
-        title: categoryTitle,
-      },
+      { title: <Link href={'/'}>{menu[0].title}</Link> },
+      { title: <Link href={`/${menu[1].path_id}`}>{menu[1].title}</Link> },
+      { title: categoryTitle },
     ];
   }, [header, categoryTitle]);
 
